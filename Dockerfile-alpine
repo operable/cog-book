@@ -1,0 +1,9 @@
+# dblatex won't install because some of the TeX toolchain is missing
+
+FROM alpine:edge
+
+RUN apk -U add --repository http://dl-3.alpinelinux.org/alpine/edge/testing texlive-full
+RUN apk -U add asciidoc
+RUN apk -U add py2-pip && pip install dblatex
+
+RUN mkdir -p /opt/book

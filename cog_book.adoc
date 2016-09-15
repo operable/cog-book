@@ -1,0 +1,10 @@
+Cog: The Definitive Guide
+=========================
+:Author: Christopher Maier
+:Email: <chris@operable.io>
+
+:icons: true
+:iconsdir: ./images/icons
+
+include::src/writing_a_command_bundle/text.adoc[]
+include::src/glossary/text.adoc[]

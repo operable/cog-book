@@ -1,0 +1,204 @@
+== Writing A Command Bundle
+
+Objective: Learn about how Cog command bundles are structured, the
+interface between Cog and a command, and how to iteratively develop a
+bundle.
+
+=== Scenario: Tweet from Cog
+
+Post to a Twitter account from Slack (start with one; expand to multiple later)
+
+Why?
+
+So when we're in the middle of an incident, anybody in the channel can
+notify the outside world. We don't need to find the One Special Person
+that has the Twitter credentials and bug them to do it.
+
+Want it to look like this:
+
+.Desired Interface for _twitter:tweet_ Command
+----
+@cog tweet Currently experiencing API slowdowns. Our engineering team is investigating.
+----
+
+What do we need for this?
+
+* A Twitter account (duh)
+* Twitter API tokens/keys/secrets
+
+Code that can take a string and those credentials and post to the
+Twitter API. What libraries exist already to do this?  Alternatively,
+what are the minimum HTTP calls required for this?  (There's a Ruby
+Twitter API client we can use; contrast this with the Pingdom bundle,
+where there isn't really a good client, but we only need a single HTTP
+call, so we rolled our own)blah
+
+Interface this code with Cog.
+How do we get the inputs?
+How do we return output to the pipeline (and what should that output be?)
+How would we like to present this output in chat? (templates!)
+How do we get the credentials to the code without hard-coding it? (dynamic config!)
+How do we package all this up so Cog can use it? (Docker? Native?)
+
+How can we extend the behavior of our command? (e.g., use a different account [talk about options])
+
+Can our bundle do other things? (add new commands... maybe do a search and return most recent tweets?)
+
+One possible approach to take to explore these things:
+
+=== Tweet from Plain Ruby
+
+The first thing we need to do before we can send a tweet from Cog is figure out how to send a tweet, period. To make things easy, we'll take advantage of the `twitter` Ruby gem (https://github.com/sferik/twitter) and build our solution on top of it.
+
+To keep this example simple, we're going to hard-code the tweet to send. As we develop the code, we'll remove that limitation, but for now, we'll start small.
+
+.Plain Ruby
+[source,ruby]
+----
+include::code/tweet.rb[]
+----
+<1> Establish a connection to the API, using credentials stored in the environment
+<2> Tweet a hard-coded message.
+
+The code is trivial.
+
+image::images/first_tweet.png["tweet!"]
+
+=== Minimal Wrapping with cog-rb
+
+Next, wrap this with cog-rb. Still keep things hard coded: we're
+just going to use Cog as a trigger. For this step, we're going to
+just introduce the minimal "wrapping":
+
+.Minimal Cog Command
+[source,ruby]
+----
+require 'cog/command'
+require 'twitter'
+
+class CogCmd::Twitter::Tweet < Cog::Command
+
+  # code you wrote earlier
+
+end
+----
+
+[source,ruby]
+----
+#!/usr/bin/env ruby
+
+# Make sure we're in the top-level directory for the command
+# since so many paths are relative.
+Dir.chdir(File.dirname(__FILE__))
+
+require 'bundler/setup'
+require 'cog'
+
+Cog.bundle('twitter')
+----
+
+=== Run on the Command Line
+
+Basic Gemfile stuff, too. Not even going to introduce request or
+response stuff. Hell, we're not even going to package this up for
+Cog just yet... we can set some environment variables and invoke
+from the command line (I'll need to look up exactly which those
+are). We're not going to care about any input and not going to
+care about output, but we should be able to run a command from
+the terminal and then see that a new tweet got posted.
+
+The cool thing about this approach is that it really drives home
+the fact that these are really just simple terminal programs. We
+can progressively build up features and add environment variables
+and demonstrate functionality without even running a Cog
+server. This will allow us to gradually build a mental model of
+how a command works without having to "eat the whole bowl" of
+command interface, input / output, config.yaml, Docker, etc.
+
+=== Arguments
+
+Next, we'll accept arguments... we'll stop posting a hard-coded
+message to twitter, but take something from our Cog environment
+variables. This will introduce the request object and show you
+how to access it easily from Ruby. We'll adjust our CLI
+invocation to add the right environment variables. In fact, we
+can start by showing in the Ruby code how you can access the
+environment variables directly, and then show how the Ruby
+library wraps that and makes it easier. That way, the
+documentation isn't so Ruby-centric, but shows how the techniques
+can be applicable in other languages, as well as give pointers on
+how you might write your own Cog library in a new language.
+
+We'll keep the creds hard coded for now, since the real solution
+gets into deployment specifics (i.e., put a file with the
+credential on your Relay in this place, or [better], have Cog
+manage them for you).
+
+=== Output
+
+Next we can start thinking about output. When we make the API
+call, what information do we get back (a tweet URL, among other things). Seems like
+that might be nice to return. Demonstrate how to pull that data
+out and return it as output to Cog. This introduces the
+"response". Show how this goes to standard output (again,
+underlining the fact that Cog commands are just plain old CLI
+programs). Describe how to make this be treated as JSON.
+
+(We won't get into templating just yet, because we don't yet have
+a good way outside of Cog to run templates.)
+
+=== Bundle Definition
+
+Now that we've got something that kinda works, let's start
+talking about how to describe what we've got to Cog - the
+config.yaml file! Describe how to document it, how to describe
+what commands are available, etc. We can start with an "allow"
+rule for now (with no permissions) to decouple the permissions
+bit from just getting the damn thing working. We can also use the
+"native" (i.e., non-Docker) approach for simplicity.  Fire up Cog
+and a local Relay, use cogctl to install the bundle and assign it
+to the relay, and then type in Slack and see 1) raw JSON being
+output in chat, and 2) your new tweet in the timeline.
+
+=== Dynamic Configuration
+
+Next, let's get those hard coded creds out of the code. Introduce
+dynamic config and show how to make Cog handle that and inject it
+into the command. I think we might have some commands lying
+around that we can use to demonstrate this. (dumping out the Cog
+environment variables, that is.) Since we're using a native
+bundle, iteration is easy, since our edited code is "live"
+immediately.
+
+(maybe here we could introduce error handling... try setting the
+"wrong" creds and see how things blow up.)
+
+=== Permissions and Rules
+
+Next, let's introduce permissions - we don't want just anybody to
+be able to tweet. We'll add a permission and update the
+authorization rule in config.yaml, bump the version, and then
+upload it to Cog. This might be a good time to briefly digress
+about how you can have multiple bundle versions in Cog, and how
+you can enable / disable them. At first, we can upload the new
+version, but don't enable it. Show you can still tweet (using the
+old "allow" rule). Then enable the new version. Try to tweet
+again and show that you can't (you don't have the permission
+yet!). Give yourself permission, then try again: yay, you can tweet!
+
+=== Templates
+
+Now, let's add a template. Update the bundle definition as
+appropriate, upload and enable, then show what it looks like.
+
+=== Options: Tweet from different accounts
+
+Next, let's introduce the ability to tweet from different
+accounts. This introduces options, some more complex dynamic
+configuration, etc. Also introduces the opportunity to make rules
+that restrict who can tweet from which account.
+
+=== Packaging with Docker
+
+Now let's Docker-ize everything. Add a minimal Dockerfile, edit
+the config.yaml as needed. Build your image, then start using it.
