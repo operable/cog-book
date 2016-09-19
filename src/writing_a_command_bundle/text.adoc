@@ -1,70 +1,148 @@
 == Writing A Command Bundle
 
-Objective: Learn about how Cog command bundles are structured, the
-interface between Cog and a command, and how to iteratively develop a
-bundle.
+At some point in your use of Cog, you'll want to write some command
+bundles of your own. One of the promises of ChatOps is the ability to
+bring your processes into the shared space of your chat system,
+lowering the bar for collaboration, and increasing
+participation. Chances are you've already got a number of programs and
+scripts that you already use to run your systems. Fortunately, using
+those tools in Cog doesn't require shoe-horning them into a particular
+application framework, or rewriting them into a new programming
+language. Instead, Cog's interface relies on the fundamental building
+blocks of standard input, standard output, and environment variables.
+
+In this chapter we'll show you how to take a standalone program and
+gradually build out the shim code needed to make it interoperate with
+Cog. We'll examine Cog's usage of input, output, and environment
+variables. We'll learn how to describe a bundle to Cog. We'll also see
+how to package your code and run it on Relay, Cog's execution
+engine. Along the way, we'll also discover what is necessary if you'd
+like to write your own language-specific interaction library to
+abstract the lower-level details of the Cog - command interaction.
 
 === Scenario: Tweet from Cog
 
-Post to a Twitter account from Slack (start with one; expand to multiple later)
+Transparency during service incidents is essential to maintaining the
+trust of your users. When your API slows down, you experience a
+hardware failure, or have a service outage, your users will be
+affected. They need to know that you are aware of the problem, and
+they need to know that you're working to remedy the situation.
 
-Why?
+https://twitter.com[Twitter] is a popular platform for companies to quickly update their
+users on their system statuses. Wouldn't it be nice if you could
+easily send a tweet from your company's status account from your chat
+window as you and your colleagues work to remedy the situation? The
+people closest to the situation could quickly get the word out,
+without having to track down the person in the company that has the
+account's login information.
 
-So when we're in the middle of an incident, anybody in the channel can
-notify the outside world. We don't need to find the One Special Person
-that has the Twitter credentials and bug them to do it.
-
-Want it to look like this:
+Let's imagine what that might look like:
 
 .Desired Interface for _twitter:tweet_ Command
 ----
-@cog tweet Currently experiencing API slowdowns. Our engineering team is investigating.
+@cog twitter:tweet Currently experiencing API slowdowns; investigating.
 ----
 
-What do we need for this?
+With a command like this, you and your colleagues could post status
+updates directly from chat. You could also wire it up into pipelines
+and triggers to augment other workflows; perhaps you could
+automatically tweet when your CI system finishes a new product
+release? The brave among you could even create an alias to "OH" your
+colleagues' witty observations. Sending a tweet is a very simple task,
+but by adding this simple task to Cog, you can unlock a number of
+incredibly useful abilities. How much moreso with the more
+sophisticated tools you already have?
 
-* A Twitter account (duh)
-* Twitter API tokens/keys/secrets
 
-Code that can take a string and those credentials and post to the
-Twitter API. What libraries exist already to do this?  Alternatively,
-what are the minimum HTTP calls required for this?  (There's a Ruby
-Twitter API client we can use; contrast this with the Pingdom bundle,
-where there isn't really a good client, but we only need a single HTTP
-call, so we rolled our own)blah
 
-Interface this code with Cog.
-How do we get the inputs?
-How do we return output to the pipeline (and what should that output be?)
-How would we like to present this output in chat? (templates!)
-How do we get the credentials to the code without hard-coding it? (dynamic config!)
-How do we package all this up so Cog can use it? (Docker? Native?)
+// What do we need for this?
 
-How can we extend the behavior of our command? (e.g., use a different account [talk about options])
+// * A Twitter account (duh)
+// * Twitter API tokens/keys/secrets
 
-Can our bundle do other things? (add new commands... maybe do a search and return most recent tweets?)
+// Code that can take a string and those credentials and post to the
+// Twitter API. What libraries exist already to do this?  Alternatively,
+// what are the minimum HTTP calls required for this?  (There's a Ruby
+// Twitter API client we can use; contrast this with the Pingdom bundle,
+// where there isn't really a good client, but we only need a single HTTP
+// call, so we rolled our own)blah
 
-One possible approach to take to explore these things:
+// Interface this code with Cog.
+// How do we get the inputs?
+// How do we return output to the pipeline (and what should that output be?)
+// How would we like to present this output in chat? (templates!)
+// How do we get the credentials to the code without hard-coding it? (dynamic config!)
+// How do we package all this up so Cog can use it? (Docker? Native?)
+
+// How can we extend the behavior of our command? (e.g., use a different account [talk about options])
+
+// Can our bundle do other things? (add new commands... maybe do a search and return most recent tweets?)
+
+// One possible approach to take to explore these things:
 
 === Tweet from Plain Ruby
 
-The first thing we need to do before we can send a tweet from Cog is figure out how to send a tweet, period. To make things easy, we'll take advantage of the `twitter` Ruby gem (https://github.com/sferik/twitter) and build our solution on top of it.
+The first thing we need to do before we can send a tweet from Cog is
+figure out how to send a tweet, period. To make things easy, we'll
+take advantage of the `twitter` Ruby gem
+(https://github.com/sferik/twitter) and build our solution on top of
+it.
 
-To keep this example simple, we're going to hard-code the tweet to send. As we develop the code, we'll remove that limitation, but for now, we'll start small.
+[NOTE]
+For this example, we're using Ruby for the heavy lifting of
+sending a tweet, but don't be put off if you're not a Ruby
+programmer. The code is short, and the details are, in any event,
+tangential to learning how Cog interacts with it.
+
+[NOTE]
+====
+If you'd like to follow along, you'll need a Twitter account, as well as the required tokens to interact with the Twitter API. This will require creating an "application" under your account. Go to https://apps.twitter.com to learn more. While you're there, you'll need to generate the following credentials:
+
+* Consumer Key
+* Consumer Secret
+* Application Token
+* Application Token Secret
+====
 
 .Plain Ruby
 [source,ruby]
 ----
-include::code/tweet.rb[]
+include::code/pure_ruby/tweet.rb[]
 ----
-<1> Establish a connection to the API, using credentials stored in the environment
-<2> Tweet a hard-coded message.
+<1> Here, we establish a connection to the Twitter API, using our API credentials, stored as environment variables
+<2> Next, we'll assemble a message to send by combining all the command line arguments into a single string
+<3> We'll actually send the message to Twitter
+<4> Finally, we'll return some information to standard output so we can find out the URL of our new tweet.
 
-The code is trivial.
+It's not a lot of code, and running it is pretty straightforward.
 
+.Plain Ruby
+[source,bash]
+----
+include::code/pure_ruby/run.sh[]
+----
+
+Running that yields the following output:
+----
+Message: This is an interesting tweet
+URL:     https://twitter.com/CogTesting/status/776900296802992128
+----
+
+// TODO: This isn't a picture of that URL ^^^
 image::images/first_tweet.png["tweet!"]
 
-=== Minimal Wrapping with cog-rb
+=== Begin to introduce Cog awareness: Arguments
+
+Our tweet code is simple, and so getting it to run in Cog should also be pretty simple. With the code we have, we'll need to take care of two things: arguments and our authentication tokens. We'll tackle arguments first.
+
+
+
+Now that we have some basic code that can send a tweet, we can begin
+to wrap Cog around it. We're going to ease into it slowly, as there
+are a lot of moving parts to a Cog command, and it can be a bit
+overwhelming to deal with it all at once. In fact, we're not even
+really going to be using Cog yet. Instead, we'll be dealing with
+`cog-rb`, theh Ruby library for writing Cog commands.
 
 Next, wrap this with cog-rb. Still keep things hard coded: we're
 just going to use Cog as a trigger. For this step, we're going to
@@ -73,29 +151,96 @@ just introduce the minimal "wrapping":
 .Minimal Cog Command
 [source,ruby]
 ----
-require 'cog/command'
-require 'twitter'
-
-class CogCmd::Twitter::Tweet < Cog::Command
-
-  # code you wrote earlier
-
-end
+include::code/minimal_cog_rb/lib/cog_cmd/twitter/tweet.rb[]
 ----
+
+<1> Here, we require the cog-rb library
+<2> The class name incorporates the bundle's name ("Twitter") and the command name ("Tweet")
+<3> The `run_command` method contains the same code that we used earlier. As the name suggests, this is the core of the command's logic.
+
+To run this, we won't call it directly, as we did in our pure Ruby implementation. Instead, the `cog-rb` library recommends setting up a runner script, which is what Cog will ultimately call when executing the command (indeed, Cog will use this runner for every command within the bundle).
+
+.Command Runner
+[source,ruby]
+----
+include::code/minimal_cog_rb/cog-command[]
+----
+
+This runner is almost deceptively simple... in fact, it's initially difficult to see how it actually does anything! On the final line we see an instantiation of our "twitter" bundle, but how can calling this result in our `tweet` command running? The answer lies in environment variables, which are the foundation of the standard interface for Cog.
+
+Due to different conventions for passing arguments into programs written in different languages, Cog was designed to take advantage of the uniform interface of environment variables as a language-agnostic way to easily support commands written in any language. Though helper libraries can be written (and have been written for Ruby and Python), the underlying interaction mechanisms are so simple, commands can easily be written without such libraries (alternatively, such libraries are easy to write).
+
+[NOTE]
+====
+Operable currently supports two language-specific libraries for writing Cog commands:
+
+* cog-rb for Ruby (https://github.com/operable/cog-rb)
+* pycog3 for Python 3 (https://github.com/operable/pycog3)
+====
+
+// TODO: Show the execution of the minimal cog-rb version
+
+The first environment variable that comes into play is `COG_COMMAND`; this is what `cog-rb` uses to determine that it needs to execute the `CogCmd::Twitter::Tweet#run_command` method.
+
+[source,bash]
+----
+export TWITTER_CONSUMER_KEY=XXXX
+export TWITTER_CONSUMER_SECRET=XXXX
+export TWITTER_ACCESS_TOKEN=XXXX
+export TWITTER_ACCESS_TOKEN_SECRET=XXXX
+
+export COG_COMMAND="tweet"
+./cog-command
+----
+
+When `COG_COMMAND` is set to `tweet`, we get our tweet. If it is set to anything else at this stage in our bundle's development, the program will fail to run.
+
+=== Adding Arguments
+
+While it's very useful to be able to repeatedly tweet the phrase "This is an interesting tweet", it is likely to be of limited utility if you're trying to keep your customers apprised of your status during an incident. We need to take that hard-coded message out of our code and learn how to access command arguments sent by Cog.
+
+Recall our desired interface for our `tweet` command:
+
+----
+@cog twitter:tweet Currently experiencing API slowdowns. Our engineering team is investigating.
+----
+
+The string `twitter:tweet` is the name of our command, and everything that follows is the message we'd like to send. If this were a traditional terminal program, each word after `twitter:tweet` would be an individual argument ("Currently", "experiencing", "API", etc.). As Cog commands are heavily influenced by the idioms and architecture of the UNIX command line, it should come as no surprise to know that Cog views these as arguments, as well.
+
+In fact, the environment variables Cog uses to represent these arguments is very similar to those used in common shell scripting.
+
+COG_ARGC - COG ARGument Count = how many arguments were passed
+COG_ARGV_0 - COG ARGument 1 = the first argument
+COG_ARGV_1 - COG ARGument 2 = the second argument
+and so on
+
+Using the values of these environment variables, a command can reconstruct the arguments in whatever form is most natural for the given language (e.g., an array data). Though it's not hard to write that code, it's tedious to do it more than once; this is one of the niceties that `cog-rb` and `pycog3` provide for Ruby and Python commands.
+
+Let's try and tweet "Hello World!", using what we now know.
+
+[source,bash]
+----
+export TWITTER_CONSUMER_KEY=XXXX
+export TWITTER_CONSUMER_SECRET=XXXX
+export TWITTER_ACCESS_TOKEN=XXXX
+export TWITTER_ACCESS_TOKEN_SECRET=XXXX
+
+export COG_COMMAND="tweet"
+export COG_ARGC=2             <1>
+export COG_ARGV_0="Hello"
+export COG_ARGV_1="World!"
+
+./cog-command
+----
+<1> Add our argument environment variables
 
 [source,ruby]
 ----
-#!/usr/bin/env ruby
-
-# Make sure we're in the top-level directory for the command
-# since so many paths are relative.
-Dir.chdir(File.dirname(__FILE__))
-
-require 'bundler/setup'
-require 'cog'
-
-Cog.bundle('twitter')
+include::code/cog_rb_args/lib/cog_cmd/twitter/tweet.rb[]
 ----
+<1> Use the `Cog::Request` object to access our arguments.
+
+image::images/tweet_with_args.png["tweet with args!"]
 
 === Run on the Command Line
 

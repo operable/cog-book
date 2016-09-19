@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require 'twitter'
 
 client = Twitter::REST::Client.new(
@@ -6,4 +8,12 @@ client = Twitter::REST::Client.new(
   access_token: ENV["TWITTER_ACCESS_TOKEN"],
   access_token_secret: ENV["TWITTER_ACCESS_TOKEN_SECRET"])
 
-client.update("This is an interesting tweet")               # <2>
+message = ARGV.join(" ")       # <2>
+
+tweet = client.update(message) # <3>
+
+# <4>
+puts <<-EOM
+Message: #{message}
+URL:     #{tweet.url}
+EOM
