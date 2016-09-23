@@ -5,4 +5,8 @@ export TWITTER_CONSUMER_SECRET=${TWITTER_CONSUMER_SECRET_BOOK}
 export TWITTER_ACCESS_TOKEN=${TWITTER_ACCESS_TOKEN_BOOK}
 export TWITTER_ACCESS_TOKEN_SECRET=${TWITTER_ACCESS_TOKEN_SECRET_BOOK}
 
-./tweet.rb This is an interesting tweet
+export COG_ARGC="2"        # <1>
+export COG_ARGV_0="Hello"
+export COG_ARGV_1="World"
+
+./tweet_cog_wrapper.sh     # <2>

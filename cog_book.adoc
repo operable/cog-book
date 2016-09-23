@@ -1,10 +1,40 @@
-Cog: The Definitive Guide
-=========================
+The Cog Book
+============
 :Author: Christopher Maier
 :Email: <chris@operable.io>
 
 :icons: true
 :iconsdir: ./images/icons
 
+Cog
+===
+
 include::src/writing_a_command_bundle/text.adoc[]
-include::src/glossary/text.adoc[]
+
+Reference
+=========
+
+== Authorization Rule Syntax
+placeholder
+
+== Bundle Definition Syntax
+placeholder
+
+// TODO: Can we somehow import / process the JSON Schema from Spanner in here?
+
+== Cog Server Configuration
+placeholder
+
+== Command Environment
+placeholder
+
+== Command Output Directives
+placeholder
+
+== Relay Configuration
+placeholder
+
+== Templating Reference
+placeholder
+
+// include::src/glossary/text.adoc[]
