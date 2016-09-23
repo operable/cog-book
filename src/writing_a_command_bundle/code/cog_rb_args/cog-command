@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+# Make sure we're in the top-level directory for the command
+# since so many paths are relative.
+Dir.chdir(File.dirname(__FILE__))
+
+require 'bundler/setup'
+require 'cog'
+
+Cog.bundle('twitter')

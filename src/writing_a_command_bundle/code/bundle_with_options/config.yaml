@@ -1,0 +1,26 @@
+---
+cog_bundle_version: 4
+name: twitter_example
+description: Interact with Twitter
+version: 0.0.4                      # <1>
+permissions:
+  - twitter_example:tweet
+commands:
+  tweet:
+    description: Send a tweet!
+    executable: /Users/chris/src/operable/cog-book/src/writing_a_command_bundle/code/bundle_with_options/tweet_cog_wrapper.sh
+    arguments: "<message>"
+    rules:
+      - when command is twitter_example:tweet must have twitter_example:tweet
+    options:                                       # <2>
+      as:
+        description: the account to tweet from
+        type: string
+        required: false
+        short_flag: a
+templates:
+  tweet:
+    body: |
+      ~each var=$results~
+      ~$item.url~
+      ~end~

@@ -5,10 +5,10 @@ ROOT_FILE=cog_book.adoc
 image: Dockerfile
 	docker build -t $(IMAGE_NAME) .
 
-xhtml: image $(ROOT_FILE)
+xhtml: $(ROOT_FILE)
 	docker run -it -v $(shell pwd):$(MOUNT) --rm $(IMAGE_NAME) a2x -f $@ $(MOUNT)/$(ROOT_FILE) --verbose --doctype=book
 
-pdf: image $(ROOT_FILE)
+pdf: $(ROOT_FILE)
 	docker run -it -v $(shell pwd):$(MOUNT) --rm $(IMAGE_NAME) a2x -f $@ $(MOUNT)/$(ROOT_FILE) --verbose --doctype=book
 
 all: xhtml pdf
