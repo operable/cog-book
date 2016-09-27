@@ -1,18 +1,10 @@
-FROM ubuntu:16.04
+FROM alpine:3.4
 
-RUN apt-get update && \
-    apt-get upgrade -y
+RUN apk --no-cache add ruby asciidoctor ruby-dev build-base python
+RUN gem install asciidoctor --no-rdoc --no-ri && \
+    gem install asciidoctor-pdf --pre --no-rdoc --no-ri && \
+    gem install pygments.rb --no-rdoc --no-ri
 
-RUN apt-get install -y \
-    asciidoc \
-    texlive
-# TODO: filter out various tex doc packages... they're huge
-# texlive-latex-base-doc
-# texlive-latex-extra-doc
-# texlive-latex-recommended-doc
-# texlive-pictures-doc
-# texlive-pstricks-doc
-
-RUN adduser --disabled-login --gecos '' asciidoc
+RUN adduser -D asciidoc
 USER asciidoc
 WORKDIR /home/asciidoc

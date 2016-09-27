@@ -1,10 +1,11 @@
+:source-highlighter: pygments
+:icons: font
+:toc2:
+
 The Cog Book
 ============
 :Author: Christopher Maier
 :Email: <chris@operable.io>
-
-:icons: true
-:iconsdir: ./images/icons
 
 Cog
 ===

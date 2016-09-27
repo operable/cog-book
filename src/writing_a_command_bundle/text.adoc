@@ -937,7 +937,7 @@ nice. We also get a rather ugly Ruby stack trace in that error
 message, which is quite as nice. We'll now take a look at how we get
 this behavior, and how we can intentionally manipulate it.
 
-image::images/tweet_recent_tweets_unauthorized_stack_trace[]
+image::images/tweet_recent_tweets_unauthorized_stack_trace.png[]
 
 If you've ever done any command line scripting, you'll likely be
 familiar with the concept of ``exit codes''. Essentially, these are
@@ -971,7 +971,7 @@ include::code/error_handling/recent_tweets.rb[]
 
 Now, when we run the command with bad tokens, we'll get a much nicer output.
 
-image::images/tweet_recent_tweets_unauthorized_error_message[]
+image::images/tweet_recent_tweets_unauthorized_error_message.png[]
 
 // === cog-rb
 // placeholder
