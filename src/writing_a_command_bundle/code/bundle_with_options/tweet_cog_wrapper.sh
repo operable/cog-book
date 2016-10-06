@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 declare -a TWEET_ARGUMENTS
 for ((i=0;i<${COG_ARGC};i++)); do
@@ -6,7 +6,7 @@ for ((i=0;i<${COG_ARGC};i++)); do
     TWEET_ARGUMENTS[$i]=${!var}
 done
 
-if [ -n "${COG_OPT_AS}" ]         # <1>
+if [ -n "${COG_OPT_AS}" ] # <1>
 then
     account=${COG_OPT_AS}
 else

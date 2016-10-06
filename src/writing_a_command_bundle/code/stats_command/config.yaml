@@ -2,7 +2,7 @@
 cog_bundle_version: 4
 name: twitter_example
 description: Interact with Twitter
-version: 0.0.5                      # <1>
+version: 0.0.5 # <1>
 docker: # <2>
   image: cog-book/twitter
   tag: latest

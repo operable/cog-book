@@ -2,7 +2,7 @@
 cog_bundle_version: 4
 name: twitter_example
 description: Interact with Twitter
-version: 0.0.4                      # <1>
+version: 0.0.4 # <1>
 permissions:
   - twitter_example:tweet
 commands:
@@ -12,7 +12,7 @@ commands:
     arguments: "<message>"
     rules:
       - when command is twitter_example:tweet must have twitter_example:tweet
-    options:                                       # <2>
+    options: # <2>
       as:
         description: the account to tweet from
         type: string

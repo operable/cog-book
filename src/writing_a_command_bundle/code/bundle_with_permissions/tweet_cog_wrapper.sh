@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 declare -a TWEET_ARGUMENTS
 for ((i=0;i<${COG_ARGC};i++)); do
