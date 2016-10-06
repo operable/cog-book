@@ -7,10 +7,14 @@
 :figure-caption: Figure
 
 
-The Cog Book
-============
+= The Cog Book
 :Author: Christopher Maier
 :Email: <chris@operable.io>
+:homepage: https://cog-book.operable.io/
+:repository: https://github.com/operable/cog-book/[GitHub]
+:license: https://github.com/operable/cog-book/blob/master/LICENSE[Apache 2]
+
+NOTE: This book is released under the {license} license. More information about contributing to this book along with access to the source code and previous releases is available at {repository}. If you would prefer to read this book as a PDF, you may download it {homepage}cog_book.pdf[here].
 
 Cog
 ===
@@ -45,3 +49,10 @@ include::src/writing_a_command_bundle/text.adoc[]
 
 // == Templating Reference
 // placeholder
+
+[colophon]
+= Colophon
+
+(C) 2016 by Operable, Inc.
+
+This book is released under the {license} with source code available at {repository}.
