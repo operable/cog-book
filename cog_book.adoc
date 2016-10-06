@@ -55,4 +55,4 @@ include::src/writing_a_command_bundle/text.adoc[]
 
 (C) 2016 by Operable, Inc.
 
-This book is released under the {license} with source code available at {repository}.
+This book is released under the {license} license. Source code is available at {repository}.
