@@ -1,6 +1,11 @@
 :source-highlighter: pygments
 :icons: font
 :toc2:
+:sectnums:
+
+:listing-caption: Listing
+:figure-caption: Figure
+
 
 The Cog Book
 ============
@@ -12,8 +17,11 @@ Cog
 
 include::src/writing_a_command_bundle/text.adoc[]
 
-Reference
-=========
+= Reference
+[partintro]
+--
+Here you will find detailed reference information on various aspects of the Cog chat platform.
+--
 
 == Authorization Rule Syntax
 placeholder
@@ -37,5 +45,3 @@ placeholder
 
 == Templating Reference
 placeholder
-
-// include::src/glossary/text.adoc[]

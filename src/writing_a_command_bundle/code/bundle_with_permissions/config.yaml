@@ -2,16 +2,16 @@
 cog_bundle_version: 4
 name: twitter_example
 description: Interact with Twitter
-version: 0.0.3                      # <1>
+version: 0.0.3 # <1>
 permissions:
-  - twitter_example:tweet           # <2>
+  - twitter_example:tweet # <2>
 commands:
   tweet:
     description: Send a tweet!
     executable: /Users/chris/src/operable/cog-book/src/writing_a_command_bundle/code/bundle_with_permissions/tweet_cog_wrapper.sh
     arguments: "<message>"
     rules:
-      - when command is twitter_example:tweet must have twitter_example:tweet     # <3>
+      - when command is twitter_example:tweet must have twitter_example:tweet # <3>
 templates:
   tweet:
     body: |
