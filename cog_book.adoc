@@ -17,31 +17,31 @@ Cog
 
 include::src/writing_a_command_bundle/text.adoc[]
 
-= Reference
-[partintro]
---
-Here you will find detailed reference information on various aspects of the Cog chat platform.
---
+// = Reference
+// [partintro]
+// --
+// Here you will find detailed reference information on various aspects of the Cog chat platform.
+// --
 
-== Authorization Rule Syntax
-placeholder
+// == Authorization Rule Syntax
+// placeholder
 
-== Bundle Definition Syntax
-placeholder
+// == Bundle Definition Syntax
+// placeholder
 
-// TODO: Can we somehow import / process the JSON Schema from Spanner in here?
+// // TODO: Can we somehow import / process the JSON Schema from Spanner in here?
 
-== Cog Server Configuration
-placeholder
+// == Cog Server Configuration
+// placeholder
 
-== Command Environment
-placeholder
+// == Command Environment
+// placeholder
 
-== Command Output Directives
-placeholder
+// == Command Output Directives
+// placeholder
 
-== Relay Configuration
-placeholder
+// == Relay Configuration
+// placeholder
 
-== Templating Reference
-placeholder
+// == Templating Reference
+// placeholder
