@@ -8,8 +8,6 @@
 
 
 = The Cog Book
-:Author: Christopher Maier
-:Email: <chris@operable.io>
 :homepage: https://cog-book.operable.io/
 :repository: https://github.com/operable/cog-book/[GitHub]
 :license: https://github.com/operable/cog-book/blob/master/LICENSE[Apache 2]
