@@ -958,7 +958,7 @@ this, Cog itself handles the extraction, and your commands don't have
 to know anything about how the prior output was structured; after all, it would
 be a bit odd for the `echo` command -- something built into Cog --
 to know how a `tweet` result was structured, particularly since we
-just wrote it). This is very important for being able to chain
+just wrote it. This is very important for being able to chain
 together commands from a variety of different bundles.
 
 However, a bundle will often include multiple commands which may
@@ -967,82 +967,45 @@ have the commands operate on the implicit input received from a
 previous pipeline stage. This data is presented to the command as a
 JSON string on standard input. With this, you can create some rather
 concise pipelines. Let's examine how this works in practice by
-introducing another command to our bundle.
+introducing a few more commands to our bundle.
 
-==== Tweet Statistics: Favorites and Retweets
+==== Usecase: Getting Statistics on Recent Tweets
 
-We can get some basic statistics from the Twitter API for our
-tweets. Let's say you've just announced the release of version 1.0 of
-your software product on Twitter, and you're curious to see what kind
-of traction it's getting in terms of favorites and retweets. Using the
-`twitter` Ruby gem once again, we can write a small script that finds
-this information for a given tweet. Let's take a look:
+Let's say you've just announced the release of version 1.0 of your
+software product on Twitter with a series of tweets, and you're
+curious to see what kind of traction they've been getting in terms of
+favorites and retweets.
 
-[source,ruby,linenums]
-.Twitter `stats.rb` Script
-----
-include::code/stats_command/stats.rb[]
-----
-<1> Though we're talking about processing input from previous pipeline stages, we shouldn't _require_ that (otherwise our command could never be called on its own, because there would be no previous stage to feed it!). If our command is passed an argument (in this case the URL of a tweet), then that is what it will operate on.
-<2> On the other hand, if we don't receive an argument, we'll read standard input as a JSON map, and extract the `url` field from it. Remember, we're handling the case where we're receiving a map that looks like what our `tweet` command produces.
-<3> This call simply "rehydrates" a Ruby tweet object from the URL. From this we can extract the number of favorites and retweets the tweet has. We'll output plain text, just as we did in our original `tweet.rb` script.
+Now, you might be tempted to make some sort of
+`recent_tweets_with_stats` command, or (slightly better) perhaps a
+`recent_tweets` command that takes a `--with-stats` option. That's all
+well and good, but consider how people might want to take advantage of
+this functionality in the future. Perhaps your support team would like
+to view those same statistics for the tweets that are directed to your
+support account. Maybe your marketing team wants to see those
+statistics for the tweets that mention your product. If you baked the
+statistics feature into your `recent_tweets` command, you'd need to
+duplicate it for a `mention` command and a `search` command to support
+the other teams' needs. That doesn't sound like much fun.
 
-As before, we'll set up a small runner script in Bash to see how Cog sends the data to the command.
+Instead, we can decompose these capabilities into several individual
+commands, and use Cog's pipelines to get us what we want. Instead of
+invoking `recent_tweets_with_stats`, we'd instead use `recent_tweets |
+stats`, which would then pave the way for `tweets_mentioning
+"@support" | stats` and `tweet_search our_product | stats`, and
+indeed, getting statistics for _any_ stream of tweets you could think
+of.
 
-[source,bash,linenums]
-.Test Harness for `stats` Command
-----
-include::code/stats_command/run_stats.sh[]
-----
-<1> If we call the runner with an argument, we'll turn it into a `COG_ARGC` and `COG_ARG_0`
-// TODO: do this in the previous runner script
-<2> any standard input will get passed along to the script. This is how we'll simulate output from a prior pipeline stage.
+==== A `recent_tweets` Command
 
-[source,bash,linenums]
-.stats_cog_wrapper.sh
-----
-include::code/stats_command/stats_cog_wrapper.sh[]
-----
-<1> Here we extract the Cog environment variables into arguments, as we did for our original `tweet` command.
-<2> We pass the arguments (if any) as arguments to the Ruby script, as well as standard input.
-<3> As with our earlier `tweet` command, we extract bits of the output and put them into a JSON object suitable for templating or further downstream processing
-
-We can run this on the command line like so:
-
-[options="nowrap"]
-.Executing `stats` Command from the Terminal, Simulating Pipeline Input
-----
-$ echo '{"url": "https://twitter.com/CogTesting/status/778312086568968193"}' | ./run_stats.sh
-COG_TEMPLATE: tweet-stats
-JSON
-{
- "url": "https://twitter.com/CogTesting/status/778312086568968193",
- "favorites": "1",
- "retweets": "1"
-}
-----
-
-.A Retweeted, Favorited Tweet
-image::images/tweet_favorites_and_retweets.png[]
-
-
-// TODO: The problem with this is that we don't have a "recent_tweets" command yet... we want to show that flowing into this for maximum impact.
-
-==== Feeding the Stats Command with a Recent Tweets Command
-
-You may have noticed a bit of a flaw in the usecase for our `stats`
-command as we've laid it out so far. Right now the only really useful
-command we have to feed input into it is our `tweet` command, but
-there's not a whole lot of utility in sending a tweet and then
-_immediately_ seeing how many favorites and retweets it's gotten. A
-better use would be having a command that could generate a number of
-tweets, and then pipe them through our stats command. This will also
-reveal an interesting thing about how input is handled in pipelines.
-
-Let's say we'd like to see how well our most recent tweets are being
-received. If we had a command that pulled back, say, the last 5 tweets
-we've sent from our account, we could pipe these through our `stats`
-command and get a quick snapshot of how well our tweets are doing.
+In order to do this, though, we need to take a look at how Cog
+commands can receive input from other commands. Though we could start
+directly with writing the `stats` command itself, illustrating how it
+works by piping the output of our existing `tweet` command into it,
+that won't actually be very exciting; it's highly doubtful that we're
+going to get any retweets or favorites to a tweet a second after we
+send it. Instead, we'll start with a `recent_tweets` command that can
+generate _multiple_ tweets for our pipeline.
 
 For brevity's sake, with this command, we'll shift gears from our
 "wrap existing commands for Cog" approach, and just write this script
@@ -1053,33 +1016,86 @@ others being wrapped pre-existing programs.
 [source,ruby,linenums]
 .`recent_tweets` Cog Command
 ----
-include::code/recent_tweets_command/recent_tweets.rb[]
+include::code/stats_command/recent_tweets.rb[]
 ----
-<1> Here we call the API client method that retrieves tweets from our authenticated user. As called here, this will result in no more than 5 tweets. This is configurable, however; a refinement of this command could involve accepting an optional number of tweets to retrieve.
-<2> As before, we specify our template to use. Notice, however, that we're using the same template as our earlier `tweet` command. This is intentional; we're generating the same "shape" of data, and so it's natural that we'd template it the same way. A command can use any template within its own bundle.
-<3> Here we generate the JSON string to send back, but notice this time we're sending back an array of objects; in our `tweet` and `stats` command we only sent back a single object.
+<1> We'll take care of the account switching in Ruby, instead of in a shell script as we did for the `tweet` command earlier.
+<2> Here we call the client's API method that retrieves tweets from our authenticated user. As called here, this will result in no more than 5 tweets. This is configurable in the API client we're using, however; a refinement of this command could involve accepting an optional number of tweets to retrieve.
+<3> As before, we specify our template to use. Notice, however, that we're using the same template as our earlier `tweet` command. This is intentional; we're generating the same "shape" of data, and so it's natural that we'd template it the same way. A command can use any template within its own bundle.
+<4> Here we generate the JSON string to send back, but notice this time we're sending back an array of objects; in our `tweet` command, we only sent back a single object.
 
-Let's dig into that last point a bit. Our `tweet` command returns a
-single JSON object, and our `stats` command can optionally _receive_ a
-single JSON object, but our `recent_tweets` command returns _multiple_
-JSON objects. Don't worry, though; our `stats` command won't break
-when we pipe our `recent_tweets` into it. On the server, Cog
+
+// TODO: show it working
+
+Now that we've got a source of tweets, let's see how we can process them in a downstream command.
+
+==== Tweet Statistics: Favorites and Retweets
+
+We're ready to tackle our `stats` command now. Once again, our `twitter` library has the code we need. We'll also write this as a "pure Cog" command, like we did for the `recent_tweets` command.
+
+[source,ruby,linenums]
+.Twitter `stats` Command
+----
+include::code/stats_command/stats.rb[]
+----
+<1> For this command, it doesn't matter what account we use (i.e., there will be no `--as` option). We'll just use the default one.
+<2> Though we're talking about processing input from previous pipeline stages, we shouldn't _require_ that (otherwise our command could never be called on its own, because there would be no previous stage to feed it!). If our command is passed an argument (in this case the URL of a tweet), then that is what it will operate on.
+<3> On the other hand, if we don't receive an argument, we'll read standard input as a JSON map, and extract the `url` field from it. Remember, we're handling the case where we're receiving a map that looks like what our `tweet` command produces.
+<4> This call simply "rehydrates" a Ruby tweet object from the URL. From this we can extract the number of favorites and retweets the tweet has. We'll output plain text, just as we did in our original `tweet.rb` script.
+
+Let's add these new commands to our bundle, install it, and give them a try.
+
+[source,yaml,linenums]
+.Final Bundle Configuration
+----
+include::code/stats_command/config.yaml[]
+----
+<1> Add the metadata for the `recent_tweets` command. Remember to add the `as` option!
+<2> Here's the metadata for the `stats` command. This command takes no options, but we do want to indicate that it can take an optional `tweet_url` argument, for use outside of pipelines.
+<3> Here's the new `stats` template. This will actually generate a nice table from our results. Templates can have conditional logic, so we could modify this to display differently if we're only given a single tweet. What we have will work in all cases, however.
+
+Once we rebuild our Docker image and install the bundle, we can finally test it all out. First, let's take a look at `recent_tweets`.
+
+.Running the `recent_tweets` Command
+image::images/tweet_recent_tweets.png[]
+
+Let's take a look at how the `stats` command behaves when we supply a single tweet as an argument.
+
+.Running the `stats` Command for a Single Tweet
+image::images/tweet_stats_for_one_tweet.png[]
+
+.A Retweeted, Favorited Tweet
+image::images/tweet_favorites_and_retweets.png[]
+
+Not bad! Now, let's take a look at it when we feed it multiple tweets in a pipeline.
+
+.A Tweet Pipeline
+image::images/tweet_stats_pipeline.png[]
+
+Let's dig into what's going on behind the scenes. You might have
+noticed that our `recent_tweets` command generated an array of tweet
+objects, but that our `stats` command accepted just a _single_ tweet
+object for input. However, it seemed to process multiple tweet objects
+just fine. The explanation to this lies in the Cog server. Cog
 accumulates all output it receives into a single flat list, and then
 doles this output one-by-one to the command in the next stage of the
 pipeline (if you're familiar with functional programming, Cog acts a
 bit like a `map` operation processing pipelines). By default, commands
 can just assume they'll receive a single object to act upon, which
 makes them simpler to implement.
+// TODO: A diagram of this flow would be really nice (perhaps not in this chapter, though)
 
-// (There are some commands that do need to operate on the aggregate of
-// output, however; things like `filter`, `sort`, `min`, `max`, and so
-// on. These commands behave a bit differently, and we'll discuss that in
-// SECTION TODO.)
+.But What If You _Need_ Multiple Inputs at Once?
+[NOTE]
+====
+Though most commands can be implemented like our Twitter `stats`
+command, operating on a single input object, there are some kinds of
+commands that _must_ operate on multiple inputs at once; think of
+commands like `filter`, `sort`, `min`, `max`, and so on. These kinds
+of commands can be implemented for Cog, but they behave a bit
+differently. This is an advanced topic which we'll describe later.
+// TODO: Link to future discussion on services
+====
 
-// TODO: A diagram of this would be really nice (perhaps not in this chapter, though)
-
-.A Tweet Pipeline
-image::images/tweet_stats_pipeline.png[]
 
 === Error Handling
 
