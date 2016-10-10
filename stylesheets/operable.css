@@ -153,3 +153,11 @@ IMG.footerlogo {
 .app-footer a {
     color: #369FCD;
 }
+
+.app-footer a:hover {
+    color: #fff;
+}
+
+.app-footer {
+    padding: 25px 0;
+}
