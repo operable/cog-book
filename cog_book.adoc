@@ -4,6 +4,7 @@
 :toc-title: Table of Contents
 :sectnums:
 :linkcss:
+:sectanchors:
 
 :google-analytics-account: UA-61670076-4
 :listing-caption: Listing
@@ -21,11 +22,11 @@ NOTE: This book is released under the {license} license. More information about 
 
 include::src/writing_a_command_bundle/text.adoc[]
 
-// = Reference
-// [partintro]
-// --
-// Here you will find detailed reference information on various aspects of the Cog chat platform.
-// --
+= Reference
+[partintro]
+--
+Here you will find detailed reference information on various aspects of the Cog chat platform.
+--
 
 // == Authorization Rule Syntax
 // placeholder
@@ -35,8 +36,8 @@ include::src/writing_a_command_bundle/text.adoc[]
 
 // // TODO: Can we somehow import / process the JSON Schema from Spanner in here?
 
-// == Cog Server Configuration
-// placeholder
+
+include::src/reference/cog_server_configuration.adoc[]
 
 // == Command Environment
 // placeholder
