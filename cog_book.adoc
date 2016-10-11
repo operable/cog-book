@@ -1,6 +1,7 @@
 :source-highlighter: pygments
 :icons: font
 :toc2:
+:toc-title: Table of Contents
 :sectnums:
 :linkcss:
 
