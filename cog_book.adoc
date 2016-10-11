@@ -2,11 +2,13 @@
 :icons: font
 :toc2:
 :sectnums:
+:linkcss:
 
 :google-analytics-account: UA-61670076-4
 :listing-caption: Listing
 :figure-caption: Figure
 
+image::images/cog_background.png[]
 
 = The Cog Book
 :homepage: https://cog-book.operable.io/
