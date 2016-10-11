@@ -2,7 +2,8 @@ IMAGE_NAME=operable/cog-book-toolchain
 MOUNT=/home/asciidoc
 ROOT_FILE=cog_book.adoc
 
-build = docker run -it -u $(shell id -u) -v $(shell pwd):$(MOUNT) --rm $(IMAGE_NAME) asciidoctor --require asciidoctor-pdf --backend=$1 --doctype=book $(MOUNT)/$(ROOT_FILE) | bin/fail_on_warnings.sh
+ASCIIDOC_OPTS     := -r ./lib/google-analytics-postprocessor.rb --require asciidoctor-pdf --doctype=book
+build = docker run -it -u $(shell id -u) -v $(shell pwd):$(MOUNT) --rm $(IMAGE_NAME) asciidoctor $(ASCIIDOC_OPTS) --backend=$1 $(MOUNT)/$(ROOT_FILE) | bin/fail_on_warnings.sh
 
 image: Dockerfile
 	docker build -t $(IMAGE_NAME) .
