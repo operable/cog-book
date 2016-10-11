@@ -131,7 +131,7 @@ meta.foundation-mq-large { font-family: "only screen and (min-width:1440px)"; wi
 
 html, body { font-size: 100%; }
 
-body { background: white; color: rgba(0, 0, 0, 0.8); padding: 0; margin: 0; font-family: "Open Sans", "DejaVu Sans", sans-serif; font-weight: normal; font-style: normal; line-height: 1; position: relative; cursor: auto; }
+body { background: white; color: rgba(0, 0, 0, 0.8); padding: 0; margin: 0; font-family: 'Noto Sans', "DejaVu Sans", sans-serif; font-weight: normal; font-style: normal; line-height: 1; position: relative; cursor: auto; }
 
 a:hover { cursor: pointer; }
 
@@ -183,12 +183,15 @@ a { color: rgbA(38, 129, 163, 1); text-decoration: underline; line-height: inher
 a:hover, a:focus { color: #1d4b8f; }
 a img { border: none; }
 
+/* Installing Noto Font */
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700);
+
 /* Default paragraph styles */
 p { font-family: inherit; font-weight: normal; font-size: 1em; line-height: 1.6; margin-bottom: 1.25em; text-rendering: optimizeLegibility; }
 p aside { font-size: 0.875em; line-height: 1.35; font-style: italic; }
 
 /* Default header styles */
-h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6 { font-family: "Open Sans", "DejaVu Sans", sans-serif; font-weight: 500; font-style: normal; color: rgbA(38, 129, 163, 1); text-rendering: optimizeLegibility; margin-top: 1em; margin-bottom: 0.5em; line-height: 1.0125em; }
+h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6 { font-family: 'Noto Sans', "DejaVu Sans", sans-serif; font-weight: 500; font-style: normal; color: rgbA(38, 129, 163, 1); text-rendering: optimizeLegibility; margin-top: 1em; margin-bottom: 0.5em; line-height: 1.0125em; }
 h1 small, h2 small, h3 small, #toctitle small, .sidebarblock > .content > .title small, h4 small, h5 small, h6 small { font-size: 60%; color: #e99b8f; line-height: 0; }
 
 h1 { font-size: 2.125em; }
@@ -330,14 +333,13 @@ p a > code:hover { color: rgba(0, 0, 0, 0.9); }
 #toc > ul { margin-left: 0.125em; }
 #toc ul.sectlevel0 > li > a { font-style: italic; }
 #toc ul.sectlevel0 ul.sectlevel1 { margin: 0.5em 0; }
-#toc ul { font-family: "Open Sans", "DejaVu Sans", sans-serif; list-style-type: none; }
+#toc ul { font-family: 'Noto Sans', "DejaVu Sans", sans-serif; list-style-type: none; }
 #toc li { line-height: 1.3334; margin-top: 0.3334em; }
 #toc a { text-decoration: none; }
 #toc a:active { text-decoration: underline; }
 
-#toctitle { color: rgbA(38, 129, 163, 1); font-size: 1.2em; }
+#toctitle {color: rgba(61, 63, 64, 1); font-size: 1.2em; font-weight: 700}
 
-#tocimage { img:url(http://placehold.it/350x150); }
 
 @media only screen and (min-width: 768px) { #toctitle { font-size: 1.375em; }
   body.toc2 { padding-left: 15em; padding-right: 0; }
@@ -375,7 +377,7 @@ p a > code:hover { color: rgba(0, 0, 0, 0.9); }
 
 .audioblock, .imageblock, .literalblock, .listingblock, .stemblock, .videoblock { margin-bottom: 1.25em; }
 
-.admonitionblock td.content > .title, .audioblock > .title, .exampleblock > .title, .imageblock > .title, .listingblock > .title, .literalblock > .title, .stemblock > .title, .openblock > .title, .paragraph > .title, .quoteblock > .title, table.tableblock > .title, .verseblock > .title, .videoblock > .title, .dlist > .title, .olist > .title, .ulist > .title, .qlist > .title, .hdlist > .title { text-rendering: optimizeLegibility; text-align: left; font-family: "Open Sans", "DejaVu Sans", sans-serif; font-size: 1rem; font-style: italic; }
+.admonitionblock td.content > .title, .audioblock > .title, .exampleblock > .title, .imageblock > .title, .listingblock > .title, .literalblock > .title, .stemblock > .title, .openblock > .title, .paragraph > .title, .quoteblock > .title, table.tableblock > .title, .verseblock > .title, .videoblock > .title, .dlist > .title, .olist > .title, .ulist > .title, .qlist > .title, .hdlist > .title { text-rendering: optimizeLegibility; text-align: left; font-family: 'Noto Sans', "DejaVu Sans", sans-serif; font-size: 1rem; font-style: italic; }
 
 table.tableblock > caption.title { white-space: nowrap; overflow: visible; max-width: 0; }
 
@@ -386,7 +388,7 @@ table.tableblock #preamble > .sectionbody > .paragraph:first-of-type p { font-si
 .admonitionblock > table { border-collapse: separate; border: 0; background: none; width: 100%; }
 .admonitionblock > table td.icon { text-align: center; width: 80px; }
 .admonitionblock > table td.icon img { max-width: none; }
-.admonitionblock > table td.icon .title { font-weight: bold; font-family: "Open Sans", "DejaVu Sans", sans-serif; text-transform: uppercase; }
+.admonitionblock > table td.icon .title { font-weight: bold; font-family: 'Noto Sans', "DejaVu Sans", sans-serif; text-transform: uppercase; }
 .admonitionblock > table td.content { padding-left: 1.125em; padding-right: 1.25em; border-left: 1px solid #ddddd8; color: rgba(0, 0, 0, 0.6); }
 .admonitionblock > table td.content > :last-child > :last-child { margin-bottom: 0; }
 
@@ -450,7 +452,7 @@ table.pyhltable .linenodiv { background: none !important; padding-right: 0 !impo
 .quoteblock .quoteblock blockquote:before { display: none; }
 
 .verseblock { margin: 0 1em 1.25em 1em; }
-.verseblock pre { font-family: "Open Sans", "DejaVu Sans", sans; font-size: 1.15rem; color: rgba(0, 0, 0, 0.85); font-weight: 500; text-rendering: optimizeLegibility; }
+.verseblock pre { font-family: 'Noto Sans', "DejaVu Sans", sans; font-size: 1.15rem; color: rgba(0, 0, 0, 0.85); font-weight: 500; text-rendering: optimizeLegibility; }
 .verseblock pre strong { font-weight: 400; }
 .verseblock .attribution { margin-top: 1.25rem; margin-left: 0.5ex; }
 
@@ -675,7 +677,7 @@ span.icon > .fa { cursor: default; }
 .admonitionblock td.icon .icon-caution:before { content: "\f06d"; color: #bf3400; }
 .admonitionblock td.icon .icon-important:before { content: "\f06a"; color: #bf0000; }
 
-.conum[data-value] { display: inline-block; color: #fff !important; background-color: rgba(0, 0, 0, 0.8); -webkit-border-radius: 100px; border-radius: 100px; text-align: center; font-size: 0.75em; width: 1.67em; height: 1.67em; line-height: 1.67em; font-family: "Open Sans", "DejaVu Sans", sans-serif; font-style: normal; font-weight: bold; }
+.conum[data-value] { display: inline-block; color: #fff !important; background-color: rgba(0, 0, 0, 0.8); -webkit-border-radius: 100px; border-radius: 100px; text-align: center; font-size: 0.75em; width: 1.67em; height: 1.67em; line-height: 1.67em; font-family: 'Noto Sans', "DejaVu Sans", sans-serif; font-style: normal; font-weight: bold; }
 .conum[data-value] * { color: #fff !important; }
 .conum[data-value] + b { display: none; }
 .conum[data-value]:after { content: attr(data-value); }
