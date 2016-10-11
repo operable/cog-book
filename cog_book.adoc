@@ -18,6 +18,7 @@ Cog
 ===
 
 include::src/writing_a_command_bundle/text.adoc[]
+include::src/installation_guide/text.adoc[]
 
 // = Reference
 // [partintro]
