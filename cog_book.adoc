@@ -1,12 +1,15 @@
 :source-highlighter: pygments
 :icons: font
 :toc2:
+:toc-title: Table of Contents
 :sectnums:
+:linkcss:
 
 :google-analytics-account: UA-61670076-4
 :listing-caption: Listing
 :figure-caption: Figure
 
+image::images/cog_background.png[]
 
 = The Cog Book
 :homepage: https://cog-book.operable.io/
@@ -15,8 +18,6 @@
 
 NOTE: This book is released under the {license} license. More information about contributing to this book along with access to the source code and previous releases is available at {repository}. If you would prefer to read this book as a PDF, you may download it {homepage}cog_book.pdf[here].
 
-Cog
-===
 
 include::src/writing_a_command_bundle/text.adoc[]
 
