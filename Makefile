@@ -17,6 +17,9 @@ pdf: $(ROOT_FILE)
 release: html5 pdf
 	mkdir -p _release
 	cp -r images _release/.
+	cp -r stylesheets _release/.
+	cp -r sass _release/.
+	cp *.css _release/.
 	cp $(basename $(ROOT_FILE)).pdf _release/.
 	cp $(basename $(ROOT_FILE)).html _release/.
 
