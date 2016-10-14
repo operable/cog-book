@@ -134,7 +134,7 @@ Controls where Relay sends its log output. Valid values are:
 +
 Defaults to `console`.
 
-[[RELAY_MAX_CONCURRENT]]`RELAY_MAX_CONCURRENT::
+[[RELAY_MAX_CONCURRENT]]`RELAY_MAX_CONCURRENT`::
 Maximum number of concurrent command invocations.
 +
 Defaults to `16`.
