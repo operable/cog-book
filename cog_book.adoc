@@ -17,8 +17,8 @@ NOTE: This book is released under the {license} license. More information about 
 Cog
 ===
 
-include::src/writing_a_command_bundle/text.adoc[]
 include::src/installation_guide/text.adoc[]
+include::src/writing_a_command_bundle/text.adoc[]
 
 // = Reference
 // [partintro]
