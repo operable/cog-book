@@ -38,6 +38,7 @@ Here you will find detailed reference information on various aspects of the Cog 
 
 
 include::src/reference/cog_server_configuration.adoc[]
+include::src/reference/relay_configuration.adoc[]
 
 // == Command Environment
 // placeholder
