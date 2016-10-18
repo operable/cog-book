@@ -14,6 +14,9 @@ html5: $(ROOT_FILE)
 pdf: $(ROOT_FILE)
 	$(call build,$@)
 
+shell:
+	docker run -it -u root -v $(shell pwd):$(MOUNT) --rm $(IMAGE_NAME) sh
+
 release: html5 pdf
 	mkdir -p _release
 	cp -r images _release/.
