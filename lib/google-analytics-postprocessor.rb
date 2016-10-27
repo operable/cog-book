@@ -24,8 +24,10 @@ Extensions.register do
         %(#{output.rstrip.chomp('</html>').rstrip.chomp('</body>').chomp}
 <script>
 var _gaq = _gaq || [];
+
 _gaq.push(['_setAccount','#{account_id}']);
 _gaq.push(['_trackPageview']);
+
 (function() {
   var ga = document.createElement('script');
   ga.type = 'text/javascript';
@@ -34,6 +36,10 @@ _gaq.push(['_trackPageview']);
   var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(ga, s);
 })();
+
+window.onhashchange = function() {
+  _gaq.push(['_trackPageview', location.pathname + location.search  + location.hash]);
+};
 </script>
 </body>
 </html>)
