@@ -24,6 +24,7 @@ include::src/installation_guide/text.adoc[]
 include::src/writing_a_command_bundle/text.adoc[]
 
 = Reference
+
 [partintro]
 --
 Here you will find detailed reference information on various aspects of the Cog chat platform.
@@ -52,6 +53,10 @@ include::src/reference/relay_configuration.adoc[]
 
 // == Templating Reference
 // placeholder
+
+= Appendices
+
+include::src/appendices/designing_for_chatops.adoc[]
 
 [colophon]
 = Colophon
