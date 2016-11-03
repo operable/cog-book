@@ -213,3 +213,4 @@ See also:
 Real-Time Messaging (RTM) API token used to connect to Slack. To obtain one, go to `https://<your_slack-team>.slack.com/apps/manage/custom-integrations` and click on `Bots`.
 +
 It _must_ be an RTM API token; a token for the REST API will _not_ work.
+
