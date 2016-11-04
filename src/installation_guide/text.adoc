@@ -4,7 +4,7 @@ So, you're ready to get in there and give Cog a shot? Well, you're in luck.
 We've made it pretty straight forward to get up and running whether you want to
 use our recommended Docker Compose configuration or manually build and run Cog
 on your own. In this guide, we'll walk you through:
-  
+
   * Installing and Running Cog with Docker Compose
   * Connecting Cog to Slack
   * Installing and Configuring a Bundle
@@ -123,7 +123,7 @@ docker exec -it $(docker-compose ps -q cog) bash
 Great now let's create you a new Cog user and associate that user with your
 Slack handle. Your Cog user can be anything you want and is not specific to
 your Slack account, which will come in handy when communicating with Cog
-outside of chat. 
+outside of chat.
 
 [source,bash]
 ----
@@ -312,7 +312,7 @@ to grab the deps and compile an escript.
 
 [source,bash]
 ----
-git clone git clone git@github.com:operable/cogctl.git
+git clone git@github.com:operable/cogctl.git
 cd cogctl
 mix escript
 ----
@@ -410,5 +410,3 @@ docker-compose up
 Now you can head back to follow the section titled <<Creating a User and Running a Command>>,
 as the rest isn't Slack specific. The only caveat is that when creating a
 chat-handle, you'll need to specify `--chat-provider=hipchat` instead.
-
-
