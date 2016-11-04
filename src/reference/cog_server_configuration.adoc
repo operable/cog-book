@@ -1,0 +1,211 @@
+== Cog Server Configuration
+
+Cog's behavior can be modified in a number of ways, each governed by a separate environment variable. This section enumerates all the available variables and describes their usage.
+
+[TIP]
+.The Twelve-Factor App
+====
+See http://12factor.net[The Twelve-Factor App] for more information about this style of configuration.
+====
+
+[[COG_ALLOW_SELF_REGISTRATION]]`COG_ALLOW_SELF_REGISTRATION`::
+Cog will automatically create accounts for new users when set. User accounts created this way will still need to be placed into groups by an administrator in order to be granted any permissions.
+
+[[COG_API_PORT]]`COG_API_PORT`::
+The IP port to listen on for Cog's REST API. Must be distinct from <<COG_TRIGGER_PORT>>.
++
+Defaults to `4000`.
+
+[[COG_API_URL_HOST]]
+`COG_API_URL_HOST`::
+Host to be used in generated API URLs. This should be a DNS name or IP address at which Cog can be reached externally.
++
+Defaults to `localhost`.
++
+See <<COG_TRIGGER_URL_HOST>> also; these two are usually set to the same value, but need not be.
+
+[[COG_API_URL_PORT]]`COG_API_URL_PORT`::
+Port to be used in generated API URLs. This should be where Cog can be reached externally.
++
+Defaults to `4000`.
++
+See also <<COG_API_URL_HOST>> and <<COG_API_PORT>>.
+
+[[COG_BOOTSTRAP_VARIABLES]]`COG_BOOTSTRAP_*` Variables::
+The following environment variables are available to automatically bootstrap a Cog system at startup without further intervention (e.g., it does not require running `cogctl bootstrap` afterwards). Values for all the `COG_BOOTSTRAP_*` variables are required for the bootstrapping to occur, and bootstrapping will _only_ occur if the system has not already been bootstrapped. Each variable describes an attribute of the first user created on the system, which will have administrator privileges over the entire system.
++
+These are intended for automated installations of Cog (e.g., using management software such as Chef, Puppet, and Ansible, and / or platforms such as AWS and Heroku). Please note that bootstrapping via these variables _will not_ generate a `.cogctl` file for you; you will need to generate one for yourself with the appropriate values.
++
+*  `COG_BOOTSTRAP_EMAIL_ADDRESS`
+*  `COG_BOOTSTRAP_FIRST_NAME`
+*  `COG_BOOTSTRAP_LAST_NAME`
+*  `COG_BOOTSTRAP_PASSWORD`
+*  `COG_BOOTSTRAP_USERNAME`
+
+[[COG_DB_POOL_SIZE]]`COG_DB_POOL_SIZE`::
+Database connection pool size.
++
+Defaults to `10`.
+
+[[COG_DB_POOL_TIMEOUT]]`COG_DB_POOL_TIMEOUT`::
+Amount of time to wait to checkout a database connection from the pool.
++
+Defaults to `15000` ms.
+
+[[COG_DB_TIMEOUT]]`COG_DB_TIMEOUT`::
+Amount of time to wait for execution of a database query to complete.
++
+Defaults to `15000` ms.
+
+[[COG_EMAIL_FROM]]`COG_EMAIL_FROM`::
+Email address that emails sent from Cog will be sent from. Necessary to enable password resets.
+// TODO: This had a link to "password resets" in Readme.io
++
+See also:
++
+*  <<COG_SMTP_VARIABLES>>
+*  <<COG_PASSWORD_RESET_BASE_URL>>
+
+
+[[COG_HIPCHAT_ENABLED]]`COG_HIPCHAT_ENABLED`::
+Enables the HipChat chat adapter for integration with HipChat. You **MUST** specify **ONE** and only **ONE** chat adapter for Cog.
++
+See also: <<COG_SLACK_ENABLED>>
+
+[[COG_MQTT_HOST]]`COG_MQTT_HOST`::
+The host (DNS name or IPv4) to listen on for the https://mqtt.org[MQTT] message bus. MQTT is the messaging system underlying Cog.
++
+Defaults to `127.0.0.1`.
++
+
+[[COG_MQTT_PORT]]`COG_MQTT_PORT`::
+The IP port number to listen on for the https://mqtt.org[MQTT] message bus.
++
+Defaults to `1883`.
+
+[[COG_PASSWORD_RESET_BASE_URL]]`COG_PASSWORD_RESET_BASE_URL`::
+For advanced users
++
+Optional variable set when configuring password resets. If set Cog will send this link with a token appended as a query string, `?token=token`, in the password reset email. This is useful if you want to provide a custom ui for resetting passwords.
++
+See also:
++
+* <<COG_EMAIL_FROM>>
+* <<COG_SMTP_VARIABLES>>
+
+[[COG_SLACK_ENABLED]]`COG_SLACK_ENABLED`::
+Enabled the Slack chat adapter for integration with Slack. You **MUST** specify **ONE** and only **ONE** chat adapter for Cog.
++
+See also: <<COG_HIPCHAT_ENABLED>>
+
+[[COG_SMTP_VARIABLES]]`COG_SMTP_*` Variables::
+You may optionally configure email support via SMTP for Cog. Currently Cog only sends emails for password resets], but there may be additional features that require email in the future.
+// TODO: This had a link to "password resets" in Readme.io
++
+*  `COG_SMTP_SERVER`
+*  `COG_SMTP_PORT`
+*  `COG_SMTP_USERNAME`
+*  `COG_SMTP_PASSWORD`
+*  `COG_SMTP_SSL` (Defaults to `false`)
+*  `COG_SMTP_RETRIES` (Defaults to 1)
++
+See also:
++
+*  <<COG_EMAIL_FROM>>
+*  <<COG_PASSWORD_RESET_BASE_URL>>
+
+[[COG_TRIGGER_PORT]]`COG_TRIGGER_PORT`::
+The IP port to listen on for invocation of triggers. Must be distinct from <<COG_API_PORT>>.
+// TODO: See [Invoking A Trigger](doc:triggers#invoking-a-trigger) for more details.
++
+Defaults to `4001`.
+
+[[COG_TRIGGER_TIMEOUT_BUFFER]]`COG_TRIGGER_TIMEOUT_BUFFER`::
+Triggers have a configurable timeout, but it is defined from the HTTP requestor's perspective. In order to satisfy this, we build in a buffer to account for network round tripping, Cog processing, etc.
+// TODO: This had a link to "trigger timeouts" in Readme.io
++
+Defaults to `2` seconds.
+
+[[COG_TRIGGER_URL_HOST]]`COG_TRIGGER_URL_HOST`::
+Host to be used in generated trigger invocation URLs. This should be a DNS name or IP address at which Cog can be reached externally.
++
+Defaults to `localhost`.
++
+See <<COG_API_URL_HOST>> also; these two are usually set to the same value, but need not be.
+
+[[COG_TRIGGER_URL_PORT]]`COG_TRIGGER_URL_PORT`::
+Port to be used in generated trigger invocation URLs. This should be where Cog can be reached externally.
++
+Defaults to `4001`.
++
+See also <<COG_TRIGGER_URL_HOST>> and <<COG_TRIGGER_PORT>>.
+
+[[DATABASE_URL]]`DATABASE_URL`::
+The URL at which Cog may access its PostgreSQL database. Cog uses the https://hexdocs.pm/ecto/Ecto.Repo.html[Ecto] library, and the URL takes the form of:
++
+```
+ecto://$POSTGRES_USER:$POSTGRES_PASSWORD@$DB_HOST:$DB_PORT/$DB_NAME
+```
++
+See also:
++
+* <<POSTGRES_USER>>
+* <<POSTGRES_PASSWORD>>
+
+[[ENABLE_SPOKEN_COMMANDS]]`ENABLE_SPOKEN_COMMANDS`::
+If `true`, allows Cog to respond to commands prefixed with `!` instead of only via direct mentions.
++
+Compare
+
+    !help
++
+with
+
+    @clever_bot_name help
++
+Defaults to `true`.
+
+[[HIPCHAT_API_TOKEN]]`HIPCHAT_API_TOKEN`::
+Token for HipChat's V2 REST API. The token must have the following scopes: Send Message, Send Notification, View Group, View Messages, View Room.
+
+[[HIPCHAT_JABBER_ID]]`HIPCHAT_JABBER_ID`::
+The Jabber ID, also called a `jid`, assigned to the bot's HipChat account.
+
+[[HIPCHAT_JABBER_PASSWORD]]`HIPCHAT_JABBER_PASSWORD`::
+The password assigned to the bot's HipChat account.
+
+[[HIPCHAT_NICKNAME]]`HIPCHAT_NICKNAME`::
+The mention name assigned to the bot's HipChat account. The name can be found on the bot account's profile page.
+
+All of the above settings can be found on the HipChat account details page. To view this page for your bot's account simply log in to HipChat's site using your bot credentials and then open `https://<organization name>.hipchat.com/account` where `<organization name>` is the name of your HipChat organization.
+
+[[HIPCHAT_API_ROOT]]`HIPCHAT_API_ROOT`::
+The root URL of HipChat's V2 REST API. Defaults to https://api.hipchat.com/v2.
+
+[[HIPCHAT_CHAT_HOST]]`HIPCHAT_CHAT_HOST`::
+The host name of HipChat's XMPP API. Defaults to `chat.hipchat.com`.
+
+[[HIPCHAT_CONF_HOST]]`HIPCHAT_CONF_HOST`::
+The host name of HipChat's XMPP multi-user room service. Defaults to `conf.hipchat.com`.
+
+[[POSTGRES_PASSWORD]]`POSTGRES_PASSWORD`::
+The password for connecting to Cog's PostgreSQL database.
++
+See also:
++
+* <<DATABASE_URL>>
+* <<POSTGRES_USER>>
+
+[[POSTGRES_USER]]`POSTGRES_USER`::
+The user to connect to Cog's PostgreSQL database.
++
+See also:
++
+* <<DATABASE_URL>>
+* <<POSTGRES_PASSWORD>>
+
+[[SLACK_API_TOKEN]]`SLACK_API_TOKEN`::
+Real-Time Messaging (RTM) API token used to connect to Slack. To obtain one, go to `https://<your_slack-team>.slack.com/apps/manage/custom-integrations` and click on `Bots`.
++
+It _must_ be an RTM API token; a token for the REST API will _not_ work.
+

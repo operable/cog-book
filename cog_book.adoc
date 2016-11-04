@@ -1,11 +1,16 @@
 :source-highlighter: pygments
 :icons: font
 :toc2:
+:toc-title: Table of Contents
 :sectnums:
+:linkcss:
+:sectanchors:
 
+:google-analytics-account: UA-61670076-4
 :listing-caption: Listing
 :figure-caption: Figure
 
+image::images/cog_background.png[]
 
 = The Cog Book
 :homepage: https://cog-book.operable.io/
@@ -14,16 +19,16 @@
 
 NOTE: This book is released under the {license} license. More information about contributing to this book along with access to the source code and previous releases is available at {repository}. If you would prefer to read this book as a PDF, you may download it {homepage}cog_book.pdf[here].
 
-Cog
-===
 
+include::src/installation_guide/text.adoc[]
 include::src/writing_a_command_bundle/text.adoc[]
 
-// = Reference
-// [partintro]
-// --
-// Here you will find detailed reference information on various aspects of the Cog chat platform.
-// --
+= Reference
+
+[partintro]
+--
+Here you will find detailed reference information on various aspects of the Cog chat platform.
+--
 
 // == Authorization Rule Syntax
 // placeholder
@@ -33,8 +38,9 @@ include::src/writing_a_command_bundle/text.adoc[]
 
 // // TODO: Can we somehow import / process the JSON Schema from Spanner in here?
 
-// == Cog Server Configuration
-// placeholder
+
+include::src/reference/cog_server_configuration.adoc[]
+include::src/reference/relay_configuration.adoc[]
 
 // == Command Environment
 // placeholder
@@ -47,6 +53,10 @@ include::src/writing_a_command_bundle/text.adoc[]
 
 // == Templating Reference
 // placeholder
+
+= Appendices
+
+include::src/appendices/designing_for_chatops.adoc[]
 
 [colophon]
 = Colophon
