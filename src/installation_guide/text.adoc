@@ -199,9 +199,9 @@ configured it yet. Let's set our api token with `cogctl`.
 
 [source,bash]
 ----
-echo 'AWS_ACCESS_KEY_ID: "AKIBU34Z8KYDVRZKWRTQ"' >> config.yaml               
+echo 'AWS_ACCESS_KEY_ID: "AKIBU34Z8KYDVRZKWRTQ"' >> config.yaml
 echo 'AWS_SECRET_ACCESS_KEY: "YQ7h84BCvE4fJhT1TdOzOgO8zpAIbulblb6MCHkO"' >> config.yaml
-echo 'AWS_REGION: "us-east-1"' >> config.yaml     
+echo 'AWS_REGION: "us-east-1"' >> config.yaml
 cogctl dynamic-config create ec2 config.yaml
 ----
 
