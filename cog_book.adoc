@@ -21,7 +21,11 @@ NOTE: This book is released under the {license} license. More information about 
 
 
 include::src/installation_guide/text.adoc[]
+
 include::src/installing_and_managing_relays/text.adoc[]
+
+include::src/managing_bundles/text.adoc[]
+
 include::src/writing_a_command_bundle/text.adoc[]
 
 = Reference

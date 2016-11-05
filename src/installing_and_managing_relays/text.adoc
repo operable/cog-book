@@ -1,4 +1,3 @@
-
 == Installing and Managing Relays
 
 To effectively route commands to Relay, we need to inform Cog of each Relay and configure each Relay to communicate with Cog via the message bus.
@@ -7,18 +6,22 @@ To effectively route commands to Relay, we need to inform Cog of each Relay and 
 
 Cog needs at least one Relay in order to deploy command bundles and execute commands. Configuring Cog to know about a new Relay instance is a simple three step process.
 
-1. Pick a secret word or phrase shared between Cog and the new Relay instance. Cog's API refers to this secret as a _token_.
-2. Use `cogctl` to tell Cog about the Relay and its secret.
+. Pick a secret word or phrase shared between Cog and the new Relay instance. Cog's API refers to this secret as a _token_.
+. Use `cogctl` to tell Cog about the Relay and its secret.
 
-[source,bash]
+.Configuring a new relay
+[source, bash]
 ----
 $ cogctl relays create my_new_relay --token="my fancy sekrit"
 ID    f8e3ead2-57e0-4fb2-81e9-24bf6c104202
 Name  my_new_relay
 $
 ----
-3. Use the ID and token from step #2 to start the Relay instance.
 
+[start=3]
+. Use the ID and token from step #2 to start the Relay instance.
+
+.Relay starting up
 [source,bash]
 ----
 $ RELAY_ID=bd03d7f0-b670-4721-9121-c23e62583e49 RELAY_COG_TOKEN="my fancy sekrit" relay
@@ -37,16 +40,17 @@ INFO[2016-04-18T14:43:00-04:00] Bundle refresh complete.
 INFO[2016-04-18T14:43:00-04:00] Relay f8e3ead2-57e0-4fb2-81e9-24bf6c104202 ready.
 ----
 
-A fully commented example `relay.conf` file can be found [here](https://github.com/operable/go-relay/blob/master/example_relay.conf).
+A fully commented example `relay.conf` file can be found https://github.com/operable/go-relay/blob/master/example_relay.conf[here].
 
 === Relays & Relay Groups
 
 Once a Relay has been created it can be assigned to one or more _relay groups_. Relay groups are merely named groups of Relays used to organize many Relays into logical groupings.
 
-NOTE: You can read about how Cog uses relay groups to simplify command bundle deployment in [Managing Bundles](doc:managing-bundles).
+NOTE: You can read about how Cog uses relay groups to simplify command bundle deployment in <<Managing Bundles>>.
 
 No relay groups are defined when Cog is first installed so you'll need to use `cogctl` to create at least one.
 
+.Creating a relay group
 [source,bash]
 ----
 $ cogctl relay-groups create my_relay_group
@@ -57,6 +61,7 @@ $
 
 You can also create a relay group and assign Relays to it in a single command, too.
 
+.Creating a relay group with members
 [source,bash]
 ----
 $ cogctl relay-groups create my_newer_group --members=my_new_relay
@@ -67,8 +72,9 @@ Adding 'my_new_relay' to relay group 'my_newer_group': Ok.
 $
 ----
 
-Members can be added or removed from a relay group at any time with `cogctl`'s `relay-groups add` and `relay-groups remove` actions.
+Members can be added or removed from a relay group at any time with `cogctl` 's `relay-groups add` and `relay-groups remove` actions.
 
+.Adding and removing group members
 [source,bash]
 ----
 $ cogctl relay-groups add my_relay_group --relay my_new_relay
@@ -80,6 +86,7 @@ $
 
 Finally, you can view a detailed description of a relay group with `cogctl` 's `relay-groups info` action.
 
+.Viewing a relay group
 [source,bash]
 ----
 $ cogctl relay-groups info my_relay_group
@@ -93,4 +100,4 @@ my_new_relay  f8e3ead2-57e0-4fb2-81e9-24bf6c104202
 $
 ----
 
-Now you are ready to add [Bundles](doc:managing-bundles) to your relays in order to execute your installed commands.
+Now you are ready to add <<Managing Bundles, Bundles>> to your relays in order to execute your installed commands.
