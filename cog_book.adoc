@@ -5,6 +5,7 @@
 :sectnums:
 :linkcss:
 :sectanchors:
+:doctype: book
 
 :google-analytics-account: UA-61670076-4
 :listing-caption: Listing
