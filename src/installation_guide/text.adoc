@@ -22,11 +22,13 @@ help from the core team, or even the author of this guide.
 
 === Installing and Running Cog with Docker Compose
 
-We've provided both a `docker-compose.yml` and a
+We've provided a set of docker-compose files for running and configuring Cog:
+`docker-compose.yml`, `docker-compose.common.yml` and
 `docker-compose.override.slack_example.yml` for running and configuring Cog. To
 run the images specified in the `docker-compose.yml` you'll need to have both
 Docker and Docker Compose installed. If you'd rather manually build and install
-Cog, skip down to the next section titled, <<Building and Running Cog from Scratch>>.
+Cog, skip down to the next section titled, <<Building and Running Cog from
+Scratch>>.
 
 First, make sure you have Docker and Docker Compose installed. If you haven't
 installed Docker, we recommend using
@@ -36,8 +38,8 @@ configuration. Then, you'll also need to install docker-compose. You can follow
 any of the directions posted on https://docs.docker.com/compose/install/[Docker
 Compose's installation guide].
 
-Next, we'll need to grab the `docker-compose.yml` and
-`docker-compose.override.slack_example.yml` from the Cog repo.
+Next, we'll need to grab the `docker-compose.yml`, `docker-compose.common.yml`
+and `docker-compose.override.slack_example.yml` files from the Cog repo.
 
 If you'd rather connect Cog to HipChat, skip down to the section titled
 <<Connecting Cog to HipChat>>.
@@ -45,19 +47,22 @@ If you'd rather connect Cog to HipChat, skip down to the section titled
 [source,bash]
 ----
 curl -o docker-compose.yml \
-  https://raw.githubusercontent.com/operable/cog/0.15.2/docker-compose.yml
+  https://raw.githubusercontent.com/operable/cog/0.16.1/docker-compose.yml
+
+curl -o docker-compose.common.yml \
+  https://raw.githubusercontent.com/operable/cog/0.16.1/docker-compose.common.yml
 
 curl -o docker-compose.override.yml \
-  https://raw.githubusercontent.com/operable/cog/0.15.2/docker-compose.override.slack_example.yml
+  https://raw.githubusercontent.com/operable/cog/0.16.1/docker-compose.override.slack_example.yml
 ----
 
 The `docker-compose.yml` defines which images to run and how they'll talk to
-each other, while the `docker-compose.override.yml` sets values for the
-environment variables passed into each container. The default
-`docker-compose.override.yml` has everything you'll need to start a working Cog
-instance. But, we recommend that you set each environment variable starting
-with `BOOTSTRAP` to automatically create an admin user for yourself upon
-startup.
+each other, while `docker-compose.common.yml` and `docker-compose.override.yml`
+set values for the environment variables passed into each container. The
+default `docker-compose.override.yml` has everything you'll need to start a
+working Cog instance. But, we recommend that you set each environment variable
+starting with `BOOTSTRAP` to automatically create an admin user for yourself
+upon startup.
 
 Ok, we're almost ready to start Cog, but one last thing we'll need is a bot
 token so Cog can connect to our Slack channel. Head over to the
@@ -66,8 +71,7 @@ bot, and copy the newly generated token; it should look something like
 `xoxb-87931061512-4m0DshC79h8tLNjTMuxxozUo`.
 
 Now it's time to run `docker-compose`. From the same directory containing the
-`docker-compose.yml` and your edited `docker-compose.override.yml`, run the
-following with the bot token you just generated.
+`docker-compose.yml`, run the following with the bot token you just generated.
 
 [source,bash]
 ----
@@ -176,44 +180,46 @@ a chat command.
 
 [source]
 ----
-@cog bundle install heroku
+@cog bundle install ec2
 ----
 
-And that's it. Now, if you run the `help` command, you'll notice the new
-`heroku` bundle is listed under "Disabled Bundles". Before we can run a
-command, we need to enable it, tell our Relay that it can run commands from
-this bundle, and configure it with credentials.
+And that's it. Now, if you run the `help` command, you'll notice the new `ec2`
+bundle is listed under "Disabled Bundles". Before we can run a command, we need
+to enable it, tell our Relay that it can run commands from this bundle, and
+configure it with credentials.
 
 [source]
 ----
-@cog bundle enable heroku
-@cog relay-group member assign default heroku
+@cog bundle enable ec2
+@cog relay-group member assign default ec2
 ----
 
-Now the the heroku bundle is enabled, but we still haven't
+Now the the ec2 bundle is enabled, but we still haven't
 configured it yet. Let's set our api token with `cogctl`.
 
 [source,bash]
 ----
-echo 'HEROKU_API_TOKEN: "beef1286-bc9d-4ea1-acae-83267e43633d"' > config.yaml
-cogctl dynamic-config create heroku config.yaml
+echo 'AWS_ACCESS_KEY_ID: "AKIBU34Z8KYDVRZKWRTQ"' >> config.yaml               
+echo 'AWS_SECRET_ACCESS_KEY: "YQ7h84BCvE4fJhT1TdOzOgO8zpAIbulblb6MCHkO"' >> config.yaml
+echo 'AWS_REGION: "us-east-1"' >> config.yaml     
+cogctl dynamic-config create ec2 config.yaml
 ----
 
-Now there's just one last step; making sure we have permission to run heroku
+Now there's just one last step; making sure we have permission to run ec2
 commands by adding some priviledges to the `cog-admin` group.
 
 [source]
 ----
-@cog permission grant heroku:read cog-admin
-@cog permission grant heroku:write cog-admin
-@cog permission grant heroku:admin cog-admin
+@cog permission grant ec2:read cog-admin
+@cog permission grant ec2:write cog-admin
+@cog permission grant ec2:admin cog-admin
 ----
 
 Now try it out!
 
 [source]
 ----
-@cog heroku:app list
+@cog ec2:instance list
 ----
 
 === Building and Running Cog from Scratch
@@ -361,17 +367,20 @@ and Configuring a Bundle."
 
 === Connecting Cog to HipChat
 
-Ok, so you've already installed Docker and Docker Compose. Next, we'll need to
-grab the `docker-compose.yml` and `docker-compose.override.hipchat_example.yml`
-from the Cog repo.
+Ok, so you've already installed Docker and Docker Compose.  Next, we'll need to
+grab the `docker-compose.yml`, `docker-compose.common.yml` and
+`docker-compose.override.hipchat_example.yml` files from the Cog repo.
 
 [source,bash]
 ----
 curl -o docker-compose.yml \
-  https://raw.githubusercontent.com/operable/cog/0.15.2/docker-compose.yml
+  https://raw.githubusercontent.com/operable/cog/0.16.1/docker-compose.yml
+
+curl -o docker-compose.common.yml \
+  https://raw.githubusercontent.com/operable/cog/0.16.1/docker-compose.common.yml
 
 curl -o docker-compose.override.yml \
-  https://raw.githubusercontent.com/operable/cog/0.15.2/docker-compose.override.hipchat_example.yml
+  https://raw.githubusercontent.com/operable/cog/0.16.1/docker-compose.override.hipchat_example.yml
 ----
 
 The `docker-compose.yml` defines which images to run and how they'll talk to
