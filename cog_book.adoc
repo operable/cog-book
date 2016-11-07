@@ -25,6 +25,8 @@ include::src/installation_guide/text.adoc[]
 
 include::src/installing_and_managing_relays/text.adoc[]
 
+include::src/commands_and_bundles/text.adoc[]
+
 include::src/managing_bundles/text.adoc[]
 
 include::src/writing_a_command_bundle/text.adoc[]
