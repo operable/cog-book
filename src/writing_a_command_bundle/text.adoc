@@ -906,6 +906,15 @@ and install our code dependencies.
 
 Creating the image is simple.
 
+.Add a Gemfile
+---
+$ cat <<EOF > test.Gemfile
+source 'https://rubygems.org'
+ 
+gem "twitter"
+EOF
+---
+
 .Building the Bundle Image
 ----
 $ docker build -t cog-book/twitter .
