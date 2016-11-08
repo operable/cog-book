@@ -180,7 +180,7 @@ div, dl, dt, dd, ul, ol, li, h1, h2, h3, #toctitle, .sidebarblock > .content > .
 
 /* Default Link Styles */
 a { color: rgbA(38, 129, 163, 1); text-decoration: underline; line-height: inherit; }
-a:hover, a:focus { color: #1d4b8f; }
+a:hover, a:focus { color: rgbA(38, 129, 163, 8); background-color: rgb(222, 222, 222)}
 a img { border: none; }
 
 /* Installing Noto Font */
@@ -386,10 +386,10 @@ table.tableblock > caption.title { white-space: nowrap; overflow: visible; max-w
 table.tableblock #preamble > .sectionbody > .paragraph:first-of-type p { font-size: inherit; }
 
 .admonitionblock > table { border-collapse: separate; border: 0; background: none; width: 100%; }
-.admonitionblock > table td.icon { text-align: center; width: 80px; }
+.admonitionblock > table td.icon { text-align: center; width: 80px; background-color: #F5F5F5; }
 .admonitionblock > table td.icon img { max-width: none; }
 .admonitionblock > table td.icon .title { font-weight: bold; font-family: 'Noto Sans', "DejaVu Sans", sans-serif; text-transform: uppercase; }
-.admonitionblock > table td.content { padding-left: 1.125em; padding-right: 1.25em; border-left: 1px solid #ddddd8; color: rgba(0, 0, 0, 0.6); }
+.admonitionblock > table td.content { padding-left: 1.125em; padding-right: 1.25em; border-left: 0px solid #ddddd8; color: rgba(0, 0, 0, 0.6); background-color: rgba(245, 245, 245, .5); }
 .admonitionblock > table td.content > :last-child > :last-child { margin-bottom: 0; }
 
 .exampleblock > .content { border-style: solid; border-width: 1px; border-color: #e6e6e6; margin-bottom: 1.25em; padding: 1.25em; background: white; -webkit-border-radius: 4px; border-radius: 4px; }

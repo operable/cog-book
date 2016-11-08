@@ -1,4 +1,4 @@
-== Installation Guide
+== *Installation Guide*
 
 So, you're ready to get in there and give Cog a shot? Well, you're in luck.
 We've made it pretty straight forward to get up and running whether you want to
@@ -174,21 +174,25 @@ installed either by referencing a config file directly or by name in the
 https://bundles.operable.io[bundle registry]. So, let's install one by running
 a chat command.
 
-[source]
-----
+---
+image::images/max.png[Max,50,50,float="left"]
+*Max Headroom* 10:52PM +
 @cog bundle install heroku
-----
+
+---
 
 And that's it. Now, if you run the `help` command, you'll notice the new
 `heroku` bundle is listed under "Disabled Bundles". Before we can run a
 command, we need to enable it, tell our Relay that it can run commands from
 this bundle, and configure it with credentials.
 
-[source]
-----
-@cog bundle enable heroku
+---
+image::images/max.png[Max,50,50,float="left"]
+*Max Headroom* 10:52PM +
+@cog bundle enable heroku +
 @cog relay-group member assign default heroku
-----
+
+---
 
 Now the the heroku bundle is enabled, but we still haven't
 configured it yet. Let's set our api token with `cogctl`.
@@ -410,4 +414,3 @@ docker-compose up
 Now you can head back to follow the section titled <<Creating a User and Running a Command>>,
 as the rest isn't Slack specific. The only caveat is that when creating a
 chat-handle, you'll need to specify `--chat-provider=hipchat` instead.
-
