@@ -7,8 +7,8 @@ image::images\cog_storywheel1.png[]
 
 Powerful access control means you can collaborate around even the most sensitive tasks with confidence. A focus on extensibility and adaptability means that you can respond quickly to the unexpected, without your team losing visibility.
 
-.Cog being used as part of your workflow.
-image::images\cog1.gif[]
+.Cog being used as part of your workflow
+image::images\cog_workflow.png[]
 
 === Current Features
 
