@@ -116,6 +116,7 @@ $ export TWITTER_CONSUMER_KEY=XXXX # <1>
 $ export TWITTER_CONSUMER_SECRET=XXXX
 $ export TWITTER_ACCESS_TOKEN=XXXX
 $ export TWITTER_ACCESS_TOKEN_SECRET=XXXX
+$ gem install twitter
 $ ./tweet.rb This is an interesting tweet
 Message: This is an interesting tweet
 URL:     https://twitter.com/CogTesting/status/776507696396791809
