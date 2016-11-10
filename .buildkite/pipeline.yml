@@ -1,0 +1,18 @@
+steps:
+  - command: "make html5"
+    label: "Generate HTML"
+    agents:
+      - docker=1.12.1
+
+  - command: "make pdf"
+    label: "Generate PDF"
+    agents:
+      - docker=1.12.1
+
+  - wait
+
+  - command: "make upload"
+    label: "Publish!"
+    branches: "release"
+    agents:
+      - docker=1.12.1
