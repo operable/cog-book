@@ -1,0 +1,61 @@
+== Introducing Cog
+
+.Cog + ChatOps = Continuous DevOps
+image::images\cog_storywheel1.png[]
+
+**Cog** brings the power of the command line to the place you collaborate with your team all the time -- your chat window.
+
+Powerful access control means you can collaborate around even the most sensitive tasks with confidence. A focus on extensibility and adaptability means that you can respond quickly to the unexpected, without your team losing visibility.
+
+.Cog being used as part of your workflow
+image::images\cog_workflow.png[]
+
+=== Current Features
+
+Cog is under heavy development and getting smarter all the time. This list of features gives you an idea of how Cog was built as well as the things that Cog knows how to do.
+
+////
+[block:html]
+{
+  "html": "<div>\n<table>\n  <tr>\n    <td>\n        <img src=\"http://www.operable.io/assets/img/icons/feature_icons_extensibility.png\" class=\"center\">\n      <h2 style=\"text-align:center;\">Extensibility</h2>\n      <p><ul>\n        <li>Build new bot commands in any language</li>\n        <li>Commands return structured data to allow for creative adaptation in pipelines</li>\n  \t\t\t<li>Built in templating allows the command response to be formatted for the current chat provider without embedding markup in your logic</li>\n      </ul></p>\n    </td>\n<td>\n  <img src=\"http://www.operable.io/assets/img/icons/feature_icons_adaptability.png\" class=\"center\">\n  <h2 style=\"text-align:center;\">Adaptability</h2>\n      <p><ul>\n        <li>Unix-style pipelines allow you to combine a series of simple commands to solve complex, unexpected problems</li>\n        <li>Support for output redirection lets you make sure everyone is in the loop</li>\n      </ul></p>\n    </td>\n</tr>\n  <tr>\n    <td>\n        <img src=\"http://www.operable.io/assets/img/icons/feature_icons_security.png\" class=\"center\">\n      <h2 style=\"text-align:center;\">Security</h2>\n      <p><ul>\n        <li>Fine-grained command permissions give you confidence in using chatops for even the most sensitive workflows</li>\n        <li>Users, Groups, and Roles allow you to organize access control for ease of management</li>\n  \t\t\t<li>Audit logging for commands and administrative functions let you keep track of everything that happens with Cog</li>\n      </ul></p>\n    </td>\n<td>\n  <img src=\"http://www.operable.io/assets/img/icons/feature_icons_chatagnostic.png\" class=\"center\">\n  <h2 style=\"text-align:center;\">Chat-provider agnostic</h2>\n      <p><ul>\n        <li>Current support for Slack</li>\n        <li>HipChat adapter in progress</li>\n \t\t\t\t<li>...other chat clients are on the roadmap!</li>\n      </ul></p>\n    </td>\n</tr>\n</div>\n<style>\nIMG.center {\n    display: block;\n    margin-left: auto;\n    margin-right: auto }\n</style>"
+}
+[/block]
+////
+
+Keep up to date on all things Cog by following https://twitter.com/operableinc[@OperableInc] on Twitter. Also, contact us at anytime via <info@operable.io>.
+
+**Current version:** v0.15.2 (https://github.com/operable/cog/releases[Changelog])
+
+**Roadmap:** https://github.com/operable/cog/milestone/18[2H 2016 Roadmap]
+
+== Get Started
+Here are a few things you will need to do first.
+
+. Join our http://slack.operable.io/[Cog Public Chat] to chat with the Operable team and the Cog community. This is the best place to get realtime help.
+. Head over to the <<Installation Guide,Installation Guide>> and start installing Cog. Have questions? Ask us!
+. Once installed, make Cog do something. Read up on <<Commands and Bundles,Commands and Bundles>>
+. Do you want to expand Cog's command capabilities? Easy, start <<Building Command Bundles,Building Command Bundles>>.
+
+=== Communication
+Let's set expectations. If you have a question, concern, idea, helpful hint, or want to tell us that you are hungry, we are listening. Please be as candid with us as possible. You can't hurt our feelings...too much. So that we can communicate as easily as possible we have several channels that you can use at anytime.
+
+**GitHub Issues**
+If you find an issue, please write it up as a https://github.com/operable/cog/issues[GitHub Issue]
+
+**Cog Public Chat via Slack**
+Chat with Operable engineers and the growing community in the http://slack.operable.io[Cog public Slack] channel.
+
+image::images\SlackLogo.png[Slack Logo]
+
+=== User experience feedback
+Much like communication states above, we want to know how your experience is going. Give us feedback, the good/bad/ugly. We want to know everything, so please keep notes (mental/paper/your-favorite-note-taking-app).
+
+**Some user experience areas we will be asking you about are**:
+
+. Cog installation
+. Documentation usage
+. Bundle installation
+. Command / bundle creation
+. Cog use in your Slack channel
+. Team sharing
+. What are we missing, not considering?

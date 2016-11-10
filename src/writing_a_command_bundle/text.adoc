@@ -30,7 +30,7 @@ arrive at that finished product.
 [WARNING]
 .Choose Your Language Wisely
 ====
-It is technically possible to write a Cog command in any language. However, certain lanugages are likely to provide poor performance due to particular details of their runtimes. You should generally favor languages that provide quick startup times. For example, commands written in JVM languages (Java, Clojure, Scala, etc.) will run slowly due to the relatively long startup of the Java Virtual Machine itself. This startup penalty will be incurred for each invocation of the command since Relay does not currently have a notion of a "persistent command", whereby a "warm" JVM could be kept around and shared for multiple invocations.
+It is technically possible to write a Cog command in any language. However, certain languages are likely to provide poor performance due to particular details of their runtimes. You should generally favor languages that provide quick startup times. For example, commands written in JVM languages (Java, Clojure, Scala, etc.) will run slowly due to the relatively long startup of the Java Virtual Machine itself. This startup penalty will be incurred for each invocation of the command since Relay does not currently have a notion of a "persistent command", whereby a "warm" JVM could be kept around and shared for multiple invocations.
 
 At present, dynamic languages like Ruby and Python, or languages that compile down to performant executables, such as Go, Rust, etc., will give you the best experience with Cog.
 ====
@@ -1229,5 +1229,3 @@ use.
 // Add $(dirname ${0}) to runners / wrappers
 // Add bundle exec calls
 // Configure relay to point to the right GEM_HOME
-
-

@@ -114,6 +114,11 @@ See also:
 *  <<COG_EMAIL_FROM>>
 *  <<COG_PASSWORD_RESET_BASE_URL>>
 
+[[COG_TELEMETRY]]`COG_TELEMETRY`::
+Whether or not Cog should send an event to the Operable telemetry service when it starts. This event contains a unique identifier (based on the SHA256 of the UUID for your operable bundle), the Cog version number, and the Elixir mix environment (:prod, :dev, etc) that Cog is running under. Set this value to `false` to disable this event from being sent.
++
+Defaults to `true`.
+
 [[COG_TRIGGER_PORT]]`COG_TRIGGER_PORT`::
 The IP port to listen on for invocation of triggers. Must be distinct from <<COG_API_PORT>>.
 // TODO: See [Invoking A Trigger](doc:triggers#invoking-a-trigger) for more details.
