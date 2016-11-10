@@ -1,4 +1,4 @@
-IMAGE_NAME=operable/cog-book-toolchain
+IMAGE_NAME=operable/cog-book-toolchain:latest
 MOUNT=/home/asciidoc
 ROOT_FILE=cog_book.adoc
 
