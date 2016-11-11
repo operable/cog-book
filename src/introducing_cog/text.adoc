@@ -1,4 +1,4 @@
-== Introducing Cog
+== *Introducing Cog*
 
 .Cog + ChatOps = Continuous DevOps
 image::images\cog_storywheel1.png[]
@@ -28,7 +28,7 @@ Keep up to date on all things Cog by following https://twitter.com/operableinc[@
 
 **Roadmap:** https://github.com/operable/cog/milestone/18[2H 2016 Roadmap]
 
-== Get Started
+== *Get Started*
 Here are a few things you will need to do first.
 
 . Join our http://slack.operable.io/[Cog Public Chat] to chat with the Operable team and the Cog community. This is the best place to get realtime help.

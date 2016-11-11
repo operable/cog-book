@@ -18,7 +18,6 @@
 
 NOTE: This book is released under the {license} license. More information about contributing to this book along with access to the source code and previous releases is available at {repository}. If you would prefer to read this book as a PDF, you may download it {homepage}cog_book.pdf[here].
 
-
 include::src/introducing_cog/text.adoc[]
 
 include::src/installation_guide/text.adoc[]
@@ -38,7 +37,7 @@ include::src/writing_a_command_bundle/text.adoc[]
 include::src/permissions_and_rules/text.adoc[]
 
 
-= Reference
+= *Reference*
 
 [partintro]
 --
@@ -69,12 +68,12 @@ include::src/reference/relay_configuration.adoc[]
 // == Templating Reference
 // placeholder
 
-= Appendices
+= *Appendices*
 
 include::src/appendices/designing_for_chatops.adoc[]
 
 [colophon]
-= Colophon
+= *Colophon*
 
 (C) 2016 by Operable, Inc.
 
