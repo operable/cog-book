@@ -758,8 +758,14 @@ and commands that are unrestricted (i.e., have a rule of `allow`).
 
 // TODO: How much do we want to talk about groups, roles, and permissions here?
 
-After granting myself the permission (I am an administrator on my own
-system!), I'm once again able to tweet.
+After granting myself the permission (I am an administrator on my own system):
+
+.Granting Permissions
+----
+@cog permission grant twitter_example:tweet cog-admin
+----
+
+I'm once again able to tweet.
 
 .Permission Granted
 image::images/tweet_permission_granted.png[]
