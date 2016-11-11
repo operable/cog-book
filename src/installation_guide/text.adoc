@@ -178,40 +178,25 @@ installed either by referencing a config file directly or by name in the
 https://bundles.operable.io[bundle registry]. So, let's install one by running
 a chat command.
 
-<<<<<<< HEAD
 ---
 image::images/max.png[Max,50,50,float="left"]
 *Max Headroom* 10:52PM +
-@cog bundle install heroku
+@cog bundle install ec2
 
 ---
-=======
-[source]
-----
-@cog bundle install ec2
-----
->>>>>>> master
 
 And that's it. Now, if you run the `help` command, you'll notice the new `ec2`
 bundle is listed under "Disabled Bundles". Before we can run a command, we need
 to enable it, tell our Relay that it can run commands from this bundle, and
 configure it with credentials.
 
-<<<<<<< HEAD
 ---
 image::images/max.png[Max,50,50,float="left"]
 *Max Headroom* 10:52PM +
-@cog bundle enable heroku +
-@cog relay-group member assign default heroku
+@cog bundle enable ec2 +
+@cog relay-group member assign default ec2
 
 ---
-=======
-[source]
-----
-@cog bundle enable ec2
-@cog relay-group member assign default ec2
-----
->>>>>>> master
 
 Now the the ec2 bundle is enabled, but we still haven't
 configured it yet. Let's set our api token with `cogctl`.
