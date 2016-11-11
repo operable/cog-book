@@ -1,4 +1,4 @@
-== Configuring password resets
+== *Configuring password resets*
 
 Cog uses email for its password reset process. To enable Cog to send emails you will need to configure SMTP. Like most things in Cog, SMTP is configured via environment variables. See <<cog-environment-variables#section--cog_smtp_-variables, SMTP configuration>> for information on which vars to set.
 

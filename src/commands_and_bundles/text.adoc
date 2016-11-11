@@ -1,4 +1,4 @@
-== Commands and Bundles
+== *Commands and Bundles*
 
 As a chatops bot, commands are central to Cog. After all, without commands, Cog wouldn't actually do anything! Let's take a look at exactly what commands are, how they are organized, and how they are managed.
 

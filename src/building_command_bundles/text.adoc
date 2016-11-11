@@ -1,4 +1,4 @@
-== Building Command Bundles
+== *Building Command Bundles*
 
 Now that you know what a Cog bundle is, how do you build one? There are two different types of command bundles: **simple** and **standard**. Bundles can be written using any language of choice. Languages that have been tested so far: Python and Ruby, but feel free to explore with others. Bundles all have access to the Cog acceptable environment variables.
 

@@ -1,4 +1,4 @@
-== Managing Bundles
+== *Managing Bundles*
 :description: How to deploy and manage bundles
 
 This document details the commands used to manage bundles.
