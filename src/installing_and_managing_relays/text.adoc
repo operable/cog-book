@@ -1,4 +1,4 @@
-== Installing and Managing Relays
+== *Installing and Managing Relays*
 
 To effectively route commands to Relay, we need to inform Cog of each Relay and configure each Relay to communicate with Cog via the message bus.
 
