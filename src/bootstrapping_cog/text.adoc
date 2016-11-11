@@ -1,4 +1,4 @@
-== Bootstrapping Cog
+== *Bootstrapping Cog*
 
 Since interactions with Cog require a user account, you'll need to _bootstrap_ your system before you can do anything interesting with it. This process will create the necessary administrator role and user group, as well as create the first user account and place it into that administrator group. At this point, you can interact with Cog as this first privileged user in order to create other user accounts (to which you can also grant administrative access), install bundles, and perform other tasks.
 
