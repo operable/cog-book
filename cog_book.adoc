@@ -6,6 +6,7 @@
 :linkcss:
 :sectanchors:
 :doctype: book
+:stylesheet: stylesheets/cog.css
 
 :google-analytics-account: UA-61670076-4
 :listing-caption: Listing
@@ -21,6 +22,8 @@ NOTE: This book is released under the {license} license. More information about 
 include::src/introducing_cog/text.adoc[]
 
 include::src/installation_guide/text.adoc[]
+
+include::src/bootstrapping_cog/text.adoc[]
 
 include::src/installing_and_managing_relays/text.adoc[]
 
@@ -54,6 +57,7 @@ Here you will find detailed reference information on various aspects of the Cog 
 
 
 include::src/reference/cog_server_configuration.adoc[]
+
 include::src/reference/relay_configuration.adoc[]
 
 // == Command Environment
