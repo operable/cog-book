@@ -717,7 +717,7 @@ commands:
     executable: /Users/chris/cog-book/tweet_cog_wrapper.sh
     arguments: "<message>"
     rules:
-      - when command is twitter_example:tweet must have twitter_example:tweet # <3>
+      - must have twitter_example:tweet # <3>
 templates:
   tweet:
     body: |
@@ -830,7 +830,7 @@ commands:
     executable: /Users/chris/cog-book/tweet_cog_wrapper.sh
     arguments: "<message>"
     rules:
-      - when command is twitter_example:tweet must have twitter_example:tweet
+      - must have twitter_example:tweet
     options: # <2>
       as:
         description: the account to tweet from
