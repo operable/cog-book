@@ -39,6 +39,8 @@ include::src/writing_a_command_bundle/text.adoc[]
 
 include::src/permissions_and_rules/text.adoc[]
 
+include::src/command_execution_rules/text.adoc[]
+
 
 = *Reference*
 
