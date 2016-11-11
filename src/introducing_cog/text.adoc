@@ -1,14 +1,8 @@
 == *Introducing Cog*
 
-.Cog + ChatOps = Continuous DevOps
-image::images\cog_storywheel1.png[]
-
 **Cog** brings the power of the command line to the place you collaborate with your team all the time -- your chat window.
 
 Powerful access control means you can collaborate around even the most sensitive tasks with confidence. A focus on extensibility and adaptability means that you can respond quickly to the unexpected, without your team losing visibility.
-
-.Cog being used as part of your workflow
-image::images\cog_workflow.png[]
 
 === Current Features
 
@@ -22,9 +16,9 @@ Cog is under heavy development and getting smarter all the time. This list of fe
 [/block]
 ////
 
-Keep up to date on all things Cog by following https://twitter.com/operableinc[@OperableInc] on Twitter. Also, contact us at anytime via <info@operable.io>.
+Keep up to date on all things Cog by following https://twitter.com/operableinc[@OperableInc] on Twitter. Also, contact us at anytime via info@operable.io.
 
-**Current version:** v0.15.2 (https://github.com/operable/cog/releases[Changelog])
+**Current version:** (https://github.com/operable/cog/releases[Changelog])
 
 **Roadmap:** https://github.com/operable/cog/milestone/18[2H 2016 Roadmap]
 
@@ -45,17 +39,5 @@ If you find an issue, please write it up as a https://github.com/operable/cog/is
 **Cog Public Chat via Slack**
 Chat with Operable engineers and the growing community in the http://slack.operable.io[Cog public Slack] channel.
 
-image::images\SlackLogo.png[Slack Logo]
-
 === User experience feedback
-Much like communication states above, we want to know how your experience is going. Give us feedback, the good/bad/ugly. We want to know everything, so please keep notes (mental/paper/your-favorite-note-taking-app).
-
-**Some user experience areas we will be asking you about are**:
-
-. Cog installation
-. Documentation usage
-. Bundle installation
-. Command / bundle creation
-. Cog use in your Slack channel
-. Team sharing
-. What are we missing, not considering?
+We want to know everything about how your experience with Cog is going. You cannot hurt our feelings! Tell us how we can make Cog a better ChatOps tool for you. Want to share your experience directly with someone at Operable? Find Shelton in our http://slack.operable.io[Cog public Slack] and message him directly.
