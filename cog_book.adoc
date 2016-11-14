@@ -6,6 +6,7 @@
 :linkcss:
 :sectanchors:
 :doctype: book
+:stylesheet: stylesheets/cog.css
 
 :google-analytics-account: UA-61670076-4
 :listing-caption: Listing
@@ -22,6 +23,8 @@ include::src/introducing_cog/text.adoc[]
 
 include::src/installation_guide/text.adoc[]
 
+include::src/bootstrapping_cog/text.adoc[]
+
 include::src/installing_and_managing_relays/text.adoc[]
 
 include::src/commands_and_bundles/text.adoc[]
@@ -35,6 +38,8 @@ include::src/configuring_password_resets/text.adoc[]
 include::src/writing_a_command_bundle/text.adoc[]
 
 include::src/permissions_and_rules/text.adoc[]
+
+include::src/command_execution_rules/text.adoc[]
 
 
 = *Reference*
@@ -54,6 +59,7 @@ Here you will find detailed reference information on various aspects of the Cog 
 
 
 include::src/reference/cog_server_configuration.adoc[]
+
 include::src/reference/relay_configuration.adoc[]
 
 // == Command Environment
