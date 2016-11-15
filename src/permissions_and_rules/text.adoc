@@ -8,7 +8,7 @@ In this document, we will discuss the individual pieces of the authorization sys
 
 At the core of Cog's authorization system are **rules**. Each time a user issues a chat command to Cog, rules governing the execution of that command are looked up and applied to the current invocation. If a match is found, the list of permissions the invoking user has is consulted to see if it includes the permission(s) required in the matching rule. If it does, the command is executed; if not, command processing immediately stops.
 
-To make things concrete, we'll start with a simple authorization rule. (There is actually a separate rule language that can be used to make rather complex rules, but for now we'll start simple. Feel free to read more <<command-execution-rules,detailed explanations>> of how rules are formed. In any event, the details of the language are orthogonal to the authorization system itself.)
+To make things concrete, we'll start with a simple authorization rule. (There is actually a separate rule language that can be used to make rather complex rules, but for now we'll start simple. Feel free to read more <<Command Execution Rules,detailed explanations>> of how rules are formed. In any event, the details of the language are orthogonal to the authorization system itself.)
 
 ```
 when command is operable:bundle must have operable:manage_commands

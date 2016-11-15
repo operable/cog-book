@@ -23,7 +23,7 @@ abstract the lower-level details of the Cog - command interaction.
 Our framework for examining all these points will be the creation of a
 bundle that interacts with https://twitter.com[Twitter]. For those
 wanting to skip ahead, the "real" version of this bundle can be found
-online at https://github.com/cogcmd/twitter. This chapter traces the
+in Cog's https://bundles.operable.io/bundles/twitter/latest[Command Bundle Warehouse]. This chapter traces the
 techniques and thought processes a developer might go through to
 arrive at that finished product.
 
