@@ -2,7 +2,7 @@
 
 As a chatops bot, commands are central to Cog. After all, without commands, Cog wouldn't actually do anything! Let's take a look at exactly what commands are, how they are organized, and how they are managed.
 
-**Current list Cog Bundles:** https://github.com/cogcmd[Installable Cog command bundles]
+**Current list Cog Bundles:** https://bundles.operable.io[Bundle Warehouse]
 
 Let's start with an example. If I type the following into Slack:
 
@@ -45,7 +45,7 @@ I have just executed the `help` command from the `operable` command bundle. From
 
 If you view your chatbot as a kind of "shared command line", then commands are like the executables in your terminal. In fact, you might recognize several commands from the `operable` namespace above from your everyday terminal usage: `echo`, `wc`, `sort`, etc.
 
-Command may need some additional information that would not be shared on the "shared command line", but will have to be setup by an administrator, such as an OAuth key. See the section on <<Dynamic Command Configuration>> for more information on how to get this data for command execution.
+Command may need some additional information that would not be shared on the "shared command line", but will have to be setup by an administrator, such as an OAuth key. See the section on http://docs.operable.io/docs/dynamic-command-configuration[Dynamic Command Configuration] for more information on how to get this data for command execution.
 
 === Bundles
 
@@ -53,15 +53,15 @@ Let's say that you've written some new chat commands for Cog. You  have one comm
 
 These commands are clearly related functionally; you probably won't use one without the other, after all. They also probably share a good bit of library and / or dependency code. It would be nice to have a way to package up these commands in a way that reflects this.
 
-Enter **bundles**, the packaging unit for commands. Bundles contain all the code for the commands within, including dependencies and library code. They also carry metadata about the commands, including documentation, details about the various options each command recognizes, configuration that affects how the commands behave in <<Command Pipelines, execution pipelines>>, and even formatting templates, which allow the results of commands to be presented in the best possible way for the chat system you use.
+Enter **bundles**, the packaging unit for commands. Bundles contain all the code for the commands within, including dependencies and library code. They also carry metadata about the commands, including documentation, details about the various options each command recognizes, configuration that affects how the commands behave in http://docs.operable.io/v0.16/docs/command-pipelines[execution pipelines], and even formatting templates, which allow the results of commands to be presented in the best possible way for the chat system you use.
 
-This sounds interesting, right? Come see how simple it is to <<Building Command Bundles, build a bundle>>.
+This sounds interesting, right? Come see how simple it is: <<Writing A Command Bundle>>.
 
 ==== Bundle Permissions and Rules
 
-Bundles also contain an initial set of <<A Tour Through Cogs Authorization System, permissions and authorization rules>> for their commands. When a bundle is installed, these permissions and accompanying rules are automatically created in the Cog system. These can be used as-is, or can be modified by Cog operators in whatever way suits their organization best.
+Bundles also contain an initial set of <<Permissions and Rules, permissions and authorization rules>> for their commands. When a bundle is installed, these permissions and accompanying rules are automatically created in the Cog system. These can be used as-is, or can be modified by Cog operators in whatever way suits their organization best.
 
-Since <<A Tour Through Cogs Authorization System, permissions>> are namespaced to the bundle they originate from, installing a bundle's permissions will never conflict with any existing authorization system configurations you may have made. No users are automatically assigned any of these permissions, either.
+Since <<Permissions and Rules, permissions>> are namespaced to the bundle they originate from, installing a bundle's permissions will never conflict with any existing authorization system configurations you may have made. No users are automatically assigned any of these permissions, either.
 
 ==== Example: The `operable` Bundle
 
@@ -97,7 +97,7 @@ If on the other hand, your installation were to have two or more bundles that ha
 
 === Implementation Details
 
-Bundles may take one of two forms. The first, which we'll call a <<Building Command Bundles#Standard bundles, standard>> bundle is a docker image that contains all of your commands. This is the form you'll use if you have custom code to implement your chat commands and wish to package that code and distribute it in a bundle.
+Bundles may take one of two forms. The first, which we'll call a <<Standard Bundles,standard>> bundle is a docker image that contains all of your commands. This is the form you'll use if you have custom code to implement your chat commands and wish to package that code and distribute it in a bundle.
 
 .Old Bundles
 WARNING: Note that versions on Cog prior to version 0.4 used a different packaging system for standard bundles. These old bundles will not work for current versions of Cog.

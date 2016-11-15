@@ -1,4 +1,4 @@
-== *Writing A Command Bundle*
+== Writing A Command Bundle
 
 At some point in your use of Cog, you'll want to write some command
 bundles of your own. One of the promises of ChatOps is the ability to
