@@ -2,7 +2,7 @@
 
 Since interactions with Cog require a user account, you'll need to _bootstrap_ your system before you can do anything interesting with it. This process will create the necessary administrator role and user group, as well as create the first user account and place it into that administrator group. At this point, you can interact with Cog as this first privileged user in order to create other user accounts (to which you can also grant administrative access), install bundles, and perform other tasks.
 
-There are a few ways you can bootstrap. If your Cog system is automated in any way (using Chef, Puppet, Ansible, or some flavor of AWS or Heroku deployment, for example), you may find it convenient to <<cog-environment-variables#section--cog_bootstrap_-variables, automatically bootstrap your new system using environment variables>>.
+There are a few ways you can bootstrap. If your Cog system is automated in any way (using Chef, Puppet, Ansible, or some flavor of AWS or Heroku deployment, for example), you may find it convenient to <<Permissions and Rules,automatically bootstrap your new system using environment variables>>.
 
 Alternatively, you can use the `cogctl bootstrap` command, as detailed below.
 
@@ -35,7 +35,7 @@ user=admin
 
 Here, we can see that a user named `admin` has been created for us on the Cog instance running on this machine. A password has also been generated for this user. Now, whenever we run any `cogctl` commands from this machine, these credentials will be used by default to make authenticated API calls.
 
-Cog's REST API is guarded by Cog's authorization system, which means that the admin user must have permissions to access the API somehow. As detailed in <<A Tour Through Cog's Authorization System>>, permissions must be attached to a user somehow through a combination of roles and groups. As you can probably guess, the bootstrapping process handles all this. Let's use `cogctl` to examine what has been done.
+Cog's REST API is guarded by Cog's authorization system, which means that the admin user must have permissions to access the API somehow. As detailed in <<Permissions and Rules>>, permissions must be attached to a user somehow through a combination of roles and groups. As you can probably guess, the bootstrapping process handles all this. Let's use `cogctl` to examine what has been done.
 
 First, let's just check that we actually exist :smile:
 [source, shell]

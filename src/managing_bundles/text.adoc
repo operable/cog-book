@@ -1,4 +1,4 @@
-== *Managing Bundles*
+== Managing Bundles
 :description: How to deploy and manage bundles
 
 This document details the commands used to manage bundles.
@@ -9,7 +9,7 @@ To learn more about <<Commands and Bundles, bundles>> or <<Installing and Managi
 
 === Prerequisites
 
-For simplicity we will be using <<Cog Architecture#cogctl,cogctl>> to demonstrate bundle management. Bundle management mostly involves use of the 'bundles' subcommand. However, you aren't explicitly required to use `cogctl` to manage bundles, you can just make calls to the api directly if you like, but it does make things a bit easier.
+For simplicity we will be using https://github.com/operable/cogctl[cogctl] to demonstrate bundle management. Bundle management mostly involves use of the 'bundles' subcommand. However, you aren't explicitly required to use `cogctl` to manage bundles, you can just make calls to the api directly if you like, but it does make things a bit easier.
 
 So given that, I'm going to assume you have a working installation of both Cog, Relay and `cogctl`.
 
@@ -17,7 +17,7 @@ So given that, I'm going to assume you have a working installation of both Cog, 
 
 Bundles are installed by uploading bundle configs to Cog. Cog then registers the bundle. Registration includes the creation of the permissions declared by the bundle, as well as any default rules specified in the bundle's metadata.
 
-NOTE: After installation your command will be available but it may not be executable by anyone yet. Before anyone can execute the new command, make sure their permissions are set properly. Check out <<A Tour Through Cogs Authorization System, Permissions & Rules>> to learn more.
+NOTE: After installation your command will be available but it may not be executable by anyone yet. Before anyone can execute the new command, make sure their permissions are set properly. Check out <<Permissions and Rules>> to learn more.
 
 Bundles are installed via the `bundle install` sub-command in cogctl.
 
@@ -206,7 +206,7 @@ NOTE: The default refresh interval for a relay is 15 minutes (set in the relay c
 
 === Uninstalling Bundles and Bundle Versions
 
-You may uninstall a specific version of a bundle or all versions of a bundle. Uninstalling a specific version will remove rules and permissions only associated with that version. Uninstalling all bundle versions _completely_ involves removal of all authorization rules governing its commands as well as deletion of all the bundle's permissions. Any custom rules you may have written concerning the commands in the bundle will also be deleted. In this regard, bundle uninstallation is not reversible. You can re-install to get back the bundle permissions and default rules, but your custom ones will be gone forever. If you only wish to disable a bundle, see <<Managing Bundles#Enabling and Disabling Bundles, Enabling and disabling bundles>> above instead.
+You may uninstall a specific version of a bundle or all versions of a bundle. Uninstalling a specific version will remove rules and permissions only associated with that version. Uninstalling all bundle versions _completely_ involves removal of all authorization rules governing its commands as well as deletion of all the bundle's permissions. Any custom rules you may have written concerning the commands in the bundle will also be deleted. In this regard, bundle uninstallation is not reversible. You can re-install to get back the bundle permissions and default rules, but your custom ones will be gone forever. If you only wish to disable a bundle, see <<Enabling and Disabling Bundle Versions>> above instead.
 
 Before a bundle can be uninstalled it must first be disabled. To uninstall a bundle just use `cogctl`.
 
