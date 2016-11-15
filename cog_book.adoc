@@ -43,6 +43,8 @@ include::src/command_execution_rules/text.adoc[]
 
 include::src/bundle_configs/text.adoc[]
 
+include::src/command_environment_variables/text.adoc[]
+
 
 = *Reference*
 
