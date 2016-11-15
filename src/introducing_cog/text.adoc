@@ -27,7 +27,7 @@ Here are a few things you will need to do first.
 
 . Join our http://slack.operable.io/[Cog Public Chat] to chat with the Operable team and the Cog community. This is the best place to get realtime help.
 . Head over to the <<Installation Guide>> and start installing Cog. Have questions? Ask us!
-. Once installed, make Cog do something. Read up on <<Commands and bundles>>
+. Once installed, make Cog do something. Read up on <<Commands and Bundles>>
 . Do you want to expand Cog's command capabilities? Easy, start <<Building Command Bundles>>.
 
 === Communication

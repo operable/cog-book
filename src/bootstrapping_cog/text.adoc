@@ -35,7 +35,7 @@ user=admin
 
 Here, we can see that a user named `admin` has been created for us on the Cog instance running on this machine. A password has also been generated for this user. Now, whenever we run any `cogctl` commands from this machine, these credentials will be used by default to make authenticated API calls.
 
-Cog's REST API is guarded by Cog's authorization system, which means that the admin user must have permissions to access the API somehow. As detailed in <<A Tour Through Cog's Authorization System>>, permissions must be attached to a user somehow through a combination of roles and groups. As you can probably guess, the bootstrapping process handles all this. Let's use `cogctl` to examine what has been done.
+Cog's REST API is guarded by Cog's authorization system, which means that the admin user must have permissions to access the API somehow. As detailed in <<Permissions and Rules>>, permissions must be attached to a user somehow through a combination of roles and groups. As you can probably guess, the bootstrapping process handles all this. Let's use `cogctl` to examine what has been done.
 
 First, let's just check that we actually exist :smile:
 [source, shell]

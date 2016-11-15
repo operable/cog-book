@@ -27,8 +27,7 @@ We've provided a set of docker-compose files for running and configuring Cog:
 `docker-compose.override.slack_example.yml` for running and configuring Cog. To
 run the images specified in the `docker-compose.yml` you'll need to have both
 Docker and Docker Compose installed. If you'd rather manually build and install
-Cog, skip down to the next section titled, <<Building and Running Cog from
-Scratch>>.
+Cog, skip down to the next section titled, <<Building and Running Cog from Scratch>>.
 
 First, make sure you have Docker and Docker Compose installed. If you haven't
 installed Docker, we recommend using
@@ -92,14 +91,14 @@ For the last step, let's check and see if our bot is available in the chat
 room. Open up Slack and try the following command. Keep in mind that you'll
 have to invite the bot to whatever room you first message it from.
 
-[source]
+[source,slack]
 ----
 @cog help
 ----
 
 You should see a response like this:
 
-[source]
+[source,slack]
 ----
 @vanstee: I'm terribly sorry, but either I don't have a Cog account for you, or your Slack chat handle has not been registered. Currently, only registered users can interact with me.
 
@@ -274,8 +273,7 @@ You'll notice that crashed since we didn't provide a `SLACK_API_TOKEN`
 environment variable. To fully configure Cog and Relay we'll need to set a few
 environment variables. If you need more customization than is explained in this
 guide checkout the full listing of environment variables and their descriptions
-for both http://docs.operable.io/docs/cog-environment-variables[Cog] and
-http://docs.operable.io/docs/relay-environment-variables[Relay].
+for both <<Cog Server Configuration>> and <<Relay Configuration>>.
 
 For now let's just provide the minimum to get things up and running. For Cog,
 we'll just need to set `COG_SLACK_ENABLED` and `SLACK_API_TOKEN` as everything

@@ -1,4 +1,4 @@
-== *Permissions and Rules*
+== Permissions and Rules
 
 The Cog chatbot system comes equipped with a comprehensive and flexible authorization system which allows operators fine-grained control over who is able to execute chat commands, extending even to control over particular _invocations_ of chat commands.
 
