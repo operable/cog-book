@@ -1,4 +1,4 @@
-== *Installation Guide*
+== Installation Guide
 
 So, you're ready to get in there and give Cog a shot? Well, you're in luck.
 We've made it pretty straight forward to get up and running whether you want to
