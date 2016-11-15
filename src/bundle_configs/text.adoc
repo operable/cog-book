@@ -1,4 +1,4 @@
-== *Bundle Configs*
+== Bundle Configs
 
 Cog executes commands to accomplish different tasks. Commands are organized into bundles. Bundles not only provide a way to organize similar commands, they also keep everything, like permissions and rules, namespaced. Every bundle includes a bundle config. Bundle configs are written in YAML and provide all of the information necessary to install and execute the commands included in the bundle.
 
