@@ -57,7 +57,7 @@ Enter **bundles**, the packaging unit for commands. Bundles contain all the code
 
 This sounds interesting, right? Come see how simple it is to <<Building Command Bundles, build a bundle>>.
 
-==== Permissions and Rules
+==== Bundle Permissions and Rules
 
 Bundles also contain an initial set of <<A Tour Through Cogs Authorization System, permissions and authorization rules>> for their commands. When a bundle is installed, these permissions and accompanying rules are automatically created in the Cog system. These can be used as-is, or can be modified by Cog operators in whatever way suits their organization best.
 

@@ -669,7 +669,7 @@ instead of the templated output, simply pipe the results through the
 `operable:raw` command.
 ====
 
-=== Permissions and Rules
+=== Tweet Permissions and Rules
 
 Earlier, we entirely bypassed the notions of permissions and
 authorization rules for our `tweet` command. We were focused more on
