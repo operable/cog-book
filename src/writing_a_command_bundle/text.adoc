@@ -1,4 +1,4 @@
-== *Writing A Command Bundle*
+== Writing A Command Bundle
 
 At some point in your use of Cog, you'll want to write some command
 bundles of your own. One of the promises of ChatOps is the ability to
@@ -23,7 +23,7 @@ abstract the lower-level details of the Cog - command interaction.
 Our framework for examining all these points will be the creation of a
 bundle that interacts with https://twitter.com[Twitter]. For those
 wanting to skip ahead, the "real" version of this bundle can be found
-online at https://github.com/cogcmd/twitter. This chapter traces the
+in Cog's https://bundles.operable.io/bundles/twitter/latest[Command Bundle Warehouse]. This chapter traces the
 techniques and thought processes a developer might go through to
 arrive at that finished product.
 
@@ -669,7 +669,7 @@ instead of the templated output, simply pipe the results through the
 `operable:raw` command.
 ====
 
-=== Permissions and Rules
+=== Tweet Permissions and Rules
 
 Earlier, we entirely bypassed the notions of permissions and
 authorization rules for our `tweet` command. We were focused more on

@@ -1,4 +1,4 @@
-== *Introducing Cog*
+== Introducing Cog
 
 **Cog** brings the power of the command line to the place you collaborate with your team all the time -- your chat window.
 
@@ -26,9 +26,9 @@ Keep up to date on all things Cog by following https://twitter.com/operableinc[@
 Here are a few things you will need to do first.
 
 . Join our http://slack.operable.io/[Cog Public Chat] to chat with the Operable team and the Cog community. This is the best place to get realtime help.
-. Head over to the <<Installation Guide,Installation Guide>> and start installing Cog. Have questions? Ask us!
-. Once installed, make Cog do something. Read up on <<Commands and Bundles,Commands and Bundles>>
-. Do you want to expand Cog's command capabilities? Easy, start <<Building Command Bundles,Building Command Bundles>>.
+. Head over to the <<Installation Guide>> and start installing Cog. Have questions? Ask us!
+. Once installed, make Cog do something. Read up on <<Commands and Bundles>>
+. Do you want to expand Cog's command capabilities? Easy, start <<Building Command Bundles>>.
 
 === Communication
 Let's set expectations. If you have a question, concern, idea, helpful hint, or want to tell us that you are hungry, we are listening. Please be as candid with us as possible. You can't hurt our feelings...too much. So that we can communicate as easily as possible we have several channels that you can use at anytime.

@@ -736,3 +736,7 @@ p { margin-bottom: 1.25rem; }
   .print-only { display: block !important; }
   .hide-for-print { display: none !important; }
   .show-for-print { display: inherit !important; } }
+
+  /* Custom */
+ul.sectlevel1 { font-weight: 800;}
+ul.sectlevel2 { font-weight: normal;}
