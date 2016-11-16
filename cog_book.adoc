@@ -47,6 +47,7 @@ include::src/command_environment_variables/text.adoc[]
 
 include::src/dynamic_command_configuration/text.adoc[]
 
+include::src/returning_data_from_cog/text.adoc[]
 
 
 = *Reference*
