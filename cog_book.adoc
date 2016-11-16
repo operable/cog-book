@@ -45,6 +45,9 @@ include::src/bundle_configs/text.adoc[]
 
 include::src/command_environment_variables/text.adoc[]
 
+include::src/dynamic_command_configuration/text.adoc[]
+
+
 
 = *Reference*
 
