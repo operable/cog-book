@@ -1,4 +1,4 @@
-== *Command Environment Variables*
+== Command Environment Variables
 
 When you send a command invocation to Cog, it can have many arguments and options. There are also several other pieces of important metadata that can be useful for commands to be aware of during execution. To get these data into the actual executable running that command, we expose them as environment variables. While libraries like https://github.com/operable/cog-rb[cog-rb] and https://github.com/operable/pycog3[pycog3] provide language-friendly abstractions to interact with these data, it can be useful to know the details of how they are structured, in case you need to perform some unique processing, or are writing commands in a language where a Cog library does not yet exist.
 
