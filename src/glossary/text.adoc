@@ -1,6 +1,6 @@
 [[terms]]
 [glossary]
-== *Glossary* 
+== Glossary
 [glossary]
 A glossary term::
     The corresponding definition.
