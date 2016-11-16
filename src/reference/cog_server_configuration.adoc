@@ -57,6 +57,11 @@ Amount of time to wait for execution of a database query to complete.
 +
 Defaults to `15000` ms.
 
+[[COG_DB_SSL]]`COG_DB_SSL`::
+Set this environment variable to have Cog connect to its database using SSL.
++
+Defaults to `false`.
+
 [[COG_EMAIL_FROM]]`COG_EMAIL_FROM`::
 Email address that emails sent from Cog will be sent from. Necessary to enable password resets.
 // TODO: This had a link to "password resets" in Readme.io
