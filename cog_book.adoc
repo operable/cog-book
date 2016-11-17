@@ -50,7 +50,7 @@ include::src/dynamic_command_configuration/text.adoc[]
 include::src/returning_data_from_cog/text.adoc[]
 
 
-= *Reference*
+= Reference
 
 [partintro]
 --
@@ -82,12 +82,12 @@ include::src/reference/relay_configuration.adoc[]
 // == Templating Reference
 // placeholder
 
-= *Appendices*
+= Appendices
 
 include::src/appendices/designing_for_chatops.adoc[]
 
 [colophon]
-= *Colophon*
+= Colophon
 
 (C) 2016 by Operable, Inc.
 
