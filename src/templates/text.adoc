@@ -1,0 +1,67 @@
+== Templates
+_Formatting pipeline output for humans!_
+
+In contrast to traditional command-line programs, the output of a Cog command is not plain text, but a JSON object. This common structure makes it easy to chain commands together into pipelines because downstream commands can easily reach into the JSON output to extract the data they need, without having to jump through the various text manipulation steps that are so frequently part of traditional command-line pipelines. When it's time to present the final output of a pipeline, however, we often want something a bit more user-friendly than a dump of JSON data in our chat window.
+
+To address this, Cog commands have the ability to specify a template that will be used to process the final pipeline output into a more readable format. This allows commands to return rich JSON objects for maximum flexibility in pipelines, but also condense these objects down to the salient information that humans need in chat ("Bundle 'foo', version '1.0.0' was enabled", for example).
+
+=== Basic Greenbar Syntax
+
+The template language used by Cog is https://github.com/operable/greenbar[Greenbar], a language created by Operable for the needs of Cog. It is probably best described as a Markdown variant, with support for ERB-like tags.
+
+Many familiar Markdown features are available, including boldface, italics, ordered and unordered lists, and monospace formatting; even tables. Iteration and conditional logic (among other features) are achieved through the use of "tags". Data from result objects can be accessed through variable references. This example will illustrate many Greenbar features:
+
+.Example Greenbar Template
+[source, Markdown]
+----
+~if cond=length($results) == 1~
+The _only_ member of the group is **~$results[0].username~**.
+~end~
+~if cond=length($results) > 1~
+The group has the following members:
+~each var=$results as=user~
+1. ~$user.username~
+~end~
+~end~
+----
+
+Note that all Greenbar instructions are enclosed in `~` characters. Some, like `~if~` and `~each~` have bodies, with corresponding `~end~` terminators; bodies may contain plain text, or other Greenbar instructions. Variable dereferencing is achieved with the use of the `$` operator within Greenbar instructions. Complex objects can be navigated using familiar dot notation, and individual array members can be addressed by a zero-based index. Markdown does not require special Greenbar instructions, but is used directly (observe the italics on "only", the bolding of the single user's name, and the generation of an ordered list in the `~each~` iterator). Note also the presence of the top-level "results" key, containing all the output of the Cog pipeline.
+
+.TL;DR - How Do I Write Templates?!
+NOTE: While this document gives an overview of Greenbar, the best source of documentation for the Greenbar system can be found in https://github.com/operable/greenbar[Greenbar's code].
+ +
+ Template authors will want to pay particular attention to the documentation for https://github.com/operable/greenbar/blob/master/lib/greenbar/tags[individual tags] in the Greenbar repository.
+ +
+ Numerous example Greenbar templates can also be found in https://github.com/operable/cog/tree/master/priv/templates[Cog itself].
+
+=== Overall Template Processing Logic
+
+In order to write effective templates, it helps to understand a bit about how Cog processes the output of pipelines, how templates are chosen, and how pipeline data is presented to the template.
+
+==== All pipelines return a "results" list
+
+For all successful pipeline runs, Cog will return a single JSON object to the template. This object will have a "results" key, which is always a list of objects returned from individual command invocations (it's a list whether there is only a single result object or many).
+
+==== Commands can specify a template when they return to Cog
+
+When each command runs, it has the option of specifying a template to use when formatting the output by returning a `COG_TEMPLATE` value in the output. The name of the template is resolved relative to the bundle the command is a member of. If no template is specified, then Cog will fall back to one of two "common" templates. If the command returns bare text (instead of JSON, as is customary), then a special "text" template is used. On the other hand, if JSON is returned, then the "raw" template is used, which will pretty-print the results.
+
+==== Last output "wins"
+
+The return value of every Cog command invocation can specify a template to use, but pipelines can trigger multiple invocations in the course of processing. That can theoretically result in multiple templates being specified.
+
+Templates are only truly needed at the end of a pipeline, however. If a command in the middle of a pipeline declares that its output should be formatted with the "foo" template, we don't care, because we know that output is going to be modified further by the downstream commands. As soon as Cog wraps up one pipeline stage and moves on to the next, all template information collected to that point is discarded.
+
+With respect to templating, it is the final stage that we care about. With Cog's current implementation, each invocation can theoretically specify a different template; in reality, though, only the template specified by the final invocation is used to template all the data.
+
+==== Meta-templates, not Templates
+
+Cog's templates are not actually templates, but rather "meta-templates". They do not generate text, but rather _directives_, instructions on how to render text. This allows individual chat providers to determine exactly how to format a given template. For example, the Slack provider can interpret a `bold` directive as `*bold text*`, while a HipChat provider can interpret the same directive as `<b>bold text</b>`.
+
+.Slack's Directive Processor
+NOTE: You can see how Greenbar directives are processed for Slack in the code https://github.com/operable/cog/blob/72308c31f49e8d8369f48ec1dd932403117e232c/lib/cog/chat/slack/template_processor.ex[here].
+
+By using this architecture, command authors only need to write a single template, which each chat provider can interpret in the best way for its host platform, instead of having to supply a template for each chat provider individually.
+
+.A Familiar Architecture
+NOTE: The rendering of Greenbar templates to general directives, which are then processed by chat adapter-specific processors, is analogous to the interpretation of Java bytecode on platform-specific VMs, or the rendering of OpenGL directives by different graphics processors.
