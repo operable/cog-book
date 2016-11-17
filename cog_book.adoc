@@ -51,6 +51,8 @@ include::src/returning_data_from_cog/text.adoc[]
 
 include::src\services\text.adoc[]
 
+include::src\templates\text.adoc[]
+
 = Reference
 
 [partintro]
