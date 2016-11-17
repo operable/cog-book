@@ -9,7 +9,7 @@
 :stylesheet: stylesheets/cog.css
 
 :google-analytics-account: UA-61670076-4
-:listing-caption: Listing
+//:listing-caption: Listing
 :figure-caption: Figure
 
 = The Cog Book
@@ -49,6 +49,7 @@ include::src/dynamic_command_configuration/text.adoc[]
 
 include::src/returning_data_from_cog/text.adoc[]
 
+include::src\services\text.adoc[]
 
 = Reference
 
