@@ -53,6 +53,8 @@ include::src\services\text.adoc[]
 
 include::src\templates\text.adoc[]
 
+include::src\installing_your_first_command_bundle\text.adoc[]
+
 = Reference
 
 [partintro]
