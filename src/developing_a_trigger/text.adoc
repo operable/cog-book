@@ -6,7 +6,7 @@ You may have heard about Cog's <<Triggers, triggers>> and are curious how you mi
 .For More Information...
 NOTE: You can read up on the details of <<Triggers,Cog's trigger system>>, but it isn't necessary for this tutorial; we'll explain "just enough" as we go along. +
  +
-We'll also provide links to more detailed documentation in callouts like this one throughout the tutorial."
+We'll also provide links to more detailed documentation in callouts like this one throughout the tutorial.
 
 At its most basic, a trigger is just a defined Cog pipeline that can run in response to an HTTP request. This allows Cog to respond to events outside of chat. In this tutorial, we'll have Cog respond to Github `push` events to our favorite Github repository by notifying us in chat. Yes, there are other ways of receiving simple notifications that don't require triggers, but we'll soon see how our pipeline can be expanded. Think of this as the "Hello World" of triggers.
 
@@ -18,7 +18,7 @@ Since triggers run a defined pipeline, we first need to define the pipeline we w
 echo "Somebody pushed some code!" > chat://#engineering
 ----
 
-You can run this directly in Slack and verify it works. If you've used Cog before, you might notice the new <<Redirecting Pipeline Output#chat-urls, URL-style syntax for redirects>>. Adding `chat://` to the beginning of a redirect will route output through the currently configured chat adapter (Slack, Hipchat, IRC, etc.). Normally when you're just interacting with Cog through chat, this isn't required since we default to returning output back through adapter that received the request. That is, if you typed a pipeline into Slack, Cog will send the output back to Slack. However, our trigger will be coming from Github, and Github doesn't know how to access your `#engineering` channel!  Our `chat://` destination gives Cog a hint so it knows how to notify you and your colleagues when interesting things happen.
+You can run this directly in Slack and verify it works. If you've used Cog before, you might notice the new <<Chat URLs, URL-style syntax for redirects>>. Adding `chat://` to the beginning of a redirect will route output through the currently configured chat adapter (Slack, Hipchat, IRC, etc.). Normally when you're just interacting with Cog through chat, this isn't required since we default to returning output back through adapter that received the request. That is, if you typed a pipeline into Slack, Cog will send the output back to Slack. However, our trigger will be coming from Github, and Github doesn't know how to access your `#engineering` channel!  Our `chat://` destination gives Cog a hint so it knows how to notify you and your colleagues when interesting things happen.
 
 
 [NOTE]
@@ -51,10 +51,10 @@ We also specify, for completeness, that this trigger will be enabled, though tha
 [NOTE]
 .For More Information...
 ====
-* <<Triggers#Anatomy of a Trigger, Anatomy of a Trigger>>
-* <<Triggers#Trigger Timeouts, Trigger Timeouts>>
-* <<Triggers#Manipulating Triggers, Manipulating Triggers>>
-* <<Permissions and Rules#Components of the Authorization System, Components of the Authorization System>>
+* <<Anatomy of a Trigger>>
+* <<Trigger Timeouts>>
+* <<Manipulating Triggers>>
+* <<Components of the Authorization System>>
 ====
 
 Upon successful trigger creation, you'll be presented with the URL at which the trigger can be, well, triggered.
@@ -113,7 +113,7 @@ image::images/Add_webhook.png[Add webhook dialogue]
 [NOTE]
 .For More Information...
 ====
-* <<Triggers#Invoking a Trigger, Invoking a Trigger>>
+* <<Invoking a Trigger, Invoking a Trigger>>
 ====
 
 === Let's Make It More Interesting
@@ -150,8 +150,9 @@ image::images/seed.png[marvin BOT 5:06 PM bobbytables just pushed code to /refs/
 [NOTE]
 .For More Information...
 ====
-* <<Command Pipelines#Variable Substitution, Variable Substitution>>
-* <<Triggers#Initial Calling Environment for Trigger-Invoked Pipelines, Initial Calling Environment for Trigger-Invoked Pipelines>>
+* <<Variable Substitution>>
+// The link above is pointing to Command Pipelines section which has not been transferred as of this comment
+* <<Initial Calling Environment for Trigger-Invoked Pipelines>>
 * [TODO: SEED COMMAND]
 ====
 
@@ -173,7 +174,7 @@ At this point, the new pipeline is "live", and the next `push` event from Github
 [NOTE]
 .For More Information...
 ====
-* <<Triggers#Update a Trigger, Update a Trigger>>
+* <<Update a Trigger>>
 ====
 
 === Going Further: Composability and Flexibility
@@ -199,7 +200,7 @@ Try updating the trigger pipeline using `cogctl` and try pushing to a few branch
 [NOTE]
 .For More Information...
 ====
-* <<Trigger#Errors and "Empty" Pipelines, Errors and "Empty" Pipelines>>
+* <<Errors and "Empty" Pipelines>>
 ====
 
 === Validation
