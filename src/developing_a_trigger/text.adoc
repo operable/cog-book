@@ -18,7 +18,7 @@ Since triggers run a defined pipeline, we first need to define the pipeline we w
 echo "Somebody pushed some code!" > chat://#engineering
 ----
 
-You can run this directly in Slack and verify it works. If you've used Cog before, you might notice the new <<Chat URLs, URL-style syntax for redirects>>. Adding `chat://` to the beginning of a redirect will route output through the currently configured chat adapter (Slack, Hipchat, IRC, etc.). Normally when you're just interacting with Cog through chat, this isn't required since we default to returning output back through adapter that received the request. That is, if you typed a pipeline into Slack, Cog will send the output back to Slack. However, our trigger will be coming from Github, and Github doesn't know how to access your `#engineering` channel!  Our `chat://` destination gives Cog a hint so it knows how to notify you and your colleagues when interesting things happen.
+You can run this directly in Slack and verify it works. If you've used Cog before, you might notice the new <<chat_URLs, URL-style syntax for redirects>>. Adding `chat://` to the beginning of a redirect will route output through the currently configured chat adapter (Slack, Hipchat, IRC, etc.). Normally when you're just interacting with Cog through chat, this isn't required since we default to returning output back through adapter that received the request. That is, if you typed a pipeline into Slack, Cog will send the output back to Slack. However, our trigger will be coming from Github, and Github doesn't know how to access your `#engineering` channel!  Our `chat://` destination gives Cog a hint so it knows how to notify you and your colleagues when interesting things happen.
 
 
 [NOTE]
@@ -113,7 +113,7 @@ image::images/Add_webhook.png[Add webhook dialogue]
 [NOTE]
 .For More Information...
 ====
-* <<Invoking a Trigger, Invoking a Trigger>>
+* <<Invoking a Trigger>>
 ====
 
 === Let's Make It More Interesting

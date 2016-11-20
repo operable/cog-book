@@ -166,7 +166,7 @@ If you don't want any output from the trigger to go to chat, and only want it in
 
 That is, if you triggered the pipeline `echo "Hello World"`, you'd get `"Hello World"` in the HTTP response body.
 
-Recall also that you can explicitly cause this same behavior by using the <<here Alias, here redirect alias>>. In this case,
+Recall also that you can explicitly cause this same behavior by using the <<here_Alias, here redirect alias>>. In this case,
 
 .Cog
 [source, text]
@@ -182,13 +182,11 @@ would behave exactly as
 echo "Hello World"
 ----
 
-(The <<me Alias, me redirect alias>>, however, is not available for triggered pipelines.)
+(The <<me_Alias, me redirect alias>>, however, is not available for triggered pipelines.)
 
 Receiving output in the response body may be useful for authenticated remote execution of pipelines (i.e. using Cog as a workflow execution engine without the chat system). It can also be useful for troubleshooting webhook execution (e.g., examining recent webhook deliveries in Github's interface).
 
-Many times, of course, you'll want output in chat. This is where Cog's <<chat URLs, chat:// URL redirect destinations>> come into play. Since the HTTP adapter knows nothing of chat, you must use the full URL-style redirect to instruct Cog to pass handling of the output to the currently configured chat adapter. Naturally, multiple redirects are available for triggered pipelines, as they are for chat-initiated pipelines. The pipeline
-
-// The links above are pointing to the 'Redirecting Pipeline Output' section which has not been transferred as of this comment
+Many times, of course, you'll want output in chat. This is where Cog's <<chat_URLs, chat:// URL redirect destinations>> come into play. Since the HTTP adapter knows nothing of chat, you must use the full URL-style redirect to instruct Cog to pass handling of the output to the currently configured chat adapter. Naturally, multiple redirects are available for triggered pipelines, as they are for chat-initiated pipelines. The pipeline
 
 .Cog
 [source, text]
