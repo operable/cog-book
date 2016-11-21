@@ -80,22 +80,22 @@ Like all templates in Cog, the standard error template is written in greenbar. S
 
 The error object contains the following keys:
 
-$id::
+id::
   The id of the pipeline.
-$started::
+started::
   The time stamp for the start of the pipeline.
-$initiator::
+initiator::
   The username of the one who initiated the pipeline.
-$pipeline_text::
+pipeline_text::
   The complete text of the pipeline.
-$error_message::
+error_message::
   The error message returned by the pipeline.
-$planning_failure::
+planning_failure::
   When a pipeline fails during it's planning stage, ie during variable binding or when interpreting options, this will contain the portion of the pipeline that generated the error. Otherwise this will be `false`.
-$execution_failure::
+execution_failure::
   Similar to `$planning_failure`; when a pipeline fails during execution of the pipeline, this will contain the portion of the pipeline that caused the error. Otherwise this is set to `false`.
 
-.example error.greenbar
+.The default error.greenbar as an example
 [source, Markdown]
 ----
 ~attachment title="Command Error" color="#ff3333" Caller=$initiator Pipeline=$pipeline_text "Pipeline ID"=$id Started=$started~
