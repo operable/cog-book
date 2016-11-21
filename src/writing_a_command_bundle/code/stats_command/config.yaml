@@ -52,5 +52,3 @@ templates:
       ~each var=$results~
       |~$item.message~|~$item.favorites~|~$item.retweets~|
       ~end~
-permissions:
-  - twitter_example:tweet
