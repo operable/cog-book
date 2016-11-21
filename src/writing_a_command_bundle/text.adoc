@@ -107,21 +107,31 @@ include::code/pure_ruby/tweet.rb[]
 <3> Here, we actually send the message to Twitter.
 <4> Finally, we'll return some information to standard output so we can find out the URL of our new tweet. There is other information we could add (like timestamp, tweet ID, etc.), but for now, we'll keep it simple.
 
-It's not a lot of code, and we can run it directly from our terminal, as seen in <<execute-pure-ruby-tweet>>.
+To make life easier, let's create a `Gemfile` in our directory to manage our dependencies. We'll also use this later when we package our bundle up.
+
+[[twitter-gemfile]]
+[source, ruby,linenums]
+.Twitter Bundle Gemfile
+----
+include::code/pure_ruby/Gemfile[]
+----
+
+As you can see, it's not a lot of code, and we can run it directly from our terminal, as seen in <<execute-pure-ruby-tweet>>.
 
 [[execute-pure-ruby-tweet]]
 .Executing the Pure Ruby `tweet` Command
 ----
-$ export TWITTER_CONSUMER_KEY=XXXX # <1>
+$ bundle install # <1>
+$ export TWITTER_CONSUMER_KEY=XXXX # <2>
 $ export TWITTER_CONSUMER_SECRET=XXXX
 $ export TWITTER_ACCESS_TOKEN=XXXX
 $ export TWITTER_ACCESS_TOKEN_SECRET=XXXX
-$ gem install twitter
 $ ./tweet.rb This is an interesting tweet
 Message: This is an interesting tweet
 URL:     https://twitter.com/CogTesting/status/776507696396791809
 ----
-<1> Substiting the appropriate values for our real credentials, of course.
+<1> We only need to install our dependencies once once.
+<2> Substiting the appropriate values for our real credentials, of course.
 
 By checking that URL, we can further verify that our command worked.
 
@@ -911,15 +921,6 @@ a bundle user, copy our existing code into that user's home directory,
 and install our code dependencies.
 
 Creating the image is simple.
-
-.Add a Gemfile
----
-$ cat <<EOF > test.Gemfile
-source 'https://rubygems.org'
- 
-gem "twitter"
-EOF
----
 
 .Building the Bundle Image
 ----
