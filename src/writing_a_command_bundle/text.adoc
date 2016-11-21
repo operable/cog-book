@@ -116,6 +116,7 @@ $ export TWITTER_CONSUMER_KEY=XXXX # <1>
 $ export TWITTER_CONSUMER_SECRET=XXXX
 $ export TWITTER_ACCESS_TOKEN=XXXX
 $ export TWITTER_ACCESS_TOKEN_SECRET=XXXX
+$ gem install twitter
 $ ./tweet.rb This is an interesting tweet
 Message: This is an interesting tweet
 URL:     https://twitter.com/CogTesting/status/776507696396791809
@@ -716,7 +717,7 @@ commands:
     executable: /Users/chris/cog-book/tweet_cog_wrapper.sh
     arguments: "<message>"
     rules:
-      - when command is twitter_example:tweet must have twitter_example:tweet # <3>
+      - must have twitter_example:tweet # <3>
 templates:
   tweet:
     body: |
@@ -757,8 +758,14 @@ and commands that are unrestricted (i.e., have a rule of `allow`).
 
 // TODO: How much do we want to talk about groups, roles, and permissions here?
 
-After granting myself the permission (I am an administrator on my own
-system!), I'm once again able to tweet.
+After granting myself the permission (I am an administrator on my own system):
+
+.Granting Permissions
+----
+@cog permission grant twitter_example:tweet cog-admin
+----
+
+I'm once again able to tweet.
 
 .Permission Granted
 image::images/tweet_permission_granted.png[]
@@ -829,7 +836,7 @@ commands:
     executable: /Users/chris/cog-book/tweet_cog_wrapper.sh
     arguments: "<message>"
     rules:
-      - when command is twitter_example:tweet must have twitter_example:tweet
+      - must have twitter_example:tweet
     options: # <2>
       as:
         description: the account to tweet from
@@ -904,6 +911,15 @@ a bundle user, copy our existing code into that user's home directory,
 and install our code dependencies.
 
 Creating the image is simple.
+
+.Add a Gemfile
+---
+$ cat <<EOF > test.Gemfile
+source 'https://rubygems.org'
+ 
+gem "twitter"
+EOF
+---
 
 .Building the Bundle Image
 ----
