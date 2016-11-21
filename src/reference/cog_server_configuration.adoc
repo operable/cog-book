@@ -32,10 +32,13 @@ Defaults to `4000`.
 See also <<COG_API_URL_HOST>> and <<COG_API_PORT>>.
 
 [[COG_BOOTSTRAP_VARIABLES]]`COG_BOOTSTRAP_*` Variables::
-The following environment variables are available to automatically bootstrap a Cog system at startup without further intervention (e.g., it does not require running `cogctl bootstrap` afterwards). Values for all the `COG_BOOTSTRAP_*` variables are required for the bootstrapping to occur, and bootstrapping will _only_ occur if the system has not already been bootstrapped. Each variable describes an attribute of the first user created on the system, which will have administrator privileges over the entire system.
+The following environment variables are available to automatically bootstrap a Cog system at startup without further intervention (e.g., it does not require running `cogctl bootstrap` afterwards). Values for all the `COG_BOOTSTRAP_*` variables are required (except `COG_BOOTSTRAP_CHAT_HANDLE`; see below) for the bootstrapping to occur, and bootstrapping will _only_ occur if the system has not already been bootstrapped. Each variable describes an attribute of the first user created on the system, which will have administrator privileges over the entire system.
++
+If you wish your bootstrap user to be associated with a chat handle for your currently-configured chat provider (see, e.g., <<COG_SLACK_ENABLED>> and <<COG_HIPCHAT_ENABLED>>), then set `COG_BOOTSTRAP_CHAT_HANDLE`. If the value is not an existing chat handle, an error will be logged, but startup will proceed as usual.
 +
 These are intended for automated installations of Cog (e.g., using management software such as Chef, Puppet, and Ansible, and / or platforms such as AWS and Heroku). Please note that bootstrapping via these variables _will not_ generate a `.cogctl` file for you; you will need to generate one for yourself with the appropriate values.
 +
+*  `COG_BOOTSTRAP_CHAT_HANDLE`
 *  `COG_BOOTSTRAP_EMAIL_ADDRESS`
 *  `COG_BOOTSTRAP_FIRST_NAME`
 *  `COG_BOOTSTRAP_LAST_NAME`
