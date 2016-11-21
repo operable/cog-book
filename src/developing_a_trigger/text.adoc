@@ -150,10 +150,9 @@ image::images/seed.png[marvin BOT 5:06 PM bobbytables just pushed code to /refs/
 [NOTE]
 .For More Information...
 ====
-* <<Variable Substitution>>
+// * <<Variable Substitution>>
 // The link above is pointing to Command Pipelines section which has not been transferred as of this comment
 * <<Initial Calling Environment for Trigger-Invoked Pipelines>>
-* [TODO: SEED COMMAND]
 ====
 
 Now that we've got a better pipeline, let's update our existing trigger using `cogctl`:
@@ -295,7 +294,7 @@ By providing a configuration file on our Relay with our shared secret, Cog adds 
 .For More Information...
 ====
 * <<Dynamic Command Configuration>>
-* [TODO: RELAY CONFIGURATION]()
+* <<Relays & Relay Groups>>
 ====
 
 For this tutorial, we've created a repository on Github that defines a bundle with this command. It even defines a Docker image that can be easily installed on your Relay instances to run in your own infrastructure.
@@ -350,7 +349,7 @@ cogctl relay-groups assign trigger-tutorial --bundle=github-trigger
 ====
 * <<Managing Bundles>>
 * <<Installing and Configuring a Bundle>>
-* [TODO: RELAY GROUPS]()
+* <<Relays & Relay Groups>>
 ====
 
 With this command in place, we can add verification to our existing pipeline by simply placing `github-trigger:verify` as the first command (I've broken up the individual invocations on separate lines for readability):
