@@ -65,3 +65,60 @@ By using this architecture, command authors only need to write a single template
 
 .A Familiar Architecture
 NOTE: The rendering of Greenbar templates to general directives, which are then processed by chat adapter-specific processors, is analogous to the interpretation of Java bytecode on platform-specific VMs, or the rendering of OpenGL directives by different graphics processors.
+
+=== Customizing the standard error template
+
+Cog uses a standard template to render errors that might occur when processing a pipeline. For example, when a user types the name of a command that does not exists, or if a command were to crash unexpectedly. The standard template contains a lot of information that is useful when developing bundles, but may a bit to much info for the average user. For this reason, it can be easily customized.
+
+==== Configuring
+
+Configuring Cog to use a custom error template is a two step process. First create a template called `error.greenbar` and place it in an empty directory accessible to Cog. Then set <<COG_CUSTOM_TEMPLATE_DIR>> to the path of said directory.
+
+==== error.greenbar
+
+Like all templates in Cog, the standard error template is written in greenbar. See <<Basic Greenbar Syntax>> for more info. Unlike templates defined for commands though, the standard error template does not receive a "results" list. Instead it receives a single object containing information about the error.
+
+The error object contains the following keys:
+
+$id::
+  The id of the pipeline.
+$started::
+  The time stamp for the start of the pipeline.
+$initiator::
+  The username of the one who initiated the pipeline.
+$pipeline_text::
+  The complete text of the pipeline.
+$error_message::
+  The error message returned by the pipeline.
+$planning_failure::
+  When a pipeline fails during it's planning stage, ie during variable binding or when interpreting options, this will contain the portion of the pipeline that generated the error. Otherwise this will be `false`.
+$execution_failure::
+  Similar to `$planning_failure`; when a pipeline fails during execution of the pipeline, this will contain the portion of the pipeline that caused the error. Otherwise this is set to `false`.
+
+.example error.greenbar
+[source, Markdown]
+----
+~attachment title="Command Error" color="#ff3333" Caller=$initiator Pipeline=$pipeline_text "Pipeline ID"=$id Started=$started~
+~if cond=$planning_failure ~
+The pipeline failed planning the invocation:
+~br~
+```
+~$planning_failure~
+```
+~end~
+~if cond=$execution_failure~
+The pipeline failed executing the command:
+~br~
+```
+~$execution_failure~
+```
+~end~
+~br~
+~br~
+The specific error was:
+~br~
+```
+~$error_message~
+```
+~end~
+----

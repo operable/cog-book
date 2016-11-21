@@ -45,6 +45,17 @@ These are intended for automated installations of Cog (e.g., using management so
 *  `COG_BOOTSTRAP_PASSWORD`
 *  `COG_BOOTSTRAP_USERNAME`
 
+[[COG_CUSTOM_TEMPLATE_DIR]]`COG_CUSTOM_TEMPLATE_DIR`::
+The path to your custom template directory.
++
+Cog uses a set of common templates to format responses generated internally. Some of these templates may be overridden by placing a custom version in a directory and setting this var to said directory's path.
++
+[TIP]
+.Custom error templates
+====
+Currently the only overridable common template is the standard `error` template. See <<Customizing the standard error template>> for more information.
+====
+
 [[COG_DB_POOL_SIZE]]`COG_DB_POOL_SIZE`::
 Database connection pool size.
 +
