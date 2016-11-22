@@ -16,15 +16,23 @@ The IP port to listen on for Cog's REST API. Must be distinct from <<COG_TRIGGER
 +
 Defaults to `4000`.
 
-[[COG_API_URL_HOST]]
-`COG_API_URL_HOST`::
+[[COG_API_URL_BASE]]`COG_API_URL_BASE`::
+Controls the prefix of URLs generated for the core API. URLs may contain a scheme (either `http` or `https`), a host, an optional port (defaulting to `80` for `http` and `443` for `https`), and an optional path.
++
+See also <<COG_SERVICE_URL_BASE>> and <<COG_TRIGGER_URL_BASE>>.
+
+[[COG_API_URL_HOST]]`COG_API_URL_HOST`::
+*DEPRECATED* Use <<COG_API_URL_BASE>> instead!
++
 Host to be used in generated API URLs. This should be a DNS name or IP address at which Cog can be reached externally.
 +
 Defaults to `localhost`.
 +
-See <<COG_TRIGGER_URL_HOST>> also; these two are usually set to the same value, but need not be.
+See <<COG_SERVICE_URL_HOST>> and <<COG_TRIGGER_URL_HOST>> also; these are all usually set to the same value, but need not be.
 
 [[COG_API_URL_PORT]]`COG_API_URL_PORT`::
+*DEPRECATED* Use <<COG_TRIGGER_API_BASE>> instead!
++
 Port to be used in generated API URLs. This should be where Cog can be reached externally.
 +
 Defaults to `4000`.
@@ -106,6 +114,29 @@ See also:
 * <<COG_EMAIL_FROM>>
 * <<COG_SMTP_VARIABLES>>
 
+[[COG_SERVICE_URL_BASE]]`COG_SERVICE_URL_BASE`::
+Controls the prefix of URLs generated for services. URLs may contain a scheme (either `http` or `https`), a host, an optional port (defaulting to `80` for `http` and `443` for `https`), and an optional path.
++
+See also <<COG_API_URL_BASE>> and <<COG_TRIGGER_URL_BASE>>.
+
+[[COG_SERVICE_URL_HOST]]`COG_SERVICE_URL_HOST`::
+*DEPRECATED* Use <<COG_SERVICE_URL_BASE>> instead!
++
+Host to be used in generated service URLs. This should be a DNS name or IP address at which Cog can be reached externally.
++
+Defaults to `localhost`.
++
+See <<COG_API_URL_HOST>> and <<COG_TRIGGER_URL_HOST>> also; these are all usually set to the same value, but need not be.
+
+[[COG_SERVICE_URL_PORT]]`COG_SERVICE_URL_PORT`::
+*DEPRECATED* Use <<COG_SERVICE_URL_BASE>> instead!
++
+Port to be used in generated service URLs. This should be where Cog can be reached externally.
++
+Defaults to `4002`.
++
+See also <<COG_SERVICE_URL_HOST>> and <<COG_SERVICE_PORT>>.
+
 [[COG_SLACK_ENABLED]]`COG_SLACK_ENABLED`::
 Enabled the Slack chat adapter for integration with Slack. You **MUST** specify **ONE** and only **ONE** chat adapter for Cog.
 +
@@ -144,14 +175,23 @@ Triggers have a configurable timeout, but it is defined from the HTTP requestor'
 +
 Defaults to `2` seconds.
 
+[[COG_TRIGGER_URL_BASE]]`COG_TRIGGER_URL_BASE`::
+Controls the prefix of URLs generated for triggers. URLs may contain a scheme (either `http` or `https`), a host, an optional port (defaulting to `80` for `http` and `443` for `https`), and an optional path.
++
+See also <<COG_API_URL_BASE>> and <<COG_SERVICE_URL_BASE>>.
+
 [[COG_TRIGGER_URL_HOST]]`COG_TRIGGER_URL_HOST`::
+*DEPRECATED* Use <<COG_TRIGGER_URL_BASE>> instead!
++
 Host to be used in generated trigger invocation URLs. This should be a DNS name or IP address at which Cog can be reached externally.
 +
 Defaults to `localhost`.
 +
-See <<COG_API_URL_HOST>> also; these two are usually set to the same value, but need not be.
+See <<COG_API_URL_HOST>> and <<COG_SERVICE_URL_HOST>> also; these are all usually set to the same value, but need not be.
 
 [[COG_TRIGGER_URL_PORT]]`COG_TRIGGER_URL_PORT`::
+*DEPRECATED* Use <<COG_TRIGGER_URL_BASE>> instead!
++
 Port to be used in generated trigger invocation URLs. This should be where Cog can be reached externally.
 +
 Defaults to `4001`.
