@@ -120,7 +120,7 @@ to start a new shell on the Cog container. You'll need to run all future
 
 [source,bash]
 ----
-docker exec -it $(docker-compose ps -q cog) bash
+docker-compose exec cog bash
 ----
 
 Great now let's create you a new Cog user and associate that user with your
