@@ -107,12 +107,22 @@ include::code/pure_ruby/tweet.rb[]
 <3> Here, we actually send the message to Twitter.
 <4> Finally, we'll return some information to standard output so we can find out the URL of our new tweet. There is other information we could add (like timestamp, tweet ID, etc.), but for now, we'll keep it simple.
 
-It's not a lot of code, and we can run it directly from our terminal, as seen in <<execute-pure-ruby-tweet>>.
+To make life easier, let's create a `Gemfile` in our directory to manage our dependencies. We'll also use this later when we package our bundle up.
+
+[[twitter-gemfile]]
+[source, ruby,linenums]
+.Twitter Bundle Gemfile
+----
+include::code/pure_ruby/Gemfile[]
+----
+
+As you can see, it's not a lot of code, and we can run it directly from our terminal, as seen in <<execute-pure-ruby-tweet>>.
 
 [[execute-pure-ruby-tweet]]
 .Executing the Pure Ruby `tweet` Command
 ----
-$ export TWITTER_CONSUMER_KEY=XXXX # <1>
+$ bundle install # <1>
+$ export TWITTER_CONSUMER_KEY=XXXX # <2>
 $ export TWITTER_CONSUMER_SECRET=XXXX
 $ export TWITTER_ACCESS_TOKEN=XXXX
 $ export TWITTER_ACCESS_TOKEN_SECRET=XXXX
@@ -120,7 +130,8 @@ $ ./tweet.rb This is an interesting tweet
 Message: This is an interesting tweet
 URL:     https://twitter.com/CogTesting/status/776507696396791809
 ----
-<1> Substiting the appropriate values for our real credentials, of course.
+<1> We only need to install our dependencies once once.
+<2> Substiting the appropriate values for our real credentials, of course.
 
 By checking that URL, we can further verify that our command worked.
 
@@ -716,7 +727,7 @@ commands:
     executable: /Users/chris/cog-book/tweet_cog_wrapper.sh
     arguments: "<message>"
     rules:
-      - when command is twitter_example:tweet must have twitter_example:tweet # <3>
+      - must have twitter_example:tweet # <3>
 templates:
   tweet:
     body: |
@@ -757,8 +768,14 @@ and commands that are unrestricted (i.e., have a rule of `allow`).
 
 // TODO: How much do we want to talk about groups, roles, and permissions here?
 
-After granting myself the permission (I am an administrator on my own
-system!), I'm once again able to tweet.
+After granting myself the permission (I am an administrator on my own system):
+
+.Granting Permissions
+----
+@cog permission grant twitter_example:tweet cog-admin
+----
+
+I'm once again able to tweet.
 
 .Permission Granted
 image::images/tweet_permission_granted.png[]
@@ -829,7 +846,7 @@ commands:
     executable: /Users/chris/cog-book/tweet_cog_wrapper.sh
     arguments: "<message>"
     rules:
-      - when command is twitter_example:tweet must have twitter_example:tweet
+      - must have twitter_example:tweet
     options: # <2>
       as:
         description: the account to tweet from
