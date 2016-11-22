@@ -58,6 +58,9 @@ include::src/installing_your_first_command_bundle/text.adoc[]
 include::src/developing_a_trigger/text.adoc[]
 
 
+include::src/cog_architecture/text.adoc[]
+
+
 include::src/redirecting_pipeline_output/text.adoc[]
 
 include::src/triggers/text.adoc[]
