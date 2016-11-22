@@ -8,15 +8,53 @@ Powerful access control means you can collaborate around even the most sensitive
 
 Cog is under heavy development and getting smarter all the time. This list of features gives you an idea of how Cog was built as well as the things that Cog knows how to do.
 
-////
-[block:html]
-{
-  "html": "<div>\n<table>\n  <tr>\n    <td>\n        <img src=\"http://www.operable.io/assets/img/icons/feature_icons_extensibility.png\" class=\"center\">\n      <h2 style=\"text-align:center;\">Extensibility</h2>\n      <p><ul>\n        <li>Build new bot commands in any language</li>\n        <li>Commands return structured data to allow for creative adaptation in pipelines</li>\n  \t\t\t<li>Built in templating allows the command response to be formatted for the current chat provider without embedding markup in your logic</li>\n      </ul></p>\n    </td>\n<td>\n  <img src=\"http://www.operable.io/assets/img/icons/feature_icons_adaptability.png\" class=\"center\">\n  <h2 style=\"text-align:center;\">Adaptability</h2>\n      <p><ul>\n        <li>Unix-style pipelines allow you to combine a series of simple commands to solve complex, unexpected problems</li>\n        <li>Support for output redirection lets you make sure everyone is in the loop</li>\n      </ul></p>\n    </td>\n</tr>\n  <tr>\n    <td>\n        <img src=\"http://www.operable.io/assets/img/icons/feature_icons_security.png\" class=\"center\">\n      <h2 style=\"text-align:center;\">Security</h2>\n      <p><ul>\n        <li>Fine-grained command permissions give you confidence in using chatops for even the most sensitive workflows</li>\n        <li>Users, Groups, and Roles allow you to organize access control for ease of management</li>\n  \t\t\t<li>Audit logging for commands and administrative functions let you keep track of everything that happens with Cog</li>\n      </ul></p>\n    </td>\n<td>\n  <img src=\"http://www.operable.io/assets/img/icons/feature_icons_chatagnostic.png\" class=\"center\">\n  <h2 style=\"text-align:center;\">Chat-provider agnostic</h2>\n      <p><ul>\n        <li>Current support for Slack</li>\n        <li>HipChat adapter in progress</li>\n \t\t\t\t<li>...other chat clients are on the roadmap!</li>\n      </ul></p>\n    </td>\n</tr>\n</div>\n<style>\nIMG.center {\n    display: block;\n    margin-left: auto;\n    margin-right: auto }\n</style>"
-}
-[/block]
-////
+---
+image::images/extensible.svg[Extensible,200,200,float="left"]
+[discrete]
+== Extensibility
 
-Keep up to date on all things Cog by following https://twitter.com/operableinc[@OperableInc] on Twitter. Also, contact us at anytime via info@operable.io.
+Build new bot commands in any language
+
+Commands return structured data to allow for creative adaptation in pipelines
+
+Built in templating allows the command response to be formatted for the current chat provider without embedding markup in your logic
+---
+
+---
+image::images/adaptability.svg[Adaptable,200,200,float="left"]
+[discrete]
+== Adaptability
+
+Unix-style pipelines allow you to combine a series of simple commands to solve complex, unexpected problems
+
+Support for output redirection lets you make sure everyone is in the loop
+---
+
+---
+image::images/security.svg[Secure,200,200,float="left"]
+[discrete]
+== Security
+
+Fine-grained command permissions give you confidence in using chatops for even the most sensitive workflows
+
+Users, Groups, and Roles allow you to organize access control for ease of management
+
+Audit logging for commands and administrative functions keep track of everything that happens with Cog
+
+---
+image::images/chat-provider_agnostic.svg[Chat-Agnostic,200,200,float="left"]
+[discrete]
+== Chat-Provider Agnostic
+
+Current support for Slack and Hipchat
+
+...other chat clients are on the roadmap!
+
+---
+
+
+
+Keep up to date on all things Cog by following icon:twitter[] https://twitter.com/operableinc[@OperableInc] on Twitter. Also, contact us at anytime via info@operable.io.
 
 **Current version:** (https://github.com/operable/cog/releases[Changelog])
 

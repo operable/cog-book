@@ -9,7 +9,7 @@
 :stylesheet: stylesheets/cog.css
 
 :google-analytics-account: UA-61670076-4
-:listing-caption: Listing
+//:listing-caption: Listing
 :figure-caption: Figure
 
 = The Cog Book
@@ -49,6 +49,28 @@ include::src/dynamic_command_configuration/text.adoc[]
 
 include::src/returning_data_from_cog/text.adoc[]
 
+include::src/services/text.adoc[]
+
+include::src/templates/text.adoc[]
+
+include::src/installing_your_first_command_bundle/text.adoc[]
+
+include::src/developing_a_trigger/text.adoc[]
+
+
+include::src/cog_architecture/text.adoc[]
+
+include::src/command_pipelines/text.adoc[]
+
+include::src/redirecting_pipeline_output/text.adoc[]
+
+include::src/triggers/text.adoc[]
+
+include::src/user_management/text.adoc[]
+
+include::src/useful_issue_searches/text.adoc[]
+
+include::src/contributor_license_agreement/text.adoc[]
 
 = Reference
 
