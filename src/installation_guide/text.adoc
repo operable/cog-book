@@ -69,6 +69,15 @@ https://my.slack.com/services/new/bot[New Bot Integration Page], create a new
 bot, and copy the newly generated token; it should look something like
 `xoxb-87931061512-4m0DshC79h8tLNjTMuxxozUo`.
 
+You'll also need to export a `COG_HOST` variable. This is not a proper https://cog-book.operable.io/#_cog_server_configuration[Cog Server Configuration], but one specifically for use with this `docker-compose` example. This is the host that the Cog API will be made available at. Set this to point to your Docker host. If you're using https://docs.docker.com/machine/[docker-machine for example], this would suffice:
+
+.Export Environment Variables
+[source,bash]
+----
+export SLACK_API_TOKEN=<your_token>
+export COG_HOST=$(docker-machine ip default)
+----
+
 Now it's time to run `docker-compose`. From the same directory containing the
 `docker-compose.yml`, run the following with the bot token you just generated.
 
