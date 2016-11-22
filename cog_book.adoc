@@ -7,6 +7,7 @@
 :sectanchors:
 :doctype: book
 :stylesheet: stylesheets/cog.css
+:docinfo:
 
 :google-analytics-account: UA-61670076-4
 //:listing-caption: Listing
@@ -58,9 +59,19 @@ include::src/installing_your_first_command_bundle/text.adoc[]
 include::src/developing_a_trigger/text.adoc[]
 
 
+include::src/cog_architecture/text.adoc[]
+
+include::src/command_pipelines/text.adoc[]
+
 include::src/redirecting_pipeline_output/text.adoc[]
 
 include::src/triggers/text.adoc[]
+
+include::src/user_management/text.adoc[]
+
+include::src/useful_issue_searches/text.adoc[]
+
+include::src/contributor_license_agreement/text.adoc[]
 
 = Reference
 
