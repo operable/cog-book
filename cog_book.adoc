@@ -60,6 +60,7 @@ include::src/developing_a_trigger/text.adoc[]
 
 include::src/cog_architecture/text.adoc[]
 
+include::src/command_pipelines/text.adoc[]
 
 include::src/redirecting_pipeline_output/text.adoc[]
 
