@@ -66,6 +66,8 @@ include::src/redirecting_pipeline_output/text.adoc[]
 
 include::src/triggers/text.adoc[]
 
+include::src/user_management/text.adoc[]
+
 = Reference
 
 [partintro]
