@@ -261,6 +261,7 @@ Download the source in your `$GOPATH` and build it.
 ----
 mkdir -p $GOPATH/src/github.com/operable
 git clone git@github.com:operable/go-relay.git $GOPATH/src/github.com/operable
+cd $GOPATH/src/github.com/operable/go-relay
 make
 ----
 
@@ -269,24 +270,26 @@ a mintue.
 
 Now, to build Cog. Cog is written in Elixir, which means you'll need to install
 both Erlang 18+ and Elixir 1.3+. You can find more information about how to
-install Elixir on their http://elixir-lang.org/install.html[installation
-guide]. Once you have Elixir installed run the following to download deps,
-setup the database, compile and run Cog.
+install Elixir on their http://elixir-lang.org/install.html[installation guide].
+Once you have Elixir installed run the following to clone the Cog repo,
+download deps, setup the database, compile and run Cog.
 
 [source,bash]
 ----
+git clone git@github.com:operable/cog.git
+cd cog
 make setup run
 ----
 
-You'll notice that crashed since we didn't provide a `SLACK_API_TOKEN`
-environment variable. To fully configure Cog and Relay we'll need to set a few
-environment variables. If you need more customization than is explained in this
-guide checkout the full listing of environment variables and their descriptions
-for both <<Cog Server Configuration>> and <<Relay Configuration>>.
+You'll notice that the `run` target crashed as we didn't provide a
+`SLACK_API_TOKEN` environment variable. To fully configure Cog and Relay we'll
+need to set a few environment variables. If you need more customization than is
+explained in this guide checkout the full listing of environment variables and
+their descriptions for both <<Cog Server Configuration>> and <<Relay Configuration>>.
 
 For now let's just provide the minimum to get things up and running. For Cog,
 we'll just need to set `COG_SLACK_ENABLED` and `SLACK_API_TOKEN` as everything
-else has a sensible default.  You can get a `SLACK_API_TOKEN` for your bot by
+else has a sensible default. You can get a `SLACK_API_TOKEN` for your bot by
 creating a https://my.slack.com/services/new/bot[new bot integration]. So let's
 try running Cog again, now with our token exported.
 
