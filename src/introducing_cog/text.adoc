@@ -18,7 +18,7 @@ Build new bot commands in any language
 Commands return structured data to allow for creative adaptation in pipelines
 
 Built in templating allows the command response to be formatted for the current chat provider without embedding markup in your logic
----
+
 
 ---
 image::images/adaptability.svg[Adaptable,200,200,float="left"]
@@ -28,7 +28,7 @@ image::images/adaptability.svg[Adaptable,200,200,float="left"]
 Unix-style pipelines allow you to combine a series of simple commands to solve complex, unexpected problems
 
 Support for output redirection lets you make sure everyone is in the loop
----
+
 
 ---
 image::images/security.svg[Secure,200,200,float="left"]
@@ -63,10 +63,11 @@ Keep up to date on all things Cog by following icon:twitter[] https://twitter.co
 == Get Started
 Here are a few things you will need to do first.
 
-. Join our http://slack.operable.io/[Cog Public Chat] to chat with the Operable team and the Cog community. This is the best place to get realtime help.
+. Join our http://slack.operable.io/[Slack Cog Public Chat] to chat with the Operable team and the Cog community. This is the best place to get realtime help.
 . Head over to the <<Installation Guide>> and start installing Cog. Have questions? Ask us!
 . Once installed, make Cog do something. Read up on <<Commands and Bundles>>
 . Do you want to expand Cog's command capabilities? Easy, start <<Building Command Bundles>>.
+. Looking for Enterprise solutions like a fully integrated Cog, dedicated support, or consultation by our team? Read more on our http://operable.io/enterprise.html[Enterprise page]. 
 
 === Communication
 Let's set expectations. If you have a question, concern, idea, helpful hint, or want to tell us that you are hungry, we are listening. Please be as candid with us as possible. You can't hurt our feelings...too much. So that we can communicate as easily as possible we have several channels that you can use at anytime.
