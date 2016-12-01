@@ -46,3 +46,4 @@
 * Bias toward returning data verbosely and filtering what the user is presented with at the template level. This allows maximum flexibility to work with the returned data in ways that the author did not expect.
 * Templates should focus on providing the simplest possible output that returns the most commonly needed data.
 * Only accumulate output when you absolutely must. Prefer stateless commands  over stateful streaming commands.
+
