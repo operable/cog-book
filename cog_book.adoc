@@ -110,6 +110,7 @@ include::src/reference/greenbar_tags.adoc[]
 = Appendices
 
 include::src/appendices/designing_for_chatops.adoc[]
+include::src/appendices/chat_platforms.adoc[]
 
 [colophon]
 = Colophon

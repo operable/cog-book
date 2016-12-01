@@ -144,7 +144,7 @@ Controls whether or not Relay pulls dynamic configuration for installed command 
 +
 If set to true, Relay will retrieve dynamic configuration files from the Cog server, instead of relying on files placed on the Relay host itself. Configuration changes can be submitted to Cog via the API, and will be picked up by Relay when it checks in periodically. See <<RELAY_MANAGED_DYNAMIC_CONFIG_INTERVAL>>.
 +
-Defaults to `false`.
+Defaults to `true`.
 
 [[RELAY_DYNAMIC_CONFIG_ROOT]]`RELAY_DYNAMIC_CONFIG_ROOT`::
 File path used to store dynamic bundle configuration files. A missing or empty value disables this feature. Nonexistent paths will be created on first use.
