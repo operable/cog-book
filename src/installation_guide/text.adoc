@@ -69,6 +69,9 @@ https://my.slack.com/services/new/bot[New Bot Integration Page], create a new
 bot, and copy the newly generated token; it should look something like
 `xoxb-87931061512-4m0DshC79h8tLNjTMuxxozUo`.
 
+While you are over in Slack making your bot, add a cute Cog avatar too. Find a Cog avatar and other Cog branded goodies in the https://drive.google.com/open?id=0B9shLHjT25r-SkhqSTU2MG05dG8[Operable + Cog Brand Folder]
+
+
 You'll also need to export a `COG_HOST` variable. This is not a proper https://cog-book.operable.io/#_cog_server_configuration[Cog Server Configuration], but one specifically for use with this `docker-compose` example. This is the host that the Cog API will be made available at. Set this to point to your Docker host. If you're using https://docs.docker.com/machine/[docker-machine for example], this would suffice:
 
 .Export Environment Variables
