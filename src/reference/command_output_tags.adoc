@@ -1,0 +1,37 @@
+== Command Output Tags
+
+Commands can print tags to stdout to communicate with Cog. To use one, print it
+to stdout at the beginning of a newline before returning your actual response.
+
+[[COGCMD_ACTION]]`COGCMD_ACTION`::
+Currently only used to abort a command by printing `COGCMD_ACTION: abort`.
+Aborting a command is different from returning a non-zero exit code. When a
+command is aborted, the pipeline will stop executing and anything printed to
+stdout will be returned verbatim as a response in chat. The error template will
+not be rendered. This is mostly useful for providing concise error messages,
+such as validation errors, while non-zero exit codes are better suited for
+unexpected error conditions.
+
+[[COG_TEMPLATE]]`COG_TEMPLATE`::
+Renders the response with the template provided. For example, if your bundle
+includes a template named "instance-list" you would output `COG_TEMPLATE:
+instance-list` before outputting your response.  You'll also need to use the
+JSON tag for the template to be applied.
+
+[[JSON]]`JSON`::
+Parses the following response as JSON. Must be printed on a new line, by
+itself, directly before your command's output. If not provided all non-tag
+output is assumed to be raw text.
+
+[[COGCMD_DEBUG]]`COGCMD_DEBUG`::
+Prints a log message to Relay with the log level set to DEBUG.
+
+[[COGCMD_INFO]]`COGCMD_INFO`::
+Prints a log message to Relay with the log level set to INFO.
+
+[[COGCMD_WARN]]`COGCMD_WARN`::
+Prints a log message to Relay with the log level set to WARN.
+
+[[COGCMD_ERR]]`COGCMD_ERR`::
+[[COGCMD_ERROR]]`COGCMD_ERROR`::
+Prints a log message to Relay with the log level set to ERROR.
