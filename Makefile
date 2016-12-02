@@ -23,6 +23,7 @@ release: html5 pdf
 	cp -r stylesheets _release/.
 	cp -r sass _release/.
 	cp *.css _release/.
+	cp favicon.ico _release/.
 	cp $(basename $(ROOT_FILE)).pdf _release/.
 	cp $(basename $(ROOT_FILE)).html _release/.
 
