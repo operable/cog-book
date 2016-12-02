@@ -86,7 +86,7 @@ Now it's time to run `docker-compose`. From the same directory containing the
 
 [source,bash]
 ----
-export SLACK_API_TOKEN=xoxb-87931061512-4m0DshC79h8tLNjTMuxxozUo
+export SLACK_API_TOKEN=xoxb-87931061512-notarealtokentLNjTMuxxozUo
 docker-compose up
 ----
 
@@ -214,8 +214,8 @@ configured it yet. Let's set our api token with `cogctl`.
 
 [source,bash]
 ----
-echo 'AWS_ACCESS_KEY_ID: "AKIBU34Z8KYDVRZKWRTQ"' >> config.yaml
-echo 'AWS_SECRET_ACCESS_KEY: "YQ7h84BCvE4fJhT1TdOzOgO8zpAIbulblb6MCHkO"' >> config.yaml
+echo 'AWS_ACCESS_KEY_ID: "AKIBU34ZNOTAREALTOKENQ"' >> config.yaml
+echo 'AWS_SECRET_ACCESS_KEY: "YQ7h84BCvE4fJnotarealtokenO8zpAIbulblb6MCHkO"' >> config.yaml
 echo 'AWS_REGION: "us-east-1"' >> config.yaml
 cogctl dynamic-config create ec2 config.yaml
 ----
@@ -299,7 +299,7 @@ try running Cog again, now with our token exported.
 [source,bash]
 ----
 export COG_SLACK_ENABLED=true
-export SLACK_API_TOKEN=xoxb-87931061512-4m0DshC79h8tLNjTMuxxozUo
+export SLACK_API_TOKEN=xoxb-87931061512-notarealtokenLNjTMuxxozUo
 make run
 ----
 
@@ -425,9 +425,9 @@ user without the `@` prefix.
 
 [source,bash]
 ----
-export HIPCHAT_API_TOKEN=0bnYC58p5UL0OvNy7uWP8TxMfzPhtheRl2DkoNZ6
-export HIPCHAT_JABBER_ID=479543_3152608@chat.hipchat.com
-export HIPCHAT_JABBER_PASSWORD=hG3CQBdyFm2wJR
+export HIPCHAT_API_TOKEN=0bnYC5notarealtokenP8TxMfzPhtheRl2DkoNZ6
+export HIPCHAT_JABBER_ID=479543_0000000@chat.hipchat.com
+export HIPCHAT_JABBER_PASSWORD=sekr3t
 export HIPCHAT_NICKNAME=cog
 docker-compose up
 ----
