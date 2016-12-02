@@ -153,7 +153,7 @@ NOTE: <<Installing and Managing Relays>> +
 
 While manually-managed dynamic configuration is simple, it can be cumbersome if you run multiple Relays, or do not have filesystem access to your Relay (as is the case with https://cog.operable.io[Hosted Cog]). In this case, you can submit your dynamic configuration layer files to Cog and it will distribute the values to your Relays as appropriate.
 
-To enable this mode of operation, your Relay(s) will need to be configured using the <<RELAY_MANAGED_DYNAMIC_CONFIG>> option. Managed Relays check in with their Cog server periodically (every 5 seconds by default; see <<RELAY_MANAGED_DYNAMIC_CONFIG_INTERVAL>>) to refresh their configuration data.
+By default your Relay(s) already supports managed dynamic config, but you can always disable it by setting <RELAY_MANAGED_DYNAMIC_CONFIG>> to `false`. Managed Relays check in with their Cog server periodically (every 5 seconds by default; see <<RELAY_MANAGED_DYNAMIC_CONFIG_INTERVAL>>) to refresh their configuration data.
 
 .Managed Mode is Enabled on Relays, Not on Cog
 NOTE: Currently, managed configuration mode requires each individual Relay to be configured as such; it is not a centrally-enabled option. Future versions of Cog and Relay may change this.

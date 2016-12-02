@@ -312,7 +312,6 @@ exporting those variables we can run the run the binary we previously built.
 export RELAY_ID=`uuid` && echo $RELAY_ID
 export RELAY_COG_TOKEN=`openssl rand -hex 12` && echo $RELAY_COG_TOKEN
 export RELAY_DYNAMIC_CONFIG_ROOT=/tmp/dynamic_configs
-export RELAY_MANAGED_DYNAMIC_CONFIG=true
 _build/relay
 ----
 
