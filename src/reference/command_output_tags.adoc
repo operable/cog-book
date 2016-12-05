@@ -2,6 +2,50 @@
 
 Commands can print tags to stdout to communicate with Cog. To use one, print it
 to stdout at the beginning of a newline before returning your actual response.
+If you're not returning JSON output (by using the JSON tag), you may
+intersperse tags in along with lines of output if necessary.
+
+=== Examples
+
+Output from a command that includes a debug statement, template selection, and
+JSON response. The debug statement will be printed in the logs of the Relay it
+ran on, while the JSON output will be rendered in template specified and sent
+to chat.
+
+----
+COGCMD_DEBUG: Requst took 53ms to complete
+COG_TEMPLATE: instances
+JSON
+[
+  {
+    "instance_id": "i-1984f3",
+    "instance_type: "t2.micro"
+  },
+  {
+    "instance_id": "i-2a7b11",
+    "instance_type: "t2.small"
+  }
+]
+----
+
+Output from a command in freeform text which also includes two info statements
+and also uses a template. The info statement will be printend in the logs of
+the Relay it ran on, while the text output will be rendered in the template
+specified and sent to chat. Even though tags were interspersed in the text
+output, each line that does not start with a tag, will be combined to form a
+single string, newlines included. That string will then be turned into a JSON
+object and set as the value of the `body` attribute. This JSON can then be used
+to render a template if provided.
+
+----
+INSTANCE_ID  INSTANCE_TYPE
+COGCMD_INFO: 2 instances returned
+i-1984f3     t2.micro
+i-2a7b11     t2.small
+COG_TEMPLATE: monospace
+----
+
+=== Tags
 
 [[COGCMD_ACTION]]`COGCMD_ACTION`::
 Currently only used to abort a command by printing `COGCMD_ACTION: abort`.
@@ -15,13 +59,15 @@ unexpected error conditions.
 [[COG_TEMPLATE]]`COG_TEMPLATE`::
 Renders the response with the template provided. For example, if your bundle
 includes a template named "instance-list" you would output `COG_TEMPLATE:
-instance-list` before outputting your response.  You'll also need to use the
-JSON tag for the template to be applied.
+instance-list` before outputting your response. If not used with JSON output
+expect the raw text output from your command to be available in the `$body`
+attribute of the first item of `$results` in the template.
 
 [[JSON]]`JSON`::
 Parses the following response as JSON. Must be printed on a new line, by
 itself, directly before your command's output. If not provided all non-tag
-output is assumed to be raw text.
+output is assumed to be raw text. Anything printed after this tag will be
+parsed as JSON, so you may not include any other tags after this one.
 
 [[COGCMD_DEBUG]]`COGCMD_DEBUG`::
 Prints a log message to Relay with the log level set to DEBUG.
