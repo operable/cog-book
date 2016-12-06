@@ -93,6 +93,8 @@ include::src/reference/cog_server_configuration.adoc[]
 
 include::src/reference/relay_configuration.adoc[]
 
+include::src/reference/command_output_tags.adoc[]
+
 include::src/reference/greenbar_tags.adoc[]
 
 // == Command Environment
