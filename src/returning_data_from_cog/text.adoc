@@ -40,3 +40,5 @@ would tell cog to render the 'foo_template' with the json '{"foo":"bar"}'.
 Additionally there are several other output markers for logging to the relay console. Log messages have the prefix `COGCMD_` followed by the log level. Available log levels are: `DEBUG`, `INFO`, `WARN`, `ERR`. For example, if we wanted to log an error to the console we would just print, `COGCMD_ERR: And error has occured` from our command.
 
 NOTE: Note that log messages may be interleaved with other output. So you could for example `puts("some text\nCOGCMD_DEBUG: A debug statement\n some more text")` and Cog will happily print "some text some more text" to the user while logging, "A debug statement".
+
+For the full reference of output tags see <<Command Output Tags>>.
