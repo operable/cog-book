@@ -1,0 +1,52 @@
+== How Chat Adapters Work
+
+To support connecting to both Slack and HipChat, Cog needed a common interface
+for chat traffic. So, we build a chat adapter interface that provides a uniform
+way to do send and receive messages, lookup rooms, lookup users, and receive
+other events. To be more specific, Cog expects adapters to implement the
+`Cog.Chat.Provider` behavior that respond to a set of function calls sent by
+the main adapter process. That means to write an adapter you'll have to be
+familiar enough with Elixir to write a module and potentially write a GenServer
+and add it to the supervision tree. Aside from the mechanics of how messages
+are sent and received, Cog also needs to know how to convert greenbar templates
+into a format each chat provider expects. For this, we need a template
+renderer that converts each greenbar directive into raw text that can be
+parsed by the chat provider (for instance before sending messages to HipChat we
+convert greenbar directives into HTML).
+
+NOTE: Implementing chat adapters is not currently ideal for external users as
+it requires modifying Cog's source code. This guide is mostly a reference for
+potential contributors building a chat adapter intended to be included with Cog
+in the future.
+
+=== Chat Provider
+
+To implement a working provider you'll need to implement the
+https://github.com/operable/cog/blob/master/lib/cog/chat/provider.ex[`Cog.Chat.Provider`]
+behavior which defines callbacks called by `Cog.Chat.Adapter`. You can see all
+the callbacks necessary for a full implementation. Also, as mentioned earlier,
+you'll probably need to implement a GenServer as well for storing connection
+state. See the
+https://github.com/operable/cog/blob/master/lib/cog/chat/slack/provider.exi[Slack
+implementation] for a good example of how this works.
+
+=== Template Renderer
+
+Cog uses greenbar templates to provide a unified templating language for all
+chat providers regardless of what formats they expect your messages to be in
+(for instance Slack accepts Markdown, while Hipchat accepts HTML). To
+correctly render templates into a format each chat provider understands we use
+a template renderer, which will convert maps like `%{"name" => "bold", "text"
+=> text}` to a string. For a list of each greenbar directive you'll need to be
+able to convert and an example of how these template renderer should be
+implemented, look at the
+https://github.com/operable/greenbar/blob/master/lib/greenbar/renderers/slack.ex[slack
+template renderer in Greenbar].
+
+To use the renderer you'll need to manually call it in your `send_message`
+callback before pushing the message to the chat service.
+
+NOTE: If you want to include your template renderer with Greenbar, you'll need
+to fork Greenbar, add your change, and update the `greenbar` dep in Cog's
+`mix.exs` file before recompiling.
+

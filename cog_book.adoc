@@ -97,6 +97,8 @@ include::src/reference/command_output_tags.adoc[]
 
 include::src/reference/greenbar_tags.adoc[]
 
+include::src/reference/chat_adapter_interface.adoc[]
+
 // == Command Environment
 // placeholder
 
