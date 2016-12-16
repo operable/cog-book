@@ -130,8 +130,8 @@ $ ./tweet.rb This is an interesting tweet
 Message: This is an interesting tweet
 URL:     https://twitter.com/CogTesting/status/776507696396791809
 ----
-<1> We only need to install our dependencies once once.
-<2> Substiting the appropriate values for our real credentials, of course.
+<1> We only need to install our dependencies once.
+<2> Substituting the appropriate values for our real credentials, of course.
 
 By checking that URL, we can further verify that our command worked.
 
