@@ -1,8 +1,9 @@
-IMAGE_NAME=operable/cog-book-toolchain:latest
-MOUNT=/home/asciidoc
-ROOT_FILE=cog_book.adoc
+IMAGE_NAME = operable/cog-book-toolchain:latest
+MOUNT = /home/asciidoc
+ROOT_FILE = cog_book.adoc
+STYLESHEET_PREFIX ?= ./stylesheets
 
-ASCIIDOC_OPTS     := -r ./lib/google-analytics-postprocessor.rb --require asciidoctor-pdf --doctype=book --attribute stylesheet=stylesheets/cog.css
+ASCIIDOC_OPTS := -r ./lib/google-analytics-postprocessor.rb --require asciidoctor-pdf --doctype=book --attribute "stylesdir=${STYLESHEET_PREFIX}" --attribute stylesheet=cog.css
 build = docker run -it -u $(shell id -u) -v $(shell pwd):$(MOUNT) --rm $(IMAGE_NAME) asciidoctor $(ASCIIDOC_OPTS) --backend=$1 $(MOUNT)/$(ROOT_FILE) | bin/fail_on_warnings.sh
 
 image: Dockerfile
@@ -22,7 +23,6 @@ release: html5 pdf
 	cp -r images _release/.
 	cp -r stylesheets _release/.
 	cp -r sass _release/.
-	cp *.css _release/.
 	cp favicon.ico _release/.
 	cp $(basename $(ROOT_FILE)).pdf _release/.
 	cp $(basename $(ROOT_FILE)).html _release/.

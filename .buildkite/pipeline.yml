@@ -14,5 +14,7 @@ steps:
   - command: "make upload"
     label: "Publish!"
     branches: "release"
+    env:
+      STYLESHEET_PREFIX=https://cog-book.operable.io/stylesheets
     agents:
       - docker=1.12.1
