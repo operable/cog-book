@@ -1,4 +1,4 @@
-IMAGE_NAME=operable/cog-book-toolchain:latest
+IMAGE_NAME=operable/cog-book-toolchain:asciidoc
 MOUNT=/home/asciidoc
 ROOT_FILE=cog_book.adoc
 
@@ -17,18 +17,21 @@ pdf: $(ROOT_FILE)
 shell:
 	docker run -it -u root -v $(shell pwd):$(MOUNT) --rm $(IMAGE_NAME) sh
 
-release: html5 pdf
-	mkdir -p _release
-	cp -r images _release/.
-	cp -r stylesheets _release/.
-	cp -r sass _release/.
-	cp *.css _release/.
-	cp favicon.ico _release/.
-	cp $(basename $(ROOT_FILE)).pdf _release/.
-	cp $(basename $(ROOT_FILE)).html _release/.
+ad-shell:
+	docker run -it -u asciidoc -v $(shell pwd):$(MOUNT) --rm $(IMAGE_NAME) /bin/bash
 
-upload: release
-	aws s3 cp --recursive _release/ s3://cog-book-origin.operable.io/
+# release: html5 pdf
+#	mkdir -p _release
+#   cp -r images _release/.
+#	cp -r stylesheets _release/.
+#	cp -r sass _release/.
+#	cp *.css _release/.
+#	cp favicon.ico _release/.
+#	cp $(basename $(ROOT_FILE)).pdf _release/.
+#	cp $(basename $(ROOT_FILE)).html _release/.
+
+# upload: release
+#	aws s3 cp --recursive _release/ s3://cog-book-origin.operable.io/
 
 all: html5 pdf
 

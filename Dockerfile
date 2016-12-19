@@ -1,10 +1,11 @@
 FROM alpine:3.4
 
-RUN apk --no-cache add ruby asciidoctor ruby-dev build-base python ca-certificates
-RUN gem install asciidoctor --no-rdoc --no-ri && \
-    gem install asciidoctor-pdf --pre --no-rdoc --no-ri && \
-    gem install pygments.rb --no-rdoc --no-ri
+RUN apk --no-cache -U add asciidoc asciidoc-doc mdocml-apropos \
+          man-pages build-base ca-certificates bash util-linux
 
-RUN adduser -D asciidoc
+RUN adduser -s /bin/bash -D asciidoc
 USER asciidoc
 WORKDIR /home/asciidoc
+
+# Need this so 'man foo' works
+RUN echo "export PAGER=less" >> /home/asciidoc/.bashrc
