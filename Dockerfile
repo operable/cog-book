@@ -1,7 +1,8 @@
 FROM alpine:3.4
 
 RUN apk --no-cache -U add asciidoc asciidoc-doc mdocml-apropos \
-          man-pages build-base ca-certificates bash util-linux
+          man-pages build-base ca-certificates bash util-linux \
+          py-pygments
 
 RUN adduser -s /bin/bash -D asciidoc
 USER asciidoc
