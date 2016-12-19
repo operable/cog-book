@@ -13,8 +13,8 @@ on your own. In this guide, we'll walk you through:
 If you don't want to use Docker Compose to install Cog or you want to connect
 to HipChat instead of Slack, take a look at the alternative sections below:
 
-  * <<Building and Running Cog from Scratch>>
-  * <<Connecting Cog to HipChat>>
+  * <<Building_and_Running_Cog_from_Scratch,Building And Running Cog from Scratch>>
+  * <<Connecting_Cog_to_HipChat,Connecting Cog to HipChat>>
 
 NOTE: If you have any trouble during this guide or just want to ask a question,
 head on over to the http://slack.operable.io[Cog Public Slack channel] to get
@@ -27,7 +27,7 @@ We've provided a set of docker-compose files for running and configuring Cog:
 `docker-compose.override.slack_example.yml` for running and configuring Cog. To
 run the images specified in the `docker-compose.yml` you'll need to have both
 Docker and Docker Compose installed. If you'd rather manually build and install
-Cog, skip down to the next section titled, <<Building and Running Cog from Scratch>>.
+Cog, skip down to the next section titled, <<Building_and_Running_Cog_from_Scratch,Building And Running Cog from Scratch>>.
 
 First, make sure you have Docker and Docker Compose installed. If you haven't
 installed Docker, we recommend using
@@ -41,7 +41,7 @@ Next, we'll need to grab the `docker-compose.yml`, `docker-compose.common.yml`
 and `docker-compose.override.slack_example.yml` files from the Cog repo.
 
 If you'd rather connect Cog to HipChat, skip down to the section titled
-<<Connecting Cog to HipChat>>.
+<<Connecting_Cog_to_HipChat,Connecting Cog to HipChat>>.
 
 [source,bash]
 ----
@@ -94,7 +94,6 @@ You should see Docker downloading and starting images for Cog, Relay and a
 database. This might take a while, but once it's done starting up and has
 connected you should start seeing logs like the following:
 
-[source]
 ----
 cog_1       | 2016-10-07T00:38:51.0504  (Cog.BusEnforcer:60) [info] Allowed connection for Relay 00000000-0000-0000-0000-000000000000
 ----
@@ -103,14 +102,12 @@ For the last step, let's check and see if our bot is available in the chat
 room. Open up Slack and try the following command. Keep in mind that you'll
 have to invite the bot to whatever room you first message it from.
 
-[source,slack]
 ----
 @cog help
 ----
 
 You should see a response like this:
 
-[source,slack]
 ----
 @vanstee: I'm terribly sorry, but either I don't have a Cog account for you, or your Slack chat handle has not been registered. Currently, only registered users can interact with me.
 
@@ -190,7 +187,7 @@ https://bundles.operable.io[bundle registry]. So, let's install one by running
 a chat command.
 
 ---
-image::images/max.png[Max,50,50,float="left"]
+image:images/max.png[Max,width=50,height=50,float="left"]
 *Max Headroom* 10:52PM +
 @cog bundle install ec2
 
@@ -202,7 +199,7 @@ to enable it, tell our Relay that it can run commands from this bundle, and
 configure it with credentials.
 
 ---
-image::images/max.png[Max,50,50,float="left"]
+image:images/max.png[Max,width=50,height=50,float="left"]
 *Max Headroom* 10:52PM +
 @cog bundle enable ec2 +
 @cog relay-group member assign default ec2
@@ -223,7 +220,6 @@ cogctl dynamic-config create ec2 config.yaml
 Now there's just one last step; making sure we have permission to run ec2
 commands by adding some priviledges to the `cog-admin` group.
 
-[source]
 ----
 @cog permission grant ec2:read cog-admin
 @cog permission grant ec2:write cog-admin
@@ -232,7 +228,6 @@ commands by adding some priviledges to the `cog-admin` group.
 
 Now try it out!
 
-[source]
 ----
 @cog ec2:instance list
 ----
@@ -288,7 +283,7 @@ You'll notice that the `run` target crashed as we didn't provide a
 `SLACK_API_TOKEN` environment variable. To fully configure Cog and Relay we'll
 need to set a few environment variables. If you need more customization than is
 explained in this guide checkout the full listing of environment variables and
-their descriptions for both <<Cog Server Configuration>> and <<Relay Configuration>>.
+their descriptions for both <<Cog_Server_Configuration,Cog Server Configuration>> and <<Relay_Configuration,Relay Configuration>>.
 
 For now let's just provide the minimum to get things up and running. For Cog,
 we'll just need to set `COG_SLACK_ENABLED` and `SLACK_API_TOKEN` as everything
@@ -432,6 +427,6 @@ export HIPCHAT_NICKNAME=cog
 docker-compose up
 ----
 
-Now you can head back to follow the section titled <<Creating a User and Running a Command>>,
+Now you can head back to follow the section titled <<Creating_a_User_and_Running_a_Command,Creating a User and Running a Command>>,
 as the rest isn't Slack specific. The only caveat is that when creating a
 chat-handle, you'll need to specify `--chat-provider=hipchat` instead.

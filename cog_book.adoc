@@ -24,99 +24,99 @@ include::src/introducing_cog/text.adoc[]
 
 include::src/installation_guide/text.adoc[]
 
-include::src/bootstrapping_cog/text.adoc[]
+// include::src/bootstrapping_cog/text.adoc[]
 
-include::src/installing_and_managing_relays/text.adoc[]
+// include::src/installing_and_managing_relays/text.adoc[]
 
-include::src/commands_and_bundles/text.adoc[]
+// include::src/commands_and_bundles/text.adoc[]
 
-include::src/managing_bundles/text.adoc[]
+// include::src/managing_bundles/text.adoc[]
 
-include::src/building_command_bundles/text.adoc[]
+// include::src/building_command_bundles/text.adoc[]
 
-include::src/configuring_password_resets/text.adoc[]
+// include::src/configuring_password_resets/text.adoc[]
 
-include::src/writing_a_command_bundle/text.adoc[]
+// include::src/writing_a_command_bundle/text.adoc[]
 
-include::src/permissions_and_rules/text.adoc[]
+// include::src/permissions_and_rules/text.adoc[]
 
-include::src/command_execution_rules/text.adoc[]
+// include::src/command_execution_rules/text.adoc[]
 
-include::src/bundle_configs/text.adoc[]
+// include::src/bundle_configs/text.adoc[]
 
-include::src/command_environment_variables/text.adoc[]
+// include::src/command_environment_variables/text.adoc[]
 
-include::src/dynamic_command_configuration/text.adoc[]
+// include::src/dynamic_command_configuration/text.adoc[]
 
-include::src/returning_data_from_cog/text.adoc[]
+// include::src/returning_data_from_cog/text.adoc[]
 
-include::src/services/text.adoc[]
+// include::src/services/text.adoc[]
 
-include::src/templates/text.adoc[]
+// include::src/templates/text.adoc[]
 
-include::src/installing_your_first_command_bundle/text.adoc[]
+// include::src/installing_your_first_command_bundle/text.adoc[]
 
-include::src/developing_a_trigger/text.adoc[]
-
-
-include::src/cog_architecture/text.adoc[]
-
-include::src/command_pipelines/text.adoc[]
-
-include::src/redirecting_pipeline_output/text.adoc[]
-
-include::src/triggers/text.adoc[]
-
-include::src/user_management/text.adoc[]
-
-include::src/useful_issue_searches/text.adoc[]
-
-include::src/contributor_license_agreement/text.adoc[]
-
-= Reference
-
-[partintro]
---
-Here you will find detailed reference information on various aspects of the Cog chat platform.
---
-
-// == Authorization Rule Syntax
-// placeholder
-
-// == Bundle Definition Syntax
-// placeholder
-
-// // TODO: Can we somehow import / process the JSON Schema from Spanner in here?
+// include::src/developing_a_trigger/text.adoc[]
 
 
-include::src/reference/cog_server_configuration.adoc[]
+// include::src/cog_architecture/text.adoc[]
 
-include::src/reference/relay_configuration.adoc[]
+// include::src/command_pipelines/text.adoc[]
 
-include::src/reference/command_output_tags.adoc[]
+// include::src/redirecting_pipeline_output/text.adoc[]
 
-include::src/reference/greenbar_tags.adoc[]
+// include::src/triggers/text.adoc[]
 
-// == Command Environment
-// placeholder
+// include::src/user_management/text.adoc[]
 
-// == Command Output Directives
-// placeholder
+// include::src/useful_issue_searches/text.adoc[]
 
-// == Relay Configuration
-// placeholder
+// include::src/contributor_license_agreement/text.adoc[]
 
-// == Templating Reference
-// placeholder
+// = Reference
 
-= Appendices
+// [partintro]
+// --
+// Here you will find detailed reference information on various aspects of the Cog chat platform.
+// --
 
-include::src/appendices/designing_for_chatops.adoc[]
-include::src/appendices/chat_platforms.adoc[]
+// // == Authorization Rule Syntax
+// // placeholder
 
-[colophon]
-= Colophon
+// // == Bundle Definition Syntax
+// // placeholder
 
-(C) 2016 by Operable, Inc.
+// // // TODO: Can we somehow import / process the JSON Schema from Spanner in here?
 
-This book is released under the {license} license. Source code is available at {repository}.
+
+// include::src/reference/cog_server_configuration.adoc[]
+
+// include::src/reference/relay_configuration.adoc[]
+
+// include::src/reference/command_output_tags.adoc[]
+
+// include::src/reference/greenbar_tags.adoc[]
+
+// // == Command Environment
+// // placeholder
+
+// // == Command Output Directives
+// // placeholder
+
+// // == Relay Configuration
+// // placeholder
+
+// // == Templating Reference
+// // placeholder
+
+// = Appendices
+
+// include::src/appendices/designing_for_chatops.adoc[]
+// include::src/appendices/chat_platforms.adoc[]
+
+// [colophon]
+// = Colophon
+
+// (C) 2016 by Operable, Inc.
+
+// This book is released under the {license} license. Source code is available at {repository}.
