@@ -45,7 +45,7 @@ I have just executed the `help` command from the `operable` command bundle. From
 
 If you view your chatbot as a kind of "shared command line", then commands are like the executables in your terminal. In fact, you might recognize several commands from the `operable` namespace above from your everyday terminal usage: `echo`, `wc`, `sort`, etc.
 
-Command may need some additional information that would not be shared on the "shared command line", but will have to be setup by an administrator, such as an OAuth key. See the section on http://docs.operable.io/docs/dynamic-command-configuration[Dynamic Command Configuration] for more information on how to get this data for command execution.
+Command may need some additional information that would not be shared on the "shared command line", but will have to be setup by an administrator, such as an OAuth key. See the section on <<Dynamic Command Configuration>> for more information on how to get this data for command execution.
 
 === Bundles
 
@@ -53,7 +53,7 @@ Let's say that you've written some new chat commands for Cog. You  have one comm
 
 These commands are clearly related functionally; you probably won't use one without the other, after all. They also probably share a good bit of library and / or dependency code. It would be nice to have a way to package up these commands in a way that reflects this.
 
-Enter **bundles**, the packaging unit for commands. Bundles contain all the code for the commands within, including dependencies and library code. They also carry metadata about the commands, including documentation, details about the various options each command recognizes, configuration that affects how the commands behave in http://docs.operable.io/v0.16/docs/command-pipelines[execution pipelines], and even formatting templates, which allow the results of commands to be presented in the best possible way for the chat system you use.
+Enter **bundles**, the packaging unit for commands. Bundles contain all the code for the commands within, including dependencies and library code. They also carry metadata about the commands, including documentation, details about the various options each command recognizes, configuration that affects how the commands behave in <<Command pipelines, execution pipelines>>, and even formatting templates, which allow the results of commands to be presented in the best possible way for the chat system you use.
 
 This sounds interesting, right? Come see how simple it is: <<Writing A Command Bundle>>.
 
