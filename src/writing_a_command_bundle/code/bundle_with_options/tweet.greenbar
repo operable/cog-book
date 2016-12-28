@@ -1,3 +1,0 @@
-~each var=$results~
-~$item.url~
-~end~
