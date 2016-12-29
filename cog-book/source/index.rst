@@ -7,12 +7,9 @@ Welcome to the Cog Book!
 ========================
 
 .. toctree::
-   :maxdepth: 2
    :numbered:
 
-   sections/introducing_cog.rst
-   sections/installation_guide.rst
-   sections/building_cog_from_scratch.rst
+   sections/getting_started.rst
    sections/bootstrapping_cog.rst
    sections/installing_and_managing_relays.rst
    sections/commands_and_bundles.rst
