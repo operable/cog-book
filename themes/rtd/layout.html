@@ -101,6 +101,10 @@
           {% endif %}
           </a>
 
+          {% if theme_peek_logo %}
+            <img src="{{ pathto('_static/' + theme_peek_logo, 1) }}" class="logo" />
+          {% endif %}
+
           {% if theme_display_version %}
             {%- set nav_version = version %}
             {% if READTHEDOCS and current_version %}
