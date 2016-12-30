@@ -93,7 +93,7 @@ html_theme = 'rtd'
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-html_theme_options = {'peek_logo': 'cog_peek.svg'}
+html_theme_options = {'peek_logo': 'cog_peek.svg', 'analytics_id': 'UA-61670076-4'}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
