@@ -21,6 +21,10 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
+# -- Detect the current git branch name -----------------------------------
+import subprocess
+branch_name = subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).strip().decode('utf-8')
+
 
 # -- General configuration ------------------------------------------------
 
@@ -93,7 +97,12 @@ html_theme = 'rtd'
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-html_theme_options = {'peek_logo': 'cog_peek.svg', 'analytics_id': 'UA-61670076-4'}
+html_theme_options = {'peek_logo': 'cog_peek.svg',
+                      'analytics_id': 'UA-61670076-4',
+                      'github_user': 'operable',
+                      'github_repo': 'cog-book',
+                      'github_version': branch_name,
+                      'github_path': 'cog-book/source'}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
