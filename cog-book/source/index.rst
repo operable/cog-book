@@ -6,9 +6,14 @@
 Welcome to the Cog Book!
 ========================
 
-.. image:: /images/cog_peek.svg
+.. note:: This book is released under the `Apache 2 <https://github.com/operable/cog-book/blob/master/LICENSE>`_ license. More information about contributing to this book along with access to the source code and previous releases is available at `GitHub <https://github.com/operable/cog-book/>`_.
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Cog is Built for ChatOps.
+-------------------------
+
+Use Cog to manage your infrastructure, support peer learning, and conduct collaborative research at the same time, right from chat. Cog is easy to install and simple to operate while remaining powerful enough to handle complex enterprise workflows.
+
+.. image:: /images/cog_peek.svg
 
 .. toctree::
    :numbered:
