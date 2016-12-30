@@ -6,6 +6,12 @@
 {% set suffix = source_suffix %}
 {% endif %}
 
+{% if theme_github_user and theme_github_repo and theme_github_version %}
+{% set display_github = True %}
+{% else %}
+{% set display_github = False %}
+{% endif %}
+
 <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="{{ pathto(master_doc) }}">Docs</a> &raquo;</li>
@@ -16,7 +22,7 @@
       <li class="wy-breadcrumbs-aside">
         {% if pagename != "search" %}
           {% if display_github %}
-            <a href="https://{{ github_host|default("github.com") }}/{{ github_user }}/{{ github_repo }}/blob/{{ github_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}"> Edit on GitHub</a>
+            <a href="https://{{ theme_github_host }}/{{ theme_github_user }}/{{ theme_github_repo }}/blob/{{ theme_github_version }}/{{theme_github_path}}/{{ pagename }}{{ suffix }}" class="fa fa-github"> Edit on GitHub</a>
           {% elif display_bitbucket %}
             <a href="https://bitbucket.org/{{ bitbucket_user }}/{{ bitbucket_repo }}/src/{{ bitbucket_version}}{{ conf_py_path }}{{ pagename }}{{ suffix }}" class="fa fa-bitbucket"> Edit on Bitbucket</a>
           {% elif show_source and source_url_prefix %}
