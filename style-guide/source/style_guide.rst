@@ -91,45 +91,32 @@ removed entirely.
 Displaying code
 ---------------
 
-.. STILL DESCRIBES THE ASCIIDOC APPROACH, TO BE CONVERTED TO SPHINX/reStructuredText.
-
-AsciiDoc can display formatted code using Source Blocks. Each block
-identifies the code represented within it.
+reStructuredText uses the ``code`` directive to identify the nature of the code block to display.  It can parse
 
 Standard Source block structure
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use appropriate code designations (yaml, bash, sh, shell…) and which to
-use when multiple are appropriate Title conventions
-
-.. raw:: html
-
-   <div class="informalexample">
+Use appropriate code designations (yaml, bash, sh, shell…).
 
 ::
 
-    .This is a title
-    [source, bash]
-    ----
+  *This is a title*
+
+  .. code:: bash
+
     This is where the code goes.
     If you use the correct source designator, this text will be formatted relative to that code style.
-    ----
 
--  Use short descriptive titles
+-  Use short descriptive titles whenever possible
 
--  Use the appropriate source language. See below for suggested
-   defaults.
+-  Use the appropriate source language. See below for suggested defaults.
 
-**This is a title.**
+*This is a title*
 
 .. code:: bash
 
-    This is where the code goes.
-    If you use the correct source designator, this text will be formatted relative to that code style.
-
-.. raw:: html
-
-   </div>
+  This is where the code goes.
+  If you use the correct source designator, this text will be formatted relative to that code style.
 
 **Command Line interface.**
 
@@ -150,14 +137,25 @@ Admonition blocks
 Application
 ~~~~~~~~~~~
 
-AsciiDoc has five levels of admonition blocks: \* NOTE \* TIP \*
-IMPORTANT \* CAUTION \* WARNING
+reStructuredText has nine defined types of `admonitions <http://docutils.sourceforge.net/docs/ref/rst/directives.html#admonitions>`_:
+
+- attention
+- caution
+- danger
+- error
+- hint
+- important
+- note
+- tip
+- warning
+
+So far, as of this writing, we are using four of them.
 
     **Note**
 
     Use NOTE blocks for simple examples, asides, or references to
-    related sections. Note blocks are asides, however, not the main
-    point. They’re extras; the fries, not the burger.
+    related sections. Note blocks are extras, however, not the main
+    point; the fries, not the burger.
 
     **Tip**
 
@@ -165,21 +163,17 @@ IMPORTANT \* CAUTION \* WARNING
     that can highlight Cog’s potential in a way the reader might not
     have considered.
 
-    **Important**
-
-    Use IMPORTANT blocks for critical information the reader will need
-    to know to successfully use Cog. This is a place to emphasize and
-    repeat fundamentals.
-
     **Caution**
 
     Use CAUTION blocks to point out complicated aspects of the topic at
-    hand or describe common mistakes.
+    hand or highlight common mistakes.
 
     **Warning**
 
     Use WARNING blocks to alert the reader to the potential for critical
     failures or significant setbacks.
+
+.. Actually, at this point (12/29/2016), we're not using any.  This is still on the list of things to modify from the transition from AsciiDoc.
 
 Syntax
 ~~~~~~
@@ -190,56 +184,28 @@ This
 
 ::
 
-    .Clever title
-    NOTE: Witty observation
+  .. note:: **Clever title.**
+    Witty observation
 
 produces this…
 
-    **Note**
-
+.. note:: **Clever title.**
     Witty observation
 
 Easy peasy.
 
-**Complex NOTE formatting.**
-
 If you want to put bullet lists, tables, or multiple paragraphs inside a
-NOTE, you’ll need to treat it like a block.
+NOTE, keep them indented to match.
 
-You need this:
+Just don't get carried away.
 
-::
+.. tip::
 
-    [NOTE]
-    .More complex, this note is
-    ====
-    * Bullet points
-    * and other complex things...
+  Don’t do this.
 
-    ...like a whole new paragraph.
-    ====
-
--  Define the kind of block you’re using.
-
--  This time the title comes second.
-
--  Define the limits of the block with ``====``
-
-To get this:
-
-    **Note**
-
-    -  Bullet points
-
-    -  and other complex things…
-
-    …like a whole new paragraph.
-
-    **Warning**
-
-        **Tip**
-
-        Don’t do this. What is wrong with you?
+  .. warning::
+  
+    What is wrong with you?
 
 Images
 ------
