@@ -39,9 +39,7 @@ Cog: ``docker-compose.yml``, ``docker-compose.common.yml`` and
 ``docker-compose.override.slack_example.yml`` for running and
 configuring Cog. To run the images specified in the
 ``docker-compose.yml`` you’ll need to have both Docker and Docker
-Compose installed. If you’d rather manually build and install Cog, skip
-down to the next section titled,
-`??? <#Building and Running Cog from Scratch>`__.
+Compose installed. If you’d rather manually build and install Cog, see the section titled, :doc:`building_cog_from_scratch`.
 
 First, make sure you have Docker and Docker Compose installed. If you
 haven’t installed Docker, we recommend using `Docker for
@@ -56,7 +54,7 @@ Next, we’ll need to grab the ``docker-compose.yml``,
 ``docker-compose.override.slack_example.yml`` files from the Cog repo.
 
 If you’d rather connect Cog to HipChat, skip down to the section titled
-`??? <#Connecting Cog to HipChat>`__.
+`Connecting Cog to HipChat`_.
 
 .. code-block:: bash
 
@@ -89,14 +87,13 @@ Bot Integration Page <https://my.slack.com/services/new/bot>`__, create
 a new bot, and copy the newly generated token; it should look something
 like ``xoxb-87931061512-4m0DshC79h8tLNjTMuxxozUo``.
 
-While you are over in Slack making your bot, add a cute Cog avatar too.
+While you are over in Slack making your bot, add a cute Cog avatar, too.
 Find a Cog avatar and other Cog branded goodies in the `Operable + Cog
 Brand
 Folder <https://drive.google.com/open?id=0B9shLHjT25r-SkhqSTU2MG05dG8>`__
 
 You’ll also need to export a ``COG_HOST`` variable. This is not a proper
-`Cog Server
-Configuration <https://cog-book.operable.io/#_cog_server_configuration>`__,
+:doc:`../references/cog_server_configuration`
 but one specifically for use with this ``docker-compose`` example. This
 is the host that the Cog API will be made available at. Set this to
 point to your Docker host. If you’re using `docker-machine for
@@ -125,6 +122,7 @@ has connected you should start seeing logs like the following:
 cog\_1 \| 2016-10-07T00:38:51.0504 (Cog.BusEnforcer:60) [info] Allowed
 connection for Relay
 00000000-0000-0000-0000-000000000000</programlisting>
+
 For the last step, let’s check and see if our bot is available in the
 chat room. Open up Slack and try the following command. Keep in mind
 that you’ll have to invite the bot to whatever room you first message it
@@ -139,8 +137,10 @@ from.
 
                     You'll need to ask a Cog administrator to fix this situation and to register your Slack handle.
 
-That’s because Cog doesn’t respond to people it doesn’t know about. In
-the next section we’ll create a Cog user associated with your Slack user
+That’s because Cog doesn’t respond to people it doesn’t know about.
+
+Now you can move on to the section titled
+`Creating a User and Running a Command`_ where we’ll create a Cog user associated with your Slack user
 and give it some permissions, so you can start running some commands.
 
 .. _installation_guide_hipchat:
@@ -196,8 +196,8 @@ you generated and the XMPP configuration you looked up.
     export HIPCHAT_NICKNAME=cog
     docker-compose up
 
-Now you can head back to follow the section titled
-`??? <#Creating a User and Running a Command>`__, as the rest isn’t
+Now you can move on to the section titled
+`Creating a User and Running a Command`_, as the rest isn’t
 Slack specific. The only caveat is that when creating a chat-handle,
 you’ll need to specify ``--chat-provider=hipchat`` instead.
 
