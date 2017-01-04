@@ -1,6 +1,6 @@
 MOUNT         = /home/cogdoc
 IMAGE_NAME    = operable/cog-book-toolchain:sphinx
-BUILD_CMD     = docker run -u cogdoc -v $(shell pwd):$(MOUNT) --rm $(IMAGE_NAME)
+BUILD_CMD     = docker run -u $(shell id -u) -v $(shell pwd):$(MOUNT) --rm $(IMAGE_NAME)
 
 DOC           = cog-book
 
