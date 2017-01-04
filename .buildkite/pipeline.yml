@@ -1,18 +1,15 @@
 steps:
-  - command: "make html5"
-    label: "Generate HTML"
+  - label: "Generate HTML"
+    command: "make cog-book"
     agents:
       - docker=1.12.1
 
-  - command: "make pdf"
-    label: "Generate PDF"
-    agents:
-      - docker=1.12.1
+  # TODO: The release process still needs automating for Sphinx
 
-  - wait
-
-  - command: "make upload"
-    label: "Publish!"
-    branches: "release"
-    agents:
-      - docker=1.12.1
+  # - wait
+  #
+  # - command: "make upload"
+  #   label: "Publish!"
+  #   branches: "release"
+  #   agents:
+  #     - docker=1.12.1
