@@ -301,7 +301,7 @@ yet. Let’s set our api token with ``cogctl``.
     cogctl dynamic-config create ec2 config.yaml
 
 Now there’s just one last step; making sure we have permission to run
-ec2 commands by adding some priviledges to the ``cog-admin`` group.
+ec2 commands by adding some privileges to the ``cog-admin`` group.
 
 @cog permission grant ec2:read cog-admin @cog permission grant ec2:write
 cog-admin @cog permission grant ec2:admin cog-admin</programlisting>

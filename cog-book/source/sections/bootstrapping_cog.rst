@@ -12,9 +12,7 @@ other tasks.
 
 There are a few ways you can bootstrap. If your Cog system is automated
 in any way (using Chef, Puppet, Ansible, or some flavor of AWS or Heroku
-deployment, for example), you may find it convenient to `automatically
 bootstrap your new system using environment
-variables <#Permissions and Rules>`__.
 
 Alternatively, you can use the ``cogctl bootstrap`` command, as detailed
 below.
@@ -27,9 +25,7 @@ principles are the same.
     cogctl bootstrap
     Bootstrapped
 
-    **Note**
-
-    You can run ``cogctl bootstrap`` multiple times; if the system is
+.. note:: You can run ``cogctl bootstrap`` multiple times; if the system is
     already bootstrapped, ``cogctl`` will alert you and return a ``1``
     exit code, but the Cog system itself will remain unaffected.
 
@@ -57,7 +53,7 @@ authenticated API calls.
 
 Cog’s REST API is guarded by Cog’s authorization system, which means
 that the admin user must have permissions to access the API somehow. As
-detailed in `??? <#Permissions and Rules>`__, permissions must be
+detailed in :doc:`permissions_and_rules`, permissions must be
 attached to a user somehow through a combination of roles and groups. As
 you can probably guess, the bootstrapping process handles all this.
 Let’s use ``cogctl`` to examine what has been done.

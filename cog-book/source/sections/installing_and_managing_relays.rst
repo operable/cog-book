@@ -57,10 +57,8 @@ Once a Relay has been created it can be assigned to one or more *relay
 groups*. Relay groups are merely named groups of Relays used to organize
 many Relays into logical groupings.
 
-    **Note**
-
-    You can read about how Cog uses relay groups to simplify command
-    bundle deployment in `??? <#Managing Bundles>`__.
+.. note:: You can read about how Cog uses relay groups to simplify command
+    bundle deployment in :doc:`managing_bundles`.
 
 No relay groups are defined when Cog is first installed so you’ll need
 to use ``cogctl`` to create at least one.
@@ -118,5 +116,5 @@ Finally, you can view a detailed description of a relay group with
     my_new_relay  f8e3ead2-57e0-4fb2-81e9-24bf6c104202
     $
 
-Now you are ready to add `Bundles <#Managing Bundles>`__ to your relays
+Now you are ready to add :doc:`managing_bundles` to your relays
 in order to execute your installed commands.

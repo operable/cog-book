@@ -11,56 +11,38 @@ Warehouse <https://bundles.operable.io>`__
 
 Let’s start with an example. If I type the following into Slack:
 
-\`\`\` !operable:help \`\`\`
+::
+
+  !operable:help
 
 I should receive a response that looks something like this:
 
-\`\`\` I know about these commands:
+::
 
--  date:date
+  I know about these commands:
 
--  github:prs
+  *  date:date
+  *  github:prs
+  *  github:repo
+  *  operable:bundle
+  *  operable:echo
+  *  operable:filter
+  *  operable:greet
+  *  operable:group
+  *  operable:help
+  *  operable:max
+  *  operable:min
+  *  operable:permissions
+  *  operable:role
+  *  operable:rules
+  *  operable:sort
+  *  operable:sum
+  *  operable:table
+  *  operable:thorn
+  *  operable:unique
+  *  operable:wc
 
--  github:repo
-
--  operable:bundle
-
--  operable:echo
-
--  operable:filter
-
--  operable:greet
-
--  operable:group
-
--  operable:help
-
--  operable:max
-
--  operable:min
-
--  operable:permissions
-
--  operable:role
-
--  operable:rules
-
--  operable:sort
-
--  operable:sum
-
--  operable:table
-
--  operable:thorn
-
--  operable:unique
-
--  operable:wc
-
-   ::
-
-        Try calling `operable:help COMMAND` to find out more.
-       ```
+  Try calling `operable:help COMMAND` to find out more.
 
 I have just executed the ``help`` command from the ``operable`` command
 bundle. From the response, I can see that the system currently has three
@@ -82,7 +64,7 @@ your everyday terminal usage: ``echo``, ``wc``, ``sort``, etc.
 Command may need some additional information that would not be shared on
 the "shared command line", but will have to be setup by an
 administrator, such as an OAuth key. See the section on
-`??? <#Dynamic Command Configuration>`__ for more information on how to
+:doc:`dynamic_command_configuration` for more information on how to
 get this data for command execution.
 
 Bundles
@@ -102,23 +84,23 @@ the code for the commands within, including dependencies and library
 code. They also carry metadata about the commands, including
 documentation, details about the various options each command
 recognizes, configuration that affects how the commands behave in
-`execution pipelines <#Command pipelines>`__, and even formatting
+:doc:`execution pipelines <command_pipelines>`, and even formatting
 templates, which allow the results of commands to be presented in the
 best possible way for the chat system you use.
 
 This sounds interesting, right? Come see how simple it is:
-`??? <#Writing A Command Bundle>`__.
+:doc:`writing_a_command_bundle`.
 
 Bundle Permissions and Rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Bundles also contain an initial set of `permissions and authorization
-rules <#Permissions and Rules>`__ for their commands. When a bundle is
+Bundles also contain an initial set of :doc:`permissions and authorization
+rules <permissions_and_rules>` for their commands. When a bundle is
 installed, these permissions and accompanying rules are automatically
 created in the Cog system. These can be used as-is, or can be modified
 by Cog operators in whatever way suits their organization best.
 
-Since `permissions <#Permissions and Rules>`__ are namespaced to the
+Since :doc:`permissions <permissions_and_rules>` are namespaced to the
 bundle they originate from, installing a bundle’s permissions will never
 conflict with any existing authorization system configurations you may
 have made. No users are automatically assigned any of these permissions,
@@ -142,18 +124,24 @@ First, you can address the bot directly by name in a channel in which
 the bot is listening. Here, my bot is named
 `Marvin <https://en.wikipedia.org/wiki/Marvin_(character)>`__
 
-\`\`\` @marvin operable:help \`\`\`
+::
+
+  @marvin operable:help
 
 Alternatively, you can configure the bot to use a "command prefix",
 which defaults to ``!``.
 
-\`\`\` !operable:help \`\`\`
+::
+
+  !operable:help
 
 Finally, you can interact with the bot in 1-on-1 chat, in which case you
 may simply type commands directly; everything you type to the bot is
 considered a command.
 
-\`\`\` operable:help \`\`\`
+::
+
+  operable:help
 
 Shortcuts
 ~~~~~~~~~
@@ -179,19 +167,18 @@ Implementation Details
 ----------------------
 
 Bundles may take one of two forms. The first, which we’ll call a
-`standard <#Standard Bundles>`__ bundle is a docker image that contains
+:ref:`standard <standard_bundle_target>` bundle is a docker image that contains
 all of your commands. This is the form you’ll use if you have custom
 code to implement your chat commands and wish to package that code and
 distribute it in a bundle.
 
-    **Warning**
-
-    Note that versions on Cog prior to version 0.4 used a different
-    packaging system for standard bundles. These old bundles will not
-    work for current versions of Cog.
+.. warning::
+  Note that versions on Cog prior to version 0.4 used a different
+  packaging system for standard bundles. These old bundles will not
+  work for current versions of Cog.
 
 The other form of bundle is a
-`simple <#Building Command Bundles#Simple bundles>`__ bundle, which is
+:ref:`simple <simple_bundle_target>` bundle, which is
 essentially just the ``config.yaml`` file from the "standard" bundle.
 This form of bundle can be used to expose executables that are already
 on the system path, which may be installed "out of band", using OS

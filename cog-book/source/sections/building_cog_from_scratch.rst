@@ -56,7 +56,7 @@ You’ll notice that the ``run`` target crashed as we didn’t provide a
 Relay we’ll need to set a few environment variables. If you need more
 customization than is explained in this guide checkout the full listing
 of environment variables and their descriptions for both
-`??? <#Cog Server Configuration>`__ and `??? <#Relay Configuration>`__.
+:doc:`../references/cog_server_configuration` and :doc:`../references/relay_configuration`.
 
 For now let’s just provide the minimum to get things up and running. For
 Cog, we’ll just need to set ``COG_SLACK_ENABLED`` and

@@ -52,6 +52,8 @@ any commands. The following can be accessed from the Cog environment.
    originated from. For 1-on-1 interactions, this will be the string
    ``"direct"``.
 
+.. _simple_bundle_target:
+
 Simple Bundles
 --------------
 
@@ -96,6 +98,8 @@ the inputs that are expected in the command.
 There are more `sample simple command
 bundles <https://github.com/operable/sample_simple_bundle>`__ located in
 a separate repository.
+
+.. _standard_bundle_target:
 
 Standard Bundles
 ----------------
