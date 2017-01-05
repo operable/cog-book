@@ -94,16 +94,6 @@
             <a href="{{ pathto(master_doc) }}" class="icon icon-home"> {{ project }}
           {% endif %}
 
-          {% if logo %}
-            {# Not strictly valid HTML, but it's the only way to display/scale it properly, without weird scripting or heaps of work #}
-            <img src="{{ pathto('_static/' + logo, 1) }}" class="logo" />
-          {% endif %}
-          </a>
-
-          {% if theme_peek_logo %}
-            <img src="{{ pathto('_static/' + theme_peek_logo, 1) }}" class="logo" />
-          {% endif %}
-
           {% if theme_display_version %}
             {%- set nav_version = version %}
             {% if READTHEDOCS and current_version %}
@@ -114,6 +104,16 @@
                 {{ nav_version }}
               </div>
             {% endif %}
+          {% endif %}
+
+          {% if logo %}
+            {# Not strictly valid HTML, but it's the only way to display/scale it properly, without weird scripting or heaps of work #}
+            <img src="{{ pathto('_static/' + logo, 1) }}" class="logo" />
+          {% endif %}
+          </a>
+
+          {% if theme_peek_logo %}
+            <img src="{{ pathto('_static/' + theme_peek_logo, 1) }}" class="logo" />
           {% endif %}
 
           {% include "searchbox.html" %}
