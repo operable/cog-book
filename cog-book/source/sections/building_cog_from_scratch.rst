@@ -31,7 +31,7 @@ Download the source in your ``$GOPATH`` and build it.
 .. code:: bash
 
     mkdir -p $GOPATH/src/github.com/operable
-    git clone git@github.com:operable/go-relay.git $GOPATH/src/github.com/operable
+    git clone git@github.com:operable/go-relay.git $GOPATH/src/github.com/operable/go-relay
     cd $GOPATH/src/github.com/operable/go-relay
     make
 
