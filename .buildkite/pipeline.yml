@@ -1,18 +1,12 @@
 steps:
   - command: "make html5"
     label: "Generate HTML"
-    agents:
-      queue: beta
 
   - command: "make pdf"
     label: "Generate PDF"
-    agents:
-      queue: beta
 
   - wait
 
   - command: "make upload"
     label: "Publish!"
     branches: "release"
-    agents:
-      queue: beta
