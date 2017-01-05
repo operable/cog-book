@@ -5315,17 +5315,17 @@ div[class^='highlight'] pre {
 }
 
 .wy-menu-vertical li.current {
-    background: #e3e3e3
+    background: #BAC4CA
 }
 
 .wy-menu-vertical li.current a {
-    color: gray;
-    border-right: solid 1px #c9c9c9;
+    color: black;
+    border-right: solid 0px #;
     padding: 0.4045em 2.427em
 }
 
 .wy-menu-vertical li.current a:hover {
-    background: #d6d6d6
+    background: #AFB9BF
 }
 
 .wy-menu-vertical li code,
@@ -5353,10 +5353,10 @@ div[class^='highlight'] pre {
     padding: 0.4045em 1.618em;
     font-weight: bold;
     position: relative;
-    background: #fcfcfc;
+    background: #D1D7DC;
     border: none;
-    border-bottom: solid 1px #c9c9c9;
-    border-top: solid 1px #c9c9c9;
+    border-bottom: solid 0px #;
+    border-top: solid 0px #;
     padding-left: 1.618em -4px
 }
 
@@ -5389,14 +5389,19 @@ div[class^='highlight'] pre {
 }
 
 .wy-menu-vertical li.toctree-l2.current>a {
-    background: #c9c9c9;
-    padding: 0.4045em 2.427em
+    background: #A5B3BB;
+    padding: 0.4045em 2.427em;
 }
 
 .wy-menu-vertical li.toctree-l2.current li.toctree-l3>a {
     display: block;
-    background: #c9c9c9;
+    background: #5C778A;
+    color: #f5f5f5;
     padding: 0.4045em 4.045em
+}
+
+.wy-menu-vertical li.toctree-l2.current li.toctree-l3>a:hover {
+    background: #3D627D;
 }
 
 .wy-menu-vertical li.toctree-l2 a:hover span.toctree-expand {
@@ -5412,7 +5417,7 @@ div[class^='highlight'] pre {
 }
 
 .wy-menu-vertical li.toctree-l3.current>a {
-    background: #bdbdbd;
+    background: #506879;
     padding: 0.4045em 4.045em
 }
 
@@ -5462,11 +5467,11 @@ div[class^='highlight'] pre {
     display: block;
     position: relative;
     font-size: 90%;
-    color: #b3b3b3
+    color: #4A4A4A
 }
 
 .wy-menu-vertical a:hover {
-    background-color: #4e4a4a;
+    background-color: #DDE1E4;
     cursor: pointer
 }
 
@@ -5475,7 +5480,7 @@ div[class^='highlight'] pre {
 }
 
 .wy-menu-vertical a:active {
-    background-color: #2980B9;
+    background-color: #5C778A;
     cursor: pointer;
     color: #fff
 }
@@ -5490,7 +5495,7 @@ div[class^='highlight'] pre {
     padding: 0.809em;
     margin-bottom: 0.809em;
     z-index: 200;
-    background-color: #25627F;
+    background-image: url("../nav-background_space.svg");
     text-align: center;
     padding: 0.809em;
     display: block;
@@ -5502,16 +5507,16 @@ div[class^='highlight'] pre {
     width: 100%;
     border-radius: 50px;
     padding: 6px 12px;
-    border-color: #2472a4
+    border-color: #ccc
 }
 
 .wy-side-nav-search img {
     display: block;
     margin: auto auto 0.809em auto;
-    height: 200px;
-    width: 200px;
+    height: 100px;
+    width: 100px;
     background-color: #ffffff;
-    padding: 5px;
+    padding: 3px;
     border-radius: 100%
 }
 
@@ -5616,7 +5621,7 @@ div[class^='highlight'] pre {
     overflow-x: hidden;
     overflow-y: hidden;
     min-height: 100%;
-    background: #343131;
+    background: #f5f5f5;
     z-index: 200
 }
 
