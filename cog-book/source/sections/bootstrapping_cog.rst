@@ -12,7 +12,9 @@ other tasks.
 
 There are a few ways you can bootstrap. If your Cog system is automated
 in any way (using Chef, Puppet, Ansible, or some flavor of AWS or Heroku
+deployment, for example), you may find it convenient to :doc:`automatically
 bootstrap your new system using environment
+variables <permissions_and_rules>`.
 
 Alternatively, you can use the ``cogctl bootstrap`` command, as detailed
 below.
