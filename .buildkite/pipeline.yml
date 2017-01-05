@@ -1,8 +1,6 @@
 steps:
   - label: "Generate HTML"
     command: "make cog-book"
-    agents:
-      queue: beta
 
   # TODO: The release process still needs automating for Sphinx
 
@@ -11,5 +9,3 @@ steps:
   # - command: "make upload"
   #   label: "Publish!"
   #   branches: "release"
-  #   agents:
-  #     queue: beta
