@@ -127,17 +127,17 @@ The complete code is show in `formalpara\_title <#pure-ruby-tweet>`__.
 
     require 'twitter'
 
-    client = Twitter::REST::Client.new( # 
+    client = Twitter::REST::Client.new( #
       consumer_key: ENV["TWITTER_CONSUMER_KEY"],
       consumer_secret: ENV["TWITTER_CONSUMER_SECRET"],
       access_token: ENV["TWITTER_ACCESS_TOKEN"],
       access_token_secret: ENV["TWITTER_ACCESS_TOKEN_SECRET"])
 
-    message = ARGV.join(" ") # 
+    message = ARGV.join(" ") #
 
-    tweet = client.update(message) # 
+    tweet = client.update(message) #
 
-    # 
+    #
     puts <<-EOM
     Message: #{message}
     URL:     #{tweet.url}
@@ -180,8 +180,8 @@ our terminal, as seen in
 
 ::
 
-    $ bundle install # 
-    $ export TWITTER_CONSUMER_KEY=XXXX # 
+    $ bundle install #
+    $ export TWITTER_CONSUMER_KEY=XXXX #
     $ export TWITTER_CONSUMER_SECRET=XXXX
     $ export TWITTER_ACCESS_TOKEN=XXXX
     $ export TWITTER_ACCESS_TOKEN_SECRET=XXXX
@@ -284,11 +284,11 @@ following code *is* Cog to our nascent command.
     $ export TWITTER_ACCESS_TOKEN=XXXX
     $ export TWITTER_ACCESS_TOKEN_SECRET=XXXX
 
-    $ export COG_ARGC="2" # 
+    $ export COG_ARGC="2" #
     $ export COG_ARGV_0="Hello"
     $ export COG_ARGV_1="World"
 
-    $ ./tweet_cog_wrapper.sh # 
+    $ ./tweet_cog_wrapper.sh #
 
 -  Here, we introduce Cog’s environment variables into our runner
    script. This would correspond to ``@cog twitter:tweet Hello World``
@@ -309,13 +309,13 @@ at all. This adapter script is the only thing that is aware of Cog.
 
     #!/bin/bash
 
-    declare -a ARGUMENTS # 
+    declare -a ARGUMENTS #
     for ((i=0;i<${COG_ARGC};i++)); do
         var="COG_ARGV_${i}"
         ARGUMENTS[$i]=${!var}
     done
 
-    ./tweet.rb ${ARGUMENTS[*]} # 
+    ./tweet.rb ${ARGUMENTS[*]} #
 
 -  We need to pull out the ``COG_ARGV_*`` variables to pass as actual
    arguments to our Ruby script. Here, we loop as determined by the
@@ -420,60 +420,43 @@ information it needs to properly interact with their commands. Let’s
 take a look at a minimal bundle definition file for our new ``twitter``
 bundle.
 
-    **Tip**
-
-    Bundle definition files are conventionally named ``config.yaml``;
+.. note:: Bundle definition files are conventionally named ``config.yaml``;
     the actual name is irrelevant to Cog, however.
 
 **Minimal ``config.yaml`` Bundle Definition.**
 
-.. code:: yaml
+.. code-block:: yaml
+   :linenos:
 
-    ---
-    cog_bundle_version: 4 # 
-    name: twitter_example # 
-    description: Interact with Twitter # 
-    version: 0.0.1 # 
-    commands: # 
+    cog_bundle_version: 4
+    name: twitter_example
+    description: Interact with Twitter
+    version: 0.0.1
+    commands:
       tweet:
         description: Send a tweet!
-        executable: /Users/chris/cog-book/tweet_cog_wrapper.sh # 
-        arguments: "<message>" # 
+        executable: /Users/chris/cog-book/tweet_cog_wrapper.sh
+        arguments: "<message>"
         rules:
-          - allow # 
+          - allow
 
--  Every bundle must declare which bundle definition schema version it
-   uses. This determines which fields are expected, how their values are
-   validated, and so on. At the time of writing, the current version is
-   ``4``.
+**Annotations by line number:**
 
--  Every bundle must have a name. These must be unique within a Cog
-   installation.
+**Line 1** Every bundle must declare which bundle definition schema version it uses. This determines which fields are expected, how their values are validated, and so on. At the time of writing, the current version is ``4``.
 
--  While not strictly required, it is a good practice to include a brief
-   description of the bundle. This will be displayed when listing
-   bundles that are installed on a Cog system, helping users discover
-   which commmands are available.
+**Line 2** Every bundle must have a name. These must be unique within a Cog installation.
 
--  This version pertains to the bundle definition artifact itself.
-   Multiple versions of a bundle may be installed on a Cog system at one
-   time, though only one may be active.
+**Line 3** While not strictly required, it is a good practice to include a brief description of the bundle. This will be displayed when listing bundles that are installed on a Cog system, helping users discover which commmands are available.
 
--  In order for Cog to recognize a command, it must be described here in
-   the ``commands`` section. The keys of this map are the command names,
-   and the values are objects providing metadata about the command.
+**Line 4** This version pertains to the bundle definition artifact itself. Multiple versions of a bundle may be installed on a Cog system at one time, though only one may be active.
 
--  The path to the actual program that contains the command logic. This
-   is what we are writing!
+**Line 5** In order for Cog to recognize a command, it must be described here in the ``commands`` section. The keys of this map are the command names, and the values are objects providing metadata about the command.
 
--  Though not required, describing the inputs your command takes is
-   always a good idea.
+**Line 8** The path to the actual program that contains the command logic. This is what we are writing!
 
--  Cog has a comprehensive authorization system that allows you to
-   define rules that govern who may execute a command. We’ll explore
-   this further in a bit, but for now, just remember that the special
-   ``allow`` rule means that any Cog user will be able to execute this
-   command.
+**Line 9** Though not required, describing the inputs your command takes is always a good idea.
+
+**Line 11** Cog has a comprehensive authorization system that allows you to define rules that govern who may execute a command. We’ll explore this further in a bit, but for now, just remember that the special ``allow`` rule means that any Cog user will be able to execute this command.
 
 Now that we’ve described our bundle, we need to upload this definition
 file to Cog.
@@ -652,12 +635,12 @@ Let’s update our adapter script to generate structured output.
         TWEET_ARGUMENTS[$i]=${!var}
     done
 
-    output=$(bundle exec $(dirname ${0})/tweet.rb ${TWEET_ARGUMENTS[*]}) # 
+    output=$(bundle exec $(dirname ${0})/tweet.rb ${TWEET_ARGUMENTS[*]}) #
 
-    message=$(echo "$output" | grep "Message: " | cut -d":" -f2 | sed -e 's/^ *//') # 
+    message=$(echo "$output" | grep "Message: " | cut -d":" -f2 | sed -e 's/^ *//') #
     url=$(echo "$output" | grep "URL: " | sed -e 's/^URL: *//')
 
-    echo "JSON" # 
+    echo "JSON" #
     echo "{\"message\": \"${message}\", \"url\": \"${url}\"}"
 
 -  Instead of returning the standard output directly to Cog, we’ll
@@ -755,14 +738,14 @@ definition file.
     cog_bundle_version: 4
     name: twitter_example
     description: Interact with Twitter
-    version: 0.0.2 # 
+    version: 0.0.2 #
     commands:
       tweet:
         description: Send a tweet!
         executable: /Users/chris/cog-book/tweet_cog_wrapper.sh
         arguments: "<message>"
         rules: [ 'allow' ]
-    templates: # 
+    templates: #
       tweet:
         body: |
           ~each var=$results~
@@ -800,7 +783,7 @@ command response attribute.
     message=$(echo "$output" | grep "Message: " | cut -d":" -f2 | sed -e 's/^ *//')
     url=$(echo "$output" | grep "URL: " | sed -e 's/^URL: *//')
 
-    echo "COG_TEMPLATE: tweet" # 
+    echo "COG_TEMPLATE: tweet" #
     echo "JSON"
     echo "{\"message\": \"${message}\", \"url\": \"${url}\"}"
 
@@ -881,16 +864,16 @@ as a rule for the command.
     cog_bundle_version: 4
     name: twitter_example
     description: Interact with Twitter
-    version: 0.0.3 # 
+    version: 0.0.3 #
     permissions:
-      - twitter_example:tweet # 
+      - twitter_example:tweet #
     commands:
       tweet:
         description: Send a tweet!
         executable: /Users/chris/cog-book/tweet_cog_wrapper.sh
         arguments: "<message>"
         rules:
-          - must have twitter_example:tweet # 
+          - must have twitter_example:tweet #
     templates:
       tweet:
         body: |
@@ -993,14 +976,14 @@ need to change.
 .. code:: yaml
 
     ---
-    TWITTER_DEFAULT_ACCOUNT: STATUS # 
+    TWITTER_DEFAULT_ACCOUNT: STATUS #
 
-    TWITTER_CONSUMER_KEY_STATUS: XXXX # 
+    TWITTER_CONSUMER_KEY_STATUS: XXXX #
     TWITTER_CONSUMER_SECRET_STATUS: XXXX
     TWITTER_ACCESS_TOKEN_STATUS: XXXX
     TWITTER_ACCESS_TOKEN_SECRET_STATUS: XXXX
 
-    TWITTER_CONSUMER_KEY_MARKETING: YYYY # 
+    TWITTER_CONSUMER_KEY_MARKETING: YYYY #
     TWITTER_CONSUMER_SECRET_MARKETING: YYYY
     TWITTER_ACCESS_TOKEN_MARKETING: YYYY
     TWITTER_ACCESS_TOKEN_SECRET_MARKETING: YYYY
@@ -1025,7 +1008,7 @@ option.
     cog_bundle_version: 4
     name: twitter_example
     description: Interact with Twitter
-    version: 0.0.4 # 
+    version: 0.0.4 #
     permissions:
       - twitter_example:tweet
     commands:
@@ -1035,7 +1018,7 @@ option.
         arguments: "<message>"
         rules:
           - must have twitter_example:tweet
-        options: # 
+        options: #
           as:
             description: the account to tweet from
             type: string
@@ -1069,15 +1052,15 @@ option.
         TWEET_ARGUMENTS[$i]=${!var}
     done
 
-    if [ -n "${COG_OPT_AS}" ] # 
+    if [ -n "${COG_OPT_AS}" ] #
     then
         account=${COG_OPT_AS}
     else
         account=${TWITTER_DEFAULT_ACCOUNT}
     fi
-    account=$(echo $account | tr '[a-z]' '[A-Z]') # 
+    account=$(echo $account | tr '[a-z]' '[A-Z]') #
 
-    # 
+    #
     export TWITTER_CONSUMER_KEY=$(eval "echo \$$(echo TWITTER_CONSUMER_KEY_${account})")
     export TWITTER_CONSUMER_SECRET=$(eval "echo \$$(echo TWITTER_CONSUMER_SECRET_${account})")
     export TWITTER_ACCESS_TOKEN=$(eval "echo \$$(echo TWITTER_ACCESS_TOKEN_${account})")
@@ -1181,8 +1164,8 @@ image should be used to run it.
     cog_bundle_version: 4
     name: twitter_example
     description: Interact with Twitter
-    version: 0.0.5 # 
-    docker: # 
+    version: 0.0.5 #
+    docker: #
       image: cog-book/twitter
       tag: latest
     permissions:
@@ -1190,7 +1173,7 @@ image should be used to run it.
     commands:
       tweet:
         description: Send a tweet!
-        executable: /home/bundle/tweet_cog_wrapper.sh # 
+        executable: /home/bundle/tweet_cog_wrapper.sh #
         arguments: "<message>"
         rules:
           - when command is twitter_example:tweet must have twitter_example:tweet
@@ -1330,20 +1313,20 @@ others being wrapped pre-existing programs.
     require 'twitter'
     require 'json'
 
-    account = (ENV['COG_OPT_AS'] ? ENV['COG_OPT_AS'] : ENV['TWITTER_DEFAULT_ACCOUNT']).upcase # 
+    account = (ENV['COG_OPT_AS'] ? ENV['COG_OPT_AS'] : ENV['TWITTER_DEFAULT_ACCOUNT']).upcase #
     client = Twitter::REST::Client.new(
       consumer_key: ENV["TWITTER_CONSUMER_KEY_#{account}"],
       consumer_secret: ENV["TWITTER_CONSUMER_SECRET_#{account}"],
       access_token: ENV["TWITTER_ACCESS_TOKEN_#{account}"],
       access_token_secret: ENV["TWITTER_ACCESS_TOKEN_SECRET_#{account}"])
 
-    tweets = client.user_timeline(count: 5).map do |tweet| # 
+    tweets = client.user_timeline(count: 5).map do |tweet| #
       {message: tweet.full_text, url: tweet.url}
     end
 
-    puts "COG_TEMPLATE: tweet" # 
+    puts "COG_TEMPLATE: tweet" #
     puts "JSON"
-    puts JSON.generate(tweets) # 
+    puts JSON.generate(tweets) #
 
 -  We’ll take care of the account switching in Ruby, instead of in a
    shell script as we did for the ``tweet`` command earlier.
@@ -1384,21 +1367,21 @@ We’re ready to tackle our ``stats`` command now. Once again, our
     require 'twitter'
     require 'json'
 
-    account = ENV['TWITTER_DEFAULT_ACCOUNT'].upcase # 
+    account = ENV['TWITTER_DEFAULT_ACCOUNT'].upcase #
     client = Twitter::REST::Client.new(
       consumer_key: ENV["TWITTER_CONSUMER_KEY_#{account}"],
       consumer_secret: ENV["TWITTER_CONSUMER_SECRET_#{account}"],
       access_token: ENV["TWITTER_ACCESS_TOKEN_#{account}"],
       access_token_secret: ENV["TWITTER_ACCESS_TOKEN_SECRET_#{account}"])
 
-    tweet = if ENV['COG_ARGC'] == "1" # 
+    tweet = if ENV['COG_ARGC'] == "1" #
               ENV['COG_ARGV_0']
             else
-              tweet = JSON.parse(STDIN.read) # 
+              tweet = JSON.parse(STDIN.read) #
               tweet["url"]
             end
 
-    tweet = client.status(tweet) # 
+    tweet = client.status(tweet) #
 
     puts "COG_TEMPLATE: stats"
     puts "JSON"
@@ -1455,7 +1438,7 @@ try.
             type: string
             required: false
             short_flag: a
-      recent_tweets: # 
+      recent_tweets: #
         description: Last 5 tweets sent from this account
         executable: /home/bundle/recent_tweets.rb
         options:
@@ -1466,7 +1449,7 @@ try.
             short_flag: a
         rules:
           - allow
-      stats: # 
+      stats: #
         description: Favorites and retweets
         arguments: "[tweet_url]"
         executable: /home/bundle/stats.rb
@@ -1479,7 +1462,7 @@ try.
           ~each var=$results~
           ~$item.url~
           ~end~
-      stats: # 
+      stats: #
         body: |
           | Tweet | Favorite Count | Retweet Count |
           |-------|----------------|---------------|
@@ -1597,7 +1580,7 @@ our users.
     require 'twitter'
     require 'json'
 
-    begin # 
+    begin #
       client = Twitter::REST::Client.new(
         consumer_key: ENV["TWITTER_CONSUMER_KEY"],
         consumer_secret: ENV["TWITTER_CONSUMER_SECRET"],
@@ -1611,9 +1594,9 @@ our users.
       puts "COG_TEMPLATE: tweet"
       puts "JSON"
       puts JSON.generate(tweets)
-    rescue Twitter::Error::Unauthorized # 
+    rescue Twitter::Error::Unauthorized #
       STDERR.puts "Could not authenticate with Twitter API; check your authentication tokens!"
-      exit 1 # 
+      exit 1 #
     end
 
 -  Since our command was initially failing due to an uncaught exception,
@@ -1668,7 +1651,7 @@ illustrate.
     require 'twitter'
     require 'json'
 
-    puts "COGCMD_WARN: Starting" # 
+    puts "COGCMD_WARN: Starting" #
 
     client = Twitter::REST::Client.new(
       consumer_key: ENV["TWITTER_CONSUMER_KEY"],
@@ -1676,14 +1659,14 @@ illustrate.
       access_token: ENV["TWITTER_ACCESS_TOKEN"],
       access_token_secret: ENV["TWITTER_ACCESS_TOKEN_SECRET"])
 
-    puts "COGCMD_INFO: Authenticated" # 
+    puts "COGCMD_INFO: Authenticated" #
 
     tweets = client.user_timeline(count: 5).map do |tweet|
-      puts "COGCMD_DEBUG: Tweet - #{tweet.full_text}" # 
+      puts "COGCMD_DEBUG: Tweet - #{tweet.full_text}" #
       {message: tweet.full_text, url: tweet.url}
     end
 
-    puts "COGCMD_ERROR: Generating final output" # 
+    puts "COGCMD_ERROR: Generating final output" #
     puts "COG_TEMPLATE: tweet"
     puts "JSON"
     puts JSON.generate(tweets)
