@@ -303,8 +303,14 @@ yet. Let’s set our api token with ``cogctl``.
 Now there’s just one last step; making sure we have permission to run
 ec2 commands by adding some privileges to the ``cog-admin`` group.
 
-@cog permission grant ec2:read cog-admin @cog permission grant ec2:write
-cog-admin @cog permission grant ec2:admin cog-admin</programlisting>
+.. code-block:: chat
+
+  @cog permission grant ec2:read cog-admin
+  @cog permission grant ec2:write cog-admin
+  @cog permission grant ec2:admin cog-admin
+
 Now try it out!
 
-@cog ec2:instance list</programlisting>
+.. code-block:: chat
+
+  @cog ec2:instance list
