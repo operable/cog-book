@@ -11,48 +11,29 @@ Current Features
 Cog is under heavy development and getting smarter all the time. This list of features gives you an idea of how Cog was built as well as the things that Cog knows how to do.
 
 
-.. image:: ../images/extensible.svg
-
-
 Extensibility
 -------------
-
-Build new bot commands in any language
-
-Commands return structured data to allow for creative adaptation in pipelines
-
-Built in templating allows the command response to be formatted for the current chat provider without embedding markup in your logic
-
-
-.. image:: ../images/adaptability.svg
+* Build new bot commands in any language
+* Commands return structured data to allow for creative adaptation in pipelines
+* Built in templating allows the command response to be formatted for the current chat provider without embedding markup in your logic
 
 Adaptability
 ------------
-Unix-style pipelines allow you to combine a series of simple commands to solve complex, unexpected problems
-
-Support for output redirection lets you make sure everyone is in the loop
-
-.. image:: ../images/security.svg
+* Unix-style pipelines allow you to combine a series of simple commands to solve complex, unexpected problems
+* Support for output redirection lets you make sure everyone is in the loop
 
 Security
 --------
-
-Fine-grained command permissions give you confidence in using chatops for even the most sensitive workflows
-
-Users, Groups, and Roles allow you to organize access control for ease of management
-
-Audit logging for commands and administrative functions keep track of everything that happens with Cog
-
-.. image:: ../images/chat-provider_agnostic.svg
+* Fine-grained command permissions give you confidence in using chatops for even the most sensitive workflows
+* Users, Groups, and Roles allow you to organize access control for ease of management
+* Audit logging for commands and administrative functions keep track of everything that happens with Cog
 
 Chat-Provider Agnostic
 ----------------------
+* Current support for Slack and Hipchat
+* ...other chat clients are on the roadmap!
 
-Current support for Slack and Hipchat
-
-...other chat clients are on the roadmap!
-
-Keep up to date on all things Cog by following `@Operable <https://twitter.com/operableinc>`_ on Twitter. Also, contact us at anytime via `info@operable.io <mailto:info@operable.io>`_.
+.. note:: Keep up to date on all things Cog by following `@Operable <https://twitter.com/operableinc>`_ on Twitter. Also, contact us at anytime via `info@operable.io <mailto:info@operable.io>`_.
 
 Get Started
 ===========

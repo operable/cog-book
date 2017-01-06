@@ -13,8 +13,8 @@ Cog is Built for ChatOps.
 
 Use Cog to manage your infrastructure, support peer learning, and conduct collaborative research at the same time, right from chat. Cog is easy to install and simple to operate while remaining powerful enough to handle complex enterprise workflows.
 
-.. image:: /images/cog_peek.svg
-
+Table of Contents
+-----------------
 .. toctree::
    :numbered:
 
