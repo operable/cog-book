@@ -18,8 +18,12 @@ passed to commands as environment variables starting with ``COG_ARGV_``.
 For example, the following variables will be set as the result of a
 command with 3 arguments as input ``mycommand foo bar baz``.
 
-\`\`\` \* COG\_ARGC=3 \* COG\_ARGV\_0="foo" \* COG\_ARGV\_1="bar" \*
-COG\_ARGV\_2="baz" \`\`\`
+::
+
+  * COG_ARGC=3
+  * COG_ARGV_0="foo"
+  * COG_ARGV_1="bar"
+  * COG_ARGV_2="baz"
 
 Options work in a similar manner. For options Cog sets any options
 passed to commands as environment variables starting with ``COG_OPT_``.
@@ -29,8 +33,12 @@ defining the environment variable. (We’ll get to that in a moment.) So
 if you have the following command, these will be the options set in the
 Cog environment variable: ``mycommand --verbose --force --id=123``.
 
-\`\`\` \* COG\_OPTS="verbose,force,id" \* COG\_OPT\_VERBOSE="true" \*
-COG\_OPT\_FORCE="true" \* COG\_OPT\_ID="123" \`\`\`
+::
+
+  * COG_OPTS="verbose,force,id"
+  * COG_OPT_VERBOSE="true"
+  * COG_OPT_FORCE="true"
+  * COG_OPT_ID="123"
 
 There are other Cog specific variables that are available for use within
 any commands. The following can be accessed from the Cog environment.

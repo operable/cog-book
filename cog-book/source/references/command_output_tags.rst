@@ -55,7 +55,7 @@ JSON response passed to the instances template:
     ]
 
 Output from a command in freeform text which also includes two info
-statements and also uses a template. The info statement will be printend
+statements and also uses a template. The info statement will be printed
 in the logs of the Relay it ran on, while the text output will be
 rendered in the template specified and sent to chat. Even though tags
 were interspersed in the text output, each line that does not start with

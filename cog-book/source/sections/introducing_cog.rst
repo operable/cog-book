@@ -56,7 +56,7 @@ If you find an issue, please open an issue in Cog's `GitHub Repository <https://
 
 Cog Public Chat via Slack
 -------------------------
-Chat with Operable engineers and the growing community in our public `Slack channel <http://slack.operable.io>`_.
+Chat with Operable engineers and the growing community in our public `Slack channel`_.
 
 User experience feedback
 ========================

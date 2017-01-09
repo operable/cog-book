@@ -8,8 +8,8 @@ bundle) run under one or more
 `Relay <https://github.com/operable/go-relay>`__ processes, which can be
 on the same machine as the Cog bot or on different machines.
 
-To learn more about `bundles <#Commands and Bundles>`__ or
-`relays <#Installing and Managing Relays>`__ check out the corresponding
+To learn more about :doc:`bundles <commands_and_bundles>` or
+:doc:`relays <installing_and_managing_relays>` check out the corresponding
 docs.
 
 Prerequisites
@@ -33,12 +33,12 @@ registers the bundle. Registration includes the creation of the
 permissions declared by the bundle, as well as any default rules
 specified in the bundle’s metadata.
 
-    **Note**
+.. note::
 
-    After installation your command will be available but it may not be
-    executable by anyone yet. Before anyone can execute the new command,
-    make sure their permissions are set properly. Check out
-    `??? <#Permissions and Rules>`__ to learn more.
+  After installation your command will be available but it may not be
+  executable by anyone yet. Before anyone can execute the new command,
+  make sure their permissions are set properly. Check out
+  :doc:`permissions_and_rules` to learn more.
 
 Bundles are installed via the ``bundle install`` sub-command in cogctl.
 
@@ -78,15 +78,14 @@ the bundle config file.
 All bundles have a config file. The file is formatted in yaml and
 contains information for installing and executing commands in your
 bundle. To learn more about config files read up on
-`??? <#Bundle Configs>`__. We won’t talk in detail about bundle configs
+:doc:`bundle_configs`. We won’t talk in detail about bundle configs
 in this doc, but minimally the file must contain:
 
 -  **name** - The name of your bundle
 
 -  **version** - The version of your bundle in semver format.
 
-    **Note**
-
+.. note::
     Version must be a string. If you drop the patch number from the
     version, yaml will interpret it as a number and the config will fail
     validation. So if you want to just use major and minor numbers, wrap
@@ -114,8 +113,7 @@ A minimal bundle config might look something like this:
 The command to install the bundle would be
 ``cogctl bundle install /path/to/my_bundle.yaml``.
 
-    **Note**
-
+.. note::
     A bundle is disabled when it is first installed. You must enable it
     before use.
 
@@ -125,8 +123,7 @@ Templates
 The templates flag points to a directory containing any templates for
 your bundle.
 
-    **Note**
-
+.. note::
     You don’t need to explicitly pass the templates flag. By default
     cogctl looks in the current working directory for a directory named
     templates. And if you don’t have any templates for your bundle,
@@ -260,7 +257,7 @@ relay-group to select which relay is capable of running which command.
 
 Relay groups are managed through ``cogctl`` with the ``relay-groups``
 sub-command. For more information read up on
-`??? <#Installing and Managing Relays>`__.
+:doc:`installing_and_managing_relays`.
 
 Optionally during bundle creation you can pass a comma separated list to
 cogctl with the ``--relay-groups`` option.
@@ -271,7 +268,7 @@ Bundles are assigned to relays via relay groups using ``cogctl``.
 
     $ cogctl relay-groups assign my_relay_group --bundles my_bundle
 
-    **Note**
+.. note::
 
     The default refresh interval for a relay is 15 minutes (set in the
     relay configuration file - ``relay.conf``). Be sure to wait for the
@@ -291,12 +288,12 @@ commands in the bundle will also be deleted. In this regard, bundle
 uninstallation is not reversible. You can re-install to get back the
 bundle permissions and default rules, but your custom ones will be gone
 forever. If you only wish to disable a bundle, see
-`??? <#Enabling and Disabling Bundle Versions>`__ above instead.
+`Enabling and Disabling Bundle Versions`_ above instead.
 
 Before a bundle can be uninstalled it must first be disabled. To
 uninstall a bundle just use ``cogctl``.
 
-    **Warning**
+.. warning::
 
     Since uninstalling all versions of a bundle can be quite
     destructive, you must pass the ``--all`` flag to ``cogctl``.
