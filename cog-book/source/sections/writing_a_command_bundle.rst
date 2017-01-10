@@ -120,44 +120,40 @@ The complete code is shown in :ref:`Command, Pure Ruby<pure-ruby-tweet>`.
 
 **tweet Command, Pure Ruby.**
 
-.. code:: ruby
+.. code-block:: ruby
+  :linenos:
 
     #!/usr/bin/env ruby
 
     require 'twitter'
 
-    client = Twitter::REST::Client.new( #
+    client = Twitter::REST::Client.new(
       consumer_key: ENV["TWITTER_CONSUMER_KEY"],
       consumer_secret: ENV["TWITTER_CONSUMER_SECRET"],
       access_token: ENV["TWITTER_ACCESS_TOKEN"],
       access_token_secret: ENV["TWITTER_ACCESS_TOKEN_SECRET"])
 
-    message = ARGV.join(" ") #
+    message = ARGV.join(" ")
 
-    tweet = client.update(message) #
+    tweet = client.update(message)
 
-    #
+
     puts <<-EOM
     Message: #{message}
     URL:     #{tweet.url}
     EOM
 
--  Here, we establish a connection to the Twitter API, using our API
-   credentials, stored as environment variables.
+**Annotations by line number:**
 
--  Next, we’ll assemble a message to send by combining all the command
-   line arguments into a single string. This allows us to invoke our
-   command like ``twitter:tweet this is a tweet``, or
-   ``twitter:tweet "this is a tweet"``. The former is often more
-   convenient, but the latter is needed when the message contains
-   special characters, like ``!``.
+**Line 5** Here, we establish a connection to the Twitter API, using our API credentials, stored as environment variables.
 
--  Here, we actually send the message to Twitter.
+**Line 11** Next, we’ll assemble a message to send by combining all the command line arguments into a single string. This allows us to invoke our command like ``twitter:tweet this is a tweet``, or ``twitter:tweet "this is a tweet"``. The former is often more convenient, but the latter is needed when the message contains special characters, like ``!``.
 
--  Finally, we’ll return some information to standard output so we can
-   find out the URL of our new tweet. There is other information we
-   could add (like timestamp, tweet ID, etc.), but for now, we’ll keep
-   it simple.
+**Line 13** Here, we actually send the message to Twitter.
+
+**Line 15** Finally, we’ll return some information to standard output so we can
+find out the URL of our new tweet. There is other information we
+could add (like timestamp, tweet ID, etc.), but for now, we’ll keep it simple.
 
 To make life easier, let’s create a ``Gemfile`` in our directory to
 manage our dependencies. We’ll also use this later when we package our
@@ -179,10 +175,11 @@ our terminal, as seen in :ref:`Executing the Pure Ruby tweet<execute-pure-ruby-t
 
 **Executing the Pure Ruby ``tweet`` Command.**
 
-::
+.. code-block:: bash
+  :linenos:
 
-    $ bundle install #
-    $ export TWITTER_CONSUMER_KEY=XXXX #
+    $ bundle install
+    $ export TWITTER_CONSUMER_KEY=XXXX
     $ export TWITTER_CONSUMER_SECRET=XXXX
     $ export TWITTER_ACCESS_TOKEN=XXXX
     $ export TWITTER_ACCESS_TOKEN_SECRET=XXXX
@@ -190,10 +187,11 @@ our terminal, as seen in :ref:`Executing the Pure Ruby tweet<execute-pure-ruby-t
     Message: This is an interesting tweet
     URL:     https://twitter.com/CogTesting/status/776507696396791809
 
--  We only need to install our dependencies once.
+**Annotations by line number:**
 
--  Substituting the appropriate values for our real credentials, of
-   course.
+**Line 1** We only need to install our dependencies once.
+
+**Line 2** Substituting the appropriate values for our real credentials, of course.
 
 By checking that URL, we can further verify that our command worked.
 
@@ -280,26 +278,29 @@ following code *is* Cog to our nascent command.
 
 **Run Our Command from the Command Line.**
 
-::
+.. code-block:: bash
+    :linenos:
 
     $ export TWITTER_CONSUMER_KEY=XXXX
     $ export TWITTER_CONSUMER_SECRET=XXXX
     $ export TWITTER_ACCESS_TOKEN=XXXX
     $ export TWITTER_ACCESS_TOKEN_SECRET=XXXX
 
-    $ export COG_ARGC="2" #
+    $ export COG_ARGC="2"
     $ export COG_ARGV_0="Hello"
     $ export COG_ARGV_1="World"
 
-    $ ./tweet_cog_wrapper.sh #
+    $ ./tweet_cog_wrapper.sh
 
--  Here, we introduce Cog’s environment variables into our runner
-   script. This would correspond to ``@cog twitter:tweet Hello World``
-   in our chat provider. Cog will parse the ``Hello World`` message as
-   two separate arguments.
+**Annotations by line number:**
 
--  Instead of calling our Ruby code directly, we introduce a new adapter
-   script to process the Cog environment variables.
+**Line 6**  Here, we introduce Cog’s environment variables into our runner
+script. This would correspond to ``@cog twitter:tweet Hello World``
+in our chat provider. Cog will parse the ``Hello World`` message as
+two separate arguments.
+
+**Line 10** Instead of calling our Ruby code directly, we introduce a new adapter
+script to process the Cog environment variables.
 
 Our Cog command is shown in :ref:`tweet\_cog\_wrapper.sh<tweet-cog-wrapper>`
 Remember, this is acting as an adapter that allows us to call our
@@ -310,27 +311,29 @@ at all. This adapter script is the only thing that is aware of Cog.
 
 **tweet\_cog\_wrapper.sh.**
 
-.. code:: bash
+.. code-block:: bash
+    :linenos:
 
     #!/bin/bash
 
-    declare -a ARGUMENTS #
+    declare -a ARGUMENTS
     for ((i=0;i<${COG_ARGC};i++)); do
         var="COG_ARGV_${i}"
         ARGUMENTS[$i]=${!var}
     done
 
-    ./tweet.rb ${ARGUMENTS[*]} #
+    ./tweet.rb ${ARGUMENTS[*]}
 
--  We need to pull out the ``COG_ARGV_*`` variables to pass as actual
-   arguments to our Ruby script. Here, we loop as determined by the
-   ``COG_ARGC`` variable, placing each ``COG_ARGV_*`` variable into a
-   Bash array in turn.
+**Annotations by line number:**
 
--  With the pieces of our message extracted from the environment, we can
-   now call our Ruby script just as we have previously, passing the
-   arguments as actual arguments. Compare this to the invocation of
-   ``tweet.rb`` in :ref:`Executing the Pure Ruby tweet<execute-pure-ruby-tweet>`.
+**Line 3** We need to pull out the ``COG_ARGV_*`` variables to pass as actual
+arguments to our Ruby script. Here, we loop as determined by the
+``COG_ARGC`` variable, placing each ``COG_ARGV_*`` variable into a Bash array in turn.
+
+**Line 9** With the pieces of our message extracted from the environment, we can
+now call our Ruby script just as we have previously, passing the
+arguments as actual arguments. Compare this to the invocation of
+``tweet.rb`` in :ref:`Executing the Pure Ruby tweet<execute-pure-ruby-tweet>`.
 
 When we execute our command in the terminal, it works as expected.
 
@@ -431,53 +434,56 @@ bundle.
 
 **Minimal ``config.yaml`` Bundle Definition.**
 
-.. code:: yaml
+.. code-block:: yaml
+    :linenos:
 
     ---
-    cog_bundle_version: 4 #
-    name: twitter_example #
-    description: Interact with Twitter #
-    version: 0.0.1 #
-    commands: #
+    cog_bundle_version: 4
+    name: twitter_example
+    description: Interact with Twitter
+    version: 0.0.1
+    commands:
       tweet:
         description: Send a tweet!
-        executable: /Users/chris/cog-book/tweet_cog_wrapper.sh #
-        arguments: "<message>" #
+        executable: /Users/chris/cog-book/tweet_cog_wrapper.sh
+        arguments: "<message>"
         rules:
-          - allow #
+          - allow
 
--  Every bundle must declare which bundle definition schema version it
-   uses. This determines which fields are expected, how their values are
-   validated, and so on. At the time of writing, the current version is
-   ``4``.
+**Annotations by line number:**
 
--  Every bundle must have a name. These must be unique within a Cog
-   installation.
+**Line 2** Every bundle must declare which bundle definition schema version it
+uses. This determines which fields are expected, how their values are
+validated, and so on. At the time of writing, the current version is
+``4``.
 
--  While not strictly required, it is a good practice to include a brief
-   description of the bundle. This will be displayed when listing
-   bundles that are installed on a Cog system, helping users discover
-   which commmands are available.
+**Line 3** Every bundle must have a name. These must be unique within a Cog
+installation.
 
--  This version pertains to the bundle definition artifact itself.
-   Multiple versions of a bundle may be installed on a Cog system at one
-   time, though only one may be active.
+**Line 4** While not strictly required, it is a good practice to include a brief
+description of the bundle. This will be displayed when listing
+bundles that are installed on a Cog system, helping users discover
+which commmands are available.
 
--  In order for Cog to recognize a command, it must be described here in
-   the ``commands`` section. The keys of this map are the command names,
-   and the values are objects providing metadata about the command.
+**Line 5** This version pertains to the bundle definition artifact itself.
+Multiple versions of a bundle may be installed on a Cog system at one
+time, though only one may be active.
 
--  The path to the actual program that contains the command logic. This
-   is what we are writing!
+**Line 6** In order for Cog to recognize a command, it must be described here in
+the ``commands`` section. The keys of this map are the command names,
+and the values are objects providing metadata about the command.
 
--  Though not required, describing the inputs your command takes is
-   always a good idea.
+**Line 9** The path to the actual program that contains the command logic. This
+is what we are writing!
 
--  Cog has a comprehensive authorization system that allows you to
-   define rules that govern who may execute a command. We’ll explore
-   this further in a bit, but for now, just remember that the special
-   ``allow`` rule means that any Cog user will be able to execute this
-   command.
+**Line 10** Though not required, describing the inputs your command takes is
+always a good idea.
+
+**Line 12** Cog has a comprehensive authorization system that allows you to
+define rules that govern who may execute a command. We’ll explore
+this further in a bit, but for now, just remember that the special
+``allow`` rule means that any Cog user will be able to execute this
+command.
 
 Now that we’ve described our bundle, we need to upload this definition
 file to Cog.
@@ -645,7 +651,8 @@ Let’s update our adapter script to generate structured output.
 
 **tweet\_cog\_wrapper.sh with structured output.**
 
-.. code:: bash
+.. code-block:: bash
+    :linenos:
 
     #!/bin/bash
 
@@ -655,26 +662,28 @@ Let’s update our adapter script to generate structured output.
         TWEET_ARGUMENTS[$i]=${!var}
     done
 
-    output=$(bundle exec $(dirname ${0})/tweet.rb ${TWEET_ARGUMENTS[*]}) #
+    output=$(bundle exec $(dirname ${0})/tweet.rb ${TWEET_ARGUMENTS[*]})
 
-    message=$(echo "$output" | grep "Message: " | cut -d":" -f2 | sed -e 's/^ *//') #
+    message=$(echo "$output" | grep "Message: " | cut -d":" -f2 | sed -e 's/^ *//')
     url=$(echo "$output" | grep "URL: " | sed -e 's/^URL: *//')
 
-    echo "JSON" #
+    echo "JSON"
     echo "{\"message\": \"${message}\", \"url\": \"${url}\"}"
 
--  Instead of returning the standard output directly to Cog, we’ll
-   capture it in our adapter script to perform some post-processing.
+**Annotations by line number:**
 
--  Here, we use common Unix utilities to extract our tweet message and
-   URL from the output. You can use whatever tools you like for this.
+**Line 9** Instead of returning the standard output directly to Cog, we’ll
+capture it in our adapter script to perform some post-processing.
 
--  If the output contains the string ``"JSON"`` on a line by itself,
-   followed by a newline, the remainder of the output is treated as
-   JSON. Here, we manually create a JSON version of the plain text
-   output we were originally returning. Of course, you can generate JSON
-   in any number of ways; we’re taking the manual route here for
-   demonstration purposes, and because the object itself is so simple.
+**Line 11** Here, we use common Unix utilities to extract our tweet message and
+URL from the output. You can use whatever tools you like for this.
+
+**Line 14** If the output contains the string ``"JSON"`` on a line by itself,
+followed by a newline, the remainder of the output is treated as
+JSON. Here, we manually create a JSON version of the plain text
+output we were originally returning. Of course, you can generate JSON
+in any number of ways; we’re taking the manual route here for
+demonstration purposes, and because the object itself is so simple.
 
 The ``JSON`` tag in our output is a "command response attribute", one of
 several that can be used by commands. We’ll touch on a few more in this
@@ -753,33 +762,36 @@ definition file.
 
 **Adding Templates to the Bundle Definition.**
 
-.. code:: yaml
+.. code-block:: yaml
+    :linenos:
 
     ---
     cog_bundle_version: 4
     name: twitter_example
     description: Interact with Twitter
-    version: 0.0.2 #
+    version: 0.0.2
     commands:
       tweet:
         description: Send a tweet!
         executable: /Users/chris/cog-book/tweet_cog_wrapper.sh
         arguments: "<message>"
         rules: [ 'allow' ]
-    templates: #
+    templates:
       tweet:
         body: |
           ~each var=$results~
           ~$item.url~
           ~end~
 
--  Note that we have updated the version of the bundle. You must do this
-   if you want to upload a new definition with a new template, new
-   command, or otherwise altered metadata.
+**Annotations by line number:**
 
--  Here we have a new top-level section of the bundle: ``templates``.
-   The keys of this map are the names of templates, while the values are
-   objects whose ``body`` key stores the literal text of the template.
+**Line 5** Note that we have updated the version of the bundle. You must do this
+if you want to upload a new definition with a new template, new
+command, or otherwise altered metadata.
+
+**Line 12** Here we have a new top-level section of the bundle: ``templates``.
+The keys of this map are the names of templates, while the values are
+objects whose ``body`` key stores the literal text of the template.
 
 Once we install this bundle there’s one more modification we must make
 to our adapter script. We must somehow inform Cog which template it
@@ -789,7 +801,8 @@ command response attribute.
 
 **Specifying a Template in a Command.**
 
-.. code:: bash
+.. code-block:: bash
+    :linenos:
 
     #!/bin/bash
 
@@ -804,15 +817,17 @@ command response attribute.
     message=$(echo "$output" | grep "Message: " | cut -d":" -f2 | sed -e 's/^ *//')
     url=$(echo "$output" | grep "URL: " | sed -e 's/^URL: *//')
 
-    echo "COG_TEMPLATE: tweet" #
+    echo "COG_TEMPLATE: tweet"
     echo "JSON"
     echo "{\"message\": \"${message}\", \"url\": \"${url}\"}"
 
--  An output line that begins with ``COG_TEMPLATE:`` is a special
-   command response attribute; whatever follows on that line is the name
-   of a template *in that command’s bundle* that should be used for
-   formatting. Our template is called "tweet", as defined in our bundle
-   definition YAML ``templates`` section.
+**Annotation by Line Numbers:**
+
+**Line 14** An output line that begins with ``COG_TEMPLATE:`` is a special
+command response attribute; whatever follows on that line is the name
+of a template *in that command’s bundle* that should be used for
+formatting. Our template is called "tweet", as defined in our bundle
+definition YAML ``templates`` section.
 
 Bundles may include many templates, and since a command programmatically
 indicates which template to use, any single command may actually use
@@ -876,22 +891,23 @@ as a rule for the command.
 
 **Adding Permissions and Rules to the Bundle.**
 
-.. code:: yaml
+.. code-block:: yaml
+    :linenos:
 
     ---
     cog_bundle_version: 4
     name: twitter_example
     description: Interact with Twitter
-    version: 0.0.3 #
+    version: 0.0.3
     permissions:
-      - twitter_example:tweet #
+      - twitter_example:tweet
     commands:
       tweet:
         description: Send a tweet!
         executable: /Users/chris/cog-book/tweet_cog_wrapper.sh
         arguments: "<message>"
         rules:
-          - must have twitter_example:tweet #
+          - must have twitter_example:tweet
     templates:
       tweet:
         body: |
@@ -899,14 +915,16 @@ as a rule for the command.
           ~$item.url~
           ~end~
 
--  We’re adding to the bundle, so we bump the version
+**Annotations by line number:**
 
--  A new ``permissions`` key holds a list of permissions used across the
-   entire bundle. Customarily, there is a permission for each command.
+**Line 5** We’re adding to the bundle, so we bump the version
 
--  We replace our "allow" rule with a new one that states that anyone
-   excuting our tweet command must have been granted the
-   ``twitter_example:tweet`` permission.
+**Line 7** A new ``permissions`` key holds a list of permissions used across the
+entire bundle. Customarily, there is a permission for each command.
+
+**Line 14** We replace our "allow" rule with a new one that states that anyone
+excuting our tweet command must have been granted the
+``twitter_example:tweet`` permission.
 
 Once we’ve installed this new version, let’s try it out.
 
@@ -991,42 +1009,46 @@ need to change.
 
 **Updated Dynamic Configuration for Multiple Twitter Accounts.**
 
-.. code:: yaml
+.. code-block:: yaml
+    :linenos:
 
     ---
-    TWITTER_DEFAULT_ACCOUNT: STATUS #
+    TWITTER_DEFAULT_ACCOUNT: STATUS
 
-    TWITTER_CONSUMER_KEY_STATUS: XXXX #
+    TWITTER_CONSUMER_KEY_STATUS: XXXX
     TWITTER_CONSUMER_SECRET_STATUS: XXXX
     TWITTER_ACCESS_TOKEN_STATUS: XXXX
     TWITTER_ACCESS_TOKEN_SECRET_STATUS: XXXX
 
-    TWITTER_CONSUMER_KEY_MARKETING: YYYY #
+    TWITTER_CONSUMER_KEY_MARKETING: YYYY
     TWITTER_CONSUMER_SECRET_MARKETING: YYYY
     TWITTER_ACCESS_TOKEN_MARKETING: YYYY
     TWITTER_ACCESS_TOKEN_SECRET_MARKETING: YYYY
 
--  We introduce a new variable indicating which set of credentials to
-   use if no ``--as`` option is supplied.
+**Annotations by line number:**
 
--  We have changed the names of the environment variables by adding a
-   suffix. This set will be used when the value of ``--as`` is "STATUS".
+**Line 2** We introduce a new variable indicating which set of credentials to
+use if no ``--as`` option is supplied.
 
--  We can add as many sets of credentials as we wish to support; as long
-   as the variable names have distinct suffixes, everything is fine.
+**Line 4** We have changed the names of the environment variables by adding a
+suffix. This set will be used when the value of ``--as`` is "STATUS".
+
+**Line 9** We can add as many sets of credentials as we wish to support; as long
+as the variable names have distinct suffixes, everything is fine.
 
 Next, let’s see how our bundle definition needs to change to add this
 option.
 
 **Adding Options to a Command.**
 
-.. code:: yaml
+.. code-block:: yaml
+    :linenos:
 
     ---
     cog_bundle_version: 4
     name: twitter_example
     description: Interact with Twitter
-    version: 0.0.4 #
+    version: 0.0.4
     permissions:
       - twitter_example:tweet
     commands:
@@ -1036,7 +1058,7 @@ option.
         arguments: "<message>"
         rules:
           - must have twitter_example:tweet
-        options: #
+        options:
           as:
             description: the account to tweet from
             type: string
@@ -1049,18 +1071,21 @@ option.
           ~$item.url~
           ~end~
 
--  Again, we bump the version of our bundle
+**Annotations by line number:**
 
--  Each command can have an ``options`` map; the keys are the option’s
-   "long name", and the value object describes additional metadata about
-   the option.
+**Line 5** Again, we bump the version of our bundle
+
+**Line 15** Each command can have an ``options`` map; the keys are the option’s
+"long name", and the value object describes additional metadata about
+the option.
 
 Finally, we modify our adapter script now to see how to access this
 option.
 
 **Access Option Values in a Command.**
 
-.. code:: bash
+.. code-block:: bash
+    :linenos:
 
     #!/bin/bash
 
@@ -1070,15 +1095,15 @@ option.
         TWEET_ARGUMENTS[$i]=${!var}
     done
 
-    if [ -n "${COG_OPT_AS}" ] #
+    if [ -n "${COG_OPT_AS}" ]
     then
         account=${COG_OPT_AS}
     else
         account=${TWITTER_DEFAULT_ACCOUNT}
     fi
-    account=$(echo $account | tr '[a-z]' '[A-Z]') #
+    account=$(echo $account | tr '[a-z]' '[A-Z]')
 
-    #
+
     export TWITTER_CONSUMER_KEY=$(eval "echo \$$(echo TWITTER_CONSUMER_KEY_${account})")
     export TWITTER_CONSUMER_SECRET=$(eval "echo \$$(echo TWITTER_CONSUMER_SECRET_${account})")
     export TWITTER_ACCESS_TOKEN=$(eval "echo \$$(echo TWITTER_ACCESS_TOKEN_${account})")
@@ -1093,22 +1118,24 @@ option.
     echo "JSON"
     echo "{\"message\": \"${message}\", \"url\": \"${url}\"}"
 
--  Here we test to see if there is a value for the ``COG_OPT_AS``
-   variable. All option values are presented this way, using the
-   uppercased "long name" of the option (thus a "foo" option would be
-   accessed as ``COG_OPT_FOO``, etc.) A ``COG_OPTS`` variable is also
-   supplied, the value of which is a comma-delimited list of options
-   present for the invocation. This is used to indicate which
-   environment variables need to be checked. For our adapter script,
-   however, which is coded specifically for this one-option command,
-   ``COG_OPTS`` does not provide much benefit.
+**Annotations by line number:**
 
--  We’ll just uppercase the account identifier, which creates a more
-   pleasing user experience; it’s easier to type "--as=status" than
-   "--as=STATUS", after all.
+**Line 9**   Here we test to see if there is a value for the ``COG_OPT_AS``
+variable. All option values are presented this way, using the
+uppercased "long name" of the option (thus a "foo" option would be
+accessed as ``COG_OPT_FOO``, etc.) A ``COG_OPTS`` variable is also
+supplied, the value of which is a comma-delimited list of options
+present for the invocation. This is used to indicate which
+environment variables need to be checked. For our adapter script,
+however, which is coded specifically for this one-option command,
+``COG_OPTS`` does not provide much benefit.
 
--  Based on the account we want to use, we’ll set the environment
-   variables our command expects to their appropriate values.
+**Line 15** We’ll just uppercase the account identifier, which creates a more
+pleasing user experience; it’s easier to type "--as=status" than
+"--as=STATUS", after all.
+
+**Line 17** Based on the account we want to use, we’ll set the environment
+variables our command expects to their appropriate values.
 
 Observe again that we haven’t touched our underlying Ruby script at all
 since we initially wrote it.
@@ -1175,14 +1202,15 @@ image should be used to run it.
 
 **Linking a Bundle to a Docker Image.**
 
-.. code:: yaml
+.. code-block:: yaml
+    :linenos:
 
     ---
     cog_bundle_version: 4
     name: twitter_example
     description: Interact with Twitter
-    version: 0.0.5 #
-    docker: #
+    version: 0.0.5
+    docker:
       image: cog-book/twitter
       tag: latest
     permissions:
@@ -1190,7 +1218,7 @@ image should be used to run it.
     commands:
       tweet:
         description: Send a tweet!
-        executable: /home/bundle/tweet_cog_wrapper.sh #
+        executable: /home/bundle/tweet_cog_wrapper.sh
         arguments: "<message>"
         rules:
           - when command is twitter_example:tweet must have twitter_example:tweet
@@ -1207,20 +1235,22 @@ image should be used to run it.
           ~$item.url~
           ~end~
 
--  Bump the version; you know the drill by now
+**Annotations by line number:**
 
--  Docker-enabled bundles have a ``docker`` configuration section,
-   indicating exactly which container should be used. We use the same
-   image name that we built our Dockerfile with. Specifying "latest" for
-   the tag will cause Relay to pull the most recent version of the image
-   when running the commmands from the bundle. This is useful for local
-   development, and potentially for other specialized use cases, but for
-   a proper release, you’ll want to both build your image with a
-   specific tag, and also lock your bundle to that tag.
+**Line 5** Bump the version; you know the drill by now
 
--  We’ve changed the path to the executable. This is from inside the
-   container, so it needs to match up with where the code was installed
-   when the image was built.
+**Line 6** Docker-enabled bundles have a ``docker`` configuration section,
+indicating exactly which container should be used. We use the same
+image name that we built our Dockerfile with. Specifying "latest" for
+the tag will cause Relay to pull the most recent version of the image
+when running the commmands from the bundle. This is useful for local
+development, and potentially for other specialized use cases, but for
+a proper release, you’ll want to both build your image with a
+specific tag, and also lock your bundle to that tag.
+
+**Line 14** We’ve changed the path to the executable. This is from inside the
+container, so it needs to match up with where the code was installed
+when the image was built.
 
 Once we install it, we can see from Relay’s logs that it has been
 notified and is downloading the image:
@@ -1322,7 +1352,8 @@ others being wrapped pre-existing programs.
 
 **``recent_tweets`` Cog Command.**
 
-.. code:: ruby
+.. code-block:: ruby
+    :linenos:
 
     #!/usr/bin/env ruby
 
@@ -1330,39 +1361,41 @@ others being wrapped pre-existing programs.
     require 'twitter'
     require 'json'
 
-    account = (ENV['COG_OPT_AS'] ? ENV['COG_OPT_AS'] : ENV['TWITTER_DEFAULT_ACCOUNT']).upcase #
+    account = (ENV['COG_OPT_AS'] ? ENV['COG_OPT_AS'] : ENV['TWITTER_DEFAULT_ACCOUNT']).upcase
     client = Twitter::REST::Client.new(
       consumer_key: ENV["TWITTER_CONSUMER_KEY_#{account}"],
       consumer_secret: ENV["TWITTER_CONSUMER_SECRET_#{account}"],
       access_token: ENV["TWITTER_ACCESS_TOKEN_#{account}"],
       access_token_secret: ENV["TWITTER_ACCESS_TOKEN_SECRET_#{account}"])
 
-    tweets = client.user_timeline(count: 5).map do |tweet| #
+    tweets = client.user_timeline(count: 5).map do |tweet|
       {message: tweet.full_text, url: tweet.url}
     end
 
-    puts "COG_TEMPLATE: tweet" #
+    puts "COG_TEMPLATE: tweet"
     puts "JSON"
-    puts JSON.generate(tweets) #
+    puts JSON.generate(tweets)
 
--  We’ll take care of the account switching in Ruby, instead of in a
-   shell script as we did for the ``tweet`` command earlier.
+**Annotations by line number:**
 
--  Here we call the client’s API method that retrieves tweets from our
-   authenticated user. As called here, this will result in no more than
-   5 tweets. This is configurable in the API client we’re using,
-   however; a refinement of this command could involve accepting an
-   optional number of tweets to retrieve.
+**Line 7** We’ll take care of the account switching in Ruby, instead of in a
+shell script as we did for the ``tweet`` command earlier.
 
--  As before, we specify our template to use. Notice, however, that
-   we’re using the same template as our earlier ``tweet`` command. This
-   is intentional; we’re generating the same "shape" of data, and so
-   it’s natural that we’d template it the same way. A command can use
-   any template within its own bundle.
+**Line 14** Here we call the client’s API method that retrieves tweets from our
+authenticated user. As called here, this will result in no more than
+5 tweets. This is configurable in the API client we’re using,
+however; a refinement of this command could involve accepting an
+optional number of tweets to retrieve.
 
--  Here we generate the JSON string to send back, but notice this time
-   we’re sending back an array of objects; in our ``tweet`` command, we
-   only sent back a single object.
+**Line 18** As before, we specify our template to use. Notice, however, that
+we’re using the same template as our earlier ``tweet`` command. This
+is intentional; we’re generating the same "shape" of data, and so
+it’s natural that we’d template it the same way. A command can use
+any template within its own bundle.
+
+**Line 20** Here we generate the JSON string to send back, but notice this time
+we’re sending back an array of objects; in our ``tweet`` command, we
+only sent back a single object.
 
 Now that we’ve got a source of tweets, let’s see how we can process them
 in a downstream command.
@@ -1376,7 +1409,8 @@ We’re ready to tackle our ``stats`` command now. Once again, our
 
 **Twitter ``stats`` Command.**
 
-.. code:: ruby
+.. code-block:: ruby
+    :linenos:
 
     #!/usr/bin/env ruby
 
@@ -1384,21 +1418,21 @@ We’re ready to tackle our ``stats`` command now. Once again, our
     require 'twitter'
     require 'json'
 
-    account = ENV['TWITTER_DEFAULT_ACCOUNT'].upcase #
+    account = ENV['TWITTER_DEFAULT_ACCOUNT'].upcase
     client = Twitter::REST::Client.new(
       consumer_key: ENV["TWITTER_CONSUMER_KEY_#{account}"],
       consumer_secret: ENV["TWITTER_CONSUMER_SECRET_#{account}"],
       access_token: ENV["TWITTER_ACCESS_TOKEN_#{account}"],
       access_token_secret: ENV["TWITTER_ACCESS_TOKEN_SECRET_#{account}"])
 
-    tweet = if ENV['COG_ARGC'] == "1" #
+    tweet = if ENV['COG_ARGC'] == "1"
               ENV['COG_ARGV_0']
             else
-              tweet = JSON.parse(STDIN.read) #
+              tweet = JSON.parse(STDIN.read)
               tweet["url"]
             end
 
-    tweet = client.status(tweet) #
+    tweet = client.status(tweet)
 
     puts "COG_TEMPLATE: stats"
     puts "JSON"
@@ -1406,31 +1440,34 @@ We’re ready to tackle our ``stats`` command now. Once again, our
                         favorites: tweet.favorite_count,
                         retweets: tweet.retweet_count})
 
--  For this command, it doesn’t matter what account we use (i.e., there
-   will be no ``--as`` option). We’ll just use the default one.
+**Annotations by line number:**
 
--  Though we’re talking about processing input from previous pipeline
-   stages, we shouldn’t *require* that (otherwise our command could
-   never be called on its own, because there would be no previous stage
-   to feed it!). If our command is passed an argument (in this case the
-   URL of a tweet), then that is what it will operate on.
+**Line 7** For this command, it doesn’t matter what account we use (i.e., there
+will be no ``--as`` option). We’ll just use the default one.
 
--  On the other hand, if we don’t receive an argument, we’ll read
-   standard input as a JSON map, and extract the ``url`` field from it.
-   Remember, we’re handling the case where we’re receiving a map that
-   looks like what our ``tweet`` command produces.
+**Line 14** Though we’re talking about processing input from previous pipeline
+stages, we shouldn’t *require* that (otherwise our command could
+never be called on its own, because there would be no previous stage
+to feed it!). If our command is passed an argument (in this case the
+URL of a tweet), then that is what it will operate on.
 
--  This call simply "rehydrates" a Ruby tweet object from the URL. From
-   this we can extract the number of favorites and retweets the tweet
-   has. We’ll output plain text, just as we did in our original
-   ``tweet.rb`` script.
+**Line 17** On the other hand, if we don’t receive an argument, we’ll read
+standard input as a JSON map, and extract the ``url`` field from it.
+Remember, we’re handling the case where we’re receiving a map that
+looks like what our ``tweet`` command produces.
+
+**Line 21** This call simply "rehydrates" a Ruby tweet object from the URL. From
+this we can extract the number of favorites and retweets the tweet
+has. We’ll output plain text, just as we did in our original
+``tweet.rb`` script.
 
 Let’s add these new commands to our bundle, install it, and give them a
 try.
 
 **Final Bundle Configuration.**
 
-.. code:: yaml
+.. code-block:: yaml
+    :linenos:
 
     ---
     cog_bundle_version: 4
@@ -1455,7 +1492,7 @@ try.
             type: string
             required: false
             short_flag: a
-      recent_tweets: #
+      recent_tweets:
         description: Last 5 tweets sent from this account
         executable: /home/bundle/recent_tweets.rb
         options:
@@ -1466,7 +1503,7 @@ try.
             short_flag: a
         rules:
           - allow
-      stats: #
+      stats:
         description: Favorites and retweets
         arguments: "[tweet_url]"
         executable: /home/bundle/stats.rb
@@ -1479,7 +1516,7 @@ try.
           ~each var=$results~
           ~$item.url~
           ~end~
-      stats: #
+      stats:
         body: |
           | Tweet | Favorite Count | Retweet Count |
           |-------|----------------|---------------|
@@ -1487,17 +1524,19 @@ try.
           |~$item.message~|~$item.favorites~|~$item.retweets~|
           ~end~
 
--  Add the metadata for the ``recent_tweets`` command. Remember to add
-   the ``as`` option!
+**Annotations by line number:**
 
--  Here’s the metadata for the ``stats`` command. This command takes no
-   options, but we do want to indicate that it can take an optional
-   ``tweet_url`` argument, for use outside of pipelines.
+**Line 24** Add the metadata for the ``recent_tweets`` command. Remember to add
+the ``as`` option!
 
--  Here’s the new ``stats`` template. This will actually generate a nice
-   table from our results. Templates can have conditional logic, so we
-   could modify this to display differently if we’re only given a single
-   tweet. What we have will work in all cases, however.
+**Line 35** Here’s the metadata for the ``stats`` command. This command takes no
+options, but we do want to indicate that it can take an optional
+``tweet_url`` argument, for use outside of pipelines.
+
+**Line 48** Here’s the new ``stats`` template. This will actually generate a nice
+table from our results. Templates can have conditional logic, so we
+could modify this to display differently if we’re only given a single
+tweet. What we have will work in all cases, however.
 
 Once we rebuild our Docker image and install the bundle, we can finally
 test it all out. First, let’s take a look at ``recent_tweets``.
@@ -1589,14 +1628,15 @@ our users.
 
 **Adding Custom Error Handling to the ``recent_tweets`` Command.**
 
-.. code:: ruby
+.. code-block:: ruby
+    :linenos:
 
     #!/usr/bin/env ruby
 
     require 'twitter'
     require 'json'
 
-    begin #
+    begin
       client = Twitter::REST::Client.new(
         consumer_key: ENV["TWITTER_CONSUMER_KEY"],
         consumer_secret: ENV["TWITTER_CONSUMER_SECRET"],
@@ -1610,22 +1650,24 @@ our users.
       puts "COG_TEMPLATE: tweet"
       puts "JSON"
       puts JSON.generate(tweets)
-    rescue Twitter::Error::Unauthorized #
+    rescue Twitter::Error::Unauthorized
       STDERR.puts "Could not authenticate with Twitter API; check your authentication tokens!"
-      exit 1 #
+      exit 1
     end
 
--  Since our command was initially failing due to an uncaught exception,
-   we’ll wrap our code in a ``begin``/``rescue`` construct.
+**Annotations by line number:**
 
--  When we have bad tokens, the code will throw a
-   ``Twitter::Error::Unauthorized`` exception. We’ll explicitly handle
-   that scenario here. You can create as many ``rescue`` clauses as
-   there are specific exceptions you’d like to deal with, or you could
-   just have a "catch-all" ``rescue`` clause; it’s up to you.
+**Line 6** Since our command was initially failing due to an uncaught exception,
+we’ll wrap our code in a ``begin``/``rescue`` construct.
 
--  After we output a custom error message on standard error, we quit the
-   program with a non-zero exit code.
+**Line 20** When we have bad tokens, the code will throw a
+``Twitter::Error::Unauthorized`` exception. We’ll explicitly handle
+that scenario here. You can create as many ``rescue`` clauses as
+there are specific exceptions you’d like to deal with, or you could
+just have a "catch-all" ``rescue`` clause; it’s up to you.
+
+**Line 22** After we output a custom error message on standard error, we quit the
+program with a non-zero exit code.
 
 Now, when we run the command with bad tokens, we’ll get a much nicer
 output.
@@ -1660,14 +1702,15 @@ illustrate.
 
 **Logging from a Cog Command.**
 
-.. code:: ruby
+.. code-block:: ruby
+    :linenos:
 
     #!/usr/bin/env ruby
 
     require 'twitter'
     require 'json'
 
-    puts "COGCMD_WARN: Starting" #
+    puts "COGCMD_WARN: Starting"
 
     client = Twitter::REST::Client.new(
       consumer_key: ENV["TWITTER_CONSUMER_KEY"],
@@ -1675,17 +1718,19 @@ illustrate.
       access_token: ENV["TWITTER_ACCESS_TOKEN"],
       access_token_secret: ENV["TWITTER_ACCESS_TOKEN_SECRET"])
 
-    puts "COGCMD_INFO: Authenticated" #
+    puts "COGCMD_INFO: Authenticated"
 
     tweets = client.user_timeline(count: 5).map do |tweet|
-      puts "COGCMD_DEBUG: Tweet - #{tweet.full_text}" #
+      puts "COGCMD_DEBUG: Tweet - #{tweet.full_text}"
       {message: tweet.full_text, url: tweet.url}
     end
 
-    puts "COGCMD_ERROR: Generating final output" #
+    puts "COGCMD_ERROR: Generating final output"
     puts "COG_TEMPLATE: tweet"
     puts "JSON"
     puts JSON.generate(tweets)
+
+.. This section had 4 annotations but no accompanying text.  (Lines 6, 14, 17, and 21)
 
 And here is what it looks like in Relay’s logs once we execute the
 command. Note that the unique pipeline ID (the ``P`` in parentheses) as
