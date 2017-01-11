@@ -13,7 +13,8 @@ point to an executable already installed on the machine running the
 relay you want to execute the command on. Simple bundles are great for
 simple common commands. Standard bundles point to a repository on Docker
 hub that contains the execution code for your bundle. To learn more
-about packaging and building bundles for Cog, check out :doc:`building_command_bundles`.
+about packaging and building bundles for Cog, check out
+`??? <#Building Command Bundles>`__.
 
 Simple bundle configs
 ---------------------
@@ -21,7 +22,7 @@ Simple bundle configs
 To start, lets discuss configs for simple bundles. Simple bundle configs
 look like this:
 
-**simple_config.yaml.**
+**simple\_config.yaml.**
 
 .. code:: YAML
 
@@ -78,7 +79,9 @@ vary from adapter to adapter so under the name of the template we key
 the template strings by adapter. Currently we only support two adapters
 for the purpose of templates; "slack" and "hipchat".
 
-.. note:: cogctl, Cogs command line tool, provides some useful functionality
+    **Note**
+
+    cogctl, Cogs command line tool, provides some useful functionality
     for templates. You can just save templates as individual files and
     cogctl will build out the templates section for you before uploading
     the config.
@@ -91,7 +94,7 @@ I thought I would give it it’s own section.
 
 As an example let’s look at an excerpt from the mist config.
 
-**mist_config.yaml (excerpt).**
+**mist\_config.yaml (excerpt).**
 
 .. code:: YAML
 
@@ -141,7 +144,8 @@ several fields. Let’s talk about them one at a time.
    optional ``short_flag`` and a ``description``.
 
 -  ``rules`` is required and is a list of strings that define what
-   permissions are required to run the command. Check out :doc:`permissions_and_rules` to learn more
+   permissions are required to run the command. Check out [Permissions &
+   Rules](doc:a-tour-through-cogs-authorization-system) to learn more
    about what rules look like. A couple things to note about rules. When
    specifying rules in configs you can drop the "when command is …"
    portion like we did in the previous mist config. Cog has enough
@@ -164,7 +168,7 @@ All commands require permissions to run. Permissions are included in the
 bundle config as a list of strings at the top level. Here is another
 excerpt of the mist config as an example.
 
-**mist_config.yaml (excerpt).**
+**mist\_config.yaml (excerpt).**
 
 .. code:: YAML
 
@@ -194,7 +198,7 @@ the image.
 
 Once again as an example, here is an excerpt from the mist config.
 
-**mist_config.yaml (excerpt).**
+**mist\_config.yaml (excerpt).**
 
 .. code:: YAML
 
@@ -240,7 +244,7 @@ Bundle
       name of your environment variable and ``description``, for an
       optional description.
 
-**aws_cfn_config.yaml (excerpt).**
+**aws\_cfn\_config.yaml (excerpt).**
 
 .. code:: YAML
 
@@ -289,7 +293,7 @@ all there is to know about what goes into a config. But for the sake of
 completeness and to help you tie everything together, here is the mist
 config in it’s entirety.
 
-**mist_config.yaml.**
+**mist\_config.yaml.**
 
 .. code:: YAML
 

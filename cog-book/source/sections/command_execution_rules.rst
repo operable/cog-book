@@ -7,7 +7,7 @@ Rule Structure
 Rules help Cog to determine who is able to perform what task. Cog rules
 follow a specific format. The rule structure describes what command is
 executed and what permission is needed in order to execute the command.
-All rules begin with the phrase ``when command is``. If a user
+All rules begin with the phrase "\`\`\`when command is\`\`\`". If a user
 does not have the specified permission, the user is not able to execute
 the command.
 
@@ -28,7 +28,7 @@ command. You can set option and arg values to match for particular
 command executions.
 
 The argument and option portion of the rules begin with the word
-```with```. There are argument and option qualifiers used in
+"\`\`\`with\`\`\`". There are argument and option qualifiers used in
 this phrasing. The possible key words and phrases that Cog recognizes
 and acts upon when using the argument and option qualifier phrase are as
 follows:
@@ -52,20 +52,22 @@ or
 You may combine these qualifiers such that your rules can be as simple
 or as complicated as you need them to be.
 
-The following are rule examples with valid argument and option qualifiers:
-
-| "when command is foo:bar with option[delete] == true must have foo:destroy"
-| "when command is foo:set with option[set] == /.\*/ must have foo:baz-set"
-| "when command is foo:qux with arg[0] == \'status\' must have foo:view"
-| "when command is foo:barqux with option[delete] == true and arg[0] > 5 must have foo:destroy"
-|
+| The following are rule examples with valid argument and option
+  qualifiers:
+| "when command is foo:bar with option[delete] == true must have
+  foo:destroy"
+| "when command is foo:set with option[set] == /.\*/ must have
+  foo:baz-set"
+| "when command is foo:qux with arg[0] == *status* must have foo:view"
+| "when command is foo:barqux with option[delete] == true and arg[0] > 5
+  must have foo:destroy"
 
 Permissions
 -----------
 
 Every rule must state what permissions are necessary in order to execute
 a certain command. The beginning of the permissions portion of the rule
-is indicated by the phrase ``must have``. This is where you
+is indicated by the phrase "\`\`\`must have\`\`\`". This is where you
 state any and all permissions that are deemed necessary in order to
 execute a particular command. It is possible to only require a single
 permission, a certain combination, or a list of permissions. The
@@ -81,19 +83,22 @@ following are the possible keywords used when declaring permissions:
 
 -  allow
 
-For example, the following are rule examples with valid permission settings:
-
-| "when command is foo:baz must have foo:write and site:admin"
-| "when command is foo:export must have all in [foo:write, site:ops] or any in [site:admin, site:management]"
+| For example, the following are rule examples with valid permission
+  settings:
+| "when command is foo:baz must have foo:write and site:admin" "when
+  command is foo:export must have all in [foo:write, site:ops] or any in
+  [site:admin, site:management]"
 | "when command is foo:bar must have any in [foo:read, foo:write]"
-| "when command is foo:qux must have all in [foo:write, site:ops] and any in [site:admin, site:management]"
+| "when command is foo:qux must have all in [foo:write, site:ops] and
+  any in [site:admin, site:management]"
 | "when command is foo:biz allow"
-|
 
-.. note:: Note the special ``allow`` keyword. ``allow`` may not be
-  accompanied with any other keyword or phrase. Commands
-  using this permission are allowed to be executed by any registered
-  user in Cog.
+    **Note**
+
+    Note the special "\`\`\`allow\`\`\`" keyword. "\`\`\`allow\`\`\`"
+    may not be accompanied with any other keyword or phrase. Commands
+    using this permission are allowed to be executed by any registered
+    user in Cog.
 
 Site Namespace
 --------------
@@ -121,20 +126,19 @@ Let’s create some example commands: foo:deploy, foo:patch, foo:delete,
 foo:readlog
 
 For the examples sake, we’ll have the example permissions map to these
-commands such that they may look like: foo:p_deploy, foo:p_patch,
-foo:p_delete, foo:p_readlog
+commands such that they may look like: foo:p\_deploy, foo:p\_patch,
+foo:p\_delete, foo:p\_readlog
 
 We’ll set up site permissions based on each group and each environment:
 site:prod, site:test, site:stage, site:it, site:qa, site:eng
 
-Some resulting rules may look like the following:
-
-| "when command is foo:deploy when option[environment] == \'prod\' must
-  have all in [site:it, site:prod, foo:p_deploy]"
-| "when command is foo:deploy when option[environment] == \'qa\' must have
-  site:test and foo:p_deploy"
-| "when command is foo:deploy when option[environment] == \'stage\' must
-  have site:stage and foo:p_deploy"
-| "when command is foo:patch must have all in [foo:p_patch, site:it] or
-  all in [site:qa, site:test, foo:p_patch] or all in [site:eng,
-  site:stage, foo:p_patch]"
+| Some resulting rules may look like the following:
+| "when command is foo:deploy when option[environment] == *prod* must
+  have all in [site:it, site:prod, foo:p\_deploy]"
+| "when command is foo:deploy when option[environment] == *qa* must have
+  site:test and foo:p\_deploy"
+| "when command is foo:deploy when option[environment] == *stage* must
+  have site:stage and foo:p\_deploy"
+| "when command is foo:patch must have all in [foo:p\_patch, site:it] or
+  all in [site:qa, site:test, foo:p\_patch] or all in [site:eng,
+  site:stage, foo:p\_patch]"

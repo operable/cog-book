@@ -84,7 +84,9 @@ the executable would access the values of ``foo`` with these variables:
     COG_OPT_FOO_1="two"
     COG_OPT_FOO_2="three"
 
-.. warning:: Only scalar-valued option values will have a ``COG_OPT_<NAME>``
+    **Warning**
+
+    Only scalar-valued option values will have a ``COG_OPT_<NAME>``
     environment variable. Variables pertaining to list-valued options
     will always end in either ``_COUNT`` or ``_N`` (where ``N`` is an
     integer).

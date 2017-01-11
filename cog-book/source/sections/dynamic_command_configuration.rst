@@ -11,14 +11,15 @@ horrible software engineering practices in your command bundles!). Cog
 provides a way to deal with these important data called *dynamic command
 configuration*.
 
-.. note:: When we talk about "dynamic command configuration", this should
-      not be confused with the :doc:`config.yaml <bundle_configs>` file
+    **Note**
+
+    | When we talk about "dynamic command configuration", this should
+      not be confused with the `config.yaml <#Bundle Configs>`__ file
       that defines the commands, rules, and permissions present in each
       command bundle. That configuration is effectively static. The
       configuration we are concerned with is for the *execution* of
       individual commands.
-
-      It’s also dynamic in the sense that it can be changed on-the-fly
+    | It’s also dynamic in the sense that it can be changed on-the-fly
       by Cog administrators, with the changes taking effect nearly
       instantaneously without restarting any applications.
 
@@ -57,11 +58,15 @@ for each command in the ``pingdom`` bundle. Commands can then access
 them as environment variables (e.g. ``ENV['PINGDOM_USER_EMAIL']`` in
 Ruby, ``os.environ['PINGDOM_USER_EMAIL']`` in Python, etc.)
 
-.. warning:: Each command in a bundle will receive the same dynamic configuration
+    **Warning**
+
+    Each command in a bundle will receive the same dynamic configuration
     environment. There is not currently a way to cause one command to
     receive one set of variables while another receives a different set.
 
-.. caution:: Any keys starting with the prefixes ``COG_`` or ``RELAY_`` will be
+    **Caution**
+
+    Any keys starting with the prefixes ``COG_`` or ``RELAY_`` will be
     logged by Relay and ignored.
 
 Layers
@@ -98,13 +103,17 @@ only ever tweet from a particular account, the appropriate credentials
 could be put into a "user/alice" layer (assuming her Cog username is
 "alice").
 
-.. note:: Since different chat clients can have different conventions, Cog
+    **Note**
+
+    Since different chat clients can have different conventions, Cog
     normalizes names by lowercasing them. Thus, the room layer for your
     \\"Operations\\" room would be \\"room/operations\\".
 
-.. note:: Early in processing a request, Cog resolves a user’s chat handle to
+    **Note**
+
+    Early in processing a request, Cog resolves a user’s chat handle to
     that person’s Cog username, and this is what is used to determine
-    the appropriate user configuration layer to apply.
+    the appropriate user configuration layer to apply."
 
 Let’s look at a basic example of how this would work in practice. Let’s
 say we have a ``widget:widget`` command that we want to configure. For
@@ -208,7 +217,7 @@ is a tiny bit slower compared to caching the contents but ensures
 commands are always run with the latest configuration.
 
 To enable this mode, Relay must be told where your configuration files
-will reside by setting the :ref:`RELAY_DYNAMIC_CONFIG_ROOT<relay_dynamic_config_root>`
+will reside by setting the `??? <#RELAY_DYNAMIC_CONFIG_ROOT>`__
 configuration. If you are changing this value, you will need to restart
 Relay for it to take effect.
 
@@ -236,23 +245,15 @@ layer, and a user layer for "chris". Finally, the
 `twitter <https://github.com/cogcmd/twitter>`__ bundle has a single base
 configuration layer.
 
-::
+\`\`\` /relay-config ├── heroku │   └── config.yaml ├── pingdom │   ├──
+config.yaml │   ├── room\_ops.yaml │   ├── room\_direct.yaml │   └──
+user\_chris.yaml └── twitter └── config.yaml \`\`\`
 
-  |relay-config
-  ├── heroku
-  │   └── config.yaml
-  ├── pingdom
-  │   ├──config.yaml
-  │   ├── room_ops.yaml
-  │   ├── room\_direct.yaml
-  │   └──user\_chris.yaml
-  └── twitter └── config.yaml
+    **Note**
 
-.. note::
-    *About Relays*
-
-    - :doc:`installing_and_managing_relays`
-    - `Annotated relay.conf <https://github.com/operable/go-relay/blob/master/example_relay.conf>`__
+    | `??? <#Installing and Managing Relays>`__
+    | `Annotated
+      relay.conf <https://github.com/operable/go-relay/blob/master/example_relay.conf>`__
 
 Cog-managed Dynamic Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -268,22 +269,28 @@ By default your Relay(s) already supports managed dynamic config, but
 you can always disable it by setting <RELAY\_MANAGED\_DYNAMIC\_CONFIG>>
 to ``false``. Managed Relays check in with their Cog server periodically
 (every 5 seconds by default; see
-:ref:`RELAY_MANAGED_DYNAMIC_CONFIG_INTERVAL<relay_managed_dynamic_config_interval>` ) to refresh their
+`??? <#RELAY_MANAGED_DYNAMIC_CONFIG_INTERVAL>`__) to refresh their
 configuration data.
 
-.. note:: Currently, managed configuration mode requires each individual Relay
+    **Note**
+
+    Currently, managed configuration mode requires each individual Relay
     to be configured as such; it is not a centrally-enabled option.
     Future versions of Cog and Relay may change this.
 
 The easiest way submit configuration layers to Cog is by using
 ``cogctl``, which in turn uses Cog’s REST API.
 
-.. warning:: These commands and the API they are built on *only* work for the
+    **Warning**
+
+    These commands and the API they are built on *only* work for the
     Cog-managed configuration. They will not have access to
     manually-managed configuration files on Relay hosts. The manual
     process is, well, *manual*.
 
-.. tip:: The command structure for ``cogctl dynamic-config`` has changed
+    **Tip**
+
+    The command structure for ``cogctl dynamic-config`` has changed
     slightly from previous releases. With 0.12.0, the ``--bundle``
     option is no longer an option; instead, the bundle is a required
     argument.
@@ -341,14 +348,14 @@ You can also see other layers:
     PINGDOM_USER_EMAIL: "cog_ops@operable.io"
     PINGDOM_APPLICATION_KEY: "opsblahblahblah"
 
-.. note::
+    **Note**
+
     | The ``cogctl dynamic-config info`` subcommand returns the contents
       of *only* the specified layer; it does not show you the effective
       configuration that might be injected into a command’s execution
       environment. You are shown exactly what was uploaded when you ran
-    |
-    | cogctl dynamic-config create $BUNDLE $PATH\_TO\_CONFIGURATION\_FILE --layer=$LAYER
-    |
+    | cogctl dynamic-config create $BUNDLE
+      $PATH\_TO\_CONFIGURATION\_FILE --layer=$LAYER
     | not the result of overlaying multiple layers on top of each other.
 
 Deleting Configuration Layers
