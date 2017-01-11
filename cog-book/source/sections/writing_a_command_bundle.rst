@@ -127,17 +127,29 @@ The complete code is shown in :ref:`Command, Pure Ruby<pure-ruby-tweet>`.
 
     require 'twitter'
 
+<<<<<<< Updated upstream
     client = Twitter::REST::Client.new(
+=======
+    client = Twitter::REST::Client.new( #
+>>>>>>> Stashed changes
       consumer_key: ENV["TWITTER_CONSUMER_KEY"],
       consumer_secret: ENV["TWITTER_CONSUMER_SECRET"],
       access_token: ENV["TWITTER_ACCESS_TOKEN"],
       access_token_secret: ENV["TWITTER_ACCESS_TOKEN_SECRET"])
 
+<<<<<<< Updated upstream
     message = ARGV.join(" ")
 
     tweet = client.update(message)
 
 
+=======
+    message = ARGV.join(" ") #
+
+    tweet = client.update(message) #
+
+    #
+>>>>>>> Stashed changes
     puts <<-EOM
     Message: #{message}
     URL:     #{tweet.url}
@@ -178,8 +190,13 @@ our terminal, as seen in :ref:`Executing the Pure Ruby tweet<execute-pure-ruby-t
 .. code-block:: bash
   :linenos:
 
+<<<<<<< Updated upstream
     $ bundle install
     $ export TWITTER_CONSUMER_KEY=XXXX
+=======
+    $ bundle install #
+    $ export TWITTER_CONSUMER_KEY=XXXX #
+>>>>>>> Stashed changes
     $ export TWITTER_CONSUMER_SECRET=XXXX
     $ export TWITTER_ACCESS_TOKEN=XXXX
     $ export TWITTER_ACCESS_TOKEN_SECRET=XXXX
@@ -286,11 +303,19 @@ following code *is* Cog to our nascent command.
     $ export TWITTER_ACCESS_TOKEN=XXXX
     $ export TWITTER_ACCESS_TOKEN_SECRET=XXXX
 
+<<<<<<< Updated upstream
     $ export COG_ARGC="2"
     $ export COG_ARGV_0="Hello"
     $ export COG_ARGV_1="World"
 
     $ ./tweet_cog_wrapper.sh
+=======
+    $ export COG_ARGC="2" #
+    $ export COG_ARGV_0="Hello"
+    $ export COG_ARGV_1="World"
+
+    $ ./tweet_cog_wrapper.sh #
+>>>>>>> Stashed changes
 
 **Annotations by line number:**
 
@@ -315,14 +340,12 @@ at all. This adapter script is the only thing that is aware of Cog.
     :linenos:
 
     #!/bin/bash
-
-    declare -a ARGUMENTS
     for ((i=0;i<${COG_ARGC};i++)); do
         var="COG_ARGV_${i}"
         ARGUMENTS[$i]=${!var}
     done
 
-    ./tweet.rb ${ARGUMENTS[*]}
+
 
 **Annotations by line number:**
 
@@ -438,6 +461,7 @@ bundle.
     :linenos:
 
     ---
+<<<<<<< Updated upstream
     cog_bundle_version: 4
     name: twitter_example
     description: Interact with Twitter
@@ -449,6 +473,19 @@ bundle.
         arguments: "<message>"
         rules:
           - allow
+=======
+    cog_bundle_version: 4 #
+    name: twitter_example #
+    description: Interact with Twitter #
+    version: 0.0.1 #
+    commands: #
+      tweet:
+        description: Send a tweet!
+        executable: /Users/chris/cog-book/tweet_cog_wrapper.sh #
+        arguments: "<message>" #
+        rules:
+          - allow #
+>>>>>>> Stashed changes
 
 **Annotations by line number:**
 
@@ -530,18 +567,6 @@ want to take measures to install the needed files in the correct place.
 Tools like `Chef <https://chef.io>`__, `Puppet <https://puppet.com>`__,
 or `Ansible <https://www.ansible.com>`__ can help with this.
 
-TODO: Need to better describe a bundle development setup, either with a
-Relay running locally, or with a Relay running in Docker.
-
-TODO: I wanted to illustrate that a "native" bundle is possible, and
-possibly emphasize the "changes are live immediately" aspect of this.
-The new dev mode on Relay may make this more of a moot point, though.
-
-In a bit we’ll update our bundle to use Docker, which greatly simplifies
-bundle installation and maintenance.
-
-TODO: Additional docs about how to start Cog, Relay, etc.
-
 Once the bundle is installed, we can finally run it from chat!
 
 .. figure:: ../images/tweet_minimal_bundle_failure.png
@@ -600,8 +625,6 @@ Let’s create another YAML file to contain your environment variables
     TWITTER_CONSUMER_SECRET: XXXX
     TWITTER_ACCESS_TOKEN: XXXX
     TWITTER_ACCESS_TOKEN_SECRET: XXXX
-
-TODO: Need to mention starting up Relay in managed config mode here.
 
 This file is a simple map whose keys are the environment variable names
 that the command expects (compare these to our original ``tweet.rb``
@@ -662,12 +685,21 @@ Let’s update our adapter script to generate structured output.
         TWEET_ARGUMENTS[$i]=${!var}
     done
 
+<<<<<<< Updated upstream
     output=$(bundle exec $(dirname ${0})/tweet.rb ${TWEET_ARGUMENTS[*]})
 
     message=$(echo "$output" | grep "Message: " | cut -d":" -f2 | sed -e 's/^ *//')
     url=$(echo "$output" | grep "URL: " | sed -e 's/^URL: *//')
 
     echo "JSON"
+=======
+    output=$(bundle exec $(dirname ${0})/tweet.rb ${TWEET_ARGUMENTS[*]}) #
+
+    message=$(echo "$output" | grep "Message: " | cut -d":" -f2 | sed -e 's/^ *//') #
+    url=$(echo "$output" | grep "URL: " | sed -e 's/^URL: *//')
+
+    echo "JSON" #
+>>>>>>> Stashed changes
     echo "{\"message\": \"${message}\", \"url\": \"${url}\"}"
 
 **Annotations by line number:**
@@ -687,7 +719,11 @@ demonstration purposes, and because the object itself is so simple.
 
 The ``JSON`` tag in our output is a "command response attribute", one of
 several that can be used by commands. We’ll touch on a few more in this
+<<<<<<< Updated upstream
 chapter; for more details, see :doc:`../references/command_output_tags`. The
+=======
+chapter; for more details, see :doc:`templates`. The
+>>>>>>> Stashed changes
 upshot is that when Relay detects these response attributes in a
 command’s output, it interprets them as special instructions on how to
 handle that output. The ``JSON`` tag is probably the most commonly used
@@ -743,8 +779,6 @@ will look like:
     ~$item.url~
     ~end~
 
-TODO: why iterate over $results?
-
 Given what we saw in the output before, we probably really only care
 about the new tweet’s URL. Modern chat platforms will generally display
 the tweet for us based on that URL, and in any event, you can always
@@ -769,14 +803,22 @@ definition file.
     cog_bundle_version: 4
     name: twitter_example
     description: Interact with Twitter
+<<<<<<< Updated upstream
     version: 0.0.2
+=======
+    version: 0.0.2 #
+>>>>>>> Stashed changes
     commands:
       tweet:
         description: Send a tweet!
         executable: /Users/chris/cog-book/tweet_cog_wrapper.sh
         arguments: "<message>"
         rules: [ 'allow' ]
+<<<<<<< Updated upstream
     templates:
+=======
+    templates: #
+>>>>>>> Stashed changes
       tweet:
         body: |
           ~each var=$results~
@@ -817,7 +859,11 @@ command response attribute.
     message=$(echo "$output" | grep "Message: " | cut -d":" -f2 | sed -e 's/^ *//')
     url=$(echo "$output" | grep "URL: " | sed -e 's/^URL: *//')
 
+<<<<<<< Updated upstream
     echo "COG_TEMPLATE: tweet"
+=======
+    echo "COG_TEMPLATE: tweet" #
+>>>>>>> Stashed changes
     echo "JSON"
     echo "{\"message\": \"${message}\", \"url\": \"${url}\"}"
 
@@ -898,16 +944,26 @@ as a rule for the command.
     cog_bundle_version: 4
     name: twitter_example
     description: Interact with Twitter
+<<<<<<< Updated upstream
     version: 0.0.3
     permissions:
       - twitter_example:tweet
+=======
+    version: 0.0.3 #
+    permissions:
+      - twitter_example:tweet #
+>>>>>>> Stashed changes
     commands:
       tweet:
         description: Send a tweet!
         executable: /Users/chris/cog-book/tweet_cog_wrapper.sh
         arguments: "<message>"
         rules:
+<<<<<<< Updated upstream
           - must have twitter_example:tweet
+=======
+          - must have twitter_example:tweet #
+>>>>>>> Stashed changes
     templates:
       tweet:
         body: |
@@ -1013,14 +1069,24 @@ need to change.
     :linenos:
 
     ---
+<<<<<<< Updated upstream
     TWITTER_DEFAULT_ACCOUNT: STATUS
 
     TWITTER_CONSUMER_KEY_STATUS: XXXX
+=======
+    TWITTER_DEFAULT_ACCOUNT: STATUS #
+
+    TWITTER_CONSUMER_KEY_STATUS: XXXX #
+>>>>>>> Stashed changes
     TWITTER_CONSUMER_SECRET_STATUS: XXXX
     TWITTER_ACCESS_TOKEN_STATUS: XXXX
     TWITTER_ACCESS_TOKEN_SECRET_STATUS: XXXX
 
+<<<<<<< Updated upstream
     TWITTER_CONSUMER_KEY_MARKETING: YYYY
+=======
+    TWITTER_CONSUMER_KEY_MARKETING: YYYY #
+>>>>>>> Stashed changes
     TWITTER_CONSUMER_SECRET_MARKETING: YYYY
     TWITTER_ACCESS_TOKEN_MARKETING: YYYY
     TWITTER_ACCESS_TOKEN_SECRET_MARKETING: YYYY
@@ -1048,7 +1114,11 @@ option.
     cog_bundle_version: 4
     name: twitter_example
     description: Interact with Twitter
+<<<<<<< Updated upstream
     version: 0.0.4
+=======
+    version: 0.0.4 #
+>>>>>>> Stashed changes
     permissions:
       - twitter_example:tweet
     commands:
@@ -1058,7 +1128,11 @@ option.
         arguments: "<message>"
         rules:
           - must have twitter_example:tweet
+<<<<<<< Updated upstream
         options:
+=======
+        options: #
+>>>>>>> Stashed changes
           as:
             description: the account to tweet from
             type: string
@@ -1095,15 +1169,25 @@ option.
         TWEET_ARGUMENTS[$i]=${!var}
     done
 
+<<<<<<< Updated upstream
     if [ -n "${COG_OPT_AS}" ]
+=======
+    if [ -n "${COG_OPT_AS}" ] #
+>>>>>>> Stashed changes
     then
         account=${COG_OPT_AS}
     else
         account=${TWITTER_DEFAULT_ACCOUNT}
     fi
+<<<<<<< Updated upstream
     account=$(echo $account | tr '[a-z]' '[A-Z]')
 
 
+=======
+    account=$(echo $account | tr '[a-z]' '[A-Z]') #
+
+    #
+>>>>>>> Stashed changes
     export TWITTER_CONSUMER_KEY=$(eval "echo \$$(echo TWITTER_CONSUMER_KEY_${account})")
     export TWITTER_CONSUMER_SECRET=$(eval "echo \$$(echo TWITTER_CONSUMER_SECRET_${account})")
     export TWITTER_ACCESS_TOKEN=$(eval "echo \$$(echo TWITTER_ACCESS_TOKEN_${account})")
@@ -1209,8 +1293,13 @@ image should be used to run it.
     cog_bundle_version: 4
     name: twitter_example
     description: Interact with Twitter
+<<<<<<< Updated upstream
     version: 0.0.5
     docker:
+=======
+    version: 0.0.5 #
+    docker: #
+>>>>>>> Stashed changes
       image: cog-book/twitter
       tag: latest
     permissions:
@@ -1218,7 +1307,11 @@ image should be used to run it.
     commands:
       tweet:
         description: Send a tweet!
+<<<<<<< Updated upstream
         executable: /home/bundle/tweet_cog_wrapper.sh
+=======
+        executable: /home/bundle/tweet_cog_wrapper.sh #
+>>>>>>> Stashed changes
         arguments: "<message>"
         rules:
           - when command is twitter_example:tweet must have twitter_example:tweet
@@ -1361,13 +1454,18 @@ others being wrapped pre-existing programs.
     require 'twitter'
     require 'json'
 
+<<<<<<< Updated upstream
     account = (ENV['COG_OPT_AS'] ? ENV['COG_OPT_AS'] : ENV['TWITTER_DEFAULT_ACCOUNT']).upcase
+=======
+    account = (ENV['COG_OPT_AS'] ? ENV['COG_OPT_AS'] : ENV['TWITTER_DEFAULT_ACCOUNT']).upcase #
+>>>>>>> Stashed changes
     client = Twitter::REST::Client.new(
       consumer_key: ENV["TWITTER_CONSUMER_KEY_#{account}"],
       consumer_secret: ENV["TWITTER_CONSUMER_SECRET_#{account}"],
       access_token: ENV["TWITTER_ACCESS_TOKEN_#{account}"],
       access_token_secret: ENV["TWITTER_ACCESS_TOKEN_SECRET_#{account}"])
 
+<<<<<<< Updated upstream
     tweets = client.user_timeline(count: 5).map do |tweet|
       {message: tweet.full_text, url: tweet.url}
     end
@@ -1377,6 +1475,15 @@ others being wrapped pre-existing programs.
     puts JSON.generate(tweets)
 
 **Annotations by line number:**
+=======
+    tweets = client.user_timeline(count: 5).map do |tweet| #
+      {message: tweet.full_text, url: tweet.url}
+    end
+
+    puts "COG_TEMPLATE: tweet" #
+    puts "JSON"
+    puts JSON.generate(tweets) #
+>>>>>>> Stashed changes
 
 **Line 7** We’ll take care of the account switching in Ruby, instead of in a
 shell script as we did for the ``tweet`` command earlier.
@@ -1418,13 +1525,18 @@ We’re ready to tackle our ``stats`` command now. Once again, our
     require 'twitter'
     require 'json'
 
+<<<<<<< Updated upstream
     account = ENV['TWITTER_DEFAULT_ACCOUNT'].upcase
+=======
+    account = ENV['TWITTER_DEFAULT_ACCOUNT'].upcase #
+>>>>>>> Stashed changes
     client = Twitter::REST::Client.new(
       consumer_key: ENV["TWITTER_CONSUMER_KEY_#{account}"],
       consumer_secret: ENV["TWITTER_CONSUMER_SECRET_#{account}"],
       access_token: ENV["TWITTER_ACCESS_TOKEN_#{account}"],
       access_token_secret: ENV["TWITTER_ACCESS_TOKEN_SECRET_#{account}"])
 
+<<<<<<< Updated upstream
     tweet = if ENV['COG_ARGC'] == "1"
               ENV['COG_ARGV_0']
             else
@@ -1433,6 +1545,16 @@ We’re ready to tackle our ``stats`` command now. Once again, our
             end
 
     tweet = client.status(tweet)
+=======
+    tweet = if ENV['COG_ARGC'] == "1" #
+              ENV['COG_ARGV_0']
+            else
+              tweet = JSON.parse(STDIN.read) #
+              tweet["url"]
+            end
+
+    tweet = client.status(tweet) #
+>>>>>>> Stashed changes
 
     puts "COG_TEMPLATE: stats"
     puts "JSON"
@@ -1492,7 +1614,11 @@ try.
             type: string
             required: false
             short_flag: a
+<<<<<<< Updated upstream
       recent_tweets:
+=======
+      recent_tweets: #
+>>>>>>> Stashed changes
         description: Last 5 tweets sent from this account
         executable: /home/bundle/recent_tweets.rb
         options:
@@ -1503,7 +1629,11 @@ try.
             short_flag: a
         rules:
           - allow
+<<<<<<< Updated upstream
       stats:
+=======
+      stats: #
+>>>>>>> Stashed changes
         description: Favorites and retweets
         arguments: "[tweet_url]"
         executable: /home/bundle/stats.rb
@@ -1516,7 +1646,11 @@ try.
           ~each var=$results~
           ~$item.url~
           ~end~
+<<<<<<< Updated upstream
       stats:
+=======
+      stats: #
+>>>>>>> Stashed changes
         body: |
           | Tweet | Favorite Count | Retweet Count |
           |-------|----------------|---------------|
@@ -1636,7 +1770,11 @@ our users.
     require 'twitter'
     require 'json'
 
+<<<<<<< Updated upstream
     begin
+=======
+    begin #
+>>>>>>> Stashed changes
       client = Twitter::REST::Client.new(
         consumer_key: ENV["TWITTER_CONSUMER_KEY"],
         consumer_secret: ENV["TWITTER_CONSUMER_SECRET"],
@@ -1650,9 +1788,15 @@ our users.
       puts "COG_TEMPLATE: tweet"
       puts "JSON"
       puts JSON.generate(tweets)
+<<<<<<< Updated upstream
     rescue Twitter::Error::Unauthorized
       STDERR.puts "Could not authenticate with Twitter API; check your authentication tokens!"
       exit 1
+=======
+    rescue Twitter::Error::Unauthorized #
+      STDERR.puts "Could not authenticate with Twitter API; check your authentication tokens!"
+      exit 1 #
+>>>>>>> Stashed changes
     end
 
 **Annotations by line number:**
@@ -1710,7 +1854,11 @@ illustrate.
     require 'twitter'
     require 'json'
 
+<<<<<<< Updated upstream
     puts "COGCMD_WARN: Starting"
+=======
+    puts "COGCMD_WARN: Starting" #
+>>>>>>> Stashed changes
 
     client = Twitter::REST::Client.new(
       consumer_key: ENV["TWITTER_CONSUMER_KEY"],
@@ -1718,6 +1866,7 @@ illustrate.
       access_token: ENV["TWITTER_ACCESS_TOKEN"],
       access_token_secret: ENV["TWITTER_ACCESS_TOKEN_SECRET"])
 
+<<<<<<< Updated upstream
     puts "COGCMD_INFO: Authenticated"
 
     tweets = client.user_timeline(count: 5).map do |tweet|
@@ -1726,6 +1875,16 @@ illustrate.
     end
 
     puts "COGCMD_ERROR: Generating final output"
+=======
+    puts "COGCMD_INFO: Authenticated" #
+
+    tweets = client.user_timeline(count: 5).map do |tweet|
+      puts "COGCMD_DEBUG: Tweet - #{tweet.full_text}" #
+      {message: tweet.full_text, url: tweet.url}
+    end
+
+    puts "COGCMD_ERROR: Generating final output" #
+>>>>>>> Stashed changes
     puts "COG_TEMPLATE: tweet"
     puts "JSON"
     puts JSON.generate(tweets)
