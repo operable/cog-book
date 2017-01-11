@@ -23,12 +23,13 @@ stops.
 To make things concrete, we’ll start with a simple authorization rule.
 (There is actually a separate rule language that can be used to make
 rather complex rules, but for now we’ll start simple. Feel free to read
-more `detailed explanations <#Command Execution Rules>`__ of how rules
+more :doc:`detailed explanations <command_execution_rules>` of how rules
 are formed. In any event, the details of the language are orthogonal to
 the authorization system itself.)
 
-\`\`\` when command is operable:bundle must have
-operable:manage\_commands \`\`\`
+::
+
+  when command is operable:bundle must have operable:manage_commands
 
 This is the simplest form of rule, and gives us all we need to discuss
 the authorization system. This rule states, in English, that for a user
@@ -39,8 +40,11 @@ the ``operable:manage_commands`` permission granted to them.
 With that rule in place, let’s say I type the following command
 invocation in my chat application:
 
-\`\`\` !operable:bundle disable github \`\`\` I’m telling Cog to disable
-all the commands in the ``github`` bundle. In order for that command to
+::
+
+  !operable:bundle disable github
+
+I’m telling Cog to disable all the commands in the ``github`` bundle. In order for that command to
 be executed, Cog must verify, according to the rule above, that I have
 the ``operable:manage_commands`` permission. It just so happens that I
 do, so the command succeeds; now nobody can check how many pull requests
@@ -51,12 +55,18 @@ important bundle; perhaps you’ve written one called ``prod`` to help
 manage your organization’s production environment. We can add this with
 a new rule that matches the invocation
 
-\`\`\` !operable:bundle disable prod \`\`\` That rule might look like
-this:
+::
 
-\`\`\` when command is operable:bundle with arg[0] == "disable" and
-arg[1] == "prod" must have site:manage\_prod and
-operable:manage\_commands \`\`\`
+  !operable:bundle disable prod
+
+That rule might look like this:
+
+::
+
+  when command is operable:bundle
+    with arg[0] == "disable"
+      and arg[1] == "prod"
+  must have site:manage_prod and operable:manage_commands
 
 Here we can see a rule that applies to a very specific invocation of a
 command. If you have the ``operable:manage_commands`` permission, you
@@ -174,9 +184,7 @@ without having to worry about "exceptions to the rule" like individual
 users being directly granted a permission, or potentially complicated
 group hierarchies.
 
-    **Warning**
-
-    For those that have used Cog before version 0.4, this document
+.. warning:: For those that have used Cog before version 0.4, this document
     describes a departure from the previous permission scheme, where
     users and groups could be granted permissions directly, and groups
     could also contain groups.

@@ -8,15 +8,11 @@ environment variable is the upper-cased key, prepended with ``RELAY_``.
 Thus, the key ``max_concurrent`` can be overridden using the environment
 variable ``RELAY_MAX_CONCURRENT``, and so on.
 
-    **Warning**
-
-    The sole exception to this is the Relay "execution env" setting. If
+.. warning:: The sole exception to this is the Relay "execution env" setting. If
     used, this *must* be set in the configuration file; there is no
     corresponding environment variable.
 
-    **Note**
-
-    An annotated example of a complete configuration file is kept in
+.. note:: An annotated example of a complete configuration file is kept in
     Relay’s GitHub repo
     `here <https://github.com/operable/go-relay/blob/master/example_relay.conf>`__.
 
@@ -179,10 +175,14 @@ variable ``RELAY_MAX_CONCURRENT``, and so on.
 
     Defaults to ``true``.
 
+.. _relay_dynamic_config_root:
+
 ``RELAY_DYNAMIC_CONFIG_ROOT``
     File path used to store dynamic bundle configuration files. A
     missing or empty value disables this feature. Nonexistent paths will
     be created on first use.
+
+.. _relay_managed_dynamic_config_interval:
 
 ``RELAY_MANAGED_DYNAMIC_CONFIG_INTERVAL``
     Controls how often Relay polls Cog for dynamic configuration
