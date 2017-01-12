@@ -34,11 +34,9 @@ include::src/commands_and_bundles/text.adoc[]
 
 include::src/managing_bundles/text.adoc[]
 
-include::src/building_command_bundles/text.adoc[]
+include::src/writing_a_command_bundle/text.adoc[]
 
 include::src/configuring_password_resets/text.adoc[]
-
-include::src/writing_a_command_bundle/text.adoc[]
 
 = Securing Chat Commands
 
