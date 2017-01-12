@@ -92,7 +92,7 @@ in this doc, but minimally the file must contain:
     the version in quotes. ex: "0.1"
 
 -  **cog\_bundle\_version** - The version of the config file format
-   (currently we only support version 2)
+   (currently we support version 3 and 4)
 
 -  **commands** - A hash of commands to be included with the bundle
 
@@ -101,9 +101,11 @@ A minimal bundle config might look something like this:
 .. code:: YAML
 
     ---
+    cog_bundle_version: 4
+
     name: my_bundle
+    description: My bundle
     version: "0.1"
-    cog_bundle_version: 3
     commands:
       date:
         executable: /bin/date
