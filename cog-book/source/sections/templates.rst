@@ -20,6 +20,9 @@ maximum flexibility in pipelines, but also condense these objects down
 to the salient information that humans need in chat ("Bundle *foo*,
 version *1.0.0* was enabled", for example).
 
+
+.. _basic_greenbar_syntax:
+
 Basic Greenbar Syntax
 ---------------------
 
@@ -62,7 +65,7 @@ ordered list in the ``~each~`` iterator). Note also the presence of the
 top-level "results" key, containing all the output of the Cog pipeline.
 
 If you’re looking for more information on how to write templates, skip
-on down to `??? <#Advanced Greenbar Usage>`__.
+on down to :ref:`Advanced Greenbar Usage <advanced_greenbar_usage>`.
 
 Overall Template Processing Logic
 ---------------------------------
@@ -121,9 +124,7 @@ exactly how to format a given template. For example, the Slack provider
 can interpret a ``bold`` directive as ``*bold text*``, while a HipChat
 provider can interpret the same directive as ``<b>bold text</b>``.
 
-    **Note**
-
-    You can see how Greenbar directives are processed for Slack in the
+.. note:: You can see how Greenbar directives are processed for Slack in the
     code
     `here <https://github.com/operable/cog/blob/72308c31f49e8d8369f48ec1dd932403117e232c/lib/cog/chat/slack/template_processor.ex>`__.
 
@@ -132,12 +133,12 @@ template, which each chat provider can interpret in the best way for its
 host platform, instead of having to supply a template for each chat
 provider individually.
 
-    **Note**
-
-    The rendering of Greenbar templates to general directives, which are
+.. note:: The rendering of Greenbar templates to general directives, which are
     then processed by chat adapter-specific processors, is analogous to
     the interpretation of Java bytecode on platform-specific VMs, or the
     rendering of OpenGL directives by different graphics processors.
+
+.. _advanced_greenbar_usage:
 
 Advanced Greenbar Usage
 -----------------------
@@ -146,12 +147,10 @@ Greenbar includs a variety of tags to help you better organze your
 output and also fully utilize the formatting options available from your
 chat provider. To view more information about all tags that come with
 Greenbar with examples for each, jump down to the Reference section
-titled `??? <#Greenbar Tags>`__. And, if you haven’t been able to find
+titled :doc:`../references/greenbar_tags`. And, if you haven’t been able to find
 the tag you’re looking for, Greenbar also supports custom tags.
 
-    **Note**
-
-    While this document gives an overview of Greenbar and gives you a
+.. note:: While this document gives an overview of Greenbar and gives you a
     reference for tags you can use, we’re still pretty short on
     examples. If you want to see what some real life templates look like
     and all the ways tags can be used to accomplish normal formatting,
@@ -186,11 +185,17 @@ useful in tags that accept a body as we’ll see in the next example.
 Now to implement our own tag. Let’s build a tag that converts the body
 to uppercase. For a template like this:
 
-\`\`\` :sub:`upcase` hello world :sub:`end` \`\`\`
+::
+
+  ~upcase~
+  hello world
+  ~end~
 
 we’ll expect the final result to be:
 
-\`\`\` HELLO WORLD \`\`\`
+::
+
+  HELLO WORLD
 
 To start we can open up a new file named ``upcase.ex`` and start out
 with an empty module and ``use Greenbar.Tag`` to set the name.
@@ -232,9 +237,7 @@ that contains text.
     def upcase_directive(directive),
       do: directive
 
-    **Note**
-
-    You’ll also have to include ``alias Greenbar.Runtime.Buffer`` at the
+.. note:: You’ll also have to include ``alias Greenbar.Runtime.Buffer`` at the
     top of the module.
 
 And that should do it. Your final custom tag module will look like the
@@ -261,9 +264,7 @@ following:
         do: directive
     end
 
-    **Note**
-
-    Modifying Cog’s source code to include custom tags is not ideal and
+.. note:: Modifying Cog’s source code to include custom tags is not ideal and
     wont be easy for everyone to include in their deploy process. Future
     versions of Cog will have a better way to include custom tags
     without modifying Cog or Greenbar, which can be more easily used
@@ -313,7 +314,7 @@ Configuring
 Configuring Cog to use a custom error template is a two step process.
 First create a template called ``error.greenbar`` and place it in an
 empty directory accessible to Cog. Then set
-`??? <#COG_CUSTOM_TEMPLATE_DIR>`__ to the path of said directory. After
+:ref:`COG_CUSTOM_TEMPLATE_DIR<COG_CUSTOM_TEMPLATE_DIR>` to the path of said directory. After
 setting the env var you can update or remove the custom template file
 directly. No Cog restarts are required.
 
@@ -321,7 +322,7 @@ error.greenbar
 ~~~~~~~~~~~~~~
 
 Like all templates in Cog, the standard error template is written in
-greenbar. See `??? <#Basic Greenbar Syntax>`__ for more info. Unlike
+greenbar. See :ref:`Basic Greenbar Syntax <basic_greenbar_syntax>` for more info. Unlike
 templates defined for commands though, the standard error template does
 not receive a "results" list. Instead it receives a single object
 containing information about the error.
@@ -357,6 +358,9 @@ execution\_failure
 **The default error.greenbar as an example.**
 
 .. code:: Markdown
+.. commented out the above line and added '::' below.  The block below wasn't displaying in the html.  I think it's related to the missing Markdown lexer.  .RJS.
+
+::
 
     ~attachment title="Command Error" color="#ff3333" Caller=$initiator Pipeline=$pipeline_text "Pipeline ID"=$id Started=$started~
     ~if cond=$planning_failure ~

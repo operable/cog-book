@@ -208,9 +208,7 @@ Data Model
 The memory service’s API resembles a hash map with two kinds of put
 (accumulating or replacing) and delete.
 
-    **Note**
-
-    The visibility and lifetime of data stored in the memory service is
+.. note:: The visibility and lifetime of data stored in the memory service is
     tied to the lifetime of the enclosing pipeline. This means commands
     executing under separate pipelines can see different values or even
     no value at all for the same key. Once a pipeline has exited the

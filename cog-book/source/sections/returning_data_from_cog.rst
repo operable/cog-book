@@ -1,9 +1,7 @@
 Returning data from Cog
 =======================
 
-    **Note**
-
-    If you are using ruby or python to write your commands check out
+.. note:: If you are using ruby or python to write your commands check out
     `cog-rb <https://github.com/cog-bundles/cog-rb>`__ and
     `pycog <https://github.com/cog-bundles/pycog>`__. They both provide
     tools to make outputting data a bit easier
@@ -21,13 +19,18 @@ most common are ``JSON`` and ``COG_TEMPLATE:``.
 
    For example printing this to stdout:
 
-   \`\`\` JSON {"foo":"bar"} \`\`\` would result in Cog returning:
+::
 
-   \`\`\` { "foo": "bar" } \`\`\`
+  JSON
+  {"foo":"bar"}
 
-    **Warning**
+would result in Cog returning:
 
-    Other than log messages, no other output can accompany json. Make
+::
+
+  { "foo": "bar" }
+
+.. warning:: Other than log messages, no other output can accompany json. Make
     sure any text following the JSON marker is valid json.
 
 -  COG\_TEMPLATE: - This is used to specify a template to render. Note:
@@ -35,10 +38,14 @@ most common are ``JSON`` and ``COG_TEMPLATE:``.
 
    For example printing this to stdout:
 
-   \`\`\` COG\_TEMPLATE: foo\_template JSON {"foo":"bar"} \`\`\`
+::
 
-   would tell cog to render the *foo\_template* with the json
-   *{"foo":"bar"}*.
+  COG_TEMPLATE: foo_template
+  JSON
+  {"foo":"bar"}
+
+would tell cog to render the 'foo_template' with the json
+   '{"foo":"bar"}'.
 
 Additionally there are several other output markers for logging to the
 relay console. Log messages have the prefix ``COGCMD_`` followed by the
@@ -47,13 +54,11 @@ log level. Available log levels are: ``DEBUG``, ``INFO``, ``WARN``,
 would just print, ``COGCMD_ERR: And error has occured`` from our
 command.
 
-    **Note**
-
-    Note that log messages may be interleaved with other output. So you
+.. note:: Note that log messages may be interleaved with other output. So you
     could for example
     ``puts("some text\nCOGCMD_DEBUG: A debug statement\n some more text")``
     and Cog will happily print "some text some more text" to the user
     while logging, "A debug statement".
 
 For the full reference of output tags see
-`??? <#Command Output Tags>`__.
+:doc:`/references/command_output_tags`.

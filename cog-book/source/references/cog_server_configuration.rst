@@ -91,6 +91,8 @@ variables and describes their usage.
 
     -  ``COG_BOOTSTRAP_USERNAME``
 
+.. _COG_CUSTOM_TEMPLATE_DIR:
+
 ``COG_CUSTOM_TEMPLATE_DIR``
     The path to your custom template directory.
 
