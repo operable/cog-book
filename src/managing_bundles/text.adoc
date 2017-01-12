@@ -60,7 +60,7 @@ All bundles have a config file. The file is formatted in yaml and contains infor
 
 NOTE: Version must be a string. If you drop the patch number from the version, yaml will interpret it as a number and the config will fail validation. So if you want to just use major and minor numbers, wrap the version in quotes. ex: "0.1"
 
-* *cog_bundle_version* - The version of the config file format (currently we only support version 2)
+* *cog_bundle_version* - The version of the config file format (currently we support version 3 and 4)
 * *commands* - A hash of commands to be included with the bundle
 
 A minimal bundle config might look something like this:
@@ -68,9 +68,11 @@ A minimal bundle config might look something like this:
 [source, YAML]
 ----
 ---
+cog_bundle_version: 4
+
 name: my_bundle
+description: My bundle
 version: "0.1"
-cog_bundle_version: 3
 commands:
   date:
     executable: /bin/date
