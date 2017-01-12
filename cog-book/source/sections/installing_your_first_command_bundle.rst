@@ -45,9 +45,11 @@ or ``.yml``.
 .. code:: YAML
 
     ---
+    cog_bundle_version: 4
+
     name: my_bundle
+    description: My bundle
     version: "0.1"
-    cog_bundle_version: 3
     commands:
        date:
          executable: /bin/date

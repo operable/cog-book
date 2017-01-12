@@ -449,17 +449,18 @@ install the bundle in your own infrastructure!
 .. code:: YAML
 
     ---
-    cog_bundle_version: 2
+    cog_bundle_version: 4
+
     name: github-trigger
+    description: Interact with GitHub webhooks
     version: "0.1"
     docker:
       image: cogcmd/github-trigger
-      tag: "dev"
+      tag: dev
     commands:
       verify:
-        documentation: "Verify a Github webhook body"
+        description: Verify a GitHub webhook body
         executable: "/usr/local/bin/github_verify.rb"
-        enforcing: false
 
 Assuming you have already set up a Relay instance and added it to a
 Relay group named ``trigger-tutorial``, you can install this command

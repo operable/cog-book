@@ -439,6 +439,7 @@ bundle.
 
     ---
     cog_bundle_version: 4
+
     name: twitter_example
     description: Interact with Twitter
     version: 0.0.1
@@ -767,6 +768,7 @@ definition file.
 
     ---
     cog_bundle_version: 4
+
     name: twitter_example
     description: Interact with Twitter
     version: 0.0.2
@@ -896,6 +898,7 @@ as a rule for the command.
 
     ---
     cog_bundle_version: 4
+
     name: twitter_example
     description: Interact with Twitter
     version: 0.0.3
@@ -1046,6 +1049,7 @@ option.
 
     ---
     cog_bundle_version: 4
+
     name: twitter_example
     description: Interact with Twitter
     version: 0.0.4
@@ -1207,6 +1211,7 @@ image should be used to run it.
 
     ---
     cog_bundle_version: 4
+
     name: twitter_example
     description: Interact with Twitter
     version: 0.0.5
@@ -1471,6 +1476,7 @@ try.
 
     ---
     cog_bundle_version: 4
+
     name: twitter_example
     description: Interact with Twitter
     version: 0.0.6

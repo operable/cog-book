@@ -84,7 +84,7 @@ various administrative functions.
 More information
 ~~~~~~~~~~~~~~~~
 
-| --- `??? <#Building Command Bundles>`__
+| --- `??? <#Writing a Command Bundle>`__
 | `??? <#Managing Bundles>`__
 | `??? <#Installing and Managing Relays>`__
 | `??? <#Relay Configuration>`__

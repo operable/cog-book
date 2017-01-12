@@ -169,9 +169,10 @@ excerpt of the mist config as an example.
 .. code:: YAML
 
     ---
-    cog_bundle_version: 3
+    cog_bundle_version: 4
 
     name: mist
+    description: Manage EC2 instances and related services
     version: 0.4.0
     permissions:
     - mist:view
@@ -294,9 +295,10 @@ config in it’s entirety.
 .. code:: YAML
 
     ---
-    cog_bundle_version: 3
+    cog_bundle_version: 4
 
     name: mist
+    description: Manage EC2 instances and related services
     version: 0.4.0
     permissions:
     - mist:view
@@ -311,7 +313,6 @@ config in it’s entirety.
     commands:
       ec2-find:
         executable: /usr/local/bin/ec2_find
-        documentation: mist:ec2-find --region=<region> [--state | --tags | --ami | --return=(id,pubdns,privdns,state,keyname,ami,kernel,arch,vpc,pubip,privip,az,tags)]
         options:
           region:
             type: string
@@ -332,7 +333,6 @@ config in it’s entirety.
           - must have mist:view
       ec2-destroy:
         executable: /usr/local/bin/ec2_destroy
-        documentation: mist:ec2-destroy --region=<region> <instance_id>...
         options:
           region:
             type: string
@@ -341,7 +341,6 @@ config in it’s entirety.
           - must have mist:destroy
       ec2-state:
         executable: /usr/local/bin/ec2_state
-        documentation: mist:ec2-state --region=<region> [stop|start|reboot] <instance_id>...
         options:
           region:
             type: string
@@ -350,7 +349,6 @@ config in it’s entirety.
           - must have mist:change-state
       vpc-list:
         executable: /usr/local/bin/ec2_vpcs
-        documentation: mist:vpc-list --region=<region>
         options:
           region:
             type: string
@@ -362,7 +360,6 @@ config in it’s entirety.
           - must have mist:view
       keypairs-list:
         executable: /usr/local/bin/ec2_keypairs
-        documentation: mist:keypairs-list --region=<region> <name> ...
         options:
           region:
             type: string
@@ -371,7 +368,6 @@ config in it’s entirety.
           - must have mist:view
       ec2-create:
         executable: /usr/local/bin/ec2_create
-        documentation: mist:ec2-create --region=<region> --type=<type> --ami=<ami> --keypair=<pair> --az=<az> --vpc=<vpc> --tags=<tags> --user-data=<user_data>
         options:
           region:
             type: string
@@ -404,7 +400,6 @@ config in it’s entirety.
           - must have mist:create
       ec2-tags:
         executable: /usr/local/bin/ec2_tags
-        documentation: mist:ec2-tags --region=<region> --tags=<tags> [add|remove|rm] ...
         options:
           region:
             type: string
@@ -416,33 +411,12 @@ config in it’s entirety.
           - must have mist:manage-tags
       s3-buckets:
         executable: /usr/local/bin/s3_buckets
-        documentation: s3-buckets [list|delete|create] ...
         rules:
           - must have mist:view
           - with arg[0] == 'list' must have mist:view
           - with (arg[0] == 'delete' or arg[0] == 'rm') must have mist:destroy
       s3-bucket-files:
         executable: /usr/local/bin/s3_bucket_files
-        documentation: s3-bucket-files [delete|list] --force --bucket=<bucket name> --file=<search string> - List contents in a S3 bucket
-        options:
-          bucket:
-            type: string
-            required: false
-          file:
-            type: string
-            required: false
-          delete:
-            type: bool
-            required: false
-          force:
-            type: bool
-            required: false
-        rules:
-          - must have mist:view
-          - with (arg[0] == 'delete' or arg[0] == 'rm') must have mist:destroy
-      s3-bucket-acl:
-        executable: /usr/local/bin/s3_bucket_acl
-        documentation: s3-bucket-acl [set|list] [--policy=[public-read, private, public-read-write, authenticated-read] --force] --bucket=<bucket name> --file=<filename> - Displays  or sets the ACL for a S3 bucket
         options:
           bucket:
             type: string
