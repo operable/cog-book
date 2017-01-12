@@ -23,9 +23,8 @@ Table of Contents
    sections/installing_and_managing_relays.rst
    sections/commands_and_bundles.rst
    sections/managing_bundles.rst
-   sections/building_command_bundles.rst
-   sections/configuring_password_resets.rst
    sections/writing_a_command_bundle.rst
+   sections/configuring_password_resets.rst
    sections/permissions_and_rules.rst
    sections/command_execution_rules.rst
    sections/bundle_configs.rst
