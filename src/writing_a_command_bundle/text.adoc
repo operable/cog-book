@@ -130,7 +130,7 @@ $ ./tweet.rb This is an interesting tweet
 Message: This is an interesting tweet
 URL:     https://twitter.com/CogTesting/status/776507696396791809
 ----
-<1> We only need to install our dependencies once.
+<1> We only need to install our dependencies once. Note also that `bundle` here refers to the Ruby dependency management tool https://bundler.io[Bundler], and not any Cog-specif executables. We're not even using Cog yet!
 <2> Substituting the appropriate values for our real credentials, of course.
 
 By checking that URL, we can further verify that our command worked.
