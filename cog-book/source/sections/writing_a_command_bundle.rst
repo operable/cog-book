@@ -189,7 +189,7 @@ our terminal, as seen in :ref:`Executing the Pure Ruby tweet<execute-pure-ruby-t
 
 **Annotations by line number:**
 
-**Line 1** We only need to install our dependencies once.
+**Line 1** We only need to install our dependencies once. Note also that ``bundle`` here refers to the Ruby dependency management tool `Bundler <https://bundler.io>`__, and not any Cog-specific executables. We’re not even using Cog yet!
 
 **Line 2** Substituting the appropriate values for our real credentials, of course.
 
