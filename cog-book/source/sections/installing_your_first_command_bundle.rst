@@ -13,13 +13,12 @@ place.
   need. In short there are only three primary steps. First you create
   the bundle, next we assign the new bundle to a relay, and last we
   enable it.
+|
 
-    **Note**
-
-    Note that there are some extra flags that can be passed to
+.. note:: Note that there are some extra flags that can be passed to
     ``cogctl bundle install`` that can shortcut some of the steps here.
     Namely the ``--enable`` and ``--relay-groups`` flags. Check out
-    `??? <#Managing Bundles>`__ to learn more.
+    :doc:`managing_bundles` to learn more.
 
 Creating your bundle
 --------------------
@@ -28,10 +27,8 @@ In order to create a bundle you only need one thing, a bundle config.
 Bundle configs are formatted in YAML and supply Cog with all the
 information it needs to install and execute commands in you bundle.
 
-    **Note**
-
-    To get all the nitty gritty about bundle configs go to the
-    `??? <#Bundle Configs>`__ section in the docs.
+.. note:: To get all the nitty gritty about bundle configs go to the
+    :doc:`bundle_configs` section in the docs.
 
 For our example we will be using the following config. It’s a simple
 bundle with only one un-enforcing command. Just create a file named
@@ -40,7 +37,7 @@ actually matter what you name the file, just make sure that it is
 properly formatted YAML and that it has the correct extension, ``.yaml``
 or ``.yml``.
 
-**my\_bundle.yaml.**
+**my_bundle.yaml.**
 
 .. code:: YAML
 
@@ -56,11 +53,9 @@ or ``.yml``.
          rules:
          - "allow"
 
-    **Warning**
-
-    If your commands specify any rules, other than the special "allow"
+.. warning:: If your commands specify any rules, other than the special "allow"
     rule, you will need to make sure the proper grants are in place.
-    Check out `??? <#Permissions and Rules>`__ to learn more.
+    Check out :doc:`permissions_and_rules` to learn more.
 
 Ok, so now that we have our config file ready, let’s create that bundle.
 
@@ -81,9 +76,9 @@ Assigning your bundle to a relay
 
 Bundles are assigned to relays via relay groups. To learn more about
 relays and relay groups check out
-`??? <#Installing and Managing Relays>`__. For the sake of this exercise
+:doc:`installing_and_managing_relays`. For the sake of this exercise
 we’ll assume that you already have a relay group created,
-*my\_relay\_group*, and that it has at least one relay as a member.
+*my_relay_group*, and that it has at least one relay as a member.
 
 Once again we can use ``cogctl`` to assign bundles to relay groups.
 
@@ -120,7 +115,7 @@ For real though, that’s it. You have successfully installed your first
 bundle. If everything went properly you should see the new command in
 Cog’s help and be able to run it.
 
-.. code:: Cog
+.. code-block:: Cog
 
     User:
     !help

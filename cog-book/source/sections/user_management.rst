@@ -1,7 +1,7 @@
 User management
 ===============
 
-If you’ve gone through the `??? <#Installation Guide>`__, you might have
+If you’ve gone through the :doc:`installation_guide`, you might have
 noticed that we had to create a Cog user before you could run any
 commands. The reason we need a full user object and don’t just ask for a
 Slack username is central to Cog’s design; we need users so Cog can

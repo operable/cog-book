@@ -15,6 +15,8 @@ variables and describes their usage.
     accounts created this way will still need to be placed into groups
     by an administrator in order to be granted any permissions.
 
+.. _cog_api_port:
+
 ``COG_API_PORT``
     The IP port to listen on for Cog’s REST API. Must be distinct from
     `[COG\_TRIGGER\_PORT] <#COG_TRIGGER_PORT>`__.
@@ -241,6 +243,8 @@ variables and describes their usage.
     this event from being sent.
 
     Defaults to ``true``.
+
+.. _cog_trigger_port:
 
 ``COG_TRIGGER_PORT``
     The IP port to listen on for invocation of triggers. Must be

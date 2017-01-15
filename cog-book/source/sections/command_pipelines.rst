@@ -96,10 +96,10 @@ This is exactly what we get:
       }
     ]
 
-(Note that the output of an ``echo`` invocation is a map, even though we
-are echoing a simple string: the rule text. The pipeline execution logic
-ensures that such data is wrapped in a map to ensure a consistent
-interface for all commands.)
+.. note:: The output of an ``echo`` invocation is a map, even though we
+    are echoing a simple string: the rule text. The pipeline execution logic
+    ensures that such data is wrapped in a map to ensure a consistent
+    interface for all commands.
 
 Collecting results
 ^^^^^^^^^^^^^^^^^^
@@ -190,7 +190,7 @@ There are two env vars that are of note: ``COG_INVOCATION_ID`` and
    the step will be ``LAST``.
 
 Given this you can collect state using the memory service, see
-`??? <#Services>`__, and process the results as a whole once you have
+:doc:`services`, and process the results as a whole once you have
 received everything.
 
 Variable Substitution

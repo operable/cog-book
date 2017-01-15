@@ -87,6 +87,8 @@ thusly:
 both ``<COMMAND>`` and ``<PERMISSION>`` must exist, and be typed as
 fully-qualified names.
 
+.. _components_of_the_authorization_system: 
+
 Components of the Authorization System
 --------------------------------------
 

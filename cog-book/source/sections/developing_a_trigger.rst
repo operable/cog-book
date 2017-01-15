@@ -3,17 +3,15 @@ Developing a Trigger
 
 *Setting up Cog to respond to Github Webhooks*
 
-You may have heard about Cog’s `triggers <#Triggers>`__ and are curious
+You may have heard about Cog’s :doc:`triggers` and are curious
 how you might use them in your Cog system. In this tutorial, we’ll set
 up a Github webhook to trigger a Cog pipeline in order to explore
 triggers in depth. Along the way, we’ll iteratively develop a pipeline,
 pick up a few tricks about how to develop pipelines in Cog, and see how
 to take maximum advantage of Cog’s composability and flexibility.
 
-    **Note**
-
-    | You can read up on the details of `Cog’s trigger
-      system <#Triggers>`__, but it isn’t necessary for this tutorial;
+.. note:: | You can read up on the details of :doc:`Cog’s trigger
+      system <triggers>`, but it isn’t necessary for this tutorial;
       we’ll explain "just enough" as we go along.
     | We’ll also provide links to more detailed documentation in
       callouts like this one throughout the tutorial.
@@ -40,8 +38,8 @@ in Slack:
     echo "Somebody pushed some code!" > chat://#engineering
 
 You can run this directly in Slack and verify it works. If you’ve used
-Cog before, you might notice the new `URL-style syntax for
-redirects <#chat_URLs>`__. Adding ``chat://`` to the beginning of a
+Cog before, you might notice the new :ref:`URL-style syntax for
+redirects <chat_URLs>`. Adding ``chat://`` to the beginning of a
 redirect will route output through the currently configured chat adapter
 (Slack, Hipchat, IRC, etc.). Normally when you’re just interacting with
 Cog through chat, this isn’t required since we default to returning
@@ -52,11 +50,10 @@ how to access your ``#engineering`` channel! Our ``chat://`` destination
 gives Cog a hint so it knows how to notify you and your colleagues when
 interesting things happen.
 
-    **Note**
+.. note::
+    -  :doc:`redirecting_pipeline_output`
 
-    -  `??? <#Redirecting Pipeline Output>`__
-
-    -  `??? <#Redirect Destinations in Triggered Pipelines>`__
+    -  :ref:`redirect_destinations_in_triggered_pipelines`
 
 Now that we know what pipeline we’re going to run, and determined where
 the output is going to go, we need to set up the trigger to run it. With
@@ -82,11 +79,11 @@ your trigger by adding a ``description``. Triggers *can* run as the Cog
 user that makes the HTTP request if a Cog authentication token is
 supplied in the ``authorization`` header, but we can also override that
 by specifying a user that the pipeline will execute as. Here,
-```bobby_tables`` <http://xkcd.com/327/>`__ will execute our pipeline.
+`bobby_tables <http://xkcd.com/327/>`__ will execute our pipeline.
 Though the ``echo`` command we’re using doesn’t require any special
 permissions, other commands may; in that case, you’ll want to be sure
 that the user you specify has all the required permissions. Obviously,
-```bobby_tables`` <http://xkcd.com/327/>`__ must exist in our Cog system
+``bobby_tables`` must exist in our Cog system
 for any of this to work.
 
 We also specify a timeout. Documentation for Github webhooks indicates
@@ -101,15 +98,15 @@ We also specify, for completeness, that this trigger will be enabled,
 though that is also the default. Enabled triggers are active and can be
 run, while disabled triggers cannot.
 
-    **Note**
+.. note::
 
-    -  `??? <#Anatomy of a Trigger>`__
+    -  :ref:`anatomy_of_a_trigger`
 
-    -  `??? <#Trigger Timeouts>`__
+    -  :ref:`trigger_timeouts`
 
-    -  `??? <#Manipulating Triggers>`__
+    -  :ref:`manipulating_triggers`
 
-    -  `??? <#Components of the Authorization System>`__
+    -  :ref:`components_of_the_authorization_system`
 
 Upon successful trigger creation, you’ll be presented with the URL at
 which the trigger can be, well, triggered.
@@ -171,9 +168,8 @@ get notified by Cog!
 
 |Add webhook dialogue|
 
-    **Note**
-
-    -  `??? <#Invoking a Trigger>`__
+.. note::
+  -  :ref:`invoking_a_trigger`
 
 Let’s Make It More Interesting
 ------------------------------
@@ -231,9 +227,8 @@ It works!
 in
 https://github.com/blahblah/blahblah-repo/compare/9049f1265b7d...0d1a26e67d8f|
 
-    **Note**
-
-    -  `??? <#Initial Calling Environment for Trigger-Invoked Pipelines>`__
+.. note::
+  -  :ref:`initial_calling_environment_for_trigger_invoked_pipelines`
 
 Now that we’ve got a better pipeline, let’s update our existing trigger
 using ``cogctl``:
@@ -252,9 +247,8 @@ values stored in the system.
 At this point, the new pipeline is "live", and the next ``push`` event
 from Github will result in a much more useful message in your chat room.
 
-    **Note**
-
-    -  `??? <#Update a Trigger>`__
+.. note::
+  -  :ref:`update_a_trigger`
 
 Going Further: Composability and Flexibility
 --------------------------------------------
@@ -304,9 +298,8 @@ operate on.
 Try updating the trigger pipeline using ``cogctl`` and try pushing to a
 few branches; you’ll only see messages in chat for the master branch.
 
-    **Note**
-
-    -  `??? <#Errors and >`__
+.. note::
+  -  :ref:`errors_and_empty_pipelines`
 
 Validation
 ----------
@@ -427,11 +420,10 @@ information back out as JSON; if not, we’ll exit with a non-zero code to
 halt the pipeline. Thus, this command acts like ``filter``, albeit a
 filter that does a more involved check than a basic string comparison.
 
-    **Note**
+.. note::
+    -  :doc:`dynamic_command_configuration`
 
-    -  `??? <#Dynamic Command Configuration>`__
-
-    -  `??? <#Relays & Relay Groups>`__
+    -  :ref:`relays_and_relay_groups`
 
 For this tutorial, we’ve created a repository on Github that defines a
 bundle with this command. It even defines a Docker image that can be
@@ -473,13 +465,12 @@ bundle in your own Cog instance:
     cogctl bundle enable github-trigger
     cogctl relay-groups assign trigger-tutorial --bundle=github-trigger
 
-    **Note**
+.. note::
+    -  :doc:`managing_bundles`
 
-    -  `??? <#Managing Bundles>`__
+    -  :ref:`installation_guide_bundle`
 
-    -  `??? <#Installing and Configuring a Bundle>`__
-
-    -  `??? <#Relays & Relay Groups>`__
+    -  :ref:`relays_and_relay_groups`
 
 With this command in place, we can add verification to our existing
 pipeline by simply placing ``github-trigger:verify`` as the first
@@ -523,4 +514,3 @@ whatever’s on your mind; we’d love to hear from you.
 .. |Add webhook dialogue| image:: ../images/Add_webhook.png
 .. |marvin BOT 5:06 PM bobbytables just pushed code to /refs/heads/master in https://github.com/blahblah/blahblah-repo/compare/9049f1265b7d...0d1a26e67d8f| image:: ../images/seed.png
 .. |Webhooks/Manage webhook dialogue| image:: ../images/webhook_secret.png
-

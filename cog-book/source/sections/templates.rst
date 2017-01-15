@@ -40,7 +40,10 @@ Greenbar features:
 
 **Example Greenbar Template.**
 
-.. code:: Markdown
+.. commenting out ''.. code:: Markdown' and adding '::' below.
+.. The block below wasn't displaying in the html.  I think it's related to the missing Markdown lexer.  .RJS.
+
+::
 
     ~if cond=length($results) == 1~
     The _only_ member of the group is **~$results[0].username~**.
@@ -357,8 +360,8 @@ execution\_failure
 
 **The default error.greenbar as an example.**
 
-.. code:: Markdown
-.. commented out the above line and added '::' below.  The block below wasn't displaying in the html.  I think it's related to the missing Markdown lexer.  .RJS.
+.. commenting out ''.. code:: Markdown' and adding '::' below.
+.. The block below wasn't displaying in the html.  I think it's related to the missing Markdown lexer.  .RJS.
 
 ::
 

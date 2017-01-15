@@ -57,6 +57,8 @@ Chat Room / Channel
     must be formatted according to the expected conventions of your chat
     provider (e.g. ``#ops`` but not ``ops`` on Slack, etc.)
 
+.. _here_alias:
+
 **here** Alias
     Cog provides a special alias ``here`` that is shorthand for
     "wherever the command came from". In fact, if you provide no
@@ -73,12 +75,16 @@ Chat Room / Channel
     This alias is always the literal string ``here``, regardless of chat
     platform.
 
+.. _me_alias:
+
 **me** Alias
     Similar to ``here``, the ``me`` alias is a shortcut for sending
     output to yourself.
 
     This alias is always the literal string ``me``, regardless of chat
     platform.
+
+.. _chat_URLs:
 
 **chat://** URLs
     Under the hood, a user or room redirect destination like

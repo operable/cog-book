@@ -84,10 +84,11 @@ various administrative functions.
 More information
 ~~~~~~~~~~~~~~~~
 
-| --- `??? <#Writing a Command Bundle>`__
-| `??? <#Managing Bundles>`__
-| `??? <#Installing and Managing Relays>`__
-| `??? <#Relay Configuration>`__
+| :doc:`writing_a_command_bundle`
+| :doc:`managing_bundles`
+| :doc:`installing_and_managing_relays`
+| :doc:`../references/relay_configuration`
 
 .. |Cog's Architecture| image:: ../images/Operable_Diagram_CogArchitecture.png
 
+|

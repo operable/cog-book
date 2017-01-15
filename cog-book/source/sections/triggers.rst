@@ -13,6 +13,8 @@ Cog provides a REST API for creating, showing, updating and deleting
 triggers; the ``cogctl`` executable and ``operable:trigger`` chat
 commands may also be used.
 
+.. _anatomy_of_a_trigger:
+
 Anatomy of a Trigger
 --------------------
 
@@ -64,6 +66,8 @@ trigger executes.
 -  ``invocation_url`` **URL, generated** HTTP ``POST`` requests sent to
    this URL will trigger the pipeline.
 
+.. _manipulating_triggers:
+
 Manipulating Triggers
 ---------------------
 
@@ -111,6 +115,8 @@ Showing all Triggers
 
 This will list all triggers, showing their name, ID, and pipeline.
 
+.. _update_a_trigger:
+
 Update a Trigger
 ~~~~~~~~~~~~~~~~
 
@@ -154,10 +160,11 @@ Though you can enable or disable a trigger by using
     cogctl triggers disable hello-world
     cogctl triggers enable hello-world
 
+
+.. _invoking_a_trigger:
+
 Invoking a Trigger
 ------------------
-
----
 
 When a trigger is created, an invocation URL for that trigger is
 created. HTTP ``POST`` requests sent to this URL will initiate execution
@@ -179,8 +186,10 @@ You should use the invocation URL that Cog gives you, rather than
 constructing one on your own.
 
 The ports for the API and trigger execution can be specified with the
-`??? <#COG_API_PORT>`__ and `??? <#COG_TRIGGER_PORT>`__ environment
+:ref:`COG_API_PORT <cog_api_port>` and :ref:`COG_TRIGGER_PORT <cog_trigger_port>` environment
 variables, respectively.
+
+.. _initial_calling_environment_for_trigger_invoked_pipelines:
 
 Initial Calling Environment for Trigger-Invoked Pipelines
 ---------------------------------------------------------
@@ -258,11 +267,13 @@ redirection destinations you supply in the trigger’s pipeline, as well
 as the trigger’s ``timeout_sec`` attribute. Finally, we’ll see how
 pipeline execution errors are handled for triggers.
 
+.. _redirect_destinations_in_triggered_pipelines:
+
 Redirect Destinations in Triggered Pipelines
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-As you know, there are a few ways you can specify `output destinations
-for a pipeline <#Redirecting Pipeline Output>`__. Let’s take a look at a
+As you know, there are a few ways you can specify :doc:`output destinations
+for a pipeline <redirecting_pipeline_output>`. Let’s take a look at a
 few scenarios with a triggered pipeline to see how these behave.
 
 If you don’t want any output from the trigger to go to chat, and only
@@ -276,7 +287,7 @@ That is, if you triggered the pipeline ``echo "Hello World"``, you’d get
 ``"Hello World"`` in the HTTP response body.
 
 Recall also that you can explicitly cause this same behavior by using
-the `here redirect alias <#here_Alias>`__. In this case,
+the :ref:`here redirect alias <here_alias>`. In this case,
 
 **Cog.**
 
@@ -292,7 +303,7 @@ would behave exactly as
 
     echo "Hello World"
 
-(The `me redirect alias <#me_Alias>`__, however, is not available for
+(The :ref:`me redirect alias <me_alias>`, however, is not available for
 triggered pipelines.)
 
 Receiving output in the response body may be useful for authenticated
@@ -302,7 +313,7 @@ troubleshooting webhook execution (e.g., examining recent webhook
 deliveries in Github’s interface).
 
 Many times, of course, you’ll want output in chat. This is where Cog’s
-`chat:// URL redirect destinations <#chat_URLs>`__ come into play. Since
+:ref:`chat:// URL redirect destinations <chat_URLs>` come into play. Since
 the HTTP adapter knows nothing of chat, you must use the full URL-style
 redirect to instruct Cog to pass handling of the output to the currently
 configured chat adapter. Naturally, multiple redirects are available for
@@ -325,6 +336,8 @@ will finalize the response with an HTTP ``204 No Content``.
 Remember: if you want output to go to chat from a triggered pipeline,
 you *must* use the full ``chat://`` URL destination form. Using just a
 bare room or user (e.g. ``#general``, ``@brent``) is an error.
+
+.. _trigger_timeouts:
 
 Trigger Timeouts
 ~~~~~~~~~~~~~~~~
@@ -362,6 +375,8 @@ entire pipeline will be terminated at that point. There is currently no
 pipeline chain of 100 commands, and as long as no one command took more
 than a minute to execute, the entire pipeline would run (for over an
 hour and a half).
+
+.. _errors_and_empty_pipelines:
 
 Errors and "Empty" Pipelines
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~

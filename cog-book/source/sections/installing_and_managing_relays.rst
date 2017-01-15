@@ -50,6 +50,8 @@ a simple three step process.
 A fully commented example ``relay.conf`` file can be found
 `here <https://github.com/operable/go-relay/blob/master/example_relay.conf>`__.
 
+.. _relays_and_relay_groups:
+
 Relays & Relay Groups
 ---------------------
 
