@@ -301,6 +301,8 @@ The end result should look like:
 And that’s it, just restart Cog and you can use your new ``~upcase~``
 tag in any template.
 
+.. _Customizing_the_standard_error_template:
+
 Customizing the standard error template
 ---------------------------------------
 

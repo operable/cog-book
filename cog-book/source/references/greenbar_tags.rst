@@ -11,11 +11,16 @@ attribute.
 Example
 ~~~~~~~
 
-\`\`\` :sub:`if cond=$doit bound?` Hello there! :sub:`end` \`\`\`
+::
+
+  ~if cond=$doit bound?`~
+  Hello there!
+  ~`end`~
 
 Given the variable ``$doit`` is bound, the above template would produce:
 
-\`\`\` Hello there! \`\`\`
+::
+  Hello there!
 
 Given that the variable ``$doit`` is not bound, the above template would
 produce an empty string.
@@ -57,20 +62,30 @@ Examples
 
 Using the default body variable ``item``:
 
-\`\`\` :sub:`each var=$users` First Name: :sub:`$item.first\_name` Last
-Name: :sub:`$item.last\_name` :sub:`end` \`\`\`
+::
+
+  ~each var=$users~
+  First Name: ~$item.first_name~
+  Last Name: ~$item.last\_name~
+  ~end~
 
 Customizing the body variable:
 
-\`\`\` :sub:`each var=$users as=user` First Name:
-:sub:`$user.first\_name` Last Name: :sub:`$user.last\_name` :sub:`end`
-\`\`\`
+::
+
+  ~each var=$users as=user~
+  First Name: ~$user.first\_name~
+  Last Name: ~$user.last\_name~
+  ~end~
 
 Given the variable ``$users`` is bound to
 ``[%{"first_name" => "John", "last_name"
 => "Doe"}]`` then both of the above templates would produce:
 
-\`\`\` First Name: John Last Name: Doe \`\`\`
+::
+
+  First Name: John
+  Last Name: Doe
 
 Join
 ----
@@ -85,25 +100,34 @@ Examples
 
 Create a comma-delimited list
 
-\`\`\` :sub:`join var=$names`\ ~$item\ :sub:`~end` \`\`\`
+::
+
+  ~join var=$names~~$item~~end~
 
 Given that the variable ``$names`` is bound to
 ``["Mark", "Kevin", "Shelton"]`` then the above template would produce:
 
-\`\`\` Mark, Kevin, Shelton \`\`\`
+::
+
+  Mark, Kevin, Shelton
 
 Specify a custom joiner
 
-\`\`\` :sub:`join var=$names with="-"`\ ~$item\ :sub:`~end` \`\`\`
+::
+
+  ~join var=$names with="-"~~$item~~end~
 
 Custom binding
 
-\`\`\` :sub:`join var=$names as=name`\ ~$name\ :sub:`~end` \`\`\`
+::
+
+  ~join var=$names as=name~~$name~~end~
 
 Bodies can contain arbitrary instructions
 
-\`\`\` :sub:`join var=$users`\ ~$item.profile.username\ :sub:`~end`
-\`\`\`
+::
+
+  ~join var=$users~~$item.profile.username~~end~
 
 Count
 -----
@@ -115,19 +139,25 @@ map’s unique keys. Any other value type will display "N/A".
 Examples
 ~~~~~~~~
 
-\`\`\` There are :sub:`count var=$users` users. \`\`\`
+::
+
+  There are ~count var=$users~ users.
 
 Given that the variable ``$users`` is bound to
 ``[{ "name": "Mark" }, { "name":
 "Kevin" }]`` then the above template would produce:
 
-\`\`\` There are 2 users. \`\`\`
+::
+
+  There are 2 users.
 
 Given that the variable ``$users`` is bound to
 ``{ "imbriaco": 1, "kevsmith": 2,
 "shelton": 3 }`` then the above template would produce:
 
-\`\`\` There are 3 users. \`\`\`
+::
+
+  There are 3 users.
 
 Break
 -----
@@ -141,17 +171,30 @@ Examples
 Normally Markdown will combine two code blocks into one if they are
 separated by a single newline.
 
-\`\`\` ``This is a line of code`` ``This is another line of code``
-\`\`\`
+::
 
-will render as ``This a line of codeThis is another line of code``
+  `This is a line of code`
+  `This is another line of code`
 
-\`\`\` ``This is a line of code`` :sub:`br`
-``This is another line of code`` \`\`\`
 
 will render as
 
-\`\`\` This is a line of code This is another line of code \`\`\`
+::
+
+  This a line of codeThis is another line of code
+
+::
+
+  `This is a line of code`
+  ~br~
+  `This is another line of code`
+
+will render as
+
+::
+
+  This is a line of code
+  This is another line of code
 
 Attachment
 ----------
@@ -188,34 +231,61 @@ Any other attributes will be interpreted as custom fields and included
 in the attachments' ``fields`` field. Custom fields have the following
 structure:
 
-\`\`\` { "title": <attribute\_name>, "value": <attribute\_value>,
-"short": false } \`\`\`
+::
+
+  {
+    "title": <attribute\_name>,
+    "value": <attribute\_value>,
+    "short": false
+  }
 
 Examples
 ~~~~~~~~
 
 The template
 
-\`\`\` :sub:`attachment title="VM Use By Region" runtime=$timestamp`
-\|Region\|Count\| \|---\|---\| :sub:`each var=$regions as=region`
-\|\ :sub:`$region.name`\ \|\ :sub:`$region.vm\_count`\ \| :sub:`end`
-:sub:`end` \`\`\`
+::
+
+  ~attachment title="VM Use By Region" runtime=$timestamp~
+  |Region|Count|
+  |---|---|
+  ~each var=$regions as=region~
+  |~$region.name~|~$region.vm_count~|
+  ~end~
+  ~end~
 
 when executed with the data
 
-\`\`\` %{"timestamp" ⇒ "Mon Sep 12 13:06:57 EDT 2016", "regions" ⇒
-[%{"name" ⇒ "us-east-1", "vm\_count" ⇒ 113}, %{"name" ⇒ "us-west-1",
-"vm\_count" ⇒ 105}]} \`\`\`
+::
+
+  %{"timestamp" => "Mon Sep 12 13:06:57 EDT 2016",
+   "regions" => [%{"name" => "us-east-1", "vm_count" => 113},
+               %{"name" => "us-west-1", "vm_count" => 105}]}
 
 generates the rendering directives
 
-\`\`\` [%{name: :attachment, title: "VM Use By Region", fields:
-[%{short: false, title: "runtime", value: "Mon Sep 12 13:06:57 EDT
-2016"}], children: [%{name: :table, children: [%{name: :table\_header,
-children: [%{name: :table\_cell, %{name: :table\_cell, %{name:
-:table\_row, children: [%{name: :table\_cell, %{name: :table\_cell,
-%{name: :table\_row, children: [%{name: :table\_cell, %{name:
-:table\_cell, \`\`\`
+::
+
+  [%{name: :attachment,
+     title: "VM Use By Region",
+     fields: [%{short: false,
+                title: "runtime",
+                value: "Mon Sep 12 13:06:57 EDT 2016"}],
+                children: [%{name: :table, children: [%{name: :table_header,
+                                    children: [%{name: :table_cell,
+                                             children: [%{name: :text, text: "Region"}]},
+                                           %{name: :table_cell,
+                                             children: [%{name: :text, text: "Count"}]}]},
+                              %{name: :table_row,
+                                children: [%{name: :table_cell,
+                                             children: [%{name: :text, text: "us-east-1"}]},
+                                           %{name: :table_cell,
+                                             children: [%{name: :text, text: "113"}]}]},
+                              %{name: :table_row,
+                                children: [%{name: :table_cell,
+                                             children: [%{name: :text, text: "us-west-1"}]},
+                                           %{name: :table_cell,
+                                             children: [%{name: :text, text: "105"}]}]}]}]}]
 
 Json
 ----
@@ -228,12 +298,28 @@ Examples
 
 With ``my_json`` equal to
 
-\`\`\` { "foo": "bar", "stuff": { "hello": "world" } } \`\`\`
+::
+
+  {
+  "foo": "bar",
+  "stuff": {
+    "hello": "world"
+  }
+  }
 
 the template
 
-\`\`\` :sub:`json var=$my\_json` \`\`\`
+::
+
+  ~json var=$my_json~
 
 would render the text
 
-\`\`\` { "foo": "bar", "stuff": { "hello": "world" } } \`\`\`
+::
+
+  {
+  "foo": "bar",
+  "stuff": {
+    "hello": "world"
+  }
+  }
