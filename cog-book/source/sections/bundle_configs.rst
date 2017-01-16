@@ -13,7 +13,9 @@ point to an executable already installed on the machine running the
 relay you want to execute the command on. Simple bundles are great for
 simple common commands. Standard bundles point to a repository on Docker
 hub that contains the execution code for your bundle. To learn more
-about packaging and building bundles for Cog, check out :doc:`building_command_bundles`.
+about packaging and building bundles for Cog, check out :doc:`writing_a_command_bundle`.
+
+.. _simple_bundle_target:
 
 Simple bundle configs
 ---------------------
@@ -183,6 +185,8 @@ excerpt of the mist config as an example.
     - mist:change-acl
 
     ...
+
+.. _standard_bundle_target:
 
 Standard bundle configs
 -----------------------
