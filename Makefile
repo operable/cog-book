@@ -13,7 +13,7 @@ BUILD_TOP     = $(shell dirname $(BUILDDIR))
 
 # Put it first so that "make" without argument is like "make help".
 help:
-	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	@$(BUILD_CMD) $(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 cog-book: build-prep
 	@$(BUILD_CMD) make build-docs DOC=$@
