@@ -1,6 +1,7 @@
 MOUNT         = /home/cogdoc
 IMAGE_NAME    = operable/cog-book-toolchain:sphinx
 BUILD_CMD     = docker run -u $(shell id -u) -v $(shell pwd):$(MOUNT) --rm $(IMAGE_NAME)
+S3_PATH       = s3://cog-book-origin.operable.io/
 
 DOC           = cog-book
 
@@ -34,6 +35,9 @@ image:
 
 clean:
 	rm -rf $(BUILD_TOP)
+
+upload: cog-book
+	aws s3 cp --recursive $(BUILDDIR)/html/ $(S3_PATH)
 
 .PHONY: help cog-book style-guide all build-prep build-docs clean image Makefile
 
