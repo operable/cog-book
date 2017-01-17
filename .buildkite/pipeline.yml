@@ -1,11 +1,7 @@
 steps:
   - label: "Generate HTML"
     command: "make cog-book"
-
-  # TODO: The release process still needs automating for Sphinx
-
-  # - wait
-  #
-  # - command: "make upload"
-  #   label: "Publish!"
-  #   branches: "release"
+  - wait
+  - label: "Publish!"
+    command: "make upload"
+    branches: "release"
