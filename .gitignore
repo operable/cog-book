@@ -1,3 +1,4 @@
-*.html
-*.pdf
-/_release
+build
+.ash_history
+tools/ChatLexer/chatlexer/__pycache__
+tools/ChatLexer/chatlexer.egg-info
