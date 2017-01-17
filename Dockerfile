@@ -1,10 +1,13 @@
-FROM alpine:3.4
+FROM frolvlad/alpine-python3
 
-RUN apk --no-cache add ruby asciidoctor ruby-dev build-base python ca-certificates
-RUN gem install asciidoctor --no-rdoc --no-ri && \
-    gem install asciidoctor-pdf --pre --no-rdoc --no-ri && \
-    gem install pygments.rb --no-rdoc --no-ri
+RUN pip3 install --upgrade pip
+RUN pip3 install sphinx
+RUN apk -U --no-cache add make git
 
-RUN adduser -D asciidoc
-USER asciidoc
-WORKDIR /home/asciidoc
+COPY tools/ChatLexer /tmp
+RUN cd /tmp && python3 setup.py install
+
+RUN adduser -D cogdoc
+
+USER cogdoc
+WORKDIR /home/cogdoc

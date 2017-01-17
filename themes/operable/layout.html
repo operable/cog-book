@@ -1,0 +1,30 @@
+{#
+    operable/layout.html
+    ~~~~~~~~~~~~~~~~~~~~
+
+    Sphinx layout template for the operable theme.
+
+    Derived from Sphinx's bizstyle theme
+
+    :copyright: Copyright 2011-2014 by Sphinx team, see AUTHORS.
+    :license: BSD, see LICENSE for details.
+#}
+{% extends "base_layout.html" %}
+
+{% set script_files = script_files + ["_static/operable.js"] %}
+
+{# put the sidebar before the body #}
+{% block sidebar1 %}{{ sidebar() }}{% endblock %}
+{% block sidebar2 %}{% endblock %}
+
+{# doctype override #}
+{%- block doctype %}
+<!doctype html>
+{%- endblock %}
+
+{%- block extrahead %}
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+{%- endblock %}

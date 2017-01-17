@@ -1,38 +1,47 @@
-IMAGE_NAME=operable/cog-book-toolchain:latest
-MOUNT=/home/asciidoc
-ROOT_FILE=cog_book.adoc
+MOUNT         = /home/cogdoc
+IMAGE_NAME    = operable/cog-book-toolchain:sphinx
+BUILD_CMD     = docker run -u $(shell id -u) -v $(shell pwd):$(MOUNT) --rm $(IMAGE_NAME)
+S3_PATH       = s3://cog-book-origin.operable.io/
 
-ASCIIDOC_OPTS     := -r ./lib/google-analytics-postprocessor.rb --require asciidoctor-pdf --doctype=book --attribute stylesheet=stylesheets/cog.css
-build = docker run -it -u $(shell id -u) -v $(shell pwd):$(MOUNT) --rm $(IMAGE_NAME) asciidoctor $(ASCIIDOC_OPTS) --backend=$1 $(MOUNT)/$(ROOT_FILE) | bin/fail_on_warnings.sh
+DOC           = cog-book
 
-image: Dockerfile
+SPHINXOPTS    =
+SPHINXBUILD   = sphinx-build
+SPHINXPROJ    = $(DOC)
+SOURCEDIR     = source
+BUILDDIR      = $(CURDIR)/build/$(DOC)
+BUILD_TOP     = $(shell dirname $(BUILDDIR))
+
+# Put it first so that "make" without argument is like "make help".
+help:
+	@$(BUILD_CMD) $(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+
+cog-book: build-prep
+	@$(BUILD_CMD) make build-docs DOC=$@
+
+style-guide: build-prep
+	@$(BUILD_CMD) make build-docs DOC=$@
+
+all: cog-book style-guide
+
+build-prep:
+	@scripts/ensure_image.sh
+
+build-docs:
+	make html DOC=$(DOC)
+
+image:
 	docker build -t $(IMAGE_NAME) .
 
-html5: $(ROOT_FILE)
-	$(call build,$@)
-
-pdf: $(ROOT_FILE)
-	$(call build,$@)
-
-shell:
-	docker run -it -u root -v $(shell pwd):$(MOUNT) --rm $(IMAGE_NAME) sh
-
-release: html5 pdf
-	mkdir -p _release
-	cp -r images _release/.
-	cp -r stylesheets _release/.
-	cp -r sass _release/.
-	cp *.css _release/.
-	cp favicon.ico _release/.
-	cp $(basename $(ROOT_FILE)).pdf _release/.
-	cp $(basename $(ROOT_FILE)).html _release/.
-
-upload: release
-	aws s3 cp --recursive _release/ s3://cog-book-origin.operable.io/
-
-all: html5 pdf
-
 clean:
-	rm -rf _release
-	rm -f *.html
-	rm -f *.pdf
+	rm -rf $(BUILD_TOP)
+
+upload: cog-book
+	aws s3 cp --recursive $(BUILDDIR)/html/ $(S3_PATH)
+
+.PHONY: help cog-book style-guide all build-prep build-docs clean image Makefile
+
+# Catch-all target: route all unknown targets to Sphinx using the new
+# "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
+%: Makefile
+	@cd $(DOC) && $(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)

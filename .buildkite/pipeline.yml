@@ -1,12 +1,7 @@
 steps:
-  - command: "make html5"
-    label: "Generate HTML"
-
-  - command: "make pdf"
-    label: "Generate PDF"
-
+  - label: "Generate HTML"
+    command: "make cog-book"
   - wait
-
-  - command: "make upload"
-    label: "Publish!"
+  - label: "Publish!"
+    command: "make upload"
     branches: "release"

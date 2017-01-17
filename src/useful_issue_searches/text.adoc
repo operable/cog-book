@@ -1,9 +1,0 @@
-== Useful Issue Searches
-
-=== So You Want To Contribute?
-
-* https://github.com/operable/cog/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Acommands+label%3A%22help+wanted%22[Help Wanted]
-
-=== Milestones
-
-* https://github.com/operable/cog/milestones[List of Cog Milestones]
