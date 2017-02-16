@@ -43,6 +43,8 @@ follows:
 
 -  all in
 
+-  in
+
 .. code:: shell
 
     when command is <bundle_name>:<command_name> with arg[<position>] == '<some value>' must have <bundle_name|site>:<permission_name>
@@ -76,6 +78,11 @@ The following are rule examples with valid argument and option qualifiers:
 | "when command is foo:bar with all option < 10 must have foo:read"
 | "when command is foo:bar with all options in ['staging', 'list'] must have foo:read"
 | "when command is foo:bar with option[foo] in ["foo", "bar"] allow"
+
+You may also use the an 'in' expression when referencing values in a list option.
+
+| "when command is foo:bar with option[list] in ["foo", "bar"] allow
+| "when command is foo:bar with option[list] in [/foo/] allow
 
 Permissions
 -----------
