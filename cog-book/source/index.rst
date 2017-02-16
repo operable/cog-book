@@ -45,6 +45,7 @@ Table of Contents
    references/relay_configuration.rst
    references/command_output_tags.rst
    references/greenbar_tags.rst
+   references/audit_log_events.rst
    appendices/glossary.rst
    appendices/designing_for_chatops.rst
    appendices/chat_platforms.rst
