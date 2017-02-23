@@ -59,13 +59,13 @@ If you’d rather connect Cog to HipChat, skip down to the section titled
 .. code-block:: bash
 
     curl -o docker-compose.yml \
-      https://raw.githubusercontent.com/operable/cog/0.16.2/docker-compose.yml
+      https://raw.githubusercontent.com/operable/cog/1.0.0/docker-compose.yml
 
     curl -o docker-compose.common.yml \
-      https://raw.githubusercontent.com/operable/cog/0.16.2/docker-compose.common.yml
+      https://raw.githubusercontent.com/operable/cog/1.0.0/docker-compose.common.yml
 
     curl -o docker-compose.override.yml \
-      https://raw.githubusercontent.com/operable/cog/0.16.2/docker-compose.override.slack_example.yml
+      https://raw.githubusercontent.com/operable/cog/1.0.0/docker-compose.override.slack_example.yml
 
 The ``docker-compose.yml`` defines which images to run and how they’ll
 talk to each other, while ``docker-compose.common.yml`` and
@@ -156,13 +156,13 @@ repo.
 .. code-block:: bash
 
     curl -o docker-compose.yml \
-      https://raw.githubusercontent.com/operable/cog/0.16.2/docker-compose.yml
+      https://raw.githubusercontent.com/operable/cog/1.0.0/docker-compose.yml
 
     curl -o docker-compose.common.yml \
-      https://raw.githubusercontent.com/operable/cog/0.16.2/docker-compose.common.yml
+      https://raw.githubusercontent.com/operable/cog/1.0.0/docker-compose.common.yml
 
     curl -o docker-compose.override.yml \
-      https://raw.githubusercontent.com/operable/cog/0.16.2/docker-compose.override.hipchat_example.yml
+      https://raw.githubusercontent.com/operable/cog/1.0.0/docker-compose.override.hipchat_example.yml
 
 The ``docker-compose.yml`` defines which images to run and how they’ll
 talk to each other, while the ``docker-compose.override.yml`` sets
