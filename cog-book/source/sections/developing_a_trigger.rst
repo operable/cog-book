@@ -65,13 +65,12 @@ Cog’s command line interface; let’s use ``cogctl``:
 
 .. code:: shell
 
-    cogctl triggers create
-      --name='github-alert' \
-      --pipeline='echo "Somebody pushed some code!" > chat://#engineering' \
-      --enabled=true \
-      --description='Now you know when something happens on Github' \
-      --as-user='bobby_tables' \
-      --timeout-sec=30
+    cogctl trigger create 'github-alert' \
+          'echo "Somebody pushed some code!" > chat://#engineering' \
+          --enable \
+          --description='Now you know when something happens on Github' \
+          --as-user='bobby_tables' \
+          --timeout=30
 
 Here, we create a trigger named ``github-alert`` which runs the pipeline
 we tested earlier. It’s a good idea to provide some documentation for
@@ -108,22 +107,19 @@ run, while disabled triggers cannot.
 
     -  :ref:`components_of_the_authorization_system`
 
-Upon successful trigger creation, you’ll be presented with the URL at
-which the trigger can be, well, triggered.
+Upon successful trigger creation, you can retrieve details about the
+trigger with ``cogctl trigger info``.
 
 **cogctl Output.**
 
-.. code:: text
+.. code:: shell
 
-    Created github-alert
-
-    ID              cd3ba1dc-b807-4b52-8acc-75c3f4e56b88
+    cogctl trigger info github-alert
     Name            github-alert
     Pipeline        echo "Somebody pushed some code!" > chat://#engineering
-    Enabled         true
+    Enabled         True
     As User         bobby_tables
-    Timeout (sec)   30
-    Description     Now you know when something happens on Github
+    Timeout Sec     30
     Invocation URL  http://cog.mycompany.com:4001/v1/triggers/cd3ba1dc-b807-4b52-8acc-75c3f4e56b88
 
 You’ll notice that the port on the invocation URL is different from the
@@ -235,12 +231,12 @@ using ``cogctl``:
 
 .. code:: shell
 
-    cogctl triggers update github-alert \
+    cogctl trigger update github-alert \
       --pipeline='echo $body.pusher.name " just pushed code to " $body.ref " in " $body.repository.html_url ". Changes: " $body.compare > chat://#engineering'
     ```
 
-The ``triggers update`` command takes the trigger name as an argument,
-as well as all the additional flags that ``triggers create`` takes; any
+The ``trigger update`` command takes the trigger name as an argument,
+as well as all the additional flags that ``trigger create`` takes; any
 values you specify in an update command will overwrite the corresponding
 values stored in the system.
 
@@ -463,7 +459,7 @@ bundle in your own Cog instance:
     git clone https://github.com/cog-bundles/github-trigger.git
     cogctl bundle create ./github-trigger/config.yaml
     cogctl bundle enable github-trigger
-    cogctl relay-groups assign trigger-tutorial --bundle=github-trigger
+    cogctl relay-group assign trigger-tutorial github-trigger
 
 .. note::
     -  :doc:`managing_bundles`

@@ -97,30 +97,22 @@ we’ve bound to ``localhost`` so certain features like enforcing a
 matching ``RELAY_TOKEN`` are disabled. But, to add a Relay to Cog, we
 need to build and run Cogctl.
 
-Cogctl requires the same dependencies as Cog, Erlang 18+ and Elixir
-1.3+. Since we already installed those, pull down the source and run the
-following, to grab the deps and compile an escript.
+Cogctl is written in Python 3, but can be compiled to a standalone,
+self-contained binary. Setting up a Python development environment is
+beyond the scope of this document, but up-to-date instructions can be
+found in the README of the `cogctl repository <https://github.com/operable/cogctl>`__.
 
-.. code:: bash
-
-    git clone git@github.com:operable/cogctl.git
-    cd cogctl
-    mix escript
-
-Now you’ll have a ``cogctl`` executable in the current directory. Since
-we have Cog’s API running on the default host and ports, we don’t need
-to create a custom profile. But look at Cogctl’s help output if you need
-to set any of these.
+Once you build the binary, you’ll have a ``cogctl`` executable in the
+``dist`` directory of your ``cogctl`` checkout. You can run this from
+its current location, or move it anywhere you like.
 
 Ok, now we just need to bootstrap Cog and create a record for our Relay.
 Here’s a snippet:
 
 .. code:: bash
 
-    ./cogctl bootstrap
-    ./cogctl relays create \
-      --id=$RELAY_ID \
-      --token=$RELAY_COG_TOKEN
+    ./cogctl bootstrap http://localhost:4000
+    ./cogctl relay create my-relay $RELAY_ID $RELAY_COG_TOKEN
 
 And now you should be in business. But there’s one last step we need to
 take care of before you can run commands. You’ll need to create an
@@ -129,20 +121,15 @@ this:
 
 .. code:: bash
 
-    ./cogctl users create \
+    ./cogctl user create patrick \
       --first-name="Patrick" \
       --last-name="Van Stee" \
       --email="patrick@operable.io" \
-      --username="patrick" \
       --password="supersecret"
 
-    ./cogctl chat-handles create \
-      --user="patrick" \
-      --chat-provider="slack" \
-      --handle="vanstee"
+    ./cogctl chat-handle create patrick slack vanstee
 
-    ./cogctl groups add cog-admin \
-      --user="patrick"
+    ./cogctl group add cog-admin patrick
 
 And now you should be all set. For a quick walkthrough of installing
 your first bundle and running a command, jump back up to the section

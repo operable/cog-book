@@ -45,29 +45,46 @@ Bundles are installed via the ``bundle install`` sub-command in cogctl.
 .. code:: bash
 
     $ cogctl bundle install --help
-    Usage: cogctl bundle install [<file>] [-t [<templates>]] [-e [<enabled>]]
-                                 [-v [<verbose>]]
-                                 [--relay-groups [<relay-groups>]]
-                                 [-? [<help>]] [-h [<host>]] [-p [<port>]]
-                                 [-s [<secure>]] [-U [<rest_user>]]
-                                 [-P [<rest_password>]]
-                                 [--profile [<profile>]]
+    Usage: cogctl bundle install [OPTIONS] BUNDLE_OR_PATH [VERSION]
 
-      <file>               Path to your bundle config file (required)
-      -t, --templates      Path to your template directory [default: templates]
-      -e, --enable         Enable bundle after installing [default: false]
-      -v, --verbose        Verbose output [default: false]
-      --relay-groups       List of relay group names separated by commas to
-                           assign the bundle [default: undefined]
-      -?, --help           Displays this brief help [default: false]
-      -h, --host           Host name or network address of the target Cog
-                           instance [default: undefined]
-      -p, --port           REST API port of the target Cog instances [default:
-                           undefined]
-      -s, --secure         Use HTTPS to connect to Cog [default: false]
-      -U, --rest-user      REST API user [default: undefined]
-      -P, --rest-password  REST API password [default: undefined]
-      --profile            $HOME/.cogctl profile to use [default: undefined]
+      Install a bundle.
+
+      Bundles may be installed from either a file (i.e., the `config.yaml` file
+      of a bundle), or from Operable's Warehouse bundle registry
+      (https://warehouse.operable.io).
+
+      When installing from a file, you may either give the path to the file, as
+      in:
+
+          cogctl bundle install /path/to/my/bundle/config.yaml
+
+      or you may give the path as `-`, in which case standard input is used:
+
+          cat config.yaml | cogctl bundle install -
+
+      When installing from the bundle registry, you should instead provide the
+      name of the bundle, as well as an optional version to install. No version
+      means the latest will be installed.
+
+          cogctl bundle install cfn
+
+          cogctl bundle install cfn 0.5.13
+
+    Options:
+      -e, --enable               Automatically enable a bundle after installing?
+                                 [default: False]
+      -f, --force                Install even if a bundle with the same version is
+                                 already installed. Applies only to bundles
+                                 installed from a file, and not from the Warehouse
+                                 bundle registry. Use this to shorten iteration
+                                 cycles in bundle development.  [default: False]
+      -r, --relay-group TEXT     Relay group to assign the bundle to. Can be
+                                 specified multiple times.
+      -t, --templates DIRECTORY  Path to templates directory. Template bodies will
+                                 be inserted into the bundle configuration prior
+                                 to uploading. This makes it easier to manage
+                                 complex templates.
+      --help                     Show this message and exit.
 
 The config file
 ---------------
@@ -125,13 +142,6 @@ Templates
 The templates flag points to a directory containing any templates for
 your bundle.
 
-.. note::
-    You don’t need to explicitly pass the templates flag. By default
-    cogctl looks in the current working directory for a directory named
-    templates. And if you don’t have any templates for your bundle,
-    that’s fine too. They aren’t necessary for commands to work, they do
-    make the output look nicer though :)
-
 Templates are used by Cog to format command output. They are singular to
 a specific command/adapter combo. So for example; if we wanted to
 support both HipChat and Slack for our date command, we would need to
@@ -156,12 +166,11 @@ This works great for simple templates, but can get confusing when things
 start to get more complicated. To remedy that cogctl provides some
 helpers.
 
-By default ``cogctl`` looks in the current working directory for a
-directory named ``templates``. If your templates are located elsewhere
-you can optionally supply a path to your templates directory with the
-``--templates`` option. The directory should contain one directory per
-adapter and each adapter directory should contain a mustache file for
-each command. So for our date command we would have something like this:
+If you store your templates in a directory, you'll need to pass the
+``--templates`` option; ``cogctl`` does not infer this by default. The
+directory should contain one directory per adapter and each adapter
+directory should contain a mustache file for each command. So for our
+date command we would have something like this:
 
 .. code:: Bash
 
@@ -185,8 +194,8 @@ have version 1.0.0 of “my-bundle” installed:
 .. code:: Bash
 
     $ cogctl bundle versions my-bundle
-    VERSION STATUS
-    1.0.0   Enabled
+    BUNDLE     VERSION  STATUS
+    my-bundle  1.0.0    Enabled
 
 You can install version 2.0.0 straightforwardly:
 
@@ -194,9 +203,9 @@ You can install version 2.0.0 straightforwardly:
 
     $ cogctl bundle install /path/to/my-bundle/v2/config.yaml
     $ cogctl bundle versions my-bundle
-    VERSION STATUS
-    1.0.0   Enabled
-    2.0.0   Disabled
+    BUNDLE     VERSION  STATUS
+    my-bundle  1.0.0    Enabled
+    my-bundle  2.0.0    Disabled
 
 As always, a newly-installed bundle is disabled by default. At this
 point, invoking any commands from the “my-bundle” bundle will still
@@ -208,9 +217,9 @@ Switching to the new version is as simple as:
 
     $ cogctl bundle enable my-bundle 2.0.0
     $ cogctl bundle versions my-bundle
-    VERSION STATUS
-    1.0.0   Disabled
-    2.0.0   Enabled
+    BUNDLE     VERSION  STATUS
+    my-bundle  1.0.0    Disabled
+    my-bundle  2.0.0    Enabled
 
 Now that version 2.0.0 is enabled, the update will percolate to any
 Relays that “my-bundle” has been assigned to. From that point, any
@@ -224,9 +233,9 @@ always drop back to 1.0.0:
 
     $ cogctl bundle enable my-bundle 1.0.0
     $ cogctl bundle versions my-bundle
-    VERSION STATUS
-    1.0.0   Enabled
-    2.0.0   Disabled
+    BUNDLE     VERSION  STATUS
+    my-bundle  1.0.0    Enabled
+    my-bundle  2.0.0    Disabled
 
 You can also enable and disable bundles through chat commands:
 
@@ -257,18 +266,17 @@ assigned to a relay-group, Cog pushes the command config to the
 appropriate relay or relays. When a command is invoked, Cog uses the
 relay-group to select which relay is capable of running which command.
 
-Relay groups are managed through ``cogctl`` with the ``relay-groups``
+Relay groups are managed through ``cogctl`` with the ``relay-group``
 sub-command. For more information read up on
 :doc:`installing_and_managing_relays`.
 
-Optionally during bundle creation you can pass a comma separated list to
-cogctl with the ``--relay-groups`` option.
+Optionally during bundle creation you can pass the ``--relay-group`` option multiple times.
 
 Bundles are assigned to relays via relay groups using ``cogctl``.
 
 .. code:: Bash
 
-    $ cogctl relay-groups assign my_relay_group --bundles my_bundle
+    $ cogctl relay-group assign my_relay_group my_bundle
 
 .. note::
 
@@ -283,7 +291,7 @@ Uninstalling Bundles and Bundle Versions
 You may uninstall a specific version of a bundle or all versions of a
 bundle. Uninstalling a specific version will remove rules and
 permissions only associated with that version. Uninstalling all bundle
-versions *completely* involves removal of all authorization rules
+versions involves *complete* removal of all authorization rules
 governing its commands as well as deletion of all the bundle’s
 permissions. Any custom rules you may have written concerning the
 commands in the bundle will also be deleted. In this regard, bundle
@@ -304,44 +312,38 @@ uninstall a bundle just use ``cogctl``.
 .. code:: Bash
 
     $ cogctl bundle uninstall --help
-    Usage: cogctl bundle uninstall [<bundle_name>] [<bundle_version>]
-                                   [-v [<verbose>]] [-c [<clean>]]
-                                   [-a [<all>]] [-? [<help>]] [-h [<host>]]
-                                   [-p [<port>]] [-s [<secure>]]
-                                   [-U [<rest_user>]] [-P [<rest_password>]]
-                                   [--profile [<profile>]]
+    Usage: cogctl bundle uninstall [OPTIONS] NAME [VERSION]
 
-      <bundle_name>        Bundle name (required)
-      <bundle_version>     Bundle version [default: undefined]
-      -v, --verbose        Verbose output [default: false]
-      -c, --clean          Uninstall all disabled bundle versions [default:
-                           false]
-      -a, --all            Uninstall all versions [default: false]
-      -?, --help           Displays this brief help [default: false]
-      -h, --host           Host name or network address of the target Cog
-                           instance [default: undefined]
-      -p, --port           REST API port of the target Cog instances [default:
-                           undefined]
-      -s, --secure         Use HTTPS to connect to Cog [default: false]
-      -U, --rest-user      REST API user [default: undefined]
-      -P, --rest-password  REST API password [default: undefined]
-      --profile            $HOME/.cogctl profile to use [default: undefined]
+      Uninstall bundles.
 
+    Options:
+      -c, --clean         Uninstall all disabled bundle versions
+      -x, --incompatible  Uninstall all incompatible versions of the bundle
+      -a, --all           Uninstall all versions of the bundle
+      --help              Show this message and exit.
 
-    $ cogctl bundle uninstall --verbose my_bundle 0.1.0
-    Uninstalled 'my_bundle' '0.1.0'
+    $ cogctl bundle uninstall my_bundle 0.1.0
+    Uninstalled my_bundle 0.1.0
 
     $ cogctl bundle uninstall my_bundle
-    cogctl: ERROR: "Can't uninstall 'date'. You must specify either '--all' or '--clean'."
-    cogctl: WARNING: "This operation is irreversible."
+    Usage: cogctl bundle uninstall [OPTIONS] NAME [VERSION]
+
+    Error: Invalid value for "version": Can't uninstall without specifying a version, or --incompatible, --all, --clean
 
     $ cogctl bundle uninstall date 0.1.0
-    cogctl: ERROR: "Cannot delete date 0.1.0, because it is currently enabled"
+    Usage: cogctl bundle uninstall [OPTIONS] NAME [VERSION]
+
+    Error: Invalid value for "version": Cannot uninstall enabled version. Please disable the bundle first
 
     $ cogctl bundle uninstall date --all
-    cogctl: ERROR: "Cannot uninstall an enabled bundle"
-    cogctl: WARNING: "Version '0.1.0' of 'date' is currently enabled"
+    Usage: cogctl bundle uninstall [OPTIONS] NAME [VERSION]
+
+    Error: Invalid value for "bundle": date 0.1.0 is currently enabled. Please disable the bundle first.
 
     $ cogctl bundle disable date
+    Disabled date
 
     $ cogctl bundle uninstall date --all
+    Uninstalled date 0.0.1
+    Uninstalled date 0.0.1
+    Uninstalled date 0.1.0

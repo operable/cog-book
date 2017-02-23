@@ -17,7 +17,7 @@ place.
 
 .. note:: Note that there are some extra flags that can be passed to
     ``cogctl bundle install`` that can shortcut some of the steps here.
-    Namely the ``--enable`` and ``--relay-groups`` flags. Check out
+    Namely the ``--enable`` and ``--relay-group`` flags. Check out
     :doc:`managing_bundles` to learn more.
 
 Creating your bundle
@@ -84,8 +84,8 @@ Once again we can use ``cogctl`` to assign bundles to relay groups.
 
 .. code:: bash
 
-    $ cogctl relay-groups assign my_relay_group --bundles my_bundle
-    Bundle `my_bundle` assigned to relay group `my_relay_group`
+    $ cogctl relay-group assign my_relay_group my_bundle
+    Relay group 'my_relay_group' has the following assigned bundles: my_bundle
 
 Enabling your bundle
 --------------------

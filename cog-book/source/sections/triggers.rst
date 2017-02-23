@@ -81,13 +81,12 @@ Create a Trigger
 
 .. code:: shell
 
-    cogctl triggers create \
-      --name='hello-world' \
-      --pipeline='echo "Hello World" > chat://#general' \
+    cogctl trigger create hello-world \
+      'echo "Hello World" > chat://#general' \
       --as-user='bobby_tables' \
       --description='Hello World, because I did not want to do Fibonacci' \
-      --enabled=true \
-      --timeout-sec=5
+      --enabled \
+      --timeout=5
 
 Each option flag corresponds to one of a trigger’s required or optional
 attributes. Unspecified optional attributes will receive their default
@@ -111,9 +110,9 @@ Showing all Triggers
 
 .. code:: shell
 
-    cogctl triggers
+    cogctl trigger
 
-This will list all triggers, showing their name, ID, and pipeline.
+This will list all triggers, showing their name, pipeline, and if they are enabled.
 
 .. _update_a_trigger:
 
@@ -124,11 +123,11 @@ Update a Trigger
 
 .. code:: shell
 
-    cogctl triggers update hello-world \
+    cogctl trigger update hello-world \
       --pipeline='echo "Hello World" *> chat://#dev chat://#ops'
 
 The trigger being updated is specified by name; the allowed options are
-the same as in ``cogctl triggers create``; any values specified
+the same as in ``cogctl trigger create``; any values specified
 overwrite the values currently in the system, leaving others unchanged.
 In this example, we are only changing the pipeline that is executed.
 
@@ -149,16 +148,12 @@ To delete a trigger, specify its name.
 Enabling / Disabling a Trigger
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Though you can enable or disable a trigger by using
-``cogctl triggers update``, you can also use the ``enable`` and
-``disable`` "shortcut" commands:
-
 **Chat.**
 
 .. code:: shell
 
-    cogctl triggers disable hello-world
-    cogctl triggers enable hello-world
+    cogctl trigger update hello-world --disable
+    cogctl trigger update hello-world --enable
 
 
 .. _invoking_a_trigger:
