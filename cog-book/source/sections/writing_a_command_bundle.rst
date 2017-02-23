@@ -499,7 +499,7 @@ Cog. We’ll use ``cogctl``:
 
 ::
 
-    $ cogctl bundle install config.yaml --enable --relay-groups=default
+    $ cogctl bundle install config.yaml --enable --relay-group=default
 
 Here, we do several things at once. First, we upload the contents of our
 bundle definition to Cog. By adding the ``--enable`` flag, we also make
@@ -519,7 +519,7 @@ This is equivalent to:
 
     $ cogctl bundle install config.yaml
     $ cogctl bundle enable twitter_example 0.0.1
-    $ cogctl relay-groups assign default --bundles=twitter_example
+    $ cogctl relay-group assign default twitter_example
 
 If you look back at our bundle definition, you’ll notice that the path
 to the executable is on my workstation. When a Relay gets the request to
@@ -619,7 +619,7 @@ Uploading this file to Cog requires another ``cogctl`` invocation.
 
 ::
 
-    $ cogctl dynamic-config create twitter_example dynamic_configuration.yaml
+    $ cogctl bundle config create twitter_example dynamic_configuration.yaml
 
 Now, we should be able to run our command completely within Cog.
 

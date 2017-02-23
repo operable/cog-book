@@ -24,8 +24,8 @@ principles are the same.
 
 .. code:: shell
 
-    cogctl bootstrap
-    Bootstrapped
+    cogctl bootstrap http://cog.mycompany.com:4000
+    Bootstrapping the server
 
 .. note:: You can run ``cogctl bootstrap`` multiple times; if the system is
     already bootstrapped, ``cogctl`` will alert you and return a ``1``
@@ -38,13 +38,11 @@ happened.
 
     cat ~/.cogctl
     [defaults]
-    profile=localhost
+    profile=cog.mycompany.com
 
-    [localhost]
-    host=localhost
+    [cog.mycompany.com]
+    url=http://cog.mycompany.com:4000
     password=BgEocTFGzON$U39srRt5^fi(ZD0KxV*1
-    port=4000
-    secure=false
     user=admin
 
 Here, we can see that a user named ``admin`` has been created for us on
@@ -64,9 +62,9 @@ First, let’s just check that we actually exist :smile:
 
 .. code:: shell
 
-    cogctl users
-    USERNAME  FULL NAME
-    admin     Cog Administrator
+    cogctl user
+    USERNAME  FULL NAME          EMAIL ADDRESS
+    admin     Cog Administrator  cog@localhost
 
 *phew!*
 
@@ -75,34 +73,26 @@ fine-grained access to the various REST API endpoints and chat commands.
 
 .. code:: shell
 
-    cogctl permissions
-    NAMESPACE  NAME                ID
-    operable   manage_commands     a8cd921d-49a9-497a-a977-79ad50512df9
-    operable   manage_groups       fa9d0311-2791-462a-9bf9-05fe29299109
-    operable   manage_permissions  cf604203-f546-43cb-8677-51c698140867
-    operable   manage_relays       365228d2-d082-4bfa-ac7d-ff731a92100d
-    operable   manage_roles        fec52faa-5106-4982-ad0b-cbe5307c26ec
-    operable   manage_triggers     4b6b01d7-0d54-4435-befd-c9bb23212404
-    operable   manage_users        65de7570-7b3f-4ebd-98fd-786f9e9b5cc2
+    cogctl permission
+    NAME                         ID
+    operable:manage_commands     a8cd921d-49a9-497a-a977-79ad50512df9
+    operable:manage_groups       fa9d0311-2791-462a-9bf9-05fe29299109
+    operable:manage_permissions  cf604203-f546-43cb-8677-51c698140867
+    operable:manage_relays       365228d2-d082-4bfa-ac7d-ff731a92100d
+    operable:manage_roles        fec52faa-5106-4982-ad0b-cbe5307c26ec
+    operable:manage_triggers     4b6b01d7-0d54-4435-befd-c9bb23212404
+    operable:manage_users        65de7570-7b3f-4ebd-98fd-786f9e9b5cc2
 
 That’s a lot of permissions; Cog helps us out by creating a
 ``cog-admin`` role to collect them all together.
 
 .. code:: shell
 
-    cogctl roles info cog-admin
-    NAME       ID
-    cog-admin  35569e67-433f-4e37-8497-76571f109453
-
-    Permissions
-    NAMESPACE  NAME                ID
-    operable   manage_commands     a8cd921d-49a9-497a-a977-79ad50512df9
-    operable   manage_groups       fa9d0311-2791-462a-9bf9-05fe29299109
-    operable   manage_permissions  cf604203-f546-43cb-8677-51c698140867
-    operable   manage_relays       365228d2-d082-4bfa-ac7d-ff731a92100d
-    operable   manage_roles        fec52faa-5106-4982-ad0b-cbe5307c26ec
-    operable   manage_triggers     4b6b01d7-0d54-4435-befd-c9bb23212404
-    operable   manage_users        65de7570-7b3f-4ebd-98fd-786f9e9b5cc2
+    cogctl role info cog-admin
+    Name         cog-admin
+    ID           15c77231-e53f-4ab9-b438-64b4a2f636d6
+    Permissions  manage_commands, manage_groups, manage_permissions, manage_relays, manage_roles, manage_triggers, manage_user_pipeline, manage_users
+    Groups       cog-admin
 
 To complete the loop, we have a group that is also named ``cog-admin``
 with the ``admin`` user as its sole member. This group is granted the
@@ -110,10 +100,10 @@ with the ``admin`` user as its sole member. This group is granted the
 
 .. code:: shell
 
-    cogctl groups info cog-admin
+    cogctl group info cog-admin
     ID     88f30dec-ca13-4d92-a6bd-4631acc7424b
     Name   cog-admin
-    Users  cog@localhost
+    Users  admin
     Roles  cog-admin
 
 Though the Cog admin user is named ``admin``, there’s nothing
