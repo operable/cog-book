@@ -39,6 +39,12 @@ follows:
 
 -  <,>, ==, !=
 
+-  any in
+
+-  all in
+
+-  in
+
 .. code:: shell
 
     when command is <bundle_name>:<command_name> with arg[<position>] == '<some value>' must have <bundle_name|site>:<permission_name>
@@ -49,6 +55,12 @@ or
 
     when command is <bundle_name>:<command_name> with option[<some option>] == <some value> must have <bundle_name|site>:<permission_name>
 
+or
+
+.. code:: shell
+
+    when command is <bundle_name>:<command_name> with <any|all> <args|options> in ['list', 'of', 'values'] must have <bundle_name|site>:<permission_name>
+
 You may combine these qualifiers such that your rules can be as simple
 or as complicated as you need them to be.
 
@@ -58,7 +70,19 @@ The following are rule examples with valid argument and option qualifiers:
 | "when command is foo:set with option[set] == /.\*/ must have foo:baz-set"
 | "when command is foo:qux with arg[0] == \'status\' must have foo:view"
 | "when command is foo:barqux with option[delete] == true and arg[0] > 5 must have foo:destroy"
-|
+| "when command is foo:bar with any args in ['wubba'] must have foo:read"
+| "when command is foo:bar with any args in ['wubba', /^f.*/, 10] must have foo:read"
+| "when command is foo:bar with all arg in [10, 'baz', 'wubba'] must have foo:read"
+| "when command is foo:bar with arg[0] in ['baz', false, 100] must have foo:read"
+| "when command is foo:bar with any option == /^prod.*/ must have foo:read"
+| "when command is foo:bar with all option < 10 must have foo:read"
+| "when command is foo:bar with all options in ['staging', 'list'] must have foo:read"
+| "when command is foo:bar with option[foo] in ["foo", "bar"] allow"
+
+You may also use the an 'in' expression when referencing values in a list option.
+
+| "when command is foo:bar with option[list] in ["foo", "bar"] allow
+| "when command is foo:bar with option[list] in [/foo/] allow
 
 Permissions
 -----------

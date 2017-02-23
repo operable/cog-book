@@ -19,12 +19,12 @@ a simple three step process.
 
 **Configuring a new relay.**
 
+You'll need to create an ID for your relay (a UUID), as well as create
+a shared secret (a "token") and then give these to Cog:
+
 .. code:: bash
 
-    $ cogctl relays create my_new_relay --token="my fancy sekrit"
-    ID    f8e3ead2-57e0-4fb2-81e9-24bf6c104202
-    Name  my_new_relay
-    $
+    $ cogctl relay create my_new_relay bd03d7f0-b670-4721-9121-c23e62583e49 "my fancy sekrit"
 
 1. Use the ID and token from step #2 to start the Relay instance.
 
@@ -69,10 +69,8 @@ to use ``cogctl`` to create at least one.
 
 .. code:: bash
 
-    $ cogctl relay-groups create my_relay_group
-    ID    c3d29691-dc5b-4adf-a88b-53aff0e2bfa4
-    Name  my_relay_group
-    $
+    $ cogctl relay-group create my_relay_group
+    Created relay group 'my_relay_group'
 
 You can also create a relay group and assign Relays to it in a single
 command, too.
@@ -81,34 +79,30 @@ command, too.
 
 .. code:: bash
 
-    $ cogctl relay-groups create my_newer_group --members=my_new_relay
-    ID    0916ff66-07f9-46bc-bd94-46a540333cb1
-    Name  my_newer_group
-
-    Adding 'my_new_relay' to relay group 'my_newer_group': Ok.
-    $
+    $ cogctl relay-groups create my_newer_group my_new_relay
+    Created relay group 'my_newer_group'
+    Relay group 'my_newer_group' has the following relay members: my_new_relay
 
 Members can be added or removed from a relay group at any time with
-``cogctl`` 's ``relay-groups add`` and ``relay-groups remove`` actions.
+``cogctl`` 's ``relay-group add`` and ``relay-group remove`` actions.
 
 **Adding and removing group members.**
 
 .. code:: bash
 
-    $ cogctl relay-groups add my_relay_group --relay my_new_relay
-    Relay `my_new_relay` added to relay group `my_relay_group`
-    $ cogctl relay-groups remove my_relay_group --relay my_other_relay
-    Relay `my_other_relay` removed from relay group `my_relay_group`
-    $
+    $ cogctl relay-group add my_relay_group my_new_relay
+    Relay group 'my_relay_group' has the following relay members: my_new_relay, my_other_relay
+    $ cogctl relay-group remove my_relay_group my_other_relay
+    Relay group 'my_relay_group' has the following relay members: my_new_relay
 
 Finally, you can view a detailed description of a relay group with
-``cogctl`` 's ``relay-groups info`` action.
+``cogctl`` 's ``relay-group info`` action.
 
 **Viewing a relay group.**
 
 .. code:: bash
 
-    $ cogctl relay-groups info my_relay_group
+    $ cogctl relay-group info my_relay_group
     Name           my_relay_group
     ID             c3d29691-dc5b-4adf-a88b-53aff0e2bfa4
     Creation Time  2016-04-19T18:55:52Z

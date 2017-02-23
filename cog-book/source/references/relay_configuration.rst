@@ -69,7 +69,7 @@ variable ``RELAY_MAX_CONCURRENT``, and so on.
 ``RELAY_COG_TOKEN``
     Shared secret between Cog and a given Relay.
 
-    Corresponds to the ``--token`` flag used when creating a Relay via
+    Corresponds to the ``TOKEN`` argument used when creating a Relay via
     ``cogctl``.
 
 .. note:: This is a required setting.

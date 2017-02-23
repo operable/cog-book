@@ -59,13 +59,13 @@ If you’d rather connect Cog to HipChat, skip down to the section titled
 .. code-block:: bash
 
     curl -o docker-compose.yml \
-      https://raw.githubusercontent.com/operable/cog/0.16.2/docker-compose.yml
+      https://raw.githubusercontent.com/operable/cog/1.0.0/docker-compose.yml
 
     curl -o docker-compose.common.yml \
-      https://raw.githubusercontent.com/operable/cog/0.16.2/docker-compose.common.yml
+      https://raw.githubusercontent.com/operable/cog/1.0.0/docker-compose.common.yml
 
     curl -o docker-compose.override.yml \
-      https://raw.githubusercontent.com/operable/cog/0.16.2/docker-compose.override.slack_example.yml
+      https://raw.githubusercontent.com/operable/cog/1.0.0/docker-compose.override.slack_example.yml
 
 The ``docker-compose.yml`` defines which images to run and how they’ll
 talk to each other, while ``docker-compose.common.yml`` and
@@ -156,13 +156,13 @@ repo.
 .. code-block:: bash
 
     curl -o docker-compose.yml \
-      https://raw.githubusercontent.com/operable/cog/0.16.2/docker-compose.yml
+      https://raw.githubusercontent.com/operable/cog/1.0.0/docker-compose.yml
 
     curl -o docker-compose.common.yml \
-      https://raw.githubusercontent.com/operable/cog/0.16.2/docker-compose.common.yml
+      https://raw.githubusercontent.com/operable/cog/1.0.0/docker-compose.common.yml
 
     curl -o docker-compose.override.yml \
-      https://raw.githubusercontent.com/operable/cog/0.16.2/docker-compose.override.hipchat_example.yml
+      https://raw.githubusercontent.com/operable/cog/1.0.0/docker-compose.override.hipchat_example.yml
 
 The ``docker-compose.yml`` defines which images to run and how they’ll
 talk to each other, while the ``docker-compose.override.yml`` sets
@@ -227,17 +227,13 @@ communicating with Cog outside of chat.
 
 .. code-block:: bash
 
-    cogctl users create \
+    cogctl user create patrick
       --first-name="Patrick" \
       --last-name="Van Stee" \
       --email="patrick@operable.io" \
-      --username="patrick" \
       --password="supersecret"
 
-    cogctl chat-handles create \
-      --user="patrick" \
-      --chat-provider="slack" \
-      --handle="vanstee"
+    cogctl chat-handle create patrick slack vanstee
 
 Great, now Cog should know who you are when running a command in chat.
 You can try it out by running that ``help`` command again.
@@ -256,8 +252,7 @@ give you permission to run all the pre-installed commands.
 
 .. code-block:: bash
 
-    cogctl groups add cog-admin \
-      --user=patrick
+    cogctl group add cog-admin patrick
 
 You should now be able to list bundles or even install them as you’ll
 see in the next section.
@@ -298,7 +293,7 @@ yet. Let’s set our api token with ``cogctl``.
     echo 'AWS_ACCESS_KEY_ID: "AKIBU34ZNOTAREALTOKENQ"' >> config.yaml
     echo 'AWS_SECRET_ACCESS_KEY: "YQ7h84BCvE4fJnotarealtokenO8zpAIbulblb6MCHkO"' >> config.yaml
     echo 'AWS_REGION: "us-east-1"' >> config.yaml
-    cogctl dynamic-config create ec2 config.yaml
+    cogctl bundle config create ec2 config.yaml
 
 Now there’s just one last step; making sure we have permission to run
 ec2 commands by adding some privileges to the ``cog-admin`` group.

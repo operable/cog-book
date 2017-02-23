@@ -80,7 +80,7 @@ vary from adapter to adapter so under the name of the template we key
 the template strings by adapter. Currently we only support two adapters
 for the purpose of templates; "slack" and "hipchat".
 
-.. note:: cogctl, Cogs command line tool, provides some useful functionality
+.. note:: cogctl, Cog's command line tool, provides some useful functionality
     for templates. You can just save templates as individual files and
     cogctl will build out the templates section for you before uploading
     the config.

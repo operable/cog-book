@@ -283,18 +283,13 @@ The easiest way submit configuration layers to Cog is by using
     manually-managed configuration files on Relay hosts. The manual
     process is, well, *manual*.
 
-.. tip:: The command structure for ``cogctl dynamic-config`` has changed
-    slightly from previous releases. With 0.12.0, the ``--bundle``
-    option is no longer an option; instead, the bundle is a required
-    argument.
-
 Adding a base layer of dynamic configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: shell
 
-    $ cogctl dynamic-config create $BUNDLE ~/path/to/config.yaml --layer=base
-    Base dynamic config layer for bundle 'pingdom' saved successfully
+    $ cogctl bundle config create pingdom ~/path/to/config.yaml --layer=base
+    Created base layer for 'pingdom' bundle
 
 Here, the ``--layer`` option is not required; if not specified, "base"
 is always the default.
@@ -303,10 +298,10 @@ Adding other layers is similar:
 
 .. code:: shell
 
-    $ cogctl dynamic-config create $BUNDLE ~/path/to/room_ops.yaml --layer=room/ops
-    room/ops dynamic config layer for bundle 'pingdom' saved successfully
+    $ cogctl bundle config create pingdom ~/path/to/room_ops.yaml --layer=room/ops
+    Created room/ops layer for 'pingdom' bundle
     $ cogctl dynamic-config create pingdom ~/path/to/user_chris.yaml --layer=user/chris
-    user/chris dynamic config layer for bundle 'pingdom' saved successfully
+    Created user/chris layer for 'pingdom' bundle
 
 Showing the layers that exist
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -315,7 +310,7 @@ You can list all layers that are currently in place for a given bundle.
 
 .. code:: shell
 
-    $ cogctl dynamic-config pingdom
+    $ cogctl bundle config layers pingdom
     base
     room/ops
     user/chris
@@ -324,30 +319,30 @@ For any given layer, you can see the configuration that will be used.
 
 .. code:: shell
 
-    $ cogctl dynamic-config info pingdom base
+    $ cogctl bundle config info pingdom base
     PINGDOM_USER_PASSWORD: "secret_dont_tell"
     PINGDOM_USER_EMAIL: "cog@operable.io"
     PINGDOM_APPLICATION_KEY: "blahblahblah"
 
 Again, if you do not specify a layer, "base" is assumed. That is,
-``cogctl dynamic info pingdom`` is equivalent to the above command.
+``cogctl bundle config info pingdom`` is equivalent to the above command.
 
 You can also see other layers:
 
 .. code:: shell
 
-    $ cogctl dynamic-config info pingdom room/ops
+    $ cogctl bundle config info pingdom room/ops
     PINGDOM_USER_PASSWORD: "ops4life"
     PINGDOM_USER_EMAIL: "cog_ops@operable.io"
     PINGDOM_APPLICATION_KEY: "opsblahblahblah"
 
 .. note::
-    | The ``cogctl dynamic-config info`` subcommand returns the contents
+    | The ``cogctl bundle config info`` subcommand returns the contents
       of *only* the specified layer; it does not show you the effective
       configuration that might be injected into a command’s execution
       environment. You are shown exactly what was uploaded when you ran
     |
-    | cogctl dynamic-config create $BUNDLE $PATH\_TO\_CONFIGURATION\_FILE --layer=$LAYER
+    | cogctl bundle config create $BUNDLE $PATH\_TO\_CONFIGURATION\_FILE --layer=$LAYER
     |
     | not the result of overlaying multiple layers on top of each other.
 
@@ -358,10 +353,10 @@ Configuration layers can be deleted individually
 
 .. code:: shell
 
-    $ cogctl dynamic-config delete pingdom
-    Base dynamic config layer for bundle 'pingdom' deleted successfully
-    $ cogctl dynamic-config delete pingdom room/ops
-    room/ops dynamic config layer for bundle 'pingdom' deleted successfully
+    $ cogctl bundle config delete pingdom
+    Deleted 'base' layer for bundle 'pingdom'
+    $ cogctl bundle config delete pingdom room/ops
+    Deleted 'room/ops' layer for bundle 'pingdom'
 
 (As before, not specifying a layer defaults to operating on the ``base``
 layer.)
@@ -374,10 +369,10 @@ following pipelines may be useful:
 .. code:: shell
 
     # Remove ALL layers
-    cogctl dynamic-config pingdom | xargs -n1 cogctl dynamic-config delete pingdom
+    cogctl bundle config layers pingdom | xargs -n1 cogctl bundle config delete pingdom
 
     # Remove only room layers
-    cogctl dynamic-config pingdom | grep "room/" | xargs -n1 cogctl dynamic-config delete pingdom
+    cogctl bundle config layers pingdom | grep "room/" | xargs -n1 cogctl bundle config delete pingdom
 
     # Remove only user layers
-    cogctl dynamic-config pingdom | grep "user/" | xargs -n1 cogctl dynamic-config delete pingdom
+    cogctl bundle config layers pingdom | grep "user/" | xargs -n1 cogctl bundle config delete pingdom

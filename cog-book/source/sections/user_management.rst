@@ -42,10 +42,10 @@ example of importing users from a CSV file with a simple shell script.
 
 First, let’s go over the cogctl commands we’ll be using.
 
-| ``cogctl users create`` - Creates a Cog user
-| ``cogctl chat-handles create`` - Creates a chat handle for a given
+| ``cogctl user create`` - Creates a Cog user
+| ``cogctl chat-handle create`` - Creates a chat handle for a given
   user
-| ``cogctl groups add`` - Adds a user to a given group
+| ``cogctl group add`` - Adds a user to a given group
 
 Our CSV file will look like this:
 
@@ -71,21 +71,17 @@ handle and add them them to the set of groups.
     IFS=,
 
     cat $1 | tail +2 | while read email password username groups; do
-      ./cogctl users create \
+      ./cogctl user create $username \
         --email $email \
-        --password $password \
-        --username $username < /dev/null
+        --password $password < /dev/null
 
-      ./cogctl chat-handles create \
-        --user $username \
-        --handle $username \
-        --chat-provider slack < /dev/null
+      ./cogctl chat-handle create $username slack $username < /dev/null
 
       groups=$(echo "$groups" | sed -e 's/"//g')
       read -ra groups <<< "$groups"
 
       for group in "${groups[@]}"; do
-        ./cogctl groups add $group --user $username < /dev/null
+        ./cogctl group add $group $username < /dev/null
       done
     done
 

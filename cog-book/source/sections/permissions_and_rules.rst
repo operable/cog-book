@@ -87,7 +87,7 @@ thusly:
 both ``<COMMAND>`` and ``<PERMISSION>`` must exist, and be typed as
 fully-qualified names.
 
-.. _components_of_the_authorization_system: 
+.. _components_of_the_authorization_system:
 
 Components of the Authorization System
 --------------------------------------
@@ -224,44 +224,43 @@ First a ``mist_admin`` role, with all the mist permissions:
 
 .. code:: Shell
 
-    cogctl roles create mist_admin
-    cogctl permissions grant mist:view --role=mist_admin
-    cogctl permissions grant mist:change_state --role=mist_admin
-    cogctl permissions grant mist:destroy --role=mist_admin
-    cogctl permissions grant mist:create --role=mist_admin
-    cogctl permissions grant mist:manage-tags --role=mist_admin
-    cogctl permissions grant mist:change-acl --role=mist_admin
+    cogctl role create mist_admin
+    cogctl role grant mist_admin mist:view
+    cogctl role grant mist_admin mist:change_state
+    cogctl role grant mist_admin mist:destroy
+    cogctl role grant mist_admin mist:create
+    cogctl role grant mist_admin mist:manage-tags
+    cogctl role grant mist_admin mist:change-acl
 
 And now, a ``mist_read_only`` role:
 
 .. code:: Shell
 
-    cogctl roles create mist_read_only
-    cogctl permissions grant mist:view --role=mist_read_only
+    cogctl role create mist_read_only
+    cogctl role grant mist_read_only mist:view
 
 Now we have our roles, but we have nothing to grant them to. Let’s
 create some groups.
 
 .. code:: Shell
 
-    cogctl groups create operations
-    cogctl groups create developers
+    cogctl group create operations
+    cogctl group create developers
 
 Now let’s grant the roles to our new groups.
 
 .. code:: Shell
 
-    cogctl roles grant mist_admin --group=operations
-    cogctl roles grant mist_read_only --group=developers
+    cogctl group grant operations mist_admin
+    cogctl group grant developers mist_read_only
 
 We’re almost there. We have the groundwork laid; all that remains is to
 add our users.
 
 .. code:: Shell
 
-    cogctl groups add operations --email=alice@mycompany.com
-    cogctl groups add developers --email=bob@mycompany.com
-    cogctl groups add developers --email=charlie@mycompany.com
+    cogctl group add operations alice
+    cogctl group add developers bob charlie
 
 Any changes to the permission structure take effect immediately. If the
 ``mist:view`` permission is removed from the ``mist_read_only`` role,
