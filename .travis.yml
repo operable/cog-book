@@ -5,6 +5,8 @@ services:
 
 script:
 - make cog-book
+- mkdir docs/
+- cp -R build/cog-book/html/* docs/
 
 deploy:
   provider: pages
