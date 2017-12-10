@@ -5,6 +5,7 @@ services:
 
 script:
 - make cog-book
+- touch build/cog-book/html/.nojekyll
 
 deploy:
   provider: pages
