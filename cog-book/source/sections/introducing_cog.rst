@@ -8,7 +8,7 @@ Powerful access control means you can collaborate around even the most sensitive
 Current Features
 ================
 
-Cog is under heavy development and getting smarter all the time. This list of features gives you an idea of how Cog was built as well as the things that Cog knows how to do.
+Cog is under heavy development and is getting smarter all the time. This list of features gives you an idea of how Cog was built as well as the things that Cog knows how to do.
 
 
 Extensibility
