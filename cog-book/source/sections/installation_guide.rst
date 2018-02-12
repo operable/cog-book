@@ -227,7 +227,7 @@ communicating with Cog outside of chat.
 
 .. code-block:: bash
 
-    cogctl user create patrick
+    cogctl user create patrick \
       --first-name="Patrick" \
       --last-name="Van Stee" \
       --email="patrick@operable.io" \
