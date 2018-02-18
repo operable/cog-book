@@ -1,0 +1,16 @@
+sudo: required
+
+services:
+  - docker
+
+script:
+- make cog-book
+- touch build/cog-book/html/.nojekyll
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  local-dir: build/cog-book/html
+  on:
+    branch: master
