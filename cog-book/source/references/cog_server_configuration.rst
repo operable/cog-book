@@ -197,6 +197,14 @@ variables and describes their usage.
 
     -  :ref:`[COG\_SMTP\_VARIABLES] <COG_SMTP>`
 
+.. _COG_PIPELINE_TIMEOUT:
+
+``COG_PIPELINE_TIMEOUT``
+    Amount of time (in seconds) to wait for execution of pipeline to
+    complete.
+
+    Defaults to ``60`` seconds.
+
 .. _COG_SERVICE_URL_BASE:
 
 ``COG_SERVICE_URL_BASE``
