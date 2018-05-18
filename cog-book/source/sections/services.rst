@@ -152,7 +152,7 @@ The Services API provides an informational API to assist monitoring,
 service discovery, and service enumeration. These endpoints are listed
 below.
 
-/services/meta
+/v1/services/meta
 ~~~~~~~~~~~~~~
 
 Returns a JSON object describing Cog version, Cog Services API version,
@@ -163,7 +163,7 @@ can be used as a normative reference.
 
 .. code:: http
 
-    GET /services/meta HTTP/1.1
+    GET /v1/services/meta HTTP/1.1
     Authorization: pipeline 123456789
 
 **Response.**
@@ -221,7 +221,7 @@ Returns the current value of ``{key}``. Returns 404 for missing keys.
 
 .. code:: HTTP
 
-    GET /services/memory/1.0/foo HTTP/1.1
+    GET /v1/services/memory/1.0/foo HTTP/1.1
     Authorization: pipeline 123456789
 
 **Response.**
@@ -246,7 +246,7 @@ Accumulate (Default)
 
 .. code:: HTTP
 
-    POST /services/memory/1.0/foo HTTP/1.1
+    POST /v1/services/memory/1.0/foo HTTP/1.1
     Authorization: pipeline 123456789
     Content-Type: application/json
 
@@ -271,7 +271,7 @@ Accumulate (Default)
 
 .. code:: HTTP
 
-    POST /services/memory/1.0/foo HTTP/1.1
+    POST /v1/services/memory/1.0/foo HTTP/1.1
     Authorization: pipeline 123456789
     Content-Type: application/json
 
@@ -296,7 +296,7 @@ Accumulate (Default)
 
 .. code:: HTTP
 
-    POST /services/memory/1.0/foo HTTP/1.1
+    POST /v1/services/memory/1.0/foo HTTP/1.1
     Authorization: pipeline 123456789
     Content-Type: application/json
 
@@ -324,7 +324,7 @@ Replace
 
 .. code:: HTTP
 
-    POST /services/memory/1.0/foo HTTP/1.1
+    POST /v1/services/memory/1.0/foo HTTP/1.1
     Authorization: pipeline 123456789
     Content-Type: application/json
 
@@ -349,7 +349,7 @@ Replace
 
 .. code:: HTTP
 
-    DELETE /services/memory/1.0/foo HTTP/1.1
+    DELETE /v1/services/memory/1.0/foo HTTP/1.1
     Authorization: pipeline 123456789
 
 **Response.**
@@ -357,3 +357,37 @@ Replace
 .. code:: HTTP
 
     HTTP/1.1 204 OK
+
+Chat Service
+------------
+
+The chat service allows you to send messages back to a channel or user
+during command execution. This can be either the originating channel/user
+using COG_ROOM/COG_CHAT_HANDLE environment variables, or to a specific
+channel/user every time.
+
+POST data should be in json format, usernames should be preceded with `@`
+and room names preceded with `#`.
+
+**Request.**
+
+.. code:: http
+
+    POST /v1/chat/1.0.0/send_message HTTP/1.1
+    Authorization: pipeline 123456789
+    Content-Type: application/json
+
+    {
+      "destination": "@username",
+      "message": "Command started."
+    }
+
+**Response.**
+
+.. code:: http
+
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+    Content-Length: ...
+
+    {"status": "sent"}
