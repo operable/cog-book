@@ -318,9 +318,9 @@ would render the text
 
 .. code-block:: json
 
-{
-  "foo": "bar",
-  "stuff": {
-    "hello": "world"
-  }
-}
+    {
+      "foo": "bar",
+      "stuff": {
+        "hello": "world"
+      }
+    }
