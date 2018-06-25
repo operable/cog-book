@@ -286,16 +286,16 @@ following code *is* Cog to our nascent command.
 .. code-block:: bash
     :linenos:
 
-    $ export TWITTER_CONSUMER_KEY=XXXX
-    $ export TWITTER_CONSUMER_SECRET=XXXX
-    $ export TWITTER_ACCESS_TOKEN=XXXX
-    $ export TWITTER_ACCESS_TOKEN_SECRET=XXXX
+    export TWITTER_CONSUMER_KEY=XXXX
+    export TWITTER_CONSUMER_SECRET=XXXX
+    export TWITTER_ACCESS_TOKEN=XXXX
+    export TWITTER_ACCESS_TOKEN_SECRET=XXXX
 
-    $ export COG_ARGC="2"
-    $ export COG_ARGV_0="Hello"
-    $ export COG_ARGV_1="World"
+    export COG_ARGC="2"
+    export COG_ARGV_0="Hello"
+    export COG_ARGV_1="World"
 
-    $ ./tweet_cog_wrapper.sh
+    ./tweet_cog_wrapper.sh
 
 **Annotations by line number:**
 
