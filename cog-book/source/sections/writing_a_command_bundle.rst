@@ -178,12 +178,17 @@ our terminal, as seen in :ref:`Executing the Pure Ruby tweet<execute-pure-ruby-t
 .. code-block:: bash
   :linenos:
 
-    $ bundle install
-    $ export TWITTER_CONSUMER_KEY=XXXX
-    $ export TWITTER_CONSUMER_SECRET=XXXX
-    $ export TWITTER_ACCESS_TOKEN=XXXX
-    $ export TWITTER_ACCESS_TOKEN_SECRET=XXXX
-    $ ./tweet.rb This is an interesting tweet
+    bundle install
+    export TWITTER_CONSUMER_KEY=XXXX
+    export TWITTER_CONSUMER_SECRET=XXXX
+    export TWITTER_ACCESS_TOKEN=XXXX
+    export TWITTER_ACCESS_TOKEN_SECRET=XXXX
+    ./tweet.rb This is an interesting tweet
+
+Outputs:
+
+.. code-block:: console
+
     Message: This is an interesting tweet
     URL:     https://twitter.com/CogTesting/status/776507696396791809
 
@@ -497,7 +502,7 @@ Cog. We’ll use ``cogctl``:
 
 **Installing a Bundle: The Quick Way.**
 
-::
+.. code-block:: bash
 
     $ cogctl bundle install config.yaml --enable --relay-group=default
 
@@ -515,11 +520,11 @@ This is equivalent to:
 
 **Installing a Bundle: The Verbose Way.**
 
-::
+.. code-block:: bash
 
-    $ cogctl bundle install config.yaml
-    $ cogctl bundle enable twitter_example 0.0.1
-    $ cogctl relay-group assign default twitter_example
+    cogctl bundle install config.yaml
+    cogctl bundle enable twitter_example 0.0.1
+    cogctl relay-group assign default twitter_example
 
 If you look back at our bundle definition, you’ll notice that the path
 to the executable is on my workstation. When a Relay gets the request to
@@ -617,9 +622,9 @@ Uploading this file to Cog requires another ``cogctl`` invocation.
 
 **Uploading Dynamic Configuration to Cog.**
 
-::
+.. code-block:: bash
 
-    $ cogctl bundle config create twitter_example dynamic_configuration.yaml
+    cogctl bundle config create twitter_example dynamic_configuration.yaml
 
 Now, we should be able to run our command completely within Cog.
 
@@ -1197,9 +1202,9 @@ Creating the image is simple.
 
 **Building the Bundle Image.**
 
-::
+.. code-block:: bash
 
-    $ docker build -t cog-book/twitter .
+    docker build -t cog-book/twitter .
 
 Now we need to tell Cog that this bundle is a Docker bundle, and which
 image should be used to run it.
@@ -1745,7 +1750,7 @@ automatically.
 
 **Command Output in Relay Logs.**
 
-::
+.. code-block:: console
 
     WARN[2016-09-23T14:10:18-04:00] (P: d3097cc6b413473780b9aa9596273586 C: twitter_example:recent_tweets) Starting
     INFO[2016-09-23T14:10:18-04:00] (P: d3097cc6b413473780b9aa9596273586 C: twitter_example:recent_tweets) Authenticated

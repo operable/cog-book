@@ -19,14 +19,14 @@ most common are ``JSON`` and ``COG_TEMPLATE:``.
 
    For example printing this to stdout:
 
-::
+.. code-block:: console
 
   JSON
   {"foo":"bar"}
 
 would result in Cog returning:
 
-::
+.. code-block:: json
 
   { "foo": "bar" }
 
@@ -38,7 +38,7 @@ would result in Cog returning:
 
    For example printing this to stdout:
 
-::
+.. code-block:: console
 
   COG_TEMPLATE: foo_template
   JSON
