@@ -44,8 +44,7 @@ would result in Cog returning:
   JSON
   {"foo":"bar"}
 
-would tell cog to render the 'foo_template' with the json
-   '{"foo":"bar"}'.
+would tell cog to render the 'foo_template' with the json ``'{"foo":"bar"}'``.
 
 Additionally there are several other output markers for logging to the
 relay console. Log messages have the prefix ``COGCMD_`` followed by the
