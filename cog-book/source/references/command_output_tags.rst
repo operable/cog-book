@@ -46,11 +46,11 @@ JSON response passed to the instances template:
     [
       {
         "instance_id": "i-1984f3",
-        "instance_type: "t2.micro"
+        "instance_type": "t2.micro"
       },
       {
         "instance_id": "i-2a7b11",
-        "instance_type: "t2.small"
+        "instance_type": "t2.small"
       }
     ]
 
