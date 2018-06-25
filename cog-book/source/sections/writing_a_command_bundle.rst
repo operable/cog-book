@@ -504,7 +504,7 @@ Cog. We’ll use ``cogctl``:
 
 .. code-block:: bash
 
-    $ cogctl bundle install config.yaml --enable --relay-group=default
+    cogctl bundle install config.yaml --enable --relay-group=default
 
 Here, we do several things at once. First, we upload the contents of our
 bundle definition to Cog. By adding the ``--enable`` flag, we also make
@@ -1267,7 +1267,7 @@ notified and is downloading the image:
 
 **Retrieving the Bundle Image in Relay’s Logs.**
 
-::
+.. code-block: console
 
     DEBU[2016-09-21T12:22:06-04:00] Refreshing command catalog.
     DEBU[2016-09-21T12:22:06-04:00] Processing bundle catalog updates.
