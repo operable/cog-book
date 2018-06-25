@@ -301,12 +301,12 @@ With ``my_json`` equal to
 
 .. code-block:: json
 
-  {
-  "foo": "bar",
-  "stuff": {
-    "hello": "world"
-  }
-  }
+    {
+      "foo": "bar",
+      "stuff": {
+        "hello": "world"
+      }
+    }
 
 the template
 
@@ -318,9 +318,9 @@ would render the text
 
 .. code-block:: json
 
-  {
+{
   "foo": "bar",
   "stuff": {
     "hello": "world"
   }
-  }
+}
