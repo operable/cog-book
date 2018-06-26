@@ -17,7 +17,7 @@ template specified and sent to chat as shown below.
 
 Output from command:
 
-::
+.. code-block:: console
 
     COGCMD_DEBUG: Requst took 53ms to complete
     COG_TEMPLATE: instances
@@ -35,22 +35,22 @@ Output from command:
 
 Relay logs:
 
-::
+.. code-block:: console
 
     DEBU[2016-12-06T11:10:14-05:00] (P: 2b113f571dc14419870cffe5d5064e69 C: ec2:instance-list) Request took 53ms to complete
 
 JSON response passed to the instances template:
 
-::
+.. code-block:: json
 
     [
       {
         "instance_id": "i-1984f3",
-        "instance_type: "t2.micro"
+        "instance_type": "t2.micro"
       },
       {
         "instance_id": "i-2a7b11",
-        "instance_type: "t2.small"
+        "instance_type": "t2.small"
       }
     ]
 
@@ -66,7 +66,7 @@ provided.
 
 Output from command:
 
-::
+.. code-block:: console
 
     INSTANCE_ID  INSTANCE_TYPE
     COGCMD_INFO: 2 instances returned
@@ -76,13 +76,13 @@ Output from command:
 
 Relay logs:
 
-::
+.. code-block:: console
 
     INFO[2016-12-06T11:10:14-05:00] (P: 2b113f571dc14419870cffe5d5064e69 C: ec2:instance-list) 2 instances returned
 
 JSON response passed to the monospace template:
 
-::
+.. code-block:: json
 
     [
       {

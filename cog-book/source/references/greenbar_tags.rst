@@ -20,6 +20,7 @@ Example
 Given the variable ``$doit`` is bound, the above template would produce:
 
 ::
+
   Hello there!
 
 Given that the variable ``$doit`` is not bound, the above template would
@@ -231,7 +232,7 @@ Any other attributes will be interpreted as custom fields and included
 in the attachments' ``fields`` field. Custom fields have the following
 structure:
 
-::
+.. code-block:: json
 
   {
     "title": <attribute\_name>,
@@ -298,14 +299,14 @@ Examples
 
 With ``my_json`` equal to
 
-::
+.. code-block:: json
 
-  {
-  "foo": "bar",
-  "stuff": {
-    "hello": "world"
-  }
-  }
+    {
+      "foo": "bar",
+      "stuff": {
+        "hello": "world"
+      }
+    }
 
 the template
 
@@ -315,11 +316,11 @@ the template
 
 would render the text
 
-::
+.. code-block:: json
 
-  {
-  "foo": "bar",
-  "stuff": {
-    "hello": "world"
-  }
-  }
+    {
+      "foo": "bar",
+      "stuff": {
+        "hello": "world"
+      }
+    }

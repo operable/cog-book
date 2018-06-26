@@ -19,14 +19,14 @@ most common are ``JSON`` and ``COG_TEMPLATE:``.
 
    For example printing this to stdout:
 
-::
+.. code-block:: console
 
   JSON
   {"foo":"bar"}
 
 would result in Cog returning:
 
-::
+.. code-block:: json
 
   { "foo": "bar" }
 
@@ -38,14 +38,13 @@ would result in Cog returning:
 
    For example printing this to stdout:
 
-::
+.. code-block:: console
 
   COG_TEMPLATE: foo_template
   JSON
   {"foo":"bar"}
 
-would tell cog to render the 'foo_template' with the json
-   '{"foo":"bar"}'.
+would tell cog to render the 'foo_template' with the json ``'{"foo":"bar"}'``.
 
 Additionally there are several other output markers for logging to the
 relay console. Log messages have the prefix ``COGCMD_`` followed by the

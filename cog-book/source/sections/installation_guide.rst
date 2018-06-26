@@ -119,7 +119,7 @@ You should see Docker downloading and starting images for Cog, Relay and
 a database. This might take a while, but once it’s done starting up and
 has connected you should start seeing logs like the following:
 
-::
+.. code-block:: console
 
   cog\_1 \| 2016-10-07T00:38:51.0504 (Cog.BusEnforcer:60) [info] Allowed connection for Relay 00000000-0000-0000-0000-000000000000
 

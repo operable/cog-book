@@ -4,7 +4,7 @@ The Cog Book Author Style Guide
 This document is meant as both description and example to encourage
 standard practices amongst Cog Book contributors. It will include
 preferred or recommended approaches for selecting among reStructuredText
-formatting options, organizing information flow, and presenting code and
+formatting options, organising information flow, and presenting code and
 other examples. It also contains the complete list of approved jokes,
 witticisms, and wry remarks acceptable for adding levity to The Cog
 Book.
@@ -123,6 +123,10 @@ Use appropriate code designations (yaml, bash, sh, shell…).
 Use ``bash`` for command line interface examples unless you have a
 specific reason to use another option.
 
+**Console output**
+
+Whenever an output of a console command (docker logs, execution lines) use ``console``.
+
 **Configuration files.**
 
 Most configuration files should be sourced in ``YAML``.
@@ -204,7 +208,7 @@ Just don't get carried away.
   Don’t do this.
 
   .. warning::
-  
+
     What is wrong with you?
 
 Images
