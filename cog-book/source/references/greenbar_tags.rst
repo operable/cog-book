@@ -232,7 +232,7 @@ Any other attributes will be interpreted as custom fields and included
 in the attachments' ``fields`` field. Custom fields have the following
 structure:
 
-.. code-block: json
+.. code-block:: json
 
   {
     "title": <attribute\_name>,
