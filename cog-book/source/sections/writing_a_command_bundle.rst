@@ -1267,7 +1267,7 @@ notified and is downloading the image:
 
 **Retrieving the Bundle Image in Relay’s Logs.**
 
-.. code-block: console
+.. code-block:: console
 
     DEBU[2016-09-21T12:22:06-04:00] Refreshing command catalog.
     DEBU[2016-09-21T12:22:06-04:00] Processing bundle catalog updates.
