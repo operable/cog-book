@@ -6,6 +6,7 @@ services:
 script:
 - make cog-book
 - touch build/cog-book/html/.nojekyll
+- if [ -f "CNAME" ]; then cp CNAME build/cog-book/html; fi
 
 notifications:
   slack:
