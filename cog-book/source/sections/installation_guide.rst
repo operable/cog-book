@@ -96,8 +96,10 @@ You’ll also need to export a ``COG_HOST`` variable. This is not a proper
 :doc:`../references/cog_server_configuration`
 but one specifically for use with this ``docker-compose`` example. This
 is the host that the Cog API will be made available at. Set this to
-point to your Docker host. If you’re using `docker-machine for
-example <https://docs.docker.com/machine/>`__, this would suffice:
+point to your Docker host. 
+
+Using `Docker Machine <https://docs.docker.com/machine/>`_.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Export Environment Variables.**
 
@@ -105,6 +107,16 @@ example <https://docs.docker.com/machine/>`__, this would suffice:
 
     export SLACK_API_TOKEN=<your_token>
     export COG_HOST=$(docker-machine ip default)
+
+Using `Docker Native <https://www.docker.com/community-edition>`_.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Export Environment Variables.**
+    
+.. code-block:: bash
+
+    export SLACK_API_TOKEN=<your_token>
+    export COG_HOST=docker.local
 
 Now it’s time to run ``docker-compose``. From the same directory
 containing the ``docker-compose.yml``, run the following with the bot
