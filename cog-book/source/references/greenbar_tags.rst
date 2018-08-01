@@ -13,9 +13,9 @@ Example
 
 ::
 
-  ~if cond=$doit bound?`~
+  ~if cond=$doit bound?~
   Hello there!
-  ~`end`~
+  ~end~
 
 Given the variable ``$doit`` is bound, the above template would produce:
 
@@ -31,16 +31,14 @@ Operators
 
 +--------------------------+--------------------------+--------------------------+
 | Symbol                   | Name                     | Variable value types     |
-+--------------------------+--------------------------+--------------------------+
-| :---                     | :---                     | :---                     |
-+--------------------------+--------------------------+--------------------------+
++==========================+==========================+==========================+
 | >                        | greater than             | int, float               |
 +--------------------------+--------------------------+--------------------------+
 | >=                       | greater than equal       | int, float               |
 +--------------------------+--------------------------+--------------------------+
 | <                        | less than                | int, float               |
 +--------------------------+--------------------------+--------------------------+
-| ⇐                        | less than equal          | int, float               |
+| <=                       | less than equal          | int, float               |
 +--------------------------+--------------------------+--------------------------+
 | ==                       | equal                    | int, float, string       |
 +--------------------------+--------------------------+--------------------------+
@@ -67,7 +65,7 @@ Using the default body variable ``item``:
 
   ~each var=$users~
   First Name: ~$item.first_name~
-  Last Name: ~$item.last\_name~
+  Last Name: ~$item.last_name~
   ~end~
 
 Customizing the body variable:
@@ -75,8 +73,8 @@ Customizing the body variable:
 ::
 
   ~each var=$users as=user~
-  First Name: ~$user.first\_name~
-  Last Name: ~$user.last\_name~
+  First Name: ~$user.first_name~
+  Last Name: ~$user.last_name~
   ~end~
 
 Given the variable ``$users`` is bound to
@@ -174,8 +172,8 @@ separated by a single newline.
 
 ::
 
-  `This is a line of code`
-  `This is another line of code`
+  This is a line of code
+  This is another line of code
 
 
 will render as
@@ -186,9 +184,9 @@ will render as
 
 ::
 
-  `This is a line of code`
+  This is a line of code
   ~br~
-  `This is another line of code`
+  This is another line of code
 
 will render as
 
@@ -232,11 +230,11 @@ Any other attributes will be interpreted as custom fields and included
 in the attachments' ``fields`` field. Custom fields have the following
 structure:
 
-.. code-block:: json
+.. code-block:: javascript
 
   {
-    "title": <attribute\_name>,
-    "value": <attribute\_value>,
+    "title": <attribute_name>,
+    "value": <attribute_value>,
     "short": false
   }
 
