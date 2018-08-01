@@ -302,6 +302,8 @@ Adding other layers is similar:
     Created room/ops layer for 'pingdom' bundle
     $ cogctl dynamic-config create pingdom ~/path/to/user_chris.yaml --layer=user/chris
     Created user/chris layer for 'pingdom' bundle
+    $ cogctl dynamic-config create pingdom ~/path/to/room_direct.yaml --layer=room/direct
+    Created room/direct layer for 'pingdom' bundle
 
 Showing the layers that exist
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
