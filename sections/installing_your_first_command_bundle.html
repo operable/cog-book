@@ -1,0 +1,407 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>16. Installing Your First Command Bundle &mdash; Cog Book 1.0.0 documentation</title>
+  
+
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Cog Book 1.0.0 documentation" href="../index.html"/>
+        <link rel="next" title="17. Developing a Trigger" href="developing_a_trigger.html"/>
+        <link rel="prev" title="15. Templates" href="templates.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cog Book
+          
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+          </a>
+
+          
+            <img src="../_static/cog_peek.svg" class="logo" />
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bootstrapping_cog.html">2. Bootstrapping Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_and_managing_relays.html">3. Installing and Managing Relays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands_and_bundles.html">4. Commands and Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="managing_bundles.html">5. Managing Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_a_command_bundle.html">6. Writing A Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_password_resets.html">7. Configuring password resets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions_and_rules.html">8. Permissions and Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_execution_rules.html">9. Command Execution Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundle_configs.html">10. Bundle Configs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_environment_variables.html">11. Command Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic_command_configuration.html">12. Dynamic Command Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="returning_data_from_cog.html">13. Returning data from Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services.html">14. Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">15. Templates</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">16. Installing Your First Command Bundle</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-your-bundle">16.1. Creating your bundle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#assigning-your-bundle-to-a-relay">16.2. Assigning your bundle to a relay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enabling-your-bundle">16.3. Enabling your bundle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#profit">16.4. Profit!</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="developing_a_trigger.html">17. Developing a Trigger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cog_architecture.html">18. Cog Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_pipelines.html">19. Command pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="redirecting_pipeline_output.html">20. Redirecting Pipeline Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">21. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_management.html">22. User management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributor_license_agreement.html">23. Contributor License Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/cog_server_configuration.html">24. Cog Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/relay_configuration.html">25. Relay Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/command_output_tags.html">26. Command Output Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/greenbar_tags.html">27. Greenbar Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/audit_log_events.html">28. Audit Log Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/glossary.html">29. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/designing_for_chatops.html">30. Designing ChatOps Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/chat_platforms.html">31. Notes on Chat Platform Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Cog Book</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>16. Installing Your First Command Bundle</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/operable/cog-book/blob/HEAD/cog-book/source/sections/installing_your_first_command_bundle.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installing-your-first-command-bundle">
+<h1>16. Installing Your First Command Bundle<a class="headerlink" href="#installing-your-first-command-bundle" title="Permalink to this headline">¶</a></h1>
+<p><em>Might be some good info to have</em></p>
+<p>So you’ve installed Cog, you have a relay instance up and running and
+<code class="docutils literal"><span class="pre">cogctl</span></code> ready to go. Now what to do? Well, if your answer is, &#8220;I’d
+like to install a bundle!&#8221; then read on, you have come to the right
+place.</p>
+<div class="line-block">
+<div class="line"><strong>tl;dr</strong></div>
+<div class="line">Bundle installation is pretty simple once you have everything you
+need. In short there are only three primary steps. First you create
+the bundle, next we assign the new bundle to a relay, and last we
+enable it.</div>
+<div class="line"><br /></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note that there are some extra flags that can be passed to
+<code class="docutils literal"><span class="pre">cogctl</span> <span class="pre">bundle</span> <span class="pre">install</span></code> that can shortcut some of the steps here.
+Namely the <code class="docutils literal"><span class="pre">--enable</span></code> and <code class="docutils literal"><span class="pre">--relay-group</span></code> flags. Check out
+<a class="reference internal" href="managing_bundles.html"><span class="doc">Managing Bundles</span></a> to learn more.</p>
+</div>
+<div class="section" id="creating-your-bundle">
+<h2>16.1. Creating your bundle<a class="headerlink" href="#creating-your-bundle" title="Permalink to this headline">¶</a></h2>
+<p>In order to create a bundle you only need one thing, a bundle config.
+Bundle configs are formatted in YAML and supply Cog with all the
+information it needs to install and execute commands in you bundle.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To get all the nitty gritty about bundle configs go to the
+<a class="reference internal" href="bundle_configs.html"><span class="doc">Bundle Configs</span></a> section in the docs.</p>
+</div>
+<p>For our example we will be using the following config. It’s a simple
+bundle with only one un-enforcing command. Just create a file named
+<code class="docutils literal"><span class="pre">my_bundle.yaml</span></code> and paste the contents below into it. It doesn’t
+actually matter what you name the file, just make sure that it is
+properly formatted YAML and that it has the correct extension, <code class="docutils literal"><span class="pre">.yaml</span></code>
+or <code class="docutils literal"><span class="pre">.yml</span></code>.</p>
+<p><strong>my_bundle.yaml.</strong></p>
+<div class="code YAML highlight-default"><div class="highlight"><pre><span></span><span class="o">---</span>
+<span class="n">cog_bundle_version</span><span class="p">:</span> <span class="mi">4</span>
+
+<span class="n">name</span><span class="p">:</span> <span class="n">my_bundle</span>
+<span class="n">description</span><span class="p">:</span> <span class="n">My</span> <span class="n">bundle</span>
+<span class="n">version</span><span class="p">:</span> <span class="s2">&quot;0.1&quot;</span>
+<span class="n">commands</span><span class="p">:</span>
+   <span class="n">date</span><span class="p">:</span>
+     <span class="n">executable</span><span class="p">:</span> <span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">date</span>
+     <span class="n">rules</span><span class="p">:</span>
+     <span class="o">-</span> <span class="s2">&quot;allow&quot;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If your commands specify any rules, other than the special &#8220;allow&#8221;
+rule, you will need to make sure the proper grants are in place.
+Check out <a class="reference internal" href="permissions_and_rules.html"><span class="doc">Permissions and Rules</span></a> to learn more.</p>
+</div>
+<p>Ok, so now that we have our config file ready, let’s create that bundle.</p>
+<p>Bundles are most easily created with Cog’s command line interface,
+<code class="docutils literal"><span class="pre">cogctl</span></code>. To create your bundle just type the following at the command
+prompt. Adjust the <code class="docutils literal"><span class="pre">my_bundle.yaml</span></code> bit to point to the config file
+that you created.</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span>$ cogctl bundle install my_bundle.yaml
+</pre></div>
+</div>
+<p>And there you have it! Bundle created. Now let’s see about assigning it
+to a relay.</p>
+</div>
+<div class="section" id="assigning-your-bundle-to-a-relay">
+<h2>16.2. Assigning your bundle to a relay<a class="headerlink" href="#assigning-your-bundle-to-a-relay" title="Permalink to this headline">¶</a></h2>
+<p>Bundles are assigned to relays via relay groups. To learn more about
+relays and relay groups check out
+<a class="reference internal" href="installing_and_managing_relays.html"><span class="doc">Installing and Managing Relays</span></a>. For the sake of this exercise
+we’ll assume that you already have a relay group created,
+<em>my_relay_group</em>, and that it has at least one relay as a member.</p>
+<p>Once again we can use <code class="docutils literal"><span class="pre">cogctl</span></code> to assign bundles to relay groups.</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span>$ cogctl relay-group assign my_relay_group my_bundle
+Relay group &#39;my_relay_group&#39; has the following assigned bundles: my_bundle
+</pre></div>
+</div>
+</div>
+<div class="section" id="enabling-your-bundle">
+<h2>16.3. Enabling your bundle<a class="headerlink" href="#enabling-your-bundle" title="Permalink to this headline">¶</a></h2>
+<p>By default any bundles added to Cog are added in the <em>disabled</em> state.
+This way you don’t have to worry about accidentally exposing commands
+that aren’t fully configured, or otherwise un-ready for prime time.</p>
+<p>Enabling commands is easy though. We’ll use <code class="docutils literal"><span class="pre">cogctl</span></code>! I betcha didn’t
+see that one coming :) By default the highest installed version of a
+bundle will be enabled. To enable a different version just pass the
+version to enable to cogctl.</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span>$ cogctl bundle enable my_bundle
+
+$ cogctl bundle enable my_bundle 0.2.0
+</pre></div>
+</div>
+</div>
+<div class="section" id="profit">
+<h2>16.4. Profit!<a class="headerlink" href="#profit" title="Permalink to this headline">¶</a></h2>
+<p>I know I said there were only three steps. And technically there are,
+but I have a thing for the whole &#8220;last step == PROFIT!!&#8221; thing.</p>
+<p>For real though, that’s it. You have successfully installed your first
+bundle. If everything went properly you should see the new command in
+Cog’s help and be able to run it.</p>
+<div class="highlight-Cog"><div class="highlight"><pre><span></span>User:
+!help
+
+Cog:
+I know about these commands:
+
+ * my_bundle:date
+ * operable:alias
+ * operable:bundle
+ * operable:echo
+ * operable:filter
+ * operable:greet
+ * operable:group
+ * operable:help
+ * operable:max
+ * operable:min
+ * operable:permissions
+ * operable:raw
+ * operable:role
+ * operable:rules
+ * operable:seed
+ * operable:sleep
+ * operable:sort
+ * operable:sum
+ * operable:table
+ * operable:thorn
+ * operable:unique
+ * operable:wc
+ * operable:which
+
+ Try calling `operable:help COMMAND` to find out more.
+
+ User:
+ !date
+
+ Cog:
+ Tue Mar 29 18:07:41 EDT 2016
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="developing_a_trigger.html" class="btn btn-neutral float-right" title="17. Developing a Trigger" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="templates.html" class="btn btn-neutral" title="15. Templates" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 Operable, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61670076-4', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  
+
+
+</body>
+</html>

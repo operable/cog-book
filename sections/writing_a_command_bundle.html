@@ -1,0 +1,2118 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>6. Writing A Command Bundle &mdash; Cog Book 1.0.0 documentation</title>
+  
+
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Cog Book 1.0.0 documentation" href="../index.html"/>
+        <link rel="next" title="7. Configuring password resets" href="configuring_password_resets.html"/>
+        <link rel="prev" title="5. Managing Bundles" href="managing_bundles.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cog Book
+          
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+          </a>
+
+          
+            <img src="../_static/cog_peek.svg" class="logo" />
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bootstrapping_cog.html">2. Bootstrapping Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_and_managing_relays.html">3. Installing and Managing Relays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands_and_bundles.html">4. Commands and Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="managing_bundles.html">5. Managing Bundles</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Writing A Command Bundle</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#scenario-tweet-from-cog">6.1. Scenario: Tweet from Cog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tweet-from-plain-ruby">6.2. Tweet from Plain Ruby</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#first-steps-toward-cog-arguments">6.3. First Steps Toward Cog: Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#describe-it-to-cog-bundle-definitions">6.4. Describe it to Cog: Bundle Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-the-bundle">6.5. Installing the Bundle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dynamic-configuration">6.6. Dynamic Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output">6.7. Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#templating-output">6.7.1. Templating Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tweet-permissions-and-rules">6.8. Tweet Permissions and Rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options-tweet-from-different-accounts">6.9. Options: Tweet from different accounts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#packaging-with-docker">6.10. Packaging with Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#handling-input">6.11. Handling Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usecase-getting-statistics-on-recent-tweets">6.11.1. Usecase: Getting Statistics on Recent Tweets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#a-recent-tweets-command">6.11.2. A <code class="docutils literal"><span class="pre">recent_tweets</span></code> Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tweet-statistics-favorites-and-retweets">6.11.3. Tweet Statistics: Favorites and Retweets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#error-handling">6.12. Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#logging">6.13. Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary">6.14. Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_password_resets.html">7. Configuring password resets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions_and_rules.html">8. Permissions and Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_execution_rules.html">9. Command Execution Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundle_configs.html">10. Bundle Configs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_environment_variables.html">11. Command Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic_command_configuration.html">12. Dynamic Command Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="returning_data_from_cog.html">13. Returning data from Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services.html">14. Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">15. Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_your_first_command_bundle.html">16. Installing Your First Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing_a_trigger.html">17. Developing a Trigger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cog_architecture.html">18. Cog Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_pipelines.html">19. Command pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="redirecting_pipeline_output.html">20. Redirecting Pipeline Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">21. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_management.html">22. User management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributor_license_agreement.html">23. Contributor License Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/cog_server_configuration.html">24. Cog Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/relay_configuration.html">25. Relay Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/command_output_tags.html">26. Command Output Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/greenbar_tags.html">27. Greenbar Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/audit_log_events.html">28. Audit Log Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/glossary.html">29. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/designing_for_chatops.html">30. Designing ChatOps Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/chat_platforms.html">31. Notes on Chat Platform Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Cog Book</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>6. Writing A Command Bundle</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/operable/cog-book/blob/HEAD/cog-book/source/sections/writing_a_command_bundle.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="writing-a-command-bundle">
+<h1>6. Writing A Command Bundle<a class="headerlink" href="#writing-a-command-bundle" title="Permalink to this headline">¶</a></h1>
+<p>At some point in your use of Cog, you’ll want to write some command
+bundles of your own. One of the promises of ChatOps is the ability to
+bring your processes into the shared space of your chat system, lowering
+the bar for collaboration, and increasing participation. Chances are
+you’ve already got a number of programs and scripts that you already use
+to run your systems. Fortunately, using those tools in Cog doesn’t
+require shoe-horning them into a particular application framework, or
+rewriting them into a new programming language. Instead, Cog’s interface
+relies on the fundamental building blocks of standard input, standard
+output, and environment variables.</p>
+<p>In this chapter we’ll show you how to take a standalone program and
+gradually write adapter code to make it interoperate with Cog. We’ll
+examine Cog’s usage of input, output, and environment variables. We’ll
+learn how to describe a bundle to Cog. We’ll also see how to package
+your code and run it on Relay, Cog’s execution engine. Along the way,
+we’ll also discover what is necessary if you’d like to write your own
+language-specific interaction library to abstract the lower-level
+details of the Cog - command interaction.</p>
+<p>Our framework for examining all these points will be the creation of a
+bundle that interacts with <a class="reference external" href="https://twitter.com">Twitter</a>. For those
+wanting to skip ahead, the &#8220;real&#8221; version of this bundle can be found in
+Cog’s <a class="reference external" href="https://bundles.operable.io/bundles/twitter/latest">Command Bundle
+Warehouse</a>. This
+chapter traces the techniques and thought processes a developer might go
+through to arrive at that finished product.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>It is technically possible to write a Cog command in any language.
+However, certain languages are likely to provide poor performance
+due to particular details of their runtimes. You should generally
+favor languages that provide quick startup times. For example,
+commands written in JVM languages (Java, Clojure, Scala, etc.) will
+run slowly due to the relatively long startup of the Java Virtual
+Machine itself. This startup penalty will be incurred for each
+invocation of the command since Relay does not currently have a
+notion of a &#8220;persistent command&#8221;, whereby a &#8220;warm&#8221; JVM could be kept
+around and shared for multiple invocations.</p>
+<p class="last">At present, dynamic languages like Ruby and Python, or languages
+that compile down to performant executables, such as Go, Rust, etc.,
+will give you the best experience with Cog.</p>
+</div>
+<div class="section" id="scenario-tweet-from-cog">
+<h2>6.1. Scenario: Tweet from Cog<a class="headerlink" href="#scenario-tweet-from-cog" title="Permalink to this headline">¶</a></h2>
+<p>Transparency during service incidents is essential to maintaining the
+trust of your users. When your API slows down, you experience a hardware
+failure, or have a service outage, your users will be affected. They
+need to know that you are aware of the problem, and they need to know
+that you’re working to remedy the situation.</p>
+<p><a class="reference external" href="https://twitter.com">Twitter</a> is a popular platform for companies to
+quickly update their users on their system statuses. Wouldn’t it be nice
+if you could easily send a tweet from your company’s status account from
+your chat window as you and your colleagues work to remedy the
+situation? The people closest to the situation could quickly get the
+word out, without having to track down the person in the company that
+has the account’s login information.</p>
+<p>Let’s imagine what that might look like:</p>
+<p><strong>Desired Interface for *twitter:tweet* Command.</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nd">@cog</span> <span class="n">twitter</span><span class="p">:</span><span class="n">tweet</span> <span class="n">Currently</span> <span class="n">experiencing</span> <span class="n">API</span> <span class="n">slowdowns</span><span class="p">;</span> <span class="n">investigating</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>With a command like this, you and your colleagues could post status
+updates directly from chat. Of course, it would be useful for more than
+just status updates. For instance, you could also wire it up into
+pipelines and triggers to augment other workflows; perhaps you could
+automatically tweet when your CI system finishes a new product release?
+The brave among you could even create an alias to &#8220;OH&#8221; your colleagues&#8217;
+witty observations. Sending a tweet is a very simple task, but by adding
+this simple task to Cog, you can unlock a number of incredibly useful
+abilities. How much moreso with the more sophisticated tools you already
+have?</p>
+</div>
+<div class="section" id="tweet-from-plain-ruby">
+<h2>6.2. Tweet from Plain Ruby<a class="headerlink" href="#tweet-from-plain-ruby" title="Permalink to this headline">¶</a></h2>
+<p>The first thing we need to do before we can send a tweet from Cog is
+figure out how to send a tweet, period. To make things easy, we’ll take
+advantage of the <code class="docutils literal"><span class="pre">twitter</span></code> Ruby gem
+(<a class="reference external" href="https://github.com/sferik/twitter">https://github.com/sferik/twitter</a>) and build our solution on top of it.
+The complete code is shown in <a class="reference internal" href="#pure-ruby-tweet"><span class="std std-ref">Command, Pure Ruby</span></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>For this example, we’re using Ruby for the heavy lifting of sending
+a tweet, but don’t be put off if you’re not a Ruby programmer.
+Thankfully, the code is short, and we’ll explain all the relevant
+points as we go on.</p>
+<p class="last">Since you can write Cog commands in any language, though, the
+specific details of Ruby aren’t all that important. The key points
+to pay attention to are the details of how Cog interacts with this
+code.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If you’d like to follow along, you’ll need a Twitter account, as
+well as the required tokens to interact with the Twitter API. This
+will require creating an &#8220;application&#8221; under your account; go to
+<a class="reference external" href="https://apps.twitter.com">https://apps.twitter.com</a> to learn more. While you’re there, you’ll
+need to generate the following credentials:</p>
+<ul class="last simple">
+<li>Consumer Key</li>
+<li>Consumer Secret</li>
+<li>Application Token</li>
+<li>Application Token Secret</li>
+</ul>
+</div>
+<p id="pure-ruby-tweet"><strong>tweet Command, Pure Ruby.</strong></p>
+<div class="highlight-ruby"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span>  <span class="c1">#!/usr/bin/env ruby</span>
+
+  <span class="nb">require</span> <span class="s1">&#39;twitter&#39;</span>
+
+  <span class="n">client</span> <span class="o">=</span> <span class="no">Twitter</span><span class="o">::</span><span class="no">REST</span><span class="o">::</span><span class="no">Client</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
+    <span class="ss">consumer_key</span><span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;TWITTER_CONSUMER_KEY&quot;</span><span class="o">]</span><span class="p">,</span>
+    <span class="ss">consumer_secret</span><span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;TWITTER_CONSUMER_SECRET&quot;</span><span class="o">]</span><span class="p">,</span>
+    <span class="ss">access_token</span><span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;TWITTER_ACCESS_TOKEN&quot;</span><span class="o">]</span><span class="p">,</span>
+    <span class="ss">access_token_secret</span><span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;TWITTER_ACCESS_TOKEN_SECRET&quot;</span><span class="o">]</span><span class="p">)</span>
+
+  <span class="n">message</span> <span class="o">=</span> <span class="no">ARGV</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+
+  <span class="n">tweet</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+
+  <span class="nb">puts</span> <span class="o">&lt;&lt;-</span><span class="no">EOM</span>
+<span class="sh">  Message: #{message}</span>
+<span class="sh">  URL:     #{tweet.url}</span>
+<span class="no">  EOM</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Annotations by line number:</strong></p>
+<p><strong>Line 5</strong> Here, we establish a connection to the Twitter API, using our API credentials, stored as environment variables.</p>
+<p><strong>Line 11</strong> Next, we’ll assemble a message to send by combining all the command line arguments into a single string. This allows us to invoke our command like <code class="docutils literal"><span class="pre">twitter:tweet</span> <span class="pre">this</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">tweet</span></code>, or <code class="docutils literal"><span class="pre">twitter:tweet</span> <span class="pre">&quot;this</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">tweet&quot;</span></code>. The former is often more convenient, but the latter is needed when the message contains special characters, like <code class="docutils literal"><span class="pre">!</span></code>.</p>
+<p><strong>Line 13</strong> Here, we actually send the message to Twitter.</p>
+<p><strong>Line 15</strong> Finally, we’ll return some information to standard output so we can
+find out the URL of our new tweet. There is other information we
+could add (like timestamp, tweet ID, etc.), but for now, we’ll keep it simple.</p>
+<p>To make life easier, let’s create a <code class="docutils literal"><span class="pre">Gemfile</span></code> in our directory to
+manage our dependencies. We’ll also use this later when we package our
+bundle up.</p>
+<p><strong>Twitter Bundle Gemfile.</strong></p>
+<div class="code ruby highlight-default"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="s1">&#39;https://rubygems.org&#39;</span>
+
+<span class="n">gem</span> <span class="s1">&#39;twitter&#39;</span>
+</pre></div>
+</div>
+<p>As you can see, it’s not a lot of code, and we can run it directly from
+our terminal, as seen in <a class="reference internal" href="#execute-pure-ruby-tweet"><span class="std std-ref">Executing the Pure Ruby tweet</span></a>.</p>
+<p id="execute-pure-ruby-tweet"><strong>Executing the Pure Ruby ``tweet`` Command.</strong></p>
+<div class="highlight-bash"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span>  bundle install
+  <span class="nb">export</span> <span class="nv">TWITTER_CONSUMER_KEY</span><span class="o">=</span>XXXX
+  <span class="nb">export</span> <span class="nv">TWITTER_CONSUMER_SECRET</span><span class="o">=</span>XXXX
+  <span class="nb">export</span> <span class="nv">TWITTER_ACCESS_TOKEN</span><span class="o">=</span>XXXX
+  <span class="nb">export</span> <span class="nv">TWITTER_ACCESS_TOKEN_SECRET</span><span class="o">=</span>XXXX
+  ./tweet.rb This is an interesting tweet
+</pre></div>
+</td></tr></table></div>
+<p>Outputs:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">Message: This is an interesting tweet</span>
+<span class="go">URL:     https://twitter.com/CogTesting/status/776507696396791809</span>
+</pre></div>
+</div>
+<p><strong>Annotations by line number:</strong></p>
+<p><strong>Line 1</strong> We only need to install our dependencies once. Note also that <code class="docutils literal"><span class="pre">bundle</span></code> here refers to the Ruby dependency management tool <a class="reference external" href="https://bundler.io">Bundler</a>, and not any Cog-specific executables. We’re not even using Cog yet!</p>
+<p><strong>Line 2</strong> Substituting the appropriate values for our real credentials, of course.</p>
+<p>By checking that URL, we can further verify that our command worked.</p>
+<div class="figure" id="id1">
+<img alt="Our First Tweet" src="../_images/first_tweet.png" />
+<p class="caption"><span class="caption-text">Our First Tweet</span></p>
+</div>
+<p>We now have a simple program to send a tweet, but we haven’t touched Cog
+just yet; we’ll begin to do that now.</p>
+</div>
+<div class="section" id="first-steps-toward-cog-arguments">
+<h2>6.3. First Steps Toward Cog: Arguments<a class="headerlink" href="#first-steps-toward-cog-arguments" title="Permalink to this headline">¶</a></h2>
+<p>Our tweet code is simple, and so getting it to run in Cog should also be
+pretty simple. With the code we have, we’ll need to take care of two
+things: arguments and our authentication tokens. We’ll tackle arguments
+first.</p>
+<p>Recall our desired interface for our <code class="docutils literal"><span class="pre">tweet</span></code> command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nd">@cog</span> <span class="n">twitter</span><span class="p">:</span><span class="n">tweet</span> <span class="n">Currently</span> <span class="n">experiencing</span> <span class="n">API</span> <span class="n">slowdowns</span><span class="p">;</span> <span class="n">investigating</span>
+</pre></div>
+</div>
+<p>The string <code class="docutils literal"><span class="pre">twitter:tweet</span></code> is the name of our command, and everything
+that follows is the message we’d like to send. If this were a
+traditional terminal program, each word after <code class="docutils literal"><span class="pre">twitter:tweet</span></code> would be
+an individual argument (&#8220;Currently&#8221;, &#8220;experiencing&#8221;, &#8220;API&#8221;, etc.). As
+Cog commands are heavily influenced by the idioms and architecture of
+the UNIX command line, it should come as no surprise to know that Cog
+views these as arguments, as well.</p>
+<p>In fact, if you have ever programmed in C before, the environment
+variables Cog uses to represent these arguments will look familiar.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">COG_ARGC</span></code> - <strong>COG ARG</strong>ument <strong>C</strong>ount = how many arguments
+were passed</li>
+<li><code class="docutils literal"><span class="pre">COG_ARGV_0</span></code> - <strong>COG ARG</strong>ument <strong>0</strong> = the first argument</li>
+<li><code class="docutils literal"><span class="pre">COG_ARGV_1</span></code> - <strong>COG ARG</strong>ument <strong>1</strong> = the second argument</li>
+</ul>
+<p>and so on.</p>
+<p>Using the values of these environment variables, a command can
+reconstruct the arguments in whatever form is most natural for its
+implementation language (e.g., as an array, a vector, etc.). Though it’s
+not hard to write that code, it can be tedious to do it more than once;
+this is where the use of language-specific libraries can be useful;
+we’ll take a look at <code class="docutils literal"><span class="pre">cog-rb</span></code>, the Ruby library for Cog commands a bit
+later.</p>
+<p>There are two approaches we can take to get these Cog environment
+variable consumed properly by our code. We could edit our Ruby code to
+directly interface with Cog, assembling the message from the
+<code class="docutils literal"><span class="pre">COG_ARG_*</span></code> variables instead of from <code class="docutils literal"><span class="pre">ARGV</span></code>. Alternatively, we
+could put this logic into an adapter script that translates between the
+interfaces of Cog and our tweet program. The former approach may be more
+useful for very small or simple programs that will only be used via Cog,
+while the latter can be more desirable for larger and more complex
+programs, programs where the source code is not readily accessible, or
+for programs that still need to be usable outside of a Cog context (see
+<a class="reference internal" href="#advantages-of-adapters"><span class="std std-ref">Tip: Advantages of Adapters</span></a> for more on this).</p>
+<p>As the adapter script approach is more flexible and more clearly
+illustrates the underlying mechanics of the Cog interface, that is the
+approach we’ll take now. Let’s pretend that <code class="docutils literal"><span class="pre">tweet.rb</span></code> is a program
+that we have been using for years in our company, and that we would now
+like to interface with Cog, without rewriting it.</p>
+<p>(Later in the chapter, once we’ve gotten a better feel for how Cog
+commands work, we’ll add another command using the more direct
+approach.)</p>
+<p>For the time being, we’ll continue to run our command directly in a
+terminal, and not through Cog. This will allow us to focus on only the
+Cog / command interface, without also having to introduce command bundle
+packaging, bundle installation, and other details. We will, of course,
+introduce all those concepts and more in time, but for now, the
+following code <em>is</em> Cog to our nascent command.</p>
+<p id="run-tweet-command-from-command-line"><strong>Run Our Command from the Command Line.</strong></p>
+<div class="highlight-bash"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">TWITTER_CONSUMER_KEY</span><span class="o">=</span>XXXX
+<span class="nb">export</span> <span class="nv">TWITTER_CONSUMER_SECRET</span><span class="o">=</span>XXXX
+<span class="nb">export</span> <span class="nv">TWITTER_ACCESS_TOKEN</span><span class="o">=</span>XXXX
+<span class="nb">export</span> <span class="nv">TWITTER_ACCESS_TOKEN_SECRET</span><span class="o">=</span>XXXX
+
+<span class="nb">export</span> <span class="nv">COG_ARGC</span><span class="o">=</span><span class="s2">&quot;2&quot;</span>
+<span class="nb">export</span> <span class="nv">COG_ARGV_0</span><span class="o">=</span><span class="s2">&quot;Hello&quot;</span>
+<span class="nb">export</span> <span class="nv">COG_ARGV_1</span><span class="o">=</span><span class="s2">&quot;World&quot;</span>
+
+./tweet_cog_wrapper.sh
+</pre></div>
+</td></tr></table></div>
+<p><strong>Annotations by line number:</strong></p>
+<p><strong>Line 6</strong>  Here, we introduce Cog’s environment variables into our runner
+script. This would correspond to <code class="docutils literal"><span class="pre">&#64;cog</span> <span class="pre">twitter:tweet</span> <span class="pre">Hello</span> <span class="pre">World</span></code>
+in our chat provider. Cog will parse the <code class="docutils literal"><span class="pre">Hello</span> <span class="pre">World</span></code> message as
+two separate arguments.</p>
+<p><strong>Line 10</strong> Instead of calling our Ruby code directly, we introduce a new adapter
+script to process the Cog environment variables.</p>
+<p>Our Cog command is shown in <a class="reference internal" href="#tweet-cog-wrapper"><span class="std std-ref">tweet_cog_wrapper.sh</span></a>
+Remember, this is acting as an adapter that allows us to call our
+original <code class="docutils literal"><span class="pre">tweet.rb</span></code> script from Cog. We are not changing <code class="docutils literal"><span class="pre">tweet.rb</span></code>
+at all. This adapter script is the only thing that is aware of Cog.</p>
+<p id="tweet-cog-wrapper"><strong>tweet_cog_wrapper.sh.</strong></p>
+<div class="highlight-bash"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="nb">declare</span> -a ARGUMENTS
+<span class="k">for</span> <span class="o">((</span><span class="nv">i</span><span class="o">=</span>0<span class="p">;</span>i&lt;<span class="si">${</span><span class="nv">COG_ARGC</span><span class="si">}</span><span class="p">;</span>i++<span class="o">))</span><span class="p">;</span> <span class="k">do</span>
+    <span class="nv">var</span><span class="o">=</span><span class="s2">&quot;COG_ARGV_</span><span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="s2">&quot;</span>
+    ARGUMENTS<span class="o">[</span><span class="nv">$i</span><span class="o">]=</span><span class="si">${</span><span class="p">!var</span><span class="si">}</span>
+<span class="k">done</span>
+
+./tweet.rb <span class="si">${</span><span class="nv">ARGUMENTS</span><span class="p">[*]</span><span class="si">}</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Annotations by line number:</strong></p>
+<p><strong>Line 3</strong> We need to pull out the <code class="docutils literal"><span class="pre">COG_ARGV_*</span></code> variables to pass as actual
+arguments to our Ruby script. Here, we loop as determined by the
+<code class="docutils literal"><span class="pre">COG_ARGC</span></code> variable, placing each <code class="docutils literal"><span class="pre">COG_ARGV_*</span></code> variable into a Bash array in turn.</p>
+<p><strong>Line 9</strong> With the pieces of our message extracted from the environment, we can
+now call our Ruby script just as we have previously, passing the
+arguments as actual arguments. Compare this to the invocation of
+<code class="docutils literal"><span class="pre">tweet.rb</span></code> in <a class="reference internal" href="#execute-pure-ruby-tweet"><span class="std std-ref">Executing the Pure Ruby tweet</span></a>.</p>
+<p>When we execute our command in the terminal, it works as expected.</p>
+<div class="figure" id="id2">
+<img alt="Hello World" src="../_images/tweet_hello_world.png" />
+<p class="caption"><span class="caption-text">Hello World</span></p>
+</div>
+<p>Believe it or not, we’re now ready to start packing this up for Cog.
+There’s more to Cog commands than arguments, of course, but we’re now at
+a point where we can actually run what we have in Cog!</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>In <a class="reference internal" href="#run-tweet-command-from-command-line"><span class="std std-ref">Run Our Command from the Command Line</span></a>, you
+might have wondered why Cog would go to the trouble of turning the
+arguments</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">hello</span> <span class="n">world</span>
+</pre></div>
+</div>
+<p>into the environment variables</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">COG_ARGC</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">COG_ARG_0</span><span class="o">=</span><span class="n">hello</span>
+<span class="n">COG_ARG_1</span><span class="o">=</span><span class="n">world</span>
+</pre></div>
+</div>
+<p>only to have our command turn those environment variables <em>back</em>
+into arguments that our Ruby code can process.</p>
+<p class="last">While each computer language has its own conventions and idioms,
+they <em>all</em> have ways to read environment variables (and consume
+standard input and write to standard output, which we’ll address
+soon.) By basing its interaction model on universal components like
+environment variables, Cog places no restrictions on what language
+commands are written in. There are no &#8220;blessed&#8221; languages for Cog
+commands; you can write commands in Fortran, COBOL, or Forth just as
+readily as you can in Ruby or Python. It is completely transparent
+to Cog.</p>
+</div>
+<div class="admonition tip" id="advantages-of-adapters">
+<p class="first admonition-title">Tip</p>
+<p>Earlier, we briefly mentioned some reasons why you might want to
+write an adapter script to interface Cog with existing tools you may
+already use. We’ll examine some of those reasons more in depth here.
+These reasons are not mutually exclusive; more than one may be
+applicable in any given situation.</p>
+<ul class="simple">
+<li>Proper Separation of Concerns</li>
+</ul>
+<p>If you have code that already performs a task well, editing it to
+also become aware of Cog calling conventions can violate the Single
+Responsibility Principle and make the code more complex and harder
+to maintain. Isolating the Cog interaction in an adapter can yield
+software that is easier to maintain and test.</p>
+<ul class="simple">
+<li>Source Code is Not Required</li>
+</ul>
+<p>You may wish to expose some software to Cog that you either do not
+have the source code for, or for which altering the source code may
+be impractical. By using an adapter, you can control how the
+executable is called.</p>
+<ul class="simple">
+<li>Tools Must Remain Usable Outside of Cog</li>
+</ul>
+<p>Some tools that you wish to use with Cog may also need to be usable
+outside of Cog. In this case, changing the code to use Cog’s calling
+conventions may make use outside of Cog inconvenient and unwieldy
+(imagine invoking such a command with four arguments, for instance).
+Using an adapter allows Cog to call it, but also retains the more
+familiar calling interface for existing users of the tools.</p>
+<ul class="simple">
+<li>Limit Capabilities Exposed to Chat</li>
+</ul>
+<p class="last">You may have existing tools with some features you would like to use
+in chat, but others that are perhaps too dangerous, inapplicable, or
+inappropriate for a chat context. By using an adapter, you can limit
+what capabilities are made available to Cog.</p>
+</div>
+</div>
+<div class="section" id="describe-it-to-cog-bundle-definitions">
+<h2>6.4. Describe it to Cog: Bundle Definitions<a class="headerlink" href="#describe-it-to-cog-bundle-definitions" title="Permalink to this headline">¶</a></h2>
+<p>All Cog commands reside in a <strong>bundle</strong>, which is a collection of
+related commands, along with metadata describing them. Right now, we
+have the makings of a single-command bundle.</p>
+<p>All bundles are described by a YAML file, which gives Cog all the
+information it needs to properly interact with their commands. Let’s
+take a look at a minimal bundle definition file for our new <code class="docutils literal"><span class="pre">twitter</span></code>
+bundle.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Bundle definition files are conventionally named <code class="docutils literal"><span class="pre">config.yaml</span></code>;
+the actual name is irrelevant to Cog, however.</p>
+</div>
+<p><strong>Minimal ``config.yaml`` Bundle Definition.</strong></p>
+<div class="highlight-yaml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">cog_bundle_version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">4</span>
+
+<span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">twitter_example</span>
+<span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Interact with Twitter</span>
+<span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0.1</span>
+<span class="l l-Scalar l-Scalar-Plain">commands</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">tweet</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Send a tweet!</span>
+    <span class="l l-Scalar l-Scalar-Plain">executable</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/Users/chris/cog-book/tweet_cog_wrapper.sh</span>
+    <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;message&gt;&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">rules</span><span class="p p-Indicator">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">allow</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Annotations by line number:</strong></p>
+<p><strong>Line 2</strong> Every bundle must declare which bundle definition schema version it
+uses. This determines which fields are expected, how their values are
+validated, and so on. At the time of writing, the current version is
+<code class="docutils literal"><span class="pre">4</span></code>.</p>
+<p><strong>Line 3</strong> Every bundle must have a name. These must be unique within a Cog
+installation.</p>
+<p><strong>Line 4</strong> While not strictly required, it is a good practice to include a brief
+description of the bundle. This will be displayed when listing
+bundles that are installed on a Cog system, helping users discover
+which commmands are available.</p>
+<p><strong>Line 5</strong> This version pertains to the bundle definition artifact itself.
+Multiple versions of a bundle may be installed on a Cog system at one
+time, though only one may be active.</p>
+<p><strong>Line 6</strong> In order for Cog to recognize a command, it must be described here in
+the <code class="docutils literal"><span class="pre">commands</span></code> section. The keys of this map are the command names,
+and the values are objects providing metadata about the command.</p>
+<p><strong>Line 9</strong> The path to the actual program that contains the command logic. This
+is what we are writing!</p>
+<p><strong>Line 10</strong> Though not required, describing the inputs your command takes is
+always a good idea.</p>
+<p><strong>Line 12</strong> Cog has a comprehensive authorization system that allows you to
+define rules that govern who may execute a command. We’ll explore
+this further in a bit, but for now, just remember that the special
+<code class="docutils literal"><span class="pre">allow</span></code> rule means that any Cog user will be able to execute this
+command.</p>
+<p>Now that we’ve described our bundle, we need to upload this definition
+file to Cog.</p>
+</div>
+<div class="section" id="installing-the-bundle">
+<h2>6.5. Installing the Bundle<a class="headerlink" href="#installing-the-bundle" title="Permalink to this headline">¶</a></h2>
+<p>Once we have written bundle definition file, we need to load it into
+Cog. We’ll use <code class="docutils literal"><span class="pre">cogctl</span></code>:</p>
+<p><strong>Installing a Bundle: The Quick Way.</strong></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>cogctl bundle install config.yaml --enable --relay-group<span class="o">=</span>default
+</pre></div>
+</div>
+<p>Here, we do several things at once. First, we upload the contents of our
+bundle definition to Cog. By adding the <code class="docutils literal"><span class="pre">--enable</span></code> flag, we also make
+the described bundle active. Cog will accept invocations for commands
+within the bundle and attempt to dispatch them; additionally, if any
+other versions of this bundle were previously available and enabled,
+this would ensure that the version we just uploaded was the active one.
+Finally, we associate the bundle with one or more relay groups, which
+governs which Relay servers will be responsible for satisfying requests
+targeted at this bundle.</p>
+<p>This is equivalent to:</p>
+<p><strong>Installing a Bundle: The Verbose Way.</strong></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>cogctl bundle install config.yaml
+cogctl bundle <span class="nb">enable</span> twitter_example 0.0.1
+cogctl relay-group assign default twitter_example
+</pre></div>
+</div>
+<p>If you look back at our bundle definition, you’ll notice that the path
+to the executable is on my workstation. When a Relay gets the request to
+run the command, it will look at this path, which means that we’ll need
+to ensure that the Relay has all the requisite files installed before a
+command will actually execute. For the purposes of demonstration, we’ll
+be running a Relay on the workstation, but for real world usage, you’ll
+want to take measures to install the needed files in the correct place.
+Tools like <a class="reference external" href="https://chef.io">Chef</a>, <a class="reference external" href="https://puppet.com">Puppet</a>,
+or <a class="reference external" href="https://www.ansible.com">Ansible</a> can help with this.</p>
+<p>TODO: Need to better describe a bundle development setup, either with a
+Relay running locally, or with a Relay running in Docker.</p>
+<p>TODO: I wanted to illustrate that a &#8220;native&#8221; bundle is possible, and
+possibly emphasize the &#8220;changes are live immediately&#8221; aspect of this.
+The new dev mode on Relay may make this more of a moot point, though.</p>
+<p>In a bit we’ll update our bundle to use Docker, which greatly simplifies
+bundle installation and maintenance.</p>
+<p>TODO: Additional docs about how to start Cog, Relay, etc.</p>
+<p>Once the bundle is installed, we can finally run it from chat!</p>
+<div class="figure" id="id3">
+<img alt="First Time Running the ``tweet`` Command from Cog" src="../_images/tweet_minimal_bundle_failure.png" />
+<p class="caption"><span class="caption-text">First Time Running the <code class="docutils literal"><span class="pre">tweet</span></code> Command from Cog</span></p>
+</div>
+<p>Oh no! It looks like we can’t authenticate with Twitter. But we’ve still
+got our credentials in the environment, don’t we?</p>
+</div>
+<div class="section" id="dynamic-configuration">
+<h2>6.6. Dynamic Configuration<a class="headerlink" href="#dynamic-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Actually, we <em>don’t</em> have our credentials in the environment anymore,
+mainly because we’re now running the command under Relay and not our
+runner script. When a command is executed by Relay, it injects variables
+into the environment that each command receives. This is how
+<code class="docutils literal"><span class="pre">COG_ARGC</span></code>, <code class="docutils literal"><span class="pre">COG_ARGV_0</span></code>, etc. get into place. Relay can also be
+configured to inject additional arbitrary values into the environment as
+well, but these will be <em>global</em>, applying to every single command
+invocation that Relay services. While you <em>could</em> add the variables our
+<code class="docutils literal"><span class="pre">tweet</span></code> command is expecting to your Relay configuration, this would
+create a huge security hole; every command would have access to your
+Twitter credentials! Over time, this approach would also become rather
+difficult to maintain as you added more bundles. Adding environment
+variables like this to your global Relay configuration is a Really Bad
+Idea, and we shall speak of it no further.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">We’ve established that adding environment variables containing
+authentication tokens, passwords, and other secrets that individual
+commands need to Relay’s global configuration is a bad idea. Any
+variables you add to this configuration should genuinely be global.
+Some examples include ensure that certain supporting files are
+available on the <code class="docutils literal"><span class="pre">PATH</span></code>, or that necessary libraries are on the
+search paths of whatever language runtimes you might be using.</p>
+</div>
+<p>Instead, we’ll let Cog manage these environment variables for us. This
+way, the only commands that will get our Twitter authentication tokens
+will be commands in our <code class="docutils literal"><span class="pre">twitter_example</span></code> bundle. We can also quickly
+change the values centrally in Cog, and they will take effect across all
+Relays almost instantly. We can even create &#8220;layered&#8221; configurations,
+dynamically changing the values based on the user that invokes a
+command, the chat room from which they invoke it, or a combination of
+both. For now, though, we’ll just deal with the simple case.</p>
+<p>Let’s create another YAML file to contain your environment variables
+(substituting <code class="docutils literal"><span class="pre">XXXX</span></code> with your real tokens, of course):</p>
+<p><strong>Dynamic Configuration.</strong></p>
+<div class="code yaml highlight-default"><div class="highlight"><pre><span></span><span class="o">---</span>
+<span class="n">TWITTER_CONSUMER_KEY</span><span class="p">:</span> <span class="n">XXXX</span>
+<span class="n">TWITTER_CONSUMER_SECRET</span><span class="p">:</span> <span class="n">XXXX</span>
+<span class="n">TWITTER_ACCESS_TOKEN</span><span class="p">:</span> <span class="n">XXXX</span>
+<span class="n">TWITTER_ACCESS_TOKEN_SECRET</span><span class="p">:</span> <span class="n">XXXX</span>
+</pre></div>
+</div>
+<p>TODO: Need to mention starting up Relay in managed config mode here.</p>
+<p>This file is a simple map whose keys are the environment variable names
+that the command expects (compare these to our original <code class="docutils literal"><span class="pre">tweet.rb</span></code>
+file), and whose values are the, well, values those variables should
+have. Remember that the values will be presented to your code as strings
+(like all environment variables); if your code expects different data
+types (integers, floats, booleans, etc.), you’ll need to handle that
+translation on your own (though this is another thing that
+language-specific libraries could potentially handle for you).</p>
+<p>Uploading this file to Cog requires another <code class="docutils literal"><span class="pre">cogctl</span></code> invocation.</p>
+<p><strong>Uploading Dynamic Configuration to Cog.</strong></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>cogctl bundle config create twitter_example dynamic_configuration.yaml
+</pre></div>
+</div>
+<p>Now, we should be able to run our command completely within Cog.</p>
+<div class="figure" id="id4">
+<img alt="Successful Execution of the ``tweet`` Command from Cog" src="../_images/tweet_minimal_bundle_success_no_template.png" />
+<p class="caption"><span class="caption-text">Successful Execution of the <code class="docutils literal"><span class="pre">tweet</span></code> Command from Cog</span></p>
+</div>
+<p>Success! Cog has captured the output of our tweet command and presented
+it it in our chat client (Here, we’re using Slack; the fancy tweet
+display is due to Slack’s handling of URLs, and is not something
+specific to Cog).</p>
+<p>We could declare victory here, but Cog can do more than just parrot
+standard output back to chat. If we structure the output our command
+returns to Cog, we can unlock richer output formatting, as well as make
+the output more easily accessible to any downstream commands in a
+pipeline.</p>
+</div>
+<div class="section" id="output">
+<h2>6.7. Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
+<p>As we saw above, the standard output of a command gets returned back to
+Cog and output in chat. Pipelines and most templates in Cog act on JSON
+object inputs, though, not arbitrary text like traditional Unix
+pipelines do. By structuring the output a bit, we can make our data much
+more useful.</p>
+<p>Let’s update our adapter script to generate structured output.</p>
+<p><strong>tweet_cog_wrapper.sh with structured output.</strong></p>
+<div class="highlight-bash"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="nb">declare</span> -a TWEET_ARGUMENTS
+<span class="k">for</span> <span class="o">((</span><span class="nv">i</span><span class="o">=</span>0<span class="p">;</span>i&lt;<span class="si">${</span><span class="nv">COG_ARGC</span><span class="si">}</span><span class="p">;</span>i++<span class="o">))</span><span class="p">;</span> <span class="k">do</span>
+    <span class="nv">var</span><span class="o">=</span><span class="s2">&quot;COG_ARGV_</span><span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="s2">&quot;</span>
+    TWEET_ARGUMENTS<span class="o">[</span><span class="nv">$i</span><span class="o">]=</span><span class="si">${</span><span class="p">!var</span><span class="si">}</span>
+<span class="k">done</span>
+
+<span class="nv">output</span><span class="o">=</span><span class="k">$(</span>bundle <span class="nb">exec</span> <span class="k">$(</span>dirname <span class="si">${</span><span class="nv">0</span><span class="si">}</span><span class="k">)</span>/tweet.rb <span class="si">${</span><span class="nv">TWEET_ARGUMENTS</span><span class="p">[*]</span><span class="si">}</span><span class="k">)</span>
+
+<span class="nv">message</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$output</span><span class="s2">&quot;</span> <span class="p">|</span> grep <span class="s2">&quot;Message: &quot;</span> <span class="p">|</span> cut -d<span class="s2">&quot;:&quot;</span> -f2 <span class="p">|</span> sed -e <span class="s1">&#39;s/^ *//&#39;</span><span class="k">)</span>
+<span class="nv">url</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$output</span><span class="s2">&quot;</span> <span class="p">|</span> grep <span class="s2">&quot;URL: &quot;</span> <span class="p">|</span> sed -e <span class="s1">&#39;s/^URL: *//&#39;</span><span class="k">)</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;JSON&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;{\&quot;message\&quot;: \&quot;</span><span class="si">${</span><span class="nv">message</span><span class="si">}</span><span class="s2">\&quot;, \&quot;url\&quot;: \&quot;</span><span class="si">${</span><span class="nv">url</span><span class="si">}</span><span class="s2">\&quot;}&quot;</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Annotations by line number:</strong></p>
+<p><strong>Line 9</strong> Instead of returning the standard output directly to Cog, we’ll
+capture it in our adapter script to perform some post-processing.</p>
+<p><strong>Line 11</strong> Here, we use common Unix utilities to extract our tweet message and
+URL from the output. You can use whatever tools you like for this.</p>
+<p><strong>Line 14</strong> If the output contains the string <code class="docutils literal"><span class="pre">&quot;JSON&quot;</span></code> on a line by itself,
+followed by a newline, the remainder of the output is treated as
+JSON. Here, we manually create a JSON version of the plain text
+output we were originally returning. Of course, you can generate JSON
+in any number of ways; we’re taking the manual route here for
+demonstration purposes, and because the object itself is so simple.</p>
+<p>The <code class="docutils literal"><span class="pre">JSON</span></code> tag in our output is a &#8220;command response attribute&#8221;, one of
+several that can be used by commands. We’ll touch on a few more in this
+chapter; for more details, see <a class="reference internal" href="../references/command_output_tags.html"><span class="doc">Command Output Tags</span></a>. The
+upshot is that when Relay detects these response attributes in a
+command’s output, it interprets them as special instructions on how to
+handle that output. The <code class="docutils literal"><span class="pre">JSON</span></code> tag is probably the most commonly used
+one.</p>
+<p>Now, when we run our command through Cog, our output looks very
+different.</p>
+<div class="figure" id="id5">
+<img alt="Structured Command Output" src="../_images/tweet_structured_output.png" />
+<p class="caption"><span class="caption-text">Structured Command Output</span></p>
+</div>
+<p>We now see a pretty-printed version of our JSON in chat. Because we’ve
+added structure, downstream commands can use our output, like so:</p>
+<div class="figure" id="id6">
+<span id="simple-echo-pipeline"></span><img alt="Extracting Data from Structured Command Output" src="../_images/tweet_structured_output_pipeline.png" />
+<p class="caption"><span class="caption-text">Extracting Data from Structured Command Output</span></p>
+</div>
+<div class="section" id="templating-output">
+<h3>6.7.1. Templating Output<a class="headerlink" href="#templating-output" title="Permalink to this headline">¶</a></h3>
+<p>As interesting as pretty-printed JSON output is, it can be cumbersome to
+deal with in chat. Though this particular command’s output is not so
+bad, imagine dealing with a large JSON object with 50 keys and
+non-scalar values. It would be difficult to visually parse, and the size
+of it alone would obscure the actual human conversations happening,
+largely nullifying the benefits of &#8220;doing chatops&#8221; in the first place.
+Favoring more complete outputs is good for maximum flexibility in
+pipelines, but humans rarely need to see all that data to get the
+situational awareness they need.</p>
+<p>In order to address this, Cog commands can specify that their output be
+rendered through a template, allowing Cog to present the most salient
+information to humans, formatted by the conventions of your chat client.
+Cog templates are written using
+<a class="reference external" href="https://github.com/operable/greenbar">Greenbar</a>, a templating
+language written by Operable to satisfy the needs of Cog. It’s probably
+best described as a Markdown variant with support for ERB-like tags.</p>
+<p>The time has come to add a template to our bundle. Here is what ours
+will look like:</p>
+<p><strong>Greenbar ``tweet`` Template.</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>~each var=$results~
+~$item.url~
+~end~
+</pre></div>
+</div>
+<p>TODO: why iterate over $results?</p>
+<p>Given what we saw in the output before, we probably really only care
+about the new tweet’s URL. Modern chat platforms will generally display
+the tweet for us based on that URL, and in any event, you can always
+click that URL if you want to see the tweet. Our template here simply
+extracts the URL from the JSON object our command now returns.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Templates are only used for formatting the final output of a
+pipeline for human consumption. If a command is not the last one in
+a pipeline, any template information is ignored. Templates <em>do not</em>
+&#8220;filter&#8221; the output as it flows through a pipeline.</p>
+</div>
+<p>To make the template available to Cog, we must add it to our bundle
+definition file.</p>
+<p><strong>Adding Templates to the Bundle Definition.</strong></p>
+<div class="highlight-yaml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">cog_bundle_version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">4</span>
+
+<span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">twitter_example</span>
+<span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Interact with Twitter</span>
+<span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0.2</span>
+<span class="l l-Scalar l-Scalar-Plain">commands</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">tweet</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Send a tweet!</span>
+    <span class="l l-Scalar l-Scalar-Plain">executable</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/Users/chris/cog-book/tweet_cog_wrapper.sh</span>
+    <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;message&gt;&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">rules</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span> <span class="s">&#39;allow&#39;</span> <span class="p p-Indicator">]</span>
+<span class="l l-Scalar l-Scalar-Plain">templates</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">tweet</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">body</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+      <span class="no">~each var=$results~</span>
+      <span class="no">~$item.url~</span>
+      <span class="no">~end~</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Annotations by line number:</strong></p>
+<p><strong>Line 5</strong> Note that we have updated the version of the bundle. You must do this
+if you want to upload a new definition with a new template, new
+command, or otherwise altered metadata.</p>
+<p><strong>Line 12</strong> Here we have a new top-level section of the bundle: <code class="docutils literal"><span class="pre">templates</span></code>.
+The keys of this map are the names of templates, while the values are
+objects whose <code class="docutils literal"><span class="pre">body</span></code> key stores the literal text of the template.</p>
+<p>Once we install this bundle there’s one more modification we must make
+to our adapter script. We must somehow inform Cog which template it
+should use to format the output of the command. The solution is similar
+to how we instructed Cog to treat our output as JSON: we’ll use a
+command response attribute.</p>
+<p><strong>Specifying a Template in a Command.</strong></p>
+<div class="highlight-bash"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="nb">declare</span> -a TWEET_ARGUMENTS
+<span class="k">for</span> <span class="o">((</span><span class="nv">i</span><span class="o">=</span>0<span class="p">;</span>i&lt;<span class="si">${</span><span class="nv">COG_ARGC</span><span class="si">}</span><span class="p">;</span>i++<span class="o">))</span><span class="p">;</span> <span class="k">do</span>
+    <span class="nv">var</span><span class="o">=</span><span class="s2">&quot;COG_ARGV_</span><span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="s2">&quot;</span>
+    TWEET_ARGUMENTS<span class="o">[</span><span class="nv">$i</span><span class="o">]=</span><span class="si">${</span><span class="p">!var</span><span class="si">}</span>
+<span class="k">done</span>
+
+<span class="nv">output</span><span class="o">=</span><span class="k">$(</span>bundle <span class="nb">exec</span> <span class="k">$(</span>dirname <span class="si">${</span><span class="nv">0</span><span class="si">}</span><span class="k">)</span>/tweet.rb <span class="si">${</span><span class="nv">TWEET_ARGUMENTS</span><span class="p">[*]</span><span class="si">}</span><span class="k">)</span>
+
+<span class="nv">message</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$output</span><span class="s2">&quot;</span> <span class="p">|</span> grep <span class="s2">&quot;Message: &quot;</span> <span class="p">|</span> cut -d<span class="s2">&quot;:&quot;</span> -f2 <span class="p">|</span> sed -e <span class="s1">&#39;s/^ *//&#39;</span><span class="k">)</span>
+<span class="nv">url</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$output</span><span class="s2">&quot;</span> <span class="p">|</span> grep <span class="s2">&quot;URL: &quot;</span> <span class="p">|</span> sed -e <span class="s1">&#39;s/^URL: *//&#39;</span><span class="k">)</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;COG_TEMPLATE: tweet&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;JSON&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;{\&quot;message\&quot;: \&quot;</span><span class="si">${</span><span class="nv">message</span><span class="si">}</span><span class="s2">\&quot;, \&quot;url\&quot;: \&quot;</span><span class="si">${</span><span class="nv">url</span><span class="si">}</span><span class="s2">\&quot;}&quot;</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Annotation by Line Numbers:</strong></p>
+<p><strong>Line 14</strong> An output line that begins with <code class="docutils literal"><span class="pre">COG_TEMPLATE:</span></code> is a special
+command response attribute; whatever follows on that line is the name
+of a template <em>in that command’s bundle</em> that should be used for
+formatting. Our template is called &#8220;tweet&#8221;, as defined in our bundle
+definition YAML <code class="docutils literal"><span class="pre">templates</span></code> section.</p>
+<p>Bundles may include many templates, and since a command programmatically
+indicates which template to use, any single command may actually use
+more than one template (e.g., based on the result of this invocation,
+use template <code class="docutils literal"><span class="pre">x</span></code>, but use template <code class="docutils literal"><span class="pre">y</span></code> if some other result is
+generated). For any given output, however, only one template may be
+used.</p>
+<p>Running the command again in our chat client shows us the template in
+action.</p>
+<div class="figure" id="id7">
+<img alt="Output Formatted with a Simple Template" src="../_images/tweet_with_template.png" />
+<p class="caption"><span class="caption-text">Output Formatted with a Simple Template</span></p>
+</div>
+<p>Here we see the output from Cog is just the tweet’s URL, and not raw
+JSON.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Earlier, we mentioned that &#8220;most&#8221; templates operate on structured
+JSON input. There is one template (named &#8220;text&#8221;) built into Cog
+itself that takes unstructured text. This is automatically used when
+Cog detects unstructured text output. It simply turns the text into
+an array of strings (one for each line of output), and wraps it in a
+JSON object with the text stored under a <code class="docutils literal"><span class="pre">body</span></code> key. In this way,
+Cog maintains the uniform interface for command input and output.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If you really do want to see the raw JSON output of a pipeline,
+instead of the templated output, simply pipe the results through the
+<code class="docutils literal"><span class="pre">operable:raw</span></code> command.</p>
+</div>
+</div>
+</div>
+<div class="section" id="tweet-permissions-and-rules">
+<h2>6.8. Tweet Permissions and Rules<a class="headerlink" href="#tweet-permissions-and-rules" title="Permalink to this headline">¶</a></h2>
+<p>Earlier, we entirely bypassed the notions of permissions and
+authorization rules for our <code class="docutils literal"><span class="pre">tweet</span></code> command. We were focused more on
+figuring out how to make our command work; adding Cog’s authorization
+system into the mix would potentially complicate things.</p>
+<p>Now that our command works, however, it’s time to revisit. While sending
+a tweet from chat can be useful, we may not want everybody with access
+to our chat system to be able to send a tweet from our account.</p>
+<p>Let’s make it so only a subset of users will be able to send a tweet.
+We’ll add a <code class="docutils literal"><span class="pre">twitter_example:tweet</span></code> permission to the bundle, as well
+as a rule for the command.</p>
+<p><strong>Adding Permissions and Rules to the Bundle.</strong></p>
+<div class="highlight-yaml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">cog_bundle_version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">4</span>
+
+<span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">twitter_example</span>
+<span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Interact with Twitter</span>
+<span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0.3</span>
+<span class="l l-Scalar l-Scalar-Plain">permissions</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">twitter_example:tweet</span>
+<span class="l l-Scalar l-Scalar-Plain">commands</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">tweet</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Send a tweet!</span>
+    <span class="l l-Scalar l-Scalar-Plain">executable</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/Users/chris/cog-book/tweet_cog_wrapper.sh</span>
+    <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;message&gt;&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">rules</span><span class="p p-Indicator">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">must have twitter_example:tweet</span>
+<span class="l l-Scalar l-Scalar-Plain">templates</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">tweet</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">body</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+      <span class="no">~each var=$results~</span>
+      <span class="no">~$item.url~</span>
+      <span class="no">~end~</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Annotations by line number:</strong></p>
+<p><strong>Line 5</strong> We’re adding to the bundle, so we bump the version</p>
+<p><strong>Line 7</strong> A new <code class="docutils literal"><span class="pre">permissions</span></code> key holds a list of permissions used across the
+entire bundle. Customarily, there is a permission for each command.</p>
+<p><strong>Line 14</strong> We replace our &#8220;allow&#8221; rule with a new one that states that anyone
+excuting our tweet command must have been granted the
+<code class="docutils literal"><span class="pre">twitter_example:tweet</span></code> permission.</p>
+<p>Once we’ve installed this new version, let’s try it out.</p>
+<div class="figure" id="id8">
+<img alt="Permission Denied" src="../_images/tweet_permission_denied.png" />
+<p class="caption"><span class="caption-text">Permission Denied</span></p>
+</div>
+<p>Looks like I don’t have permission to send tweets anymore! (Probably for
+the best; distributing puppies along with open source software sounds
+like a logistical nightmare.) This is expected, though. We just
+restricted who can run our command, but didn’t grant anybody
+permissions. In fact, at this stage, <em>no</em> Cog users in this system could
+execute this command. This is why it is actually safe to include default
+authorization rules within bundle. Bundle rules may only reference
+bundle permissions, and until someone has been granted those
+permissions, Cog will deny execution of the restricted commands. This
+allows administrators to roll out use of commands to users at their
+leisure.</p>
+<p>Each command in a bundle may have multiple rules specified; when a user
+invokes a command with multiple rules, only one of them needs to match
+for the user to be able to execute the command. Bundles may contain a
+mix of commands that are restricted by authorization rules and commands
+that are unrestricted (i.e., have a rule of <code class="docutils literal"><span class="pre">allow</span></code>).</p>
+<p>After granting myself the permission (I am an administrator on my own
+system):</p>
+<p><strong>Granting Permissions.</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nd">@cog</span> <span class="n">permission</span> <span class="n">grant</span> <span class="n">twitter_example</span><span class="p">:</span><span class="n">tweet</span> <span class="n">cog</span><span class="o">-</span><span class="n">admin</span>
+</pre></div>
+</div>
+<p>I’m once again able to tweet.</p>
+<div class="figure" id="id9">
+<img alt="Permission Granted" src="../_images/tweet_permission_granted.png" />
+<p class="caption"><span class="caption-text">Permission Granted</span></p>
+</div>
+<p>Whoever let me tweet from the company account clearly exhibited poor
+judgement.</p>
+<p>At this point, we’ve brought our original <code class="docutils literal"><span class="pre">tweet.rb</span></code> script into Cog.
+We glossed over some points earlier, but have a good foundation in the
+basics now. Let’s circle back to touch on those points now, as we expand
+the capabilities of our bundle.</p>
+</div>
+<div class="section" id="options-tweet-from-different-accounts">
+<h2>6.9. Options: Tweet from different accounts<a class="headerlink" href="#options-tweet-from-different-accounts" title="Permalink to this headline">¶</a></h2>
+<p>We’ve seen how to deal with arguments in a Cog command, but they can
+also have options as well. Let’s see how they are represented as we add
+the ability to tweet from multiple accounts to our command.</p>
+<p>Always tweeting from the same account, while useful, can be a bit
+limiting. If you have both a status account and a marketing account, you
+very well may want to tweet from either one using Cog. We can add this
+ability to our command by adding a new option; let’s call it <code class="docutils literal"><span class="pre">--as</span></code>.
+Here’s what we want it to look like:</p>
+<p><strong>Tweeting from Different Accounts: Desired Interface.</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nd">@cog</span> <span class="n">twitter_example</span><span class="p">:</span><span class="n">tweet</span> <span class="o">--</span><span class="k">as</span><span class="o">=</span><span class="n">status</span> <span class="s2">&quot;All systems are normal&quot;</span>
+<span class="nd">@cog</span> <span class="n">twitter_example</span><span class="p">:</span><span class="n">tweet</span> <span class="o">--</span><span class="k">as</span><span class="o">=</span><span class="n">marketing</span> <span class="s2">&quot;We shipped version 1.0.0!&quot;</span>
+</pre></div>
+</div>
+<p>(You could call the option something like <code class="docutils literal"><span class="pre">--account</span></code> if you like, but
+<code class="docutils literal"><span class="pre">--as</span></code> reads nicely.)</p>
+<p>To support this, we’ll need to be sure that the authentication tokens
+for each account are available to the command. Based on the value of the
+<code class="docutils literal"><span class="pre">--as</span></code> option, we can then select which of these sets of tokens we’ll
+actually use. If no <code class="docutils literal"><span class="pre">--as</span></code> option is supplied, we can fall back to a
+default account.</p>
+<p>Let’s take a look at how our dynamic configuration for this bundle will
+need to change.</p>
+<p><strong>Updated Dynamic Configuration for Multiple Twitter Accounts.</strong></p>
+<div class="highlight-yaml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">TWITTER_DEFAULT_ACCOUNT</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">STATUS</span>
+
+<span class="l l-Scalar l-Scalar-Plain">TWITTER_CONSUMER_KEY_STATUS</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">XXXX</span>
+<span class="l l-Scalar l-Scalar-Plain">TWITTER_CONSUMER_SECRET_STATUS</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">XXXX</span>
+<span class="l l-Scalar l-Scalar-Plain">TWITTER_ACCESS_TOKEN_STATUS</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">XXXX</span>
+<span class="l l-Scalar l-Scalar-Plain">TWITTER_ACCESS_TOKEN_SECRET_STATUS</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">XXXX</span>
+
+<span class="l l-Scalar l-Scalar-Plain">TWITTER_CONSUMER_KEY_MARKETING</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">YYYY</span>
+<span class="l l-Scalar l-Scalar-Plain">TWITTER_CONSUMER_SECRET_MARKETING</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">YYYY</span>
+<span class="l l-Scalar l-Scalar-Plain">TWITTER_ACCESS_TOKEN_MARKETING</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">YYYY</span>
+<span class="l l-Scalar l-Scalar-Plain">TWITTER_ACCESS_TOKEN_SECRET_MARKETING</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">YYYY</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Annotations by line number:</strong></p>
+<p><strong>Line 2</strong> We introduce a new variable indicating which set of credentials to
+use if no <code class="docutils literal"><span class="pre">--as</span></code> option is supplied.</p>
+<p><strong>Line 4</strong> We have changed the names of the environment variables by adding a
+suffix. This set will be used when the value of <code class="docutils literal"><span class="pre">--as</span></code> is &#8220;STATUS&#8221;.</p>
+<p><strong>Line 9</strong> We can add as many sets of credentials as we wish to support; as long
+as the variable names have distinct suffixes, everything is fine.</p>
+<p>Next, let’s see how our bundle definition needs to change to add this
+option.</p>
+<p><strong>Adding Options to a Command.</strong></p>
+<div class="highlight-yaml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">cog_bundle_version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">4</span>
+
+<span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">twitter_example</span>
+<span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Interact with Twitter</span>
+<span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0.4</span>
+<span class="l l-Scalar l-Scalar-Plain">permissions</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">twitter_example:tweet</span>
+<span class="l l-Scalar l-Scalar-Plain">commands</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">tweet</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Send a tweet!</span>
+    <span class="l l-Scalar l-Scalar-Plain">executable</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/Users/chris/cog-book/tweet_cog_wrapper.sh</span>
+    <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;message&gt;&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">rules</span><span class="p p-Indicator">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">must have twitter_example:tweet</span>
+    <span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">as</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">the account to tweet from</span>
+        <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+        <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+        <span class="l l-Scalar l-Scalar-Plain">short_flag</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">a</span>
+<span class="l l-Scalar l-Scalar-Plain">templates</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">tweet</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">body</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+      <span class="no">~each var=$results~</span>
+      <span class="no">~$item.url~</span>
+      <span class="no">~end~</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Annotations by line number:</strong></p>
+<p><strong>Line 5</strong> Again, we bump the version of our bundle</p>
+<p><strong>Line 15</strong> Each command can have an <code class="docutils literal"><span class="pre">options</span></code> map; the keys are the option’s
+&#8220;long name&#8221;, and the value object describes additional metadata about
+the option.</p>
+<p>Finally, we modify our adapter script now to see how to access this
+option.</p>
+<p><strong>Access Option Values in a Command.</strong></p>
+<div class="highlight-bash"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="nb">declare</span> -a TWEET_ARGUMENTS
+<span class="k">for</span> <span class="o">((</span><span class="nv">i</span><span class="o">=</span>0<span class="p">;</span>i&lt;<span class="si">${</span><span class="nv">COG_ARGC</span><span class="si">}</span><span class="p">;</span>i++<span class="o">))</span><span class="p">;</span> <span class="k">do</span>
+    <span class="nv">var</span><span class="o">=</span><span class="s2">&quot;COG_ARGV_</span><span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="s2">&quot;</span>
+    TWEET_ARGUMENTS<span class="o">[</span><span class="nv">$i</span><span class="o">]=</span><span class="si">${</span><span class="p">!var</span><span class="si">}</span>
+<span class="k">done</span>
+
+<span class="k">if</span> <span class="o">[</span> -n <span class="s2">&quot;</span><span class="si">${</span><span class="nv">COG_OPT_AS</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">]</span>
+<span class="k">then</span>
+    <span class="nv">account</span><span class="o">=</span><span class="si">${</span><span class="nv">COG_OPT_AS</span><span class="si">}</span>
+<span class="k">else</span>
+    <span class="nv">account</span><span class="o">=</span><span class="si">${</span><span class="nv">TWITTER_DEFAULT_ACCOUNT</span><span class="si">}</span>
+<span class="k">fi</span>
+<span class="nv">account</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$account</span> <span class="p">|</span> tr <span class="s1">&#39;[a-z]&#39;</span> <span class="s1">&#39;[A-Z]&#39;</span><span class="k">)</span>
+
+
+<span class="nb">export</span> <span class="nv">TWITTER_CONSUMER_KEY</span><span class="o">=</span><span class="k">$(</span><span class="nb">eval</span> <span class="s2">&quot;echo \$</span><span class="k">$(</span><span class="nb">echo</span> TWITTER_CONSUMER_KEY_<span class="si">${</span><span class="nv">account</span><span class="si">}</span><span class="k">)</span><span class="s2">&quot;</span><span class="k">)</span>
+<span class="nb">export</span> <span class="nv">TWITTER_CONSUMER_SECRET</span><span class="o">=</span><span class="k">$(</span><span class="nb">eval</span> <span class="s2">&quot;echo \$</span><span class="k">$(</span><span class="nb">echo</span> TWITTER_CONSUMER_SECRET_<span class="si">${</span><span class="nv">account</span><span class="si">}</span><span class="k">)</span><span class="s2">&quot;</span><span class="k">)</span>
+<span class="nb">export</span> <span class="nv">TWITTER_ACCESS_TOKEN</span><span class="o">=</span><span class="k">$(</span><span class="nb">eval</span> <span class="s2">&quot;echo \$</span><span class="k">$(</span><span class="nb">echo</span> TWITTER_ACCESS_TOKEN_<span class="si">${</span><span class="nv">account</span><span class="si">}</span><span class="k">)</span><span class="s2">&quot;</span><span class="k">)</span>
+<span class="nb">export</span> <span class="nv">TWITTER_ACCESS_TOKEN_SECRET</span><span class="o">=</span><span class="k">$(</span><span class="nb">eval</span> <span class="s2">&quot;echo \$</span><span class="k">$(</span><span class="nb">echo</span> TWITTER_ACCESS_TOKEN_SECRET_<span class="si">${</span><span class="nv">account</span><span class="si">}</span><span class="k">)</span><span class="s2">&quot;</span><span class="k">)</span>
+
+<span class="nv">output</span><span class="o">=</span><span class="k">$(</span>bundle <span class="nb">exec</span> <span class="k">$(</span>dirname <span class="si">${</span><span class="nv">0</span><span class="si">}</span><span class="k">)</span>/tweet.rb <span class="si">${</span><span class="nv">TWEET_ARGUMENTS</span><span class="p">[*]</span><span class="si">}</span><span class="k">)</span>
+
+<span class="nv">message</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$output</span><span class="s2">&quot;</span> <span class="p">|</span> grep <span class="s2">&quot;Message: &quot;</span> <span class="p">|</span> cut -d<span class="s2">&quot;:&quot;</span> -f2 <span class="p">|</span> sed -e <span class="s1">&#39;s/^ *//&#39;</span><span class="k">)</span>
+<span class="nv">url</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$output</span><span class="s2">&quot;</span> <span class="p">|</span> grep <span class="s2">&quot;URL: &quot;</span> <span class="p">|</span> sed -e <span class="s1">&#39;s/^URL: *//&#39;</span><span class="k">)</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;COG_TEMPLATE: tweet&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;JSON&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;{\&quot;message\&quot;: \&quot;</span><span class="si">${</span><span class="nv">message</span><span class="si">}</span><span class="s2">\&quot;, \&quot;url\&quot;: \&quot;</span><span class="si">${</span><span class="nv">url</span><span class="si">}</span><span class="s2">\&quot;}&quot;</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Annotations by line number:</strong></p>
+<p><strong>Line 9</strong>   Here we test to see if there is a value for the <code class="docutils literal"><span class="pre">COG_OPT_AS</span></code>
+variable. All option values are presented this way, using the
+uppercased &#8220;long name&#8221; of the option (thus a &#8220;foo&#8221; option would be
+accessed as <code class="docutils literal"><span class="pre">COG_OPT_FOO</span></code>, etc.) A <code class="docutils literal"><span class="pre">COG_OPTS</span></code> variable is also
+supplied, the value of which is a comma-delimited list of options
+present for the invocation. This is used to indicate which
+environment variables need to be checked. For our adapter script,
+however, which is coded specifically for this one-option command,
+<code class="docutils literal"><span class="pre">COG_OPTS</span></code> does not provide much benefit.</p>
+<p><strong>Line 15</strong> We’ll just uppercase the account identifier, which creates a more
+pleasing user experience; it’s easier to type &#8220;&#8211;as=status&#8221; than
+&#8220;&#8211;as=STATUS&#8221;, after all.</p>
+<p><strong>Line 17</strong> Based on the account we want to use, we’ll set the environment
+variables our command expects to their appropriate values.</p>
+<p>Observe again that we haven’t touched our underlying Ruby script at all
+since we initially wrote it.</p>
+<p>Let’s take a look at it in action.</p>
+<div class="figure" id="id10">
+<img alt="Tweeting from Multiple Accounts" src="../_images/tweet_with_different_accounts.png" />
+<p class="caption"><span class="caption-text">Tweeting from Multiple Accounts</span></p>
+</div>
+</div>
+<div class="section" id="packaging-with-docker">
+<h2>6.10. Packaging with Docker<a class="headerlink" href="#packaging-with-docker" title="Permalink to this headline">¶</a></h2>
+<p>Up until now, we’ve been installing our command executable on the Relay
+directly. While this is sometimes convenient, you often want automation
+for deploying commands. While you can use automation tools like Chef,
+Puppet, or Ansible to do this, Relay also has built-in support for
+deploying bundles as Docker containers. In fact, as long as your
+container repository is accessible by your Relay server, all you need to
+do to completely install a bundle is to upload the definition YAML file
+to Cog, and everything else is taken care of for you. We’ll package up
+our bundle into a Docker container now.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A full explanation of Docker is beyond the scope of this chapter.
+For resources, please visit <a class="reference external" href="https://www.docker.com">https://www.docker.com</a>.</p>
+</div>
+<p>We’re shooting for a minimal container here, so we’re building on
+<a class="reference external" href="https://alpinelinux.org">Alpine Linux</a>, a lightweight distribution
+based on <a class="reference external" href="https://busybox.net">BusyBox</a>.</p>
+<p><strong>Packaging our Bundle with Docker.</strong></p>
+<div class="code docker highlight-default"><div class="highlight"><pre><span></span><span class="n">FROM</span> <span class="n">alpine</span><span class="p">:</span><span class="mf">3.4</span>
+
+<span class="n">RUN</span> <span class="n">apk</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">cache</span> <span class="n">add</span> <span class="n">bash</span> <span class="n">build</span><span class="o">-</span><span class="n">base</span> <span class="n">ca</span><span class="o">-</span><span class="n">certificates</span> \
+                       <span class="n">ruby</span> <span class="n">ruby</span><span class="o">-</span><span class="n">dev</span> <span class="n">ruby</span><span class="o">-</span><span class="n">bundler</span> <span class="n">ruby</span><span class="o">-</span><span class="n">io</span><span class="o">-</span><span class="n">console</span>
+
+<span class="n">RUN</span> <span class="n">adduser</span> <span class="o">-</span><span class="n">D</span> <span class="n">bundle</span>
+<span class="n">USER</span> <span class="n">bundle</span>
+<span class="n">WORKDIR</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">bundle</span>
+<span class="n">COPY</span> <span class="o">.</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">bundle</span>
+
+<span class="n">RUN</span> <span class="n">bundle</span> <span class="n">install</span> <span class="o">--</span><span class="n">path</span> <span class="o">.</span><span class="n">bundle</span>
+</pre></div>
+</div>
+<p>After a bit of experimentation, we’ve narrowed down our system
+dependencies to the minimum needed to run our command. We also create a
+bundle user, copy our existing code into that user’s home directory, and
+install our code dependencies.</p>
+<p>Creating the image is simple.</p>
+<p><strong>Building the Bundle Image.</strong></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>docker build -t cog-book/twitter .
+</pre></div>
+</div>
+<p>Now we need to tell Cog that this bundle is a Docker bundle, and which
+image should be used to run it.</p>
+<p><strong>Linking a Bundle to a Docker Image.</strong></p>
+<div class="highlight-yaml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">cog_bundle_version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">4</span>
+
+<span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">twitter_example</span>
+<span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Interact with Twitter</span>
+<span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0.5</span>
+<span class="l l-Scalar l-Scalar-Plain">docker</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cog-book/twitter</span>
+  <span class="l l-Scalar l-Scalar-Plain">tag</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">latest</span>
+<span class="l l-Scalar l-Scalar-Plain">permissions</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">twitter_example:tweet</span>
+<span class="l l-Scalar l-Scalar-Plain">commands</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">tweet</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Send a tweet!</span>
+    <span class="l l-Scalar l-Scalar-Plain">executable</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/home/bundle/tweet_cog_wrapper.sh</span>
+    <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;message&gt;&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">rules</span><span class="p p-Indicator">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">when command is twitter_example:tweet must have twitter_example:tweet</span>
+    <span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">as</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">the account to tweet from</span>
+        <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+        <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+        <span class="l l-Scalar l-Scalar-Plain">short_flag</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">a</span>
+<span class="l l-Scalar l-Scalar-Plain">templates</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">tweet</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">body</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+      <span class="no">~each var=$results~</span>
+      <span class="no">~$item.url~</span>
+      <span class="no">~end~</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Annotations by line number:</strong></p>
+<p><strong>Line 5</strong> Bump the version; you know the drill by now</p>
+<p><strong>Line 6</strong> Docker-enabled bundles have a <code class="docutils literal"><span class="pre">docker</span></code> configuration section,
+indicating exactly which container should be used. We use the same
+image name that we built our Dockerfile with. Specifying &#8220;latest&#8221; for
+the tag will cause Relay to pull the most recent version of the image
+when running the commmands from the bundle. This is useful for local
+development, and potentially for other specialized use cases, but for
+a proper release, you’ll want to both build your image with a
+specific tag, and also lock your bundle to that tag.</p>
+<p><strong>Line 14</strong> We’ve changed the path to the executable. This is from inside the
+container, so it needs to match up with where the code was installed
+when the image was built.</p>
+<p>Once we install it, we can see from Relay’s logs that it has been
+notified and is downloading the image:</p>
+<p><strong>Retrieving the Bundle Image in Relay’s Logs.</strong></p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">DEBU[2016-09-21T12:22:06-04:00] Refreshing command catalog.</span>
+<span class="go">DEBU[2016-09-21T12:22:06-04:00] Processing bundle catalog updates.</span>
+<span class="go">DEBU[2016-09-21T12:22:06-04:00] Updating bundle catalog. Adds: 1, Deletions: 1.</span>
+<span class="go">DEBU[2016-09-21T12:22:07-04:00] Retrieving cog-book/twitter:latest from upstream Docker registry.</span>
+<span class="go">DEBU[2016-09-21T12:22:08-04:00] Retrieved cog-book/twitter:latest from upstream Docker registry.</span>
+<span class="go">INFO[2016-09-21T12:22:08-04:00] Docker image 21b2b516883 for cog-book/twitter:latest is up to date.</span>
+<span class="go">INFO[2016-09-21T12:22:08-04:00] Changes to bundle catalog detected.</span>
+<span class="go">DEBU[2016-09-21T12:22:08-04:00] Called relayAnnouncer.SendAnnouncement()</span>
+<span class="go">DEBU[2016-09-21T12:22:08-04:00] Preparing announcement</span>
+<span class="go">DEBU[2016-09-21T12:22:08-04:00] Publishing bundle announcement to bot/relays/discover</span>
+<span class="go">DEBU[2016-09-21T12:22:08-04:00] Announcement sent.</span>
+<span class="go">INFO[2016-09-21T12:22:08-04:00] Cog successfully ack&#39;d bundle announcement 2.</span>
+</pre></div>
+</div>
+<p>And it works!</p>
+<div class="figure" id="id11">
+<img alt="Using a Docker-packaged Command" src="../_images/tweet_docker.png" />
+<p class="caption"><span class="caption-text">Using a Docker-packaged Command</span></p>
+</div>
+</div>
+<div class="section" id="handling-input">
+<h2>6.11. Handling Input<a class="headerlink" href="#handling-input" title="Permalink to this headline">¶</a></h2>
+<p>We’ve got a nice little bundle going here, but amazingly, we’ve not
+really gotten into one of Cog’s more exciting features: pipelines!</p>
+<p>In <a class="reference internal" href="#simple-echo-pipeline"><span class="std std-ref">Extracting Data from Structured Command Output</span></a>, we saw a basic pipeline
+where we explicitly pulled out the <code class="docutils literal"><span class="pre">message</span></code> field from our <code class="docutils literal"><span class="pre">tweet</span></code>
+command’s output to use in the following <code class="docutils literal"><span class="pre">echo</span></code> command invocation.
+When you do this, Cog itself handles the extraction, and your commands
+don’t have to know anything about how the prior output was structured;
+after all, it would be a bit odd for the <code class="docutils literal"><span class="pre">echo</span></code> command — something
+built into Cog — to know how a <code class="docutils literal"><span class="pre">tweet</span></code> result was structured,
+particularly since we just wrote it. This is very important for being
+able to chain together commands from a variety of different bundles.</p>
+<p>However, a bundle will often include multiple commands which may operate
+on a common structure. In <em>this</em> case, it can be convenient to have the
+commands operate on the implicit input received from a previous pipeline
+stage. This data is presented to the command as a JSON string on
+standard input. With this, you can create some rather concise pipelines.
+Let’s examine how this works in practice by introducing a few more
+commands to our bundle.</p>
+<div class="section" id="usecase-getting-statistics-on-recent-tweets">
+<h3>6.11.1. Usecase: Getting Statistics on Recent Tweets<a class="headerlink" href="#usecase-getting-statistics-on-recent-tweets" title="Permalink to this headline">¶</a></h3>
+<p>Let’s say you’ve just announced the release of version 1.0 of your
+software product on Twitter with a series of tweets, and you’re curious
+to see what kind of traction they’ve been getting in terms of favorites
+and retweets.</p>
+<p>Now, you might be tempted to make some sort of
+‘recent_tweets_with_stats` command, or (slightly better) perhaps a
+<code class="docutils literal"><span class="pre">recent_tweets</span></code> command that takes a <code class="docutils literal"><span class="pre">--with-stats</span></code> option. That’s
+all well and good, but consider how people might want to take advantage
+of this functionality in the future. Perhaps your support team would
+like to view those same statistics for the tweets that are directed to
+your support account. Maybe your marketing team wants to see those
+statistics for the tweets that mention your product. If you baked the
+statistics feature into your <code class="docutils literal"><span class="pre">recent_tweets</span></code> command, you’d need to
+duplicate it for a <code class="docutils literal"><span class="pre">mention</span></code> command and a <code class="docutils literal"><span class="pre">search</span></code> command to
+support the other teams’ needs. That doesn’t sound like much fun.</p>
+<p>Instead, we can decompose these capabilities into several individual
+commands, and use Cog’s pipelines to get us what we want. Instead of
+invoking <code class="docutils literal"><span class="pre">recent_tweets_with_stats</span></code>, we’d instead use
+<code class="docutils literal"><span class="pre">recent_tweets</span> <span class="pre">|</span>
+<span class="pre">stats</span></code>, which would then pave the way for <code class="docutils literal"><span class="pre">tweets_mentioning</span>
+<span class="pre">&quot;&#64;support&quot;</span> <span class="pre">|</span> <span class="pre">stats</span></code> and <code class="docutils literal"><span class="pre">tweet_search</span> <span class="pre">our_product</span> <span class="pre">|</span> <span class="pre">stats</span></code>, and
+indeed, getting statistics for <em>any</em> stream of tweets you could think
+of.</p>
+</div>
+<div class="section" id="a-recent-tweets-command">
+<h3>6.11.2. A <code class="docutils literal"><span class="pre">recent_tweets</span></code> Command<a class="headerlink" href="#a-recent-tweets-command" title="Permalink to this headline">¶</a></h3>
+<p>In order to do this, though, we need to take a look at how Cog commands
+can receive input from other commands. Though we could start directly
+with writing the <code class="docutils literal"><span class="pre">stats</span></code> command itself, illustrating how it works by
+piping the output of our existing <code class="docutils literal"><span class="pre">tweet</span></code> command into it, that won’t
+actually be very exciting; it’s highly doubtful that we’re going to get
+any retweets or favorites to a tweet a second after we send it. Instead,
+we’ll start with a <code class="docutils literal"><span class="pre">recent_tweets</span></code> command that can generate
+<em>multiple</em> tweets for our pipeline.</p>
+<p>For brevity’s sake, with this command, we’ll shift gears from our &#8220;wrap
+existing commands for Cog&#8221; approach, and just write this script as
+though it were destined for Cog and only Cog. Of course, a bundle can
+have a mix of these commands, with some being custom Cog code, and
+others being wrapped pre-existing programs.</p>
+<p><strong>``recent_tweets`` Cog Command.</strong></p>
+<div class="highlight-ruby"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env ruby</span>
+
+<span class="nb">require</span> <span class="s1">&#39;bundler/setup&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;twitter&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;json&#39;</span>
+
+<span class="n">account</span> <span class="o">=</span> <span class="p">(</span><span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;COG_OPT_AS&#39;</span><span class="o">]</span> <span class="p">?</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;COG_OPT_AS&#39;</span><span class="o">]</span> <span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;TWITTER_DEFAULT_ACCOUNT&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">upcase</span>
+<span class="n">client</span> <span class="o">=</span> <span class="no">Twitter</span><span class="o">::</span><span class="no">REST</span><span class="o">::</span><span class="no">Client</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
+  <span class="ss">consumer_key</span><span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;TWITTER_CONSUMER_KEY_</span><span class="si">#{</span><span class="n">account</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">]</span><span class="p">,</span>
+  <span class="ss">consumer_secret</span><span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;TWITTER_CONSUMER_SECRET_</span><span class="si">#{</span><span class="n">account</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">]</span><span class="p">,</span>
+  <span class="ss">access_token</span><span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;TWITTER_ACCESS_TOKEN_</span><span class="si">#{</span><span class="n">account</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">]</span><span class="p">,</span>
+  <span class="ss">access_token_secret</span><span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;TWITTER_ACCESS_TOKEN_SECRET_</span><span class="si">#{</span><span class="n">account</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">]</span><span class="p">)</span>
+
+<span class="n">tweets</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">user_timeline</span><span class="p">(</span><span class="ss">count</span><span class="p">:</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">tweet</span><span class="o">|</span>
+  <span class="p">{</span><span class="ss">message</span><span class="p">:</span> <span class="n">tweet</span><span class="o">.</span><span class="n">full_text</span><span class="p">,</span> <span class="ss">url</span><span class="p">:</span> <span class="n">tweet</span><span class="o">.</span><span class="n">url</span><span class="p">}</span>
+<span class="k">end</span>
+
+<span class="nb">puts</span> <span class="s2">&quot;COG_TEMPLATE: tweet&quot;</span>
+<span class="nb">puts</span> <span class="s2">&quot;JSON&quot;</span>
+<span class="nb">puts</span> <span class="no">JSON</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">tweets</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Annotations by line number:</strong></p>
+<p><strong>Line 7</strong> We’ll take care of the account switching in Ruby, instead of in a
+shell script as we did for the <code class="docutils literal"><span class="pre">tweet</span></code> command earlier.</p>
+<p><strong>Line 14</strong> Here we call the client’s API method that retrieves tweets from our
+authenticated user. As called here, this will result in no more than
+5 tweets. This is configurable in the API client we’re using,
+however; a refinement of this command could involve accepting an
+optional number of tweets to retrieve.</p>
+<p><strong>Line 18</strong> As before, we specify our template to use. Notice, however, that
+we’re using the same template as our earlier <code class="docutils literal"><span class="pre">tweet</span></code> command. This
+is intentional; we’re generating the same &#8220;shape&#8221; of data, and so
+it’s natural that we’d template it the same way. A command can use
+any template within its own bundle.</p>
+<p><strong>Line 20</strong> Here we generate the JSON string to send back, but notice this time
+we’re sending back an array of objects; in our <code class="docutils literal"><span class="pre">tweet</span></code> command, we
+only sent back a single object.</p>
+<p>Now that we’ve got a source of tweets, let’s see how we can process them
+in a downstream command.</p>
+</div>
+<div class="section" id="tweet-statistics-favorites-and-retweets">
+<h3>6.11.3. Tweet Statistics: Favorites and Retweets<a class="headerlink" href="#tweet-statistics-favorites-and-retweets" title="Permalink to this headline">¶</a></h3>
+<p>We’re ready to tackle our <code class="docutils literal"><span class="pre">stats</span></code> command now. Once again, our
+<code class="docutils literal"><span class="pre">twitter</span></code> library has the code we need. We’ll also write this as a
+&#8220;pure Cog&#8221; command, like we did for the <code class="docutils literal"><span class="pre">recent_tweets</span></code> command.</p>
+<p><strong>Twitter ``stats`` Command.</strong></p>
+<div class="highlight-ruby"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env ruby</span>
+
+<span class="nb">require</span> <span class="s1">&#39;bundler/setup&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;twitter&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;json&#39;</span>
+
+<span class="n">account</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;TWITTER_DEFAULT_ACCOUNT&#39;</span><span class="o">].</span><span class="n">upcase</span>
+<span class="n">client</span> <span class="o">=</span> <span class="no">Twitter</span><span class="o">::</span><span class="no">REST</span><span class="o">::</span><span class="no">Client</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
+  <span class="ss">consumer_key</span><span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;TWITTER_CONSUMER_KEY_</span><span class="si">#{</span><span class="n">account</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">]</span><span class="p">,</span>
+  <span class="ss">consumer_secret</span><span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;TWITTER_CONSUMER_SECRET_</span><span class="si">#{</span><span class="n">account</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">]</span><span class="p">,</span>
+  <span class="ss">access_token</span><span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;TWITTER_ACCESS_TOKEN_</span><span class="si">#{</span><span class="n">account</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">]</span><span class="p">,</span>
+  <span class="ss">access_token_secret</span><span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;TWITTER_ACCESS_TOKEN_SECRET_</span><span class="si">#{</span><span class="n">account</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">]</span><span class="p">)</span>
+
+<span class="n">tweet</span> <span class="o">=</span> <span class="k">if</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;COG_ARGC&#39;</span><span class="o">]</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span>
+          <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;COG_ARGV_0&#39;</span><span class="o">]</span>
+        <span class="k">else</span>
+          <span class="n">tweet</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="no">STDIN</span><span class="o">.</span><span class="n">read</span><span class="p">)</span>
+          <span class="n">tweet</span><span class="o">[</span><span class="s2">&quot;url&quot;</span><span class="o">]</span>
+        <span class="k">end</span>
+
+<span class="n">tweet</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">status</span><span class="p">(</span><span class="n">tweet</span><span class="p">)</span>
+
+<span class="nb">puts</span> <span class="s2">&quot;COG_TEMPLATE: stats&quot;</span>
+<span class="nb">puts</span> <span class="s2">&quot;JSON&quot;</span>
+<span class="nb">puts</span> <span class="no">JSON</span><span class="o">.</span><span class="n">generate</span><span class="p">({</span><span class="ss">message</span><span class="p">:</span> <span class="n">tweet</span><span class="o">.</span><span class="n">full_text</span><span class="p">,</span>
+                    <span class="ss">favorites</span><span class="p">:</span> <span class="n">tweet</span><span class="o">.</span><span class="n">favorite_count</span><span class="p">,</span>
+                    <span class="ss">retweets</span><span class="p">:</span> <span class="n">tweet</span><span class="o">.</span><span class="n">retweet_count</span><span class="p">})</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Annotations by line number:</strong></p>
+<p><strong>Line 7</strong> For this command, it doesn’t matter what account we use (i.e., there
+will be no <code class="docutils literal"><span class="pre">--as</span></code> option). We’ll just use the default one.</p>
+<p><strong>Line 14</strong> Though we’re talking about processing input from previous pipeline
+stages, we shouldn’t <em>require</em> that (otherwise our command could
+never be called on its own, because there would be no previous stage
+to feed it!). If our command is passed an argument (in this case the
+URL of a tweet), then that is what it will operate on.</p>
+<p><strong>Line 17</strong> On the other hand, if we don’t receive an argument, we’ll read
+standard input as a JSON map, and extract the <code class="docutils literal"><span class="pre">url</span></code> field from it.
+Remember, we’re handling the case where we’re receiving a map that
+looks like what our <code class="docutils literal"><span class="pre">tweet</span></code> command produces.</p>
+<p><strong>Line 21</strong> This call simply &#8220;rehydrates&#8221; a Ruby tweet object from the URL. From
+this we can extract the number of favorites and retweets the tweet
+has. We’ll output plain text, just as we did in our original
+<code class="docutils literal"><span class="pre">tweet.rb</span></code> script.</p>
+<p>Let’s add these new commands to our bundle, install it, and give them a
+try.</p>
+<p><strong>Final Bundle Configuration.</strong></p>
+<div class="highlight-yaml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">cog_bundle_version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">4</span>
+
+<span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">twitter_example</span>
+<span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Interact with Twitter</span>
+<span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0.6</span>
+<span class="l l-Scalar l-Scalar-Plain">docker</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cog-book/twitter</span>
+  <span class="l l-Scalar l-Scalar-Plain">tag</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">latest</span>
+<span class="l l-Scalar l-Scalar-Plain">permissions</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">twitter_example:tweet</span>
+<span class="l l-Scalar l-Scalar-Plain">commands</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">tweet</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Send a tweet!</span>
+    <span class="l l-Scalar l-Scalar-Plain">executable</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/home/bundle/tweet_cog_wrapper.sh</span>
+    <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;message&gt;&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">rules</span><span class="p p-Indicator">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">when command is twitter_example:tweet must have twitter_example:tweet</span>
+    <span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">as</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">the account to tweet from</span>
+        <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+        <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+        <span class="l l-Scalar l-Scalar-Plain">short_flag</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">a</span>
+  <span class="l l-Scalar l-Scalar-Plain">recent_tweets</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Last 5 tweets sent from this account</span>
+    <span class="l l-Scalar l-Scalar-Plain">executable</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/home/bundle/recent_tweets.rb</span>
+    <span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">as</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">the account to tweet from</span>
+        <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+        <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+        <span class="l l-Scalar l-Scalar-Plain">short_flag</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">a</span>
+    <span class="l l-Scalar l-Scalar-Plain">rules</span><span class="p p-Indicator">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">allow</span>
+  <span class="l l-Scalar l-Scalar-Plain">stats</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Favorites and retweets</span>
+    <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span> <span class="s">&quot;[tweet_url]&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">executable</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/home/bundle/stats.rb</span>
+    <span class="l l-Scalar l-Scalar-Plain">rules</span><span class="p p-Indicator">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">allow</span>
+
+<span class="l l-Scalar l-Scalar-Plain">templates</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">tweet</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">body</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+      <span class="no">~each var=$results~</span>
+      <span class="no">~$item.url~</span>
+      <span class="no">~end~</span>
+  <span class="l l-Scalar l-Scalar-Plain">stats</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">body</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+      <span class="no">| Tweet | Favorite Count | Retweet Count |</span>
+      <span class="no">|-------|----------------|---------------|</span>
+      <span class="no">~each var=$results~</span>
+      <span class="no">|~$item.message~|~$item.favorites~|~$item.retweets~|</span>
+      <span class="no">~end~</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Annotations by line number:</strong></p>
+<p><strong>Line 24</strong> Add the metadata for the <code class="docutils literal"><span class="pre">recent_tweets</span></code> command. Remember to add
+the <code class="docutils literal"><span class="pre">as</span></code> option!</p>
+<p><strong>Line 35</strong> Here’s the metadata for the <code class="docutils literal"><span class="pre">stats</span></code> command. This command takes no
+options, but we do want to indicate that it can take an optional
+<code class="docutils literal"><span class="pre">tweet_url</span></code> argument, for use outside of pipelines.</p>
+<p><strong>Line 48</strong> Here’s the new <code class="docutils literal"><span class="pre">stats</span></code> template. This will actually generate a nice
+table from our results. Templates can have conditional logic, so we
+could modify this to display differently if we’re only given a single
+tweet. What we have will work in all cases, however.</p>
+<p>Once we rebuild our Docker image and install the bundle, we can finally
+test it all out. First, let’s take a look at <code class="docutils literal"><span class="pre">recent_tweets</span></code>.</p>
+<div class="figure" id="id12">
+<img alt="Running the ``recent_tweets`` Command" src="../_images/tweet_recent_tweets.png" />
+<p class="caption"><span class="caption-text">Running the <code class="docutils literal"><span class="pre">recent_tweets</span></code> Command</span></p>
+</div>
+<p>Let’s take a look at how the <code class="docutils literal"><span class="pre">stats</span></code> command behaves when we supply a
+single tweet as an argument.</p>
+<div class="figure" id="id13">
+<img alt="Running the ``stats`` Command for a Single Tweet" src="../_images/tweet_stats_for_one_tweet.png" />
+<p class="caption"><span class="caption-text">Running the <code class="docutils literal"><span class="pre">stats</span></code> Command for a Single Tweet</span></p>
+</div>
+<div class="figure" id="id14">
+<img alt="A Retweeted, Favorited Tweet" src="../_images/tweet_favorites_and_retweets.png" />
+<p class="caption"><span class="caption-text">A Retweeted, Favorited Tweet</span></p>
+</div>
+<p>Not bad! Now, let’s take a look at it when we feed it multiple tweets in
+a pipeline.</p>
+<div class="figure" id="id15">
+<img alt="A Tweet Pipeline" src="../_images/tweet_stats_pipeline.png" />
+<p class="caption"><span class="caption-text">A Tweet Pipeline</span></p>
+</div>
+<p>Let’s dig into what’s going on behind the scenes. You might have noticed
+that our <code class="docutils literal"><span class="pre">recent_tweets</span></code> command generated an array of tweet objects,
+but that our <code class="docutils literal"><span class="pre">stats</span></code> command accepted just a <em>single</em> tweet object for
+input. However, it seemed to process multiple tweet objects just fine.
+The explanation to this lies in the Cog server. Cog accumulates all
+output it receives into a single flat list, and then doles this output
+one-by-one to the command in the next stage of the pipeline (if you’re
+familiar with functional programming, Cog acts a bit like a <code class="docutils literal"><span class="pre">map</span></code>
+operation processing pipelines). By default, commands can just assume
+they’ll receive a single object to act upon, which makes them simpler to
+implement.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Though most commands can be implemented like our Twitter <code class="docutils literal"><span class="pre">stats</span></code>
+command, operating on a single input object, there are some kinds of
+commands that <em>must</em> operate on multiple inputs at once; think of
+commands like <code class="docutils literal"><span class="pre">filter</span></code>, <code class="docutils literal"><span class="pre">sort</span></code>, <code class="docutils literal"><span class="pre">min</span></code>, <code class="docutils literal"><span class="pre">max</span></code>, and so on.
+These kinds of commands can be implemented for Cog, but they behave
+a bit differently. This is an advanced topic which we’ll describe
+later.</p>
+</div>
+</div>
+</div>
+<div class="section" id="error-handling">
+<h2>6.12. Error Handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h2>
+<p>If we try to execute our <code class="docutils literal"><span class="pre">recent_tweets</span></code> command (or indeed, <em>any</em> of
+these commands we’ve been working on) with incorrect authorization
+tokens, our commands will fail, but Cog will present us with a nicely
+formatted error message. We don’t need to write any code in our command
+to get that behavior; Cog gives it to us for free, which is nice. We
+also get a rather ugly Ruby stack trace in that error message, which is
+quite as nice. We’ll now take a look at how we get this behavior, and
+how we can intentionally manipulate it.</p>
+<div class="figure" id="id16">
+<img alt="Command Failure with Stack Trace" src="../_images/tweet_recent_tweets_unauthorized_stack_trace.png" />
+<p class="caption"><span class="caption-text">Command Failure with Stack Trace</span></p>
+</div>
+<p>If you’ve ever done any command line scripting, you’ll likely be
+familiar with the concept of “exit codes”. Essentially, these are
+numerical codes that indicate whether a program exited successfully or
+with an error (and if so, which error). An exit code of 0 is regarded as
+successful, while the numbers 1 and higher indicate errors. The same
+holds for Cog commands. All our successful commands finished executing
+on our Relay with an exit code of 0. Our failure to authenticate with
+Twitter actually raised an exception which we did not catch in our code,
+which ultimately ended up with our command failing with an exit code of
+1. The stack trace that shows up in the error message was actually
+output on standard error, which Relay is also monitoring. If a command
+exits with a non-zero exit code, Relay captures the standard error
+stream of the command and sends that back to Cog, with an indication
+that the command has failed. Cog’s internal processing then takes over
+to render that as the error message we see in chat.</p>
+<p>With this knowledge, we now know how we can control command errors.
+Let’s update our <code class="docutils literal"><span class="pre">recent_tweets.rb</span></code> script and see how we can hide
+that ugly Ruby stack trace and make a more friendly error message for
+our users.</p>
+<p><strong>Adding Custom Error Handling to the ``recent_tweets`` Command.</strong></p>
+<div class="highlight-ruby"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env ruby</span>
+
+<span class="nb">require</span> <span class="s1">&#39;twitter&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;json&#39;</span>
+
+<span class="k">begin</span>
+  <span class="n">client</span> <span class="o">=</span> <span class="no">Twitter</span><span class="o">::</span><span class="no">REST</span><span class="o">::</span><span class="no">Client</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
+    <span class="ss">consumer_key</span><span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;TWITTER_CONSUMER_KEY&quot;</span><span class="o">]</span><span class="p">,</span>
+    <span class="ss">consumer_secret</span><span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;TWITTER_CONSUMER_SECRET&quot;</span><span class="o">]</span><span class="p">,</span>
+    <span class="ss">access_token</span><span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;TWITTER_ACCESS_TOKEN&quot;</span><span class="o">]</span><span class="p">,</span>
+    <span class="ss">access_token_secret</span><span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;TWITTER_ACCESS_TOKEN_SECRET&quot;</span><span class="o">]</span><span class="p">)</span>
+
+  <span class="n">tweets</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">user_timeline</span><span class="p">(</span><span class="ss">count</span><span class="p">:</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">tweet</span><span class="o">|</span>
+    <span class="p">{</span><span class="ss">message</span><span class="p">:</span> <span class="n">tweet</span><span class="o">.</span><span class="n">full_text</span><span class="p">,</span> <span class="ss">url</span><span class="p">:</span> <span class="n">tweet</span><span class="o">.</span><span class="n">url</span><span class="p">}</span>
+  <span class="k">end</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;COG_TEMPLATE: tweet&quot;</span>
+  <span class="nb">puts</span> <span class="s2">&quot;JSON&quot;</span>
+  <span class="nb">puts</span> <span class="no">JSON</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">tweets</span><span class="p">)</span>
+<span class="k">rescue</span> <span class="no">Twitter</span><span class="o">::</span><span class="no">Error</span><span class="o">::</span><span class="no">Unauthorized</span>
+  <span class="no">STDERR</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;Could not authenticate with Twitter API; check your authentication tokens!&quot;</span>
+  <span class="nb">exit</span> <span class="mi">1</span>
+<span class="k">end</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Annotations by line number:</strong></p>
+<p><strong>Line 6</strong> Since our command was initially failing due to an uncaught exception,
+we’ll wrap our code in a <code class="docutils literal"><span class="pre">begin</span></code>/<code class="docutils literal"><span class="pre">rescue</span></code> construct.</p>
+<p><strong>Line 20</strong> When we have bad tokens, the code will throw a
+<code class="docutils literal"><span class="pre">Twitter::Error::Unauthorized</span></code> exception. We’ll explicitly handle
+that scenario here. You can create as many <code class="docutils literal"><span class="pre">rescue</span></code> clauses as
+there are specific exceptions you’d like to deal with, or you could
+just have a &#8220;catch-all&#8221; <code class="docutils literal"><span class="pre">rescue</span></code> clause; it’s up to you.</p>
+<p><strong>Line 22</strong> After we output a custom error message on standard error, we quit the
+program with a non-zero exit code.</p>
+<p>Now, when we run the command with bad tokens, we’ll get a much nicer
+output.</p>
+<div class="figure" id="id17">
+<img alt="Revised Error Output with Custom Message" src="../_images/tweet_recent_tweets_unauthorized_error_message.png" />
+<p class="caption"><span class="caption-text">Revised Error Output with Custom Message</span></p>
+</div>
+</div>
+<div class="section" id="logging">
+<h2>6.13. Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h2>
+<p>When developing a command, not everything will work out the first time.
+Often, one of the simplest ways to figure out where your code has gone
+wrong is by tracing it using logging statements. Cog commands support
+this using the command response attributes <code class="docutils literal"><span class="pre">COGCMD_DEBUG</span></code>,
+<code class="docutils literal"><span class="pre">COGCMD_INFO</span></code>, <code class="docutils literal"><span class="pre">COGCMD_WARN</span></code>, and <code class="docutils literal"><span class="pre">COGCMD_ERROR</span></code>. Emitting a line
+starting with these flags (followed by a colon) will result in the
+remainder of the line being sent to Relay’s log file at the specified
+logging level.</p>
+<p>You are free to interleave &#8220;real&#8221; output with logging output like this
+without worry; Relay will keep them separate. Only your &#8220;real&#8221; output
+will make it to Cog, while the logging information will only show up in
+the log file. The only exception to this is with the <code class="docutils literal"><span class="pre">JSON</span></code> reponse
+attribute. Once that attribute has been emitted, everything that follows
+on standard output must be a legal JSON string.</p>
+<p>Let’s modify our <code class="docutils literal"><span class="pre">recent_tweets.rb</span></code> script to see how this would look
+in practice. We’ll ad a few logging messages at various levels to
+illustrate.</p>
+<p><strong>Logging from a Cog Command.</strong></p>
+<div class="highlight-ruby"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env ruby</span>
+
+<span class="nb">require</span> <span class="s1">&#39;twitter&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;json&#39;</span>
+
+<span class="nb">puts</span> <span class="s2">&quot;COGCMD_WARN: Starting&quot;</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="no">Twitter</span><span class="o">::</span><span class="no">REST</span><span class="o">::</span><span class="no">Client</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
+  <span class="ss">consumer_key</span><span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;TWITTER_CONSUMER_KEY&quot;</span><span class="o">]</span><span class="p">,</span>
+  <span class="ss">consumer_secret</span><span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;TWITTER_CONSUMER_SECRET&quot;</span><span class="o">]</span><span class="p">,</span>
+  <span class="ss">access_token</span><span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;TWITTER_ACCESS_TOKEN&quot;</span><span class="o">]</span><span class="p">,</span>
+  <span class="ss">access_token_secret</span><span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;TWITTER_ACCESS_TOKEN_SECRET&quot;</span><span class="o">]</span><span class="p">)</span>
+
+<span class="nb">puts</span> <span class="s2">&quot;COGCMD_INFO: Authenticated&quot;</span>
+
+<span class="n">tweets</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">user_timeline</span><span class="p">(</span><span class="ss">count</span><span class="p">:</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">tweet</span><span class="o">|</span>
+  <span class="nb">puts</span> <span class="s2">&quot;COGCMD_DEBUG: Tweet - </span><span class="si">#{</span><span class="n">tweet</span><span class="o">.</span><span class="n">full_text</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="p">{</span><span class="ss">message</span><span class="p">:</span> <span class="n">tweet</span><span class="o">.</span><span class="n">full_text</span><span class="p">,</span> <span class="ss">url</span><span class="p">:</span> <span class="n">tweet</span><span class="o">.</span><span class="n">url</span><span class="p">}</span>
+<span class="k">end</span>
+
+<span class="nb">puts</span> <span class="s2">&quot;COGCMD_ERROR: Generating final output&quot;</span>
+<span class="nb">puts</span> <span class="s2">&quot;COG_TEMPLATE: tweet&quot;</span>
+<span class="nb">puts</span> <span class="s2">&quot;JSON&quot;</span>
+<span class="nb">puts</span> <span class="no">JSON</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">tweets</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>And here is what it looks like in Relay’s logs once we execute the
+command. Note that the unique pipeline ID (the <code class="docutils literal"><span class="pre">P</span></code> in parentheses) as
+well as the complete command name (the <code class="docutils literal"><span class="pre">C</span></code>) are included for you
+automatically.</p>
+<p><strong>Command Output in Relay Logs.</strong></p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">WARN[2016-09-23T14:10:18-04:00] (P: d3097cc6b413473780b9aa9596273586 C: twitter_example:recent_tweets) Starting</span>
+<span class="go">INFO[2016-09-23T14:10:18-04:00] (P: d3097cc6b413473780b9aa9596273586 C: twitter_example:recent_tweets) Authenticated</span>
+<span class="go">DEBU[2016-09-23T14:10:18-04:00] (P: d3097cc6b413473780b9aa9596273586 C: twitter_example:recent_tweets) Tweet - All systems are normal</span>
+<span class="go">DEBU[2016-09-23T14:10:18-04:00] (P: d3097cc6b413473780b9aa9596273586 C: twitter_example:recent_tweets) Tweet - OMG</span>
+<span class="go">DEBU[2016-09-23T14:10:18-04:00] (P: d3097cc6b413473780b9aa9596273586 C: twitter_example:recent_tweets) Tweet - OMG</span>
+<span class="go">DEBU[2016-09-23T14:10:18-04:00] (P: d3097cc6b413473780b9aa9596273586 C: twitter_example:recent_tweets) Tweet - This is from a Docker container</span>
+<span class="go">DEBU[2016-09-23T14:10:18-04:00] (P: d3097cc6b413473780b9aa9596273586 C: twitter_example:recent_tweets) Tweet - from docker</span>
+<span class="go">ERRO[2016-09-23T14:10:18-04:00] (P: d3097cc6b413473780b9aa9596273586 C: twitter_example:recent_tweets) Generating final output</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="summary">
+<h2>6.14. Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>In this chapter we’ve taken a look at the low-level underpinnings of the
+Cog/Command interface. Since this interface is based on the fundamental
+building blocks of environment variables, standard input, standard
+output, and exit codes, Cog commands can be written in any programming
+language.</p>
+<p>We’ve also looked at techniques for developing commands and bundles,
+using existing programs you already use, or writing new Cog-specific
+commands from scratch. We’ve explored techniques for designing
+composable commands. Note that each one of these commands we wrote is
+very small; pretty much all they do is make a single API call! Yet from
+these simple commands, we can chain them together to make some exciting
+workflows.</p>
+<p>We started with the simple idea of being to update our company’s Twitter
+status account during an incident, a usecase generally of interest to
+ops and engineering groups. However, as we went along, we started adding
+features that would be useful to other parts of the company; engineering
+probably doesn’t care a whole lot about how many retweets their status
+messages get, but marketing would care a lot about how many retweets a
+product release tweet got. ChatOps isn’t just for the ops and engineers;
+it’s something the whole company can use.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="configuring_password_resets.html" class="btn btn-neutral float-right" title="7. Configuring password resets" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="managing_bundles.html" class="btn btn-neutral" title="5. Managing Bundles" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 Operable, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61670076-4', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  
+
+
+</body>
+</html>

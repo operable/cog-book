@@ -1,0 +1,492 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>8. Permissions and Rules &mdash; Cog Book 1.0.0 documentation</title>
+  
+
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Cog Book 1.0.0 documentation" href="../index.html"/>
+        <link rel="next" title="9. Command Execution Rules" href="command_execution_rules.html"/>
+        <link rel="prev" title="7. Configuring password resets" href="configuring_password_resets.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cog Book
+          
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+          </a>
+
+          
+            <img src="../_static/cog_peek.svg" class="logo" />
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bootstrapping_cog.html">2. Bootstrapping Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_and_managing_relays.html">3. Installing and Managing Relays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands_and_bundles.html">4. Commands and Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="managing_bundles.html">5. Managing Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_a_command_bundle.html">6. Writing A Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_password_resets.html">7. Configuring password resets</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">8. Permissions and Rules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#authorization-rules">8.1. Authorization Rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#components-of-the-authorization-system">8.2. Components of the Authorization System</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#permissions">8.2.1. Permissions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#roles">8.2.2. Roles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#users">8.2.3. Users</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#groups">8.2.4. Groups</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bringing-it-all-together">8.3. Bringing It All Together</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="command_execution_rules.html">9. Command Execution Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundle_configs.html">10. Bundle Configs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_environment_variables.html">11. Command Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic_command_configuration.html">12. Dynamic Command Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="returning_data_from_cog.html">13. Returning data from Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services.html">14. Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">15. Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_your_first_command_bundle.html">16. Installing Your First Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing_a_trigger.html">17. Developing a Trigger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cog_architecture.html">18. Cog Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_pipelines.html">19. Command pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="redirecting_pipeline_output.html">20. Redirecting Pipeline Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">21. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_management.html">22. User management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributor_license_agreement.html">23. Contributor License Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/cog_server_configuration.html">24. Cog Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/relay_configuration.html">25. Relay Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/command_output_tags.html">26. Command Output Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/greenbar_tags.html">27. Greenbar Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/audit_log_events.html">28. Audit Log Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/glossary.html">29. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/designing_for_chatops.html">30. Designing ChatOps Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/chat_platforms.html">31. Notes on Chat Platform Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Cog Book</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>8. Permissions and Rules</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/operable/cog-book/blob/HEAD/cog-book/source/sections/permissions_and_rules.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="permissions-and-rules">
+<h1>8. Permissions and Rules<a class="headerlink" href="#permissions-and-rules" title="Permalink to this headline">¶</a></h1>
+<p>The Cog chatbot system comes equipped with a comprehensive and flexible
+authorization system which allows operators fine-grained control over
+who is able to execute chat commands, extending even to control over
+particular <em>invocations</em> of chat commands.</p>
+<p>In this document, we will discuss the individual pieces of the
+authorization system and take a look at how it is used in practice.</p>
+<div class="section" id="authorization-rules">
+<h2>8.1. Authorization Rules<a class="headerlink" href="#authorization-rules" title="Permalink to this headline">¶</a></h2>
+<p>At the core of Cog’s authorization system are <strong>rules</strong>. Each time a
+user issues a chat command to Cog, rules governing the execution of that
+command are looked up and applied to the current invocation. If a match
+is found, the list of permissions the invoking user has is consulted to
+see if it includes the permission(s) required in the matching rule. If
+it does, the command is executed; if not, command processing immediately
+stops.</p>
+<p>To make things concrete, we’ll start with a simple authorization rule.
+(There is actually a separate rule language that can be used to make
+rather complex rules, but for now we’ll start simple. Feel free to read
+more <a class="reference internal" href="command_execution_rules.html"><span class="doc">detailed explanations</span></a> of how rules
+are formed. In any event, the details of the language are orthogonal to
+the authorization system itself.)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">when</span> <span class="n">command</span> <span class="ow">is</span> <span class="n">operable</span><span class="p">:</span><span class="n">bundle</span> <span class="n">must</span> <span class="n">have</span> <span class="n">operable</span><span class="p">:</span><span class="n">manage_commands</span>
+</pre></div>
+</div>
+<p>This is the simplest form of rule, and gives us all we need to discuss
+the authorization system. This rule states, in English, that for a user
+to execute the <code class="docutils literal"><span class="pre">operable:bundles</span></code> chat command (which allows users to
+enable or disable entire bundles of commands at once), they must have
+the <code class="docutils literal"><span class="pre">operable:manage_commands</span></code> permission granted to them.</p>
+<p>With that rule in place, let’s say I type the following command
+invocation in my chat application:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>!operable:bundle disable github
+</pre></div>
+</div>
+<p>I’m telling Cog to disable all the commands in the <code class="docutils literal"><span class="pre">github</span></code> bundle. In order for that command to
+be executed, Cog must verify, according to the rule above, that I have
+the <code class="docutils literal"><span class="pre">operable:manage_commands</span></code> permission. It just so happens that I
+do, so the command succeeds; now nobody can check how many pull requests
+are open on their favorite repository.</p>
+<p>Perhaps you want to restrict the ability to disable a particularly
+important bundle; perhaps you’ve written one called <code class="docutils literal"><span class="pre">prod</span></code> to help
+manage your organization’s production environment. We can add this with
+a new rule that matches the invocation</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>!operable:bundle disable prod
+</pre></div>
+</div>
+<p>That rule might look like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">when</span> <span class="n">command</span> <span class="ow">is</span> <span class="n">operable</span><span class="p">:</span><span class="n">bundle</span>
+  <span class="k">with</span> <span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;disable&quot;</span>
+    <span class="ow">and</span> <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;prod&quot;</span>
+<span class="n">must</span> <span class="n">have</span> <span class="n">site</span><span class="p">:</span><span class="n">manage_prod</span> <span class="ow">and</span> <span class="n">operable</span><span class="p">:</span><span class="n">manage_commands</span>
+</pre></div>
+</div>
+<p>Here we can see a rule that applies to a very specific invocation of a
+command. If you have the <code class="docutils literal"><span class="pre">operable:manage_commands</span></code> permission, you
+can manipulate bundles in general, but in order to disable the <code class="docutils literal"><span class="pre">prod</span></code>
+bundle, you must have the additional <code class="docutils literal"><span class="pre">site:manage_prod</span></code> permission.</p>
+<p>As you can imagine, the ability to define rules like this offers a lot
+of power. We’ll talk more in depth about rules later; the remainder of
+this document will delve into the specifics of the authorization system
+itself, explaining the its components and how they all work together.</p>
+<p>Rules can be viewed, created, and deleted using the <code class="docutils literal"><span class="pre">operable:rules</span></code>
+command. In particular, simple rules of the form
+<code class="docutils literal"><span class="pre">when</span> <span class="pre">command</span> <span class="pre">is</span> <span class="pre">&lt;COMMAND&gt;</span> <span class="pre">must</span> <span class="pre">have</span> <span class="pre">&lt;PERMISSION&gt;</span></code> can be created
+thusly:</p>
+<p>``` !operable:rule create &lt;COMMAND&gt; &lt;PERMISSION&gt; ``` Note that
+both <code class="docutils literal"><span class="pre">&lt;COMMAND&gt;</span></code> and <code class="docutils literal"><span class="pre">&lt;PERMISSION&gt;</span></code> must exist, and be typed as
+fully-qualified names.</p>
+</div>
+<div class="section" id="components-of-the-authorization-system">
+<span id="id1"></span><h2>8.2. Components of the Authorization System<a class="headerlink" href="#components-of-the-authorization-system" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="permissions">
+<h3>8.2.1. Permissions<a class="headerlink" href="#permissions" title="Permalink to this headline">¶</a></h3>
+<p>Permissions are at the base of Cog’s authorization system. They act as a
+kind of token; you can carry out certain actions if you possess the
+correct token(s).</p>
+<p>You will notice that permissions have a structure:
+<code class="docutils literal"><span class="pre">operable:manage_commands</span></code>, <code class="docutils literal"><span class="pre">site:manage_prod</span></code>, etc. Permissions are
+<em>namespaced</em>; here we have a <code class="docutils literal"><span class="pre">manage_commands</span></code> permission in the
+<code class="docutils literal"><span class="pre">operable</span></code> namespace, and a <code class="docutils literal"><span class="pre">manage_prod</span></code> permission in the <code class="docutils literal"><span class="pre">site</span></code>
+namespace. In general, every bundle of commands defines its own
+permission namespace. This allows bundle authors the flexibility to
+define permissions that are used by commands in the bundle without
+worrying about conflicting with permissions from any other bundles that
+happen to be installed on a Cog system. We can have an
+<code class="docutils literal"><span class="pre">operable:manage_commands</span></code> permission as well as a
+<code class="docutils literal"><span class="pre">site:manage_commands</span></code> permission without any problems.</p>
+<p>There are two ways that permissions can be created. The first is through
+bundle installation. All command bundles have the option to define
+permissions and authorization rules to help bootstrap the bundle in a
+Cog system. The operator is not under any obligation to use these rules
+or permissions, and is free to define their own, but they are always
+installed with the bundle.</p>
+<p>The second way that permissions can be created is directly by the Cog
+operator. This is where the special <code class="docutils literal"><span class="pre">site</span></code> namespace comes into play.
+<code class="docutils literal"><span class="pre">site</span></code> is unique; it is the only permission namespace that is <em>not</em>
+associated with a corresponding command bundle. All permissions created
+by operators are part of the <code class="docutils literal"><span class="pre">site</span></code> namespace. It is the mechanism by
+which the permission scheme may be customized to the needs of the
+operator’s unique environment and use cases.</p>
+</div>
+<div class="section" id="roles">
+<h3>8.2.2. Roles<a class="headerlink" href="#roles" title="Permalink to this headline">¶</a></h3>
+<p>Moving up from permissions, we arrive at roles, which are collections of
+associated permissions. While permissions can be created when you
+install command bundles, roles are something purely under your control
+as a Cog operator; you create them and you manage them.</p>
+</div>
+<div class="section" id="users">
+<h3>8.2.3. Users<a class="headerlink" href="#users" title="Permalink to this headline">¶</a></h3>
+<p>In order for permissions to be useful, we have to have a way to
+associate them with people invoking commands. The Cog <strong>user</strong> is the
+unique identity to which <strong>permissions</strong> are ultimately attached.</p>
+<p>Each person that can interact with Cog has an associated <strong>user</strong>
+account. This is also the identity with which a person will interact
+with Cog’s REST API.</p>
+<p>It is important to understand that this &#8220;Cog User&#8221; is <em>not the same</em> as
+a person’s &#8220;handle&#8221; in a particular chat system. In fact, a Cog user can
+be associated with multiple handles from different chat systems. For
+instance, I may be <code class="docutils literal"><span class="pre">&#64;cm</span></code> in HipChat and <code class="docutils literal"><span class="pre">&#64;chris</span></code> in Slack, but
+<code class="docutils literal"><span class="pre">cmaier</span></code> in Cog. Cog can recognize this and map these various chat
+handles back to the same Cog user, allowing authorization to be managed
+centrally and independently of which chat system is in use.</p>
+<p>Users are scoped to the entire Cog installation; that is, there is no
+higher-level namespace (e.g., &#8220;organization&#8221;) into which users are
+grouped.</p>
+</div>
+<div class="section" id="groups">
+<h3>8.2.4. Groups<a class="headerlink" href="#groups" title="Permalink to this headline">¶</a></h3>
+<p>Finally, Cog groups collect Cog users together. Any number of users may
+be in a group, but <em>only</em> users may be members of groups.</p>
+</div>
+</div>
+<div class="section" id="bringing-it-all-together">
+<h2>8.3. Bringing It All Together<a class="headerlink" href="#bringing-it-all-together" title="Permalink to this headline">¶</a></h2>
+<p>Now that you know about permissions, roles, users, and groups, how do
+you use them?</p>
+<p>We know that roles are collections of permissions, and groups are
+collections of users, but that ultimately, somehow, permissions become
+associated with users. This missing link here is that roles can be
+granted to groups.</p>
+<p>Thus, a user has all the permissions in all the roles granted to all the
+groups of which she is a member.</p>
+<p>To grant a permission to a user, then, the user must be placed into a
+group that has been granted a role that contains that permission. While
+this might seem a bit cumbersome from the perspective of a single user
+and a single permission, it makes global management easier; it frees you
+to think in terms of the higher-level constructs of roles and groups,
+without having to worry about &#8220;exceptions to the rule&#8221; like individual
+users being directly granted a permission, or potentially complicated
+group hierarchies.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">For those that have used Cog before version 0.4, this document
+describes a departure from the previous permission scheme, where
+users and groups could be granted permissions directly, and groups
+could also contain groups.</p>
+</div>
+<p>As an example, let’s look at how we might set up a Cog system to grant
+permissions for the <a class="reference external" href="https://github.com/cog-bundles/mist">mist</a> EC2
+command bundle. For this demonstration, let’s say we have three users:
+Alice, Bob, and Charlie. Furthermore, let’s say that Alice is on our
+Operations team, while Bob and Charlie are on the Development team.
+Let’s also stipulate that everyone on the operations team should be able
+to perform any action with Mist, while developers start out with
+read-only permissions.</p>
+<p>Looking at Mist’s bundle
+<a class="reference external" href="https://github.com/cog-bundles/mist/blob/cf44151121cbe98f9819b6925d9f2246ad422ebd/config.yaml#L58-L64">configuration</a>,
+we see it declares the following permissions:</p>
+<ul class="simple">
+<li>mist:view</li>
+<li>mist:change-state</li>
+<li>mist:destroy</li>
+<li>mist:create</li>
+<li>mist:manage-tags</li>
+<li>mist:change-acl</li>
+</ul>
+<p>It looks like we’ll want to give operations folks all of these
+permissions, and developers only <code class="docutils literal"><span class="pre">mist:view</span></code>. Let’s set up some roles
+to express this.</p>
+<p>First a <code class="docutils literal"><span class="pre">mist_admin</span></code> role, with all the mist permissions:</p>
+<div class="code Shell highlight-default"><div class="highlight"><pre><span></span><span class="n">cogctl</span> <span class="n">role</span> <span class="n">create</span> <span class="n">mist_admin</span>
+<span class="n">cogctl</span> <span class="n">role</span> <span class="n">grant</span> <span class="n">mist_admin</span> <span class="n">mist</span><span class="p">:</span><span class="n">view</span>
+<span class="n">cogctl</span> <span class="n">role</span> <span class="n">grant</span> <span class="n">mist_admin</span> <span class="n">mist</span><span class="p">:</span><span class="n">change_state</span>
+<span class="n">cogctl</span> <span class="n">role</span> <span class="n">grant</span> <span class="n">mist_admin</span> <span class="n">mist</span><span class="p">:</span><span class="n">destroy</span>
+<span class="n">cogctl</span> <span class="n">role</span> <span class="n">grant</span> <span class="n">mist_admin</span> <span class="n">mist</span><span class="p">:</span><span class="n">create</span>
+<span class="n">cogctl</span> <span class="n">role</span> <span class="n">grant</span> <span class="n">mist_admin</span> <span class="n">mist</span><span class="p">:</span><span class="n">manage</span><span class="o">-</span><span class="n">tags</span>
+<span class="n">cogctl</span> <span class="n">role</span> <span class="n">grant</span> <span class="n">mist_admin</span> <span class="n">mist</span><span class="p">:</span><span class="n">change</span><span class="o">-</span><span class="n">acl</span>
+</pre></div>
+</div>
+<p>And now, a <code class="docutils literal"><span class="pre">mist_read_only</span></code> role:</p>
+<div class="code Shell highlight-default"><div class="highlight"><pre><span></span><span class="n">cogctl</span> <span class="n">role</span> <span class="n">create</span> <span class="n">mist_read_only</span>
+<span class="n">cogctl</span> <span class="n">role</span> <span class="n">grant</span> <span class="n">mist_read_only</span> <span class="n">mist</span><span class="p">:</span><span class="n">view</span>
+</pre></div>
+</div>
+<p>Now we have our roles, but we have nothing to grant them to. Let’s
+create some groups.</p>
+<div class="code Shell highlight-default"><div class="highlight"><pre><span></span><span class="n">cogctl</span> <span class="n">group</span> <span class="n">create</span> <span class="n">operations</span>
+<span class="n">cogctl</span> <span class="n">group</span> <span class="n">create</span> <span class="n">developers</span>
+</pre></div>
+</div>
+<p>Now let’s grant the roles to our new groups.</p>
+<div class="code Shell highlight-default"><div class="highlight"><pre><span></span><span class="n">cogctl</span> <span class="n">group</span> <span class="n">grant</span> <span class="n">operations</span> <span class="n">mist_admin</span>
+<span class="n">cogctl</span> <span class="n">group</span> <span class="n">grant</span> <span class="n">developers</span> <span class="n">mist_read_only</span>
+</pre></div>
+</div>
+<p>We’re almost there. We have the groundwork laid; all that remains is to
+add our users.</p>
+<div class="code Shell highlight-default"><div class="highlight"><pre><span></span><span class="n">cogctl</span> <span class="n">group</span> <span class="n">add</span> <span class="n">operations</span> <span class="n">alice</span>
+<span class="n">cogctl</span> <span class="n">group</span> <span class="n">add</span> <span class="n">developers</span> <span class="n">bob</span> <span class="n">charlie</span>
+</pre></div>
+</div>
+<p>Any changes to the permission structure take effect immediately. If the
+<code class="docutils literal"><span class="pre">mist:view</span></code> permission is removed from the <code class="docutils literal"><span class="pre">mist_read_only</span></code> role,
+Bob and Charlie immediately lose the ability to run commands that
+require that permission (unless they happen to also be members of
+another group that has the permission via some other role). Similarly,
+if Danielle is added to the <code class="docutils literal"><span class="pre">operations</span></code> group, she immediately has
+all the <code class="docutils literal"><span class="pre">mist</span></code> permissions.</p>
+<p>Note also that all authorization rules are written in terms of
+<em>permissions</em>, and not <em>roles</em>,</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="command_execution_rules.html" class="btn btn-neutral float-right" title="9. Command Execution Rules" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="configuring_password_resets.html" class="btn btn-neutral" title="7. Configuring password resets" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 Operable, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61670076-4', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  
+
+
+</body>
+</html>

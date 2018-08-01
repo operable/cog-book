@@ -1,0 +1,377 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>26. Command Output Tags &mdash; Cog Book 1.0.0 documentation</title>
+  
+
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Cog Book 1.0.0 documentation" href="../index.html"/>
+        <link rel="next" title="27. Greenbar Tags" href="greenbar_tags.html"/>
+        <link rel="prev" title="25. Relay Configuration" href="relay_configuration.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cog Book
+          
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+          </a>
+
+          
+            <img src="../_static/cog_peek.svg" class="logo" />
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../sections/getting_started.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/bootstrapping_cog.html">2. Bootstrapping Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/installing_and_managing_relays.html">3. Installing and Managing Relays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/commands_and_bundles.html">4. Commands and Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/managing_bundles.html">5. Managing Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/writing_a_command_bundle.html">6. Writing A Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/configuring_password_resets.html">7. Configuring password resets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/permissions_and_rules.html">8. Permissions and Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/command_execution_rules.html">9. Command Execution Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/bundle_configs.html">10. Bundle Configs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/command_environment_variables.html">11. Command Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/dynamic_command_configuration.html">12. Dynamic Command Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/returning_data_from_cog.html">13. Returning data from Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/services.html">14. Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/templates.html">15. Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/installing_your_first_command_bundle.html">16. Installing Your First Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/developing_a_trigger.html">17. Developing a Trigger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/cog_architecture.html">18. Cog Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/command_pipelines.html">19. Command pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/redirecting_pipeline_output.html">20. Redirecting Pipeline Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/triggers.html">21. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/user_management.html">22. User management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/contributor_license_agreement.html">23. Contributor License Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cog_server_configuration.html">24. Cog Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="relay_configuration.html">25. Relay Configuration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">26. Command Output Tags</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#examples">26.1. Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tags">26.2. Tags</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="greenbar_tags.html">27. Greenbar Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="audit_log_events.html">28. Audit Log Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/glossary.html">29. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/designing_for_chatops.html">30. Designing ChatOps Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/chat_platforms.html">31. Notes on Chat Platform Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Cog Book</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>26. Command Output Tags</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/operable/cog-book/blob/HEAD/cog-book/source/references/command_output_tags.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="command-output-tags">
+<h1>26. Command Output Tags<a class="headerlink" href="#command-output-tags" title="Permalink to this headline">¶</a></h1>
+<p>Commands can print tags to stdout to communicate with Cog. To use one,
+print it to STDOUT at the beginning of a newline before returning your
+actual response. If you’re not returning JSON output (by using the JSON
+tag), you may intersperse tags in along with lines of output if
+necessary.</p>
+<div class="section" id="examples">
+<h2>26.1. Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>Output from a command that includes a debug statement, template
+selection, and JSON response. The debug statement will be printed in the
+logs of the Relay it ran on, while the JSON output will be rendered in
+template specified and sent to chat as shown below.</p>
+<p>Output from command:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">COGCMD_DEBUG: Requst took 53ms to complete</span>
+<span class="go">COG_TEMPLATE: instances</span>
+<span class="go">JSON</span>
+<span class="go">[</span>
+<span class="go">  {</span>
+<span class="go">    &quot;instance_id&quot;: &quot;i-1984f3&quot;,</span>
+<span class="go">    &quot;instance_type: &quot;t2.micro&quot;</span>
+<span class="go">  },</span>
+<span class="go">  {</span>
+<span class="go">    &quot;instance_id&quot;: &quot;i-2a7b11&quot;,</span>
+<span class="go">    &quot;instance_type: &quot;t2.small&quot;</span>
+<span class="go">  }</span>
+<span class="go">]</span>
+</pre></div>
+</div>
+<p>Relay logs:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">DEBU[2016-12-06T11:10:14-05:00] (P: 2b113f571dc14419870cffe5d5064e69 C: ec2:instance-list) Request took 53ms to complete</span>
+</pre></div>
+</div>
+<p>JSON response passed to the instances template:</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;instance_id&quot;</span><span class="p">:</span> <span class="s2">&quot;i-1984f3&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;instance_type&quot;</span><span class="p">:</span> <span class="s2">&quot;t2.micro&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;instance_id&quot;</span><span class="p">:</span> <span class="s2">&quot;i-2a7b11&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;instance_type&quot;</span><span class="p">:</span> <span class="s2">&quot;t2.small&quot;</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Output from a command in freeform text which also includes two info
+statements and also uses a template. The info statement will be printed
+in the logs of the Relay it ran on, while the text output will be
+rendered in the template specified and sent to chat. Even though tags
+were interspersed in the text output, each line that does not start with
+a tag will be accumulated in an array in the order they were printed.
+That array will then be included in a JSON object as the value of the
+<code class="docutils literal"><span class="pre">body</span></code> attribute. This JSON can then be used to render a template if
+provided.</p>
+<p>Output from command:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">INSTANCE_ID  INSTANCE_TYPE</span>
+<span class="go">COGCMD_INFO: 2 instances returned</span>
+<span class="go">i-1984f3     t2.micro</span>
+<span class="go">i-2a7b11     t2.small</span>
+<span class="go">COG_TEMPLATE: monospace</span>
+</pre></div>
+</div>
+<p>Relay logs:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">INFO[2016-12-06T11:10:14-05:00] (P: 2b113f571dc14419870cffe5d5064e69 C: ec2:instance-list) 2 instances returned</span>
+</pre></div>
+</div>
+<p>JSON response passed to the monospace template:</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;body&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;INSTANCE_ID  INSTANCE_TYPE&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;i-1984f3     t2.micro&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;i-2a7b11     t2.small&quot;</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tags">
+<h2>26.2. Tags<a class="headerlink" href="#tags" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">COGCMD_ACTION</span></code></dt>
+<dd>Currently only used to abort a command by printing
+<code class="docutils literal"><span class="pre">COGCMD_ACTION:</span> <span class="pre">abort</span></code>. Aborting a command is different from
+returning a non-zero exit code. When a command is aborted, the
+pipeline will stop executing and anything printed to stdout will be
+returned verbatim as a response in chat. The error template will not
+be rendered. This is mostly useful for providing concise error
+messages, such as validation errors, while non-zero exit codes are
+better suited for unexpected error conditions.</dd>
+<dt><code class="docutils literal"><span class="pre">COG_TEMPLATE</span></code></dt>
+<dd>Renders the response with the template provided. For example, if
+your bundle includes a template named &#8220;instance-list&#8221; you would
+output <code class="docutils literal"><span class="pre">COG_TEMPLATE:</span>
+<span class="pre">instance-list</span></code> before outputting your response. If not used with
+JSON output expect the raw text output from your command to be
+available in the <code class="docutils literal"><span class="pre">$body</span></code> attribute of the first item of
+<code class="docutils literal"><span class="pre">$results</span></code> in the template.</dd>
+<dt><code class="docutils literal"><span class="pre">JSON</span></code></dt>
+<dd>Parses the following response as JSON. Must be printed on a new
+line, by itself, directly before your command’s output. If not
+provided all non-tag output is assumed to be raw text. Anything
+output after this tag will be parsed as JSON, so you must not
+include any other tags after this one.</dd>
+<dt><code class="docutils literal"><span class="pre">COGCMD_DEBUG</span></code></dt>
+<dd>Prints a log message to Relay with the log level set to DEBUG.</dd>
+<dt><code class="docutils literal"><span class="pre">COGCMD_INFO</span></code></dt>
+<dd>Prints a log message to Relay with the log level set to INFO.</dd>
+<dt><code class="docutils literal"><span class="pre">COGCMD_WARN</span></code></dt>
+<dd>Prints a log message to Relay with the log level set to WARN.</dd>
+<dt><code class="docutils literal"><span class="pre">COGCMD_ERR</span></code>; <code class="docutils literal"><span class="pre">COGCMD_ERROR</span></code></dt>
+<dd>Prints a log message to Relay with the log level set to ERROR.</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="greenbar_tags.html" class="btn btn-neutral float-right" title="27. Greenbar Tags" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="relay_configuration.html" class="btn btn-neutral" title="25. Relay Configuration" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 Operable, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61670076-4', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  
+
+
+</body>
+</html>

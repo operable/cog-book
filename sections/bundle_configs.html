@@ -1,0 +1,674 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>10. Bundle Configs &mdash; Cog Book 1.0.0 documentation</title>
+  
+
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Cog Book 1.0.0 documentation" href="../index.html"/>
+        <link rel="next" title="11. Command Environment Variables" href="command_environment_variables.html"/>
+        <link rel="prev" title="9. Command Execution Rules" href="command_execution_rules.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cog Book
+          
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+          </a>
+
+          
+            <img src="../_static/cog_peek.svg" class="logo" />
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bootstrapping_cog.html">2. Bootstrapping Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_and_managing_relays.html">3. Installing and Managing Relays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands_and_bundles.html">4. Commands and Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="managing_bundles.html">5. Managing Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_a_command_bundle.html">6. Writing A Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_password_resets.html">7. Configuring password resets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions_and_rules.html">8. Permissions and Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_execution_rules.html">9. Command Execution Rules</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">10. Bundle Configs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#simple-bundle-configs">10.1. Simple bundle configs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#commands">10.2. Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#other-fields">10.3. Other fields</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#permissions">10.3.1. Permissions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#standard-bundle-configs">10.4. Standard bundle configs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#documentation-fields">10.4.1. Documentation fields</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bundle">10.4.1.1. Bundle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#command">10.4.1.2. Command</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#conclusion">10.5. Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="command_environment_variables.html">11. Command Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic_command_configuration.html">12. Dynamic Command Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="returning_data_from_cog.html">13. Returning data from Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services.html">14. Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">15. Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_your_first_command_bundle.html">16. Installing Your First Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing_a_trigger.html">17. Developing a Trigger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cog_architecture.html">18. Cog Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_pipelines.html">19. Command pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="redirecting_pipeline_output.html">20. Redirecting Pipeline Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">21. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_management.html">22. User management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributor_license_agreement.html">23. Contributor License Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/cog_server_configuration.html">24. Cog Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/relay_configuration.html">25. Relay Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/command_output_tags.html">26. Command Output Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/greenbar_tags.html">27. Greenbar Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/audit_log_events.html">28. Audit Log Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/glossary.html">29. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/designing_for_chatops.html">30. Designing ChatOps Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/chat_platforms.html">31. Notes on Chat Platform Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Cog Book</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>10. Bundle Configs</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/operable/cog-book/blob/HEAD/cog-book/source/sections/bundle_configs.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="bundle-configs">
+<h1>10. Bundle Configs<a class="headerlink" href="#bundle-configs" title="Permalink to this headline">¶</a></h1>
+<p>Cog executes commands to accomplish different tasks. Commands are
+organized into bundles. Bundles not only provide a way to organize
+similar commands, they also keep everything, like permissions and rules,
+namespaced. Every bundle includes a bundle config. Bundle configs are
+written in YAML and provide all of the information necessary to install
+and execute the commands included in the bundle.</p>
+<p>Cog provides two types of bundles, simple and standard. Simple bundles
+point to an executable already installed on the machine running the
+relay you want to execute the command on. Simple bundles are great for
+simple common commands. Standard bundles point to a repository on Docker
+hub that contains the execution code for your bundle. To learn more
+about packaging and building bundles for Cog, check out <a class="reference internal" href="writing_a_command_bundle.html"><span class="doc">Writing A Command Bundle</span></a>.</p>
+<div class="section" id="simple-bundle-configs">
+<span id="simple-bundle-target"></span><h2>10.1. Simple bundle configs<a class="headerlink" href="#simple-bundle-configs" title="Permalink to this headline">¶</a></h2>
+<p>To start, lets discuss configs for simple bundles. Simple bundle configs
+look like this:</p>
+<p><strong>simple_config.yaml.</strong></p>
+<div class="code YAML highlight-default"><div class="highlight"><pre><span></span><span class="o">---</span>
+<span class="n">cog_bundle_version</span><span class="p">:</span> <span class="mi">4</span>
+
+<span class="n">name</span><span class="p">:</span> <span class="n">my_bundle</span>
+<span class="n">description</span><span class="p">:</span> <span class="s2">&quot;Does bundle things&quot;</span>
+<span class="n">version</span><span class="p">:</span> <span class="s2">&quot;0.1&quot;</span>
+<span class="n">commands</span><span class="p">:</span>
+  <span class="n">date</span><span class="p">:</span>
+    <span class="n">executable</span><span class="p">:</span> <span class="s2">&quot;/usr/local/bin/mydate.exs&quot;</span>
+    <span class="n">description</span><span class="p">:</span> <span class="s2">&quot;Displays the current date and time&quot;</span>
+    <span class="n">rules</span><span class="p">:</span>
+      <span class="o">-</span> <span class="s2">&quot;allow&quot;</span>
+<span class="n">templates</span><span class="p">:</span>
+  <span class="n">date</span><span class="p">:</span>
+    <span class="n">slack</span><span class="p">:</span> <span class="s2">&quot;`{{date}}`&quot;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">name</span></code>, <code class="docutils literal"><span class="pre">description</span></code>, <code class="docutils literal"><span class="pre">version</span></code>, <code class="docutils literal"><span class="pre">cog_bundle_version</span></code> and
+<code class="docutils literal"><span class="pre">commands</span></code> are all required fields. Most of these are pretty self
+explanatory but let’s go over them anyway.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">name</span></code> is simply the name of your bundle. All commands will be
+installed within a namespace defined by this field. So command names
+that collide with command names in other bundles will be invoked by
+using the fully qualified name. In this case the date command’s fully
+qualified name would be <code class="docutils literal"><span class="pre">my_bundle:date</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">description</span></code> is a short, one-line description for your bundle.
+This will be printed along with a list of all installed bundles when
+a user runs the help command.</li>
+<li><code class="docutils literal"><span class="pre">version</span></code> is the semver version number of your bundle. Currently
+Cog provides no internal mechanism for dealing with versions. If you
+want to install a new version of bundle then you first need to
+uninstall the old one. We require version because at some point we
+will provide a mechanism to upgrade bundles.</li>
+<li><code class="docutils literal"><span class="pre">cog_bundle_version</span></code> is the version of Cog’s bundle system that
+your bundle was built for. The current bundle version is <code class="docutils literal"><span class="pre">4</span></code>, which
+is used through out the rest of this document.</li>
+<li><code class="docutils literal"><span class="pre">commands</span></code> are a hash of commands keyed by the command name. Here
+the command name is &#8220;date&#8221;. For simple bundles you are only required
+to provide the <code class="docutils literal"><span class="pre">executable</span></code> and the <code class="docutils literal"><span class="pre">rules</span></code> fields. We’ll detail
+more about the <code class="docutils literal"><span class="pre">commands</span></code> section a little later.</li>
+</ul>
+<p>In addition to the required fields there is also one optional in this
+example, <code class="docutils literal"><span class="pre">templates</span></code>. <code class="docutils literal"><span class="pre">templates</span></code> are a hash of templates keyed my
+name. Template names should correspond to command names. In this case
+the template is named &#8220;date&#8221; just like the command &#8220;date&#8221;. Templates
+vary from adapter to adapter so under the name of the template we key
+the template strings by adapter. Currently we only support two adapters
+for the purpose of templates; &#8220;slack&#8221; and &#8220;hipchat&#8221;.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">cogctl, Cog&#8217;s command line tool, provides some useful functionality
+for templates. You can just save templates as individual files and
+cogctl will build out the templates section for you before uploading
+the config.</p>
+</div>
+</div>
+<div class="section" id="commands">
+<h2>10.2. Commands<a class="headerlink" href="#commands" title="Permalink to this headline">¶</a></h2>
+<p>Commands are probably the most complex component of the bundle config so
+I thought I would give it it’s own section.</p>
+<p>As an example let’s look at an excerpt from the mist config.</p>
+<p><strong>mist_config.yaml (excerpt).</strong></p>
+<div class="code YAML highlight-default"><div class="highlight"><pre><span></span><span class="o">...</span>
+
+<span class="n">commands</span><span class="p">:</span>
+  <span class="n">ec2</span><span class="o">-</span><span class="n">find</span><span class="p">:</span>
+    <span class="n">executable</span><span class="p">:</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">ec2_find</span>
+    <span class="n">description</span><span class="p">:</span> <span class="n">Finds</span> <span class="n">an</span> <span class="n">ec2</span> <span class="n">instance</span>
+    <span class="n">options</span><span class="p">:</span>
+      <span class="n">region</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">true</span>
+      <span class="n">tags</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">false</span>
+      <span class="n">ami</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">false</span>
+      <span class="n">state</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">false</span>
+      <span class="k">return</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">false</span>
+        <span class="n">description</span><span class="p">:</span> <span class="n">Valid</span> <span class="n">values</span> <span class="n">are</span> <span class="nb">id</span><span class="p">,</span> <span class="n">pubdns</span><span class="p">,</span> <span class="n">privdns</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">keyname</span><span class="p">,</span> <span class="n">ami</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">arch</span><span class="p">,</span> <span class="n">vpc</span><span class="p">,</span> <span class="n">pubip</span><span class="p">,</span> <span class="n">privip</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">tags</span>
+    <span class="n">rules</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">must</span> <span class="n">have</span> <span class="n">mist</span><span class="p">:</span><span class="n">view</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>Here you will notice the command name &#8220;ec2-find&#8221; and nested under it
+several fields. Let’s talk about them one at a time.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">executable</span></code> is probably the easiest but is arguably the most
+important field. It’s also the only required field in a command hash.
+<code class="docutils literal"><span class="pre">executable</span></code> simple points to the command script or binary that is
+to be run.</li>
+<li><code class="docutils literal"><span class="pre">description</span></code> is a short, one-line description for the command.
+This is the info that will appear along with a list of commands when
+a user runs the help command for a specific bundle.</li>
+<li><code class="docutils literal"><span class="pre">options</span></code> is a hash of arguments that the command accepts. By
+default Cog you can pass options to a command using the option name,
+<code class="docutils literal"><span class="pre">--region</span></code> as an example here. Options have a type, currently we
+support: int, float, bool, string, incr and list. They also have an
+optional <code class="docutils literal"><span class="pre">short_flag</span></code> and a <code class="docutils literal"><span class="pre">description</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">rules</span></code> is required and is a list of strings that define what
+permissions are required to run the command. Check out <a class="reference internal" href="permissions_and_rules.html"><span class="doc">Permissions and Rules</span></a> to learn more
+about what rules look like. A couple things to note about rules. When
+specifying rules in configs you can drop the &#8220;when command is …&#8221;
+portion like we did in the previous mist config. Cog has enough
+context to fill that bit in for you. There is also a special rule
+that opens the command up for execution by anyone, &#8220;when command is
+bundle:command allow&#8221;. So when combined with the previous note you
+only need to specify the &#8220;allow&#8221; bit in configs.</li>
+</ul>
+</div>
+<div class="section" id="other-fields">
+<h2>10.3. Other fields<a class="headerlink" href="#other-fields" title="Permalink to this headline">¶</a></h2>
+<p>To get a simple command up and running the simple config is pretty much
+all that you need. But for more advanced features there are a number of
+additional fields that you might want to consider.</p>
+<div class="section" id="permissions">
+<h3>10.3.1. Permissions<a class="headerlink" href="#permissions" title="Permalink to this headline">¶</a></h3>
+<p>All commands require permissions to run. Permissions are included in the
+bundle config as a list of strings at the top level. Here is another
+excerpt of the mist config as an example.</p>
+<p><strong>mist_config.yaml (excerpt).</strong></p>
+<div class="code YAML highlight-default"><div class="highlight"><pre><span></span><span class="o">---</span>
+<span class="n">cog_bundle_version</span><span class="p">:</span> <span class="mi">4</span>
+
+<span class="n">name</span><span class="p">:</span> <span class="n">mist</span>
+<span class="n">description</span><span class="p">:</span> <span class="n">Manage</span> <span class="n">EC2</span> <span class="n">instances</span> <span class="ow">and</span> <span class="n">related</span> <span class="n">services</span>
+<span class="n">version</span><span class="p">:</span> <span class="mf">0.4</span><span class="o">.</span><span class="mi">0</span>
+<span class="n">permissions</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">mist</span><span class="p">:</span><span class="n">view</span>
+<span class="o">-</span> <span class="n">mist</span><span class="p">:</span><span class="n">change</span><span class="o">-</span><span class="n">state</span>
+<span class="o">-</span> <span class="n">mist</span><span class="p">:</span><span class="n">destroy</span>
+<span class="o">-</span> <span class="n">mist</span><span class="p">:</span><span class="n">create</span>
+<span class="o">-</span> <span class="n">mist</span><span class="p">:</span><span class="n">manage</span><span class="o">-</span><span class="n">tags</span>
+<span class="o">-</span> <span class="n">mist</span><span class="p">:</span><span class="n">change</span><span class="o">-</span><span class="n">acl</span>
+
+<span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="standard-bundle-configs">
+<span id="standard-bundle-target"></span><h2>10.4. Standard bundle configs<a class="headerlink" href="#standard-bundle-configs" title="Permalink to this headline">¶</a></h2>
+<p>For the most part standard bundle configs follow the same rules as
+simple bundle configs. Really the only difference is the addition of the
+<code class="docutils literal"><span class="pre">docker</span></code> field. Standard bundles are deployed from docker hub as
+docker images. The <code class="docutils literal"><span class="pre">docker</span></code> field just tells Cog where to go to get
+the image.</p>
+<p>Once again as an example, here is an excerpt from the mist config.</p>
+<p><strong>mist_config.yaml (excerpt).</strong></p>
+<div class="code YAML highlight-default"><div class="highlight"><pre><span></span><span class="o">...</span>
+
+<span class="n">docker</span><span class="p">:</span>
+  <span class="n">image</span><span class="p">:</span> <span class="n">cogcmd</span><span class="o">/</span><span class="n">mist</span>
+  <span class="n">tag</span><span class="p">:</span> <span class="s2">&quot;0.4&quot;</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>It’s fairly self explanatory. There are only two fields, <code class="docutils literal"><span class="pre">image</span></code> and
+<code class="docutils literal"><span class="pre">tag</span></code>. <code class="docutils literal"><span class="pre">image</span></code> refers to the image on docker hub and <code class="docutils literal"><span class="pre">tag</span></code> just
+points to a specific tag. If you don’t pass <code class="docutils literal"><span class="pre">tag</span></code> Cog will grab the
+most recent version of the image.</p>
+<div class="section" id="documentation-fields">
+<h3>10.4.1. Documentation fields<a class="headerlink" href="#documentation-fields" title="Permalink to this headline">¶</a></h3>
+<p>There are a number of fields dedicated to rendering manpage-style
+documentation rendered by the <code class="docutils literal"><span class="pre">help</span></code> command both for the bundle and
+the command.</p>
+<div class="section" id="bundle">
+<h4>10.4.1.1. Bundle<a class="headerlink" href="#bundle" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">long_description</span></code> is a separate section for a longer form
+description, which can include things like what configuration is
+required, how commands should be used, and more details about the
+underlying implementation.</li>
+<li><code class="docutils literal"><span class="pre">author</span></code> is where the bundle author can leave their name and email
+address if a user needs their contact information.</li>
+<li><code class="docutils literal"><span class="pre">homepage</span></code> is a URL for the bundle, typically a github repo.</li>
+<li><code class="docutils literal"><span class="pre">config</span></code> is used to document your bundle configuration settings. It
+contains two sections, notes and env.<ul>
+<li><code class="docutils literal"><span class="pre">notes</span></code> is used to provide any additional configuration
+information that might be useful to users.</li>
+<li><code class="docutils literal"><span class="pre">env</span></code> is a list of objects containing two keys; <code class="docutils literal"><span class="pre">var</span></code>, for the
+name of your environment variable and <code class="docutils literal"><span class="pre">description</span></code>, for an
+optional description.</li>
+</ul>
+</li>
+</ul>
+<p><strong>aws_cfn_config.yaml (excerpt).</strong></p>
+<div class="code YAML highlight-default"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="n">config</span><span class="p">:</span>
+  <span class="n">notes</span><span class="p">:</span>
+    <span class="n">The</span> <span class="n">cfn</span> <span class="n">bundle</span> <span class="n">makes</span> <span class="n">use</span> <span class="n">of</span> <span class="n">CloudFormation</span> <span class="n">stack</span> <span class="n">templates</span> <span class="ow">and</span> <span class="n">stack</span> <span class="n">policies</span> <span class="n">that</span> <span class="n">are</span> <span class="n">defined</span> <span class="ow">in</span> <span class="n">JSON</span> <span class="n">documents</span> <span class="ow">and</span> <span class="n">stored</span> <span class="ow">in</span> <span class="n">pre</span><span class="o">-</span><span class="n">defined</span> <span class="n">S3</span> <span class="n">locations</span><span class="o">.</span> <span class="n">These</span> <span class="n">locations</span> <span class="n">are</span> <span class="n">defined</span> <span class="k">with</span> <span class="n">the</span> <span class="s1">&#39;CFN_TEMPLATE_URL&#39;</span> <span class="ow">and</span> <span class="s1">&#39;CFN_POLICY_URL&#39;</span> <span class="n">configuration</span> <span class="n">variables</span><span class="o">.</span>
+  <span class="n">env</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">var</span><span class="p">:</span> <span class="n">AWS_REGION</span>
+    <span class="o">-</span> <span class="n">var</span><span class="p">:</span> <span class="n">AWS_ACCESS_KEY_ID</span>
+    <span class="o">-</span> <span class="n">var</span><span class="p">:</span> <span class="n">AWS_SECRET_ACCESS_KEY</span>
+    <span class="o">-</span> <span class="n">var</span><span class="p">:</span> <span class="n">AWS_STS_ROLE_ARN</span>
+      <span class="n">description</span><span class="p">:</span> <span class="n">STS</span> <span class="n">role</span> <span class="n">ARN</span> <span class="n">that</span> <span class="n">should</span> <span class="n">be</span> <span class="n">assumed</span><span class="o">.</span> <span class="n">Defined</span> <span class="k">as</span> <span class="s1">&#39;arn:aws:iam::&lt;account_number&gt;:role/&lt;role_name&gt;&#39;</span><span class="o">.</span>
+    <span class="o">-</span> <span class="n">var</span><span class="p">:</span> <span class="n">CFN_TEMPLATE_URL</span>
+      <span class="n">description</span><span class="p">:</span> <span class="n">S3</span> <span class="n">Location</span> <span class="n">of</span> <span class="n">your</span> <span class="n">stack</span> <span class="n">templates</span><span class="o">.</span> <span class="n">Defined</span> <span class="k">as</span> <span class="s1">&#39;s3://&lt;bucket&gt;/&lt;path&gt;&#39;</span><span class="o">.</span>
+    <span class="o">-</span> <span class="n">var</span><span class="p">:</span> <span class="n">CFN_POLICY_URL</span>
+      <span class="n">description</span><span class="p">:</span> <span class="n">S3</span> <span class="n">Location</span> <span class="n">of</span> <span class="n">your</span> <span class="n">stack</span> <span class="n">policies</span><span class="o">.</span> <span class="n">Defined</span> <span class="k">as</span> <span class="s1">&#39;s3://&lt;bucket&gt;/&lt;path&gt;&#39;</span><span class="o">.</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="command">
+<h4>10.4.1.2. Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">long_description</span></code> is a long-form description used to explain
+details of a command that don’t fit into other sections like an
+explanation of required arguments or about the structure of the
+output.</li>
+<li><code class="docutils literal"><span class="pre">examples</span></code> is how a user will run the command and what output they
+should expect.</li>
+<li><code class="docutils literal"><span class="pre">notes</span></code> is a free-form section at the bottom of the command above
+<code class="docutils literal"><span class="pre">author</span></code> and <code class="docutils literal"><span class="pre">homepage</span></code></li>
+<li><code class="docutils literal"><span class="pre">arguments</span></code> is a short string appended to the generated synopsis
+for describing named or required arguments or subcommands.</li>
+<li><code class="docutils literal"><span class="pre">subcommands</span></code> is an object where the keys are the subcommand
+arguments and the values are a short one-line description of each
+subcommand.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>10.5. Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>And that, as they say, is that. There is no more; you pretty much know
+all there is to know about what goes into a config. But for the sake of
+completeness and to help you tie everything together, here is the mist
+config in it’s entirety.</p>
+<p><strong>mist_config.yaml.</strong></p>
+<div class="code YAML highlight-default"><div class="highlight"><pre><span></span><span class="o">---</span>
+<span class="n">cog_bundle_version</span><span class="p">:</span> <span class="mi">4</span>
+
+<span class="n">name</span><span class="p">:</span> <span class="n">mist</span>
+<span class="n">description</span><span class="p">:</span> <span class="n">Manage</span> <span class="n">EC2</span> <span class="n">instances</span> <span class="ow">and</span> <span class="n">related</span> <span class="n">services</span>
+<span class="n">version</span><span class="p">:</span> <span class="mf">0.4</span><span class="o">.</span><span class="mi">0</span>
+<span class="n">permissions</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">mist</span><span class="p">:</span><span class="n">view</span>
+<span class="o">-</span> <span class="n">mist</span><span class="p">:</span><span class="n">change</span><span class="o">-</span><span class="n">state</span>
+<span class="o">-</span> <span class="n">mist</span><span class="p">:</span><span class="n">destroy</span>
+<span class="o">-</span> <span class="n">mist</span><span class="p">:</span><span class="n">create</span>
+<span class="o">-</span> <span class="n">mist</span><span class="p">:</span><span class="n">manage</span><span class="o">-</span><span class="n">tags</span>
+<span class="o">-</span> <span class="n">mist</span><span class="p">:</span><span class="n">change</span><span class="o">-</span><span class="n">acl</span>
+<span class="n">docker</span><span class="p">:</span>
+  <span class="n">image</span><span class="p">:</span> <span class="n">cogcmd</span><span class="o">/</span><span class="n">mist</span>
+  <span class="n">tag</span><span class="p">:</span> <span class="s2">&quot;0.4&quot;</span>
+<span class="n">commands</span><span class="p">:</span>
+  <span class="n">ec2</span><span class="o">-</span><span class="n">find</span><span class="p">:</span>
+    <span class="n">executable</span><span class="p">:</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">ec2_find</span>
+    <span class="n">options</span><span class="p">:</span>
+      <span class="n">region</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">true</span>
+      <span class="n">tags</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">false</span>
+      <span class="n">ami</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">false</span>
+      <span class="n">state</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">false</span>
+      <span class="k">return</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">false</span>
+    <span class="n">rules</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">must</span> <span class="n">have</span> <span class="n">mist</span><span class="p">:</span><span class="n">view</span>
+  <span class="n">ec2</span><span class="o">-</span><span class="n">destroy</span><span class="p">:</span>
+    <span class="n">executable</span><span class="p">:</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">ec2_destroy</span>
+    <span class="n">options</span><span class="p">:</span>
+      <span class="n">region</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">true</span>
+    <span class="n">rules</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">must</span> <span class="n">have</span> <span class="n">mist</span><span class="p">:</span><span class="n">destroy</span>
+  <span class="n">ec2</span><span class="o">-</span><span class="n">state</span><span class="p">:</span>
+    <span class="n">executable</span><span class="p">:</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">ec2_state</span>
+    <span class="n">options</span><span class="p">:</span>
+      <span class="n">region</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">true</span>
+    <span class="n">rules</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">must</span> <span class="n">have</span> <span class="n">mist</span><span class="p">:</span><span class="n">change</span><span class="o">-</span><span class="n">state</span>
+  <span class="n">vpc</span><span class="o">-</span><span class="nb">list</span><span class="p">:</span>
+    <span class="n">executable</span><span class="p">:</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">ec2_vpcs</span>
+    <span class="n">options</span><span class="p">:</span>
+      <span class="n">region</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">true</span>
+      <span class="n">subnets</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="nb">bool</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">false</span>
+    <span class="n">rules</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">must</span> <span class="n">have</span> <span class="n">mist</span><span class="p">:</span><span class="n">view</span>
+  <span class="n">keypairs</span><span class="o">-</span><span class="nb">list</span><span class="p">:</span>
+    <span class="n">executable</span><span class="p">:</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">ec2_keypairs</span>
+    <span class="n">options</span><span class="p">:</span>
+      <span class="n">region</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">true</span>
+    <span class="n">rules</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">must</span> <span class="n">have</span> <span class="n">mist</span><span class="p">:</span><span class="n">view</span>
+  <span class="n">ec2</span><span class="o">-</span><span class="n">create</span><span class="p">:</span>
+    <span class="n">executable</span><span class="p">:</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">ec2_create</span>
+    <span class="n">options</span><span class="p">:</span>
+      <span class="n">region</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">true</span>
+      <span class="nb">type</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">true</span>
+      <span class="n">ami</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">true</span>
+      <span class="n">keypair</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">true</span>
+      <span class="n">az</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">false</span>
+      <span class="n">vpc</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">false</span>
+      <span class="n">tags</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">false</span>
+      <span class="n">user</span><span class="o">-</span><span class="n">data</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">false</span>
+      <span class="n">count</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="nb">int</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">false</span>
+    <span class="n">rules</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">must</span> <span class="n">have</span> <span class="n">mist</span><span class="p">:</span><span class="n">create</span>
+  <span class="n">ec2</span><span class="o">-</span><span class="n">tags</span><span class="p">:</span>
+    <span class="n">executable</span><span class="p">:</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">ec2_tags</span>
+    <span class="n">options</span><span class="p">:</span>
+      <span class="n">region</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">true</span>
+      <span class="n">tags</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">true</span>
+    <span class="n">rules</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">must</span> <span class="n">have</span> <span class="n">mist</span><span class="p">:</span><span class="n">manage</span><span class="o">-</span><span class="n">tags</span>
+  <span class="n">s3</span><span class="o">-</span><span class="n">buckets</span><span class="p">:</span>
+    <span class="n">executable</span><span class="p">:</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">s3_buckets</span>
+    <span class="n">rules</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">must</span> <span class="n">have</span> <span class="n">mist</span><span class="p">:</span><span class="n">view</span>
+      <span class="o">-</span> <span class="k">with</span> <span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;list&#39;</span> <span class="n">must</span> <span class="n">have</span> <span class="n">mist</span><span class="p">:</span><span class="n">view</span>
+      <span class="o">-</span> <span class="k">with</span> <span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;delete&#39;</span> <span class="ow">or</span> <span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;rm&#39;</span><span class="p">)</span> <span class="n">must</span> <span class="n">have</span> <span class="n">mist</span><span class="p">:</span><span class="n">destroy</span>
+  <span class="n">s3</span><span class="o">-</span><span class="n">bucket</span><span class="o">-</span><span class="n">files</span><span class="p">:</span>
+    <span class="n">executable</span><span class="p">:</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">s3_bucket_files</span>
+    <span class="n">options</span><span class="p">:</span>
+      <span class="n">bucket</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">false</span>
+      <span class="n">file</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">false</span>
+      <span class="n">policy</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">string</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">false</span>
+      <span class="n">force</span><span class="p">:</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="nb">bool</span>
+        <span class="n">required</span><span class="p">:</span> <span class="n">false</span>
+    <span class="n">rules</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">must</span> <span class="n">have</span> <span class="n">mist</span><span class="p">:</span><span class="n">view</span>
+      <span class="o">-</span> <span class="k">with</span> <span class="n">option</span><span class="p">[</span><span class="nb">set</span><span class="o">-</span><span class="n">policy</span><span class="p">]</span> <span class="o">==</span> <span class="o">/.*/</span> <span class="n">must</span> <span class="n">have</span> <span class="n">mist</span><span class="p">:</span><span class="n">change</span><span class="o">-</span><span class="n">acl</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="command_environment_variables.html" class="btn btn-neutral float-right" title="11. Command Environment Variables" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="command_execution_rules.html" class="btn btn-neutral" title="9. Command Execution Rules" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 Operable, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61670076-4', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  
+
+
+</body>
+</html>

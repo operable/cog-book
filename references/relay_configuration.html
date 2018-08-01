@@ -1,0 +1,478 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>25. Relay Configuration &mdash; Cog Book 1.0.0 documentation</title>
+  
+
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Cog Book 1.0.0 documentation" href="../index.html"/>
+        <link rel="next" title="26. Command Output Tags" href="command_output_tags.html"/>
+        <link rel="prev" title="24. Cog Server Configuration" href="cog_server_configuration.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cog Book
+          
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+          </a>
+
+          
+            <img src="../_static/cog_peek.svg" class="logo" />
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../sections/getting_started.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/bootstrapping_cog.html">2. Bootstrapping Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/installing_and_managing_relays.html">3. Installing and Managing Relays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/commands_and_bundles.html">4. Commands and Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/managing_bundles.html">5. Managing Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/writing_a_command_bundle.html">6. Writing A Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/configuring_password_resets.html">7. Configuring password resets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/permissions_and_rules.html">8. Permissions and Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/command_execution_rules.html">9. Command Execution Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/bundle_configs.html">10. Bundle Configs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/command_environment_variables.html">11. Command Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/dynamic_command_configuration.html">12. Dynamic Command Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/returning_data_from_cog.html">13. Returning data from Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/services.html">14. Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/templates.html">15. Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/installing_your_first_command_bundle.html">16. Installing Your First Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/developing_a_trigger.html">17. Developing a Trigger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/cog_architecture.html">18. Cog Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/command_pipelines.html">19. Command pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/redirecting_pipeline_output.html">20. Redirecting Pipeline Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/triggers.html">21. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/user_management.html">22. User management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/contributor_license_agreement.html">23. Contributor License Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cog_server_configuration.html">24. Cog Server Configuration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">25. Relay Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_output_tags.html">26. Command Output Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="greenbar_tags.html">27. Greenbar Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="audit_log_events.html">28. Audit Log Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/glossary.html">29. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/designing_for_chatops.html">30. Designing ChatOps Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/chat_platforms.html">31. Notes on Chat Platform Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Cog Book</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>25. Relay Configuration</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/operable/cog-book/blob/HEAD/cog-book/source/references/relay_configuration.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="relay-configuration">
+<h1>25. Relay Configuration<a class="headerlink" href="#relay-configuration" title="Permalink to this headline">¶</a></h1>
+<p>Relay can be configured using a configuration file. As with Cog, most of
+Relay’s configuration entries can be controlled via environment
+variables. For each key in the configuration file, the corresponding
+environment variable is the upper-cased key, prepended with <code class="docutils literal"><span class="pre">RELAY_</span></code>.
+Thus, the key <code class="docutils literal"><span class="pre">max_concurrent</span></code> can be overridden using the environment
+variable <code class="docutils literal"><span class="pre">RELAY_MAX_CONCURRENT</span></code>, and so on.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The sole exception to this is the Relay &#8220;execution env&#8221; setting. If
+used, this <em>must</em> be set in the configuration file; there is no
+corresponding environment variable.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">An annotated example of a complete configuration file is kept in
+Relay’s GitHub repo
+<a class="reference external" href="https://github.com/operable/go-relay/blob/master/example_relay.conf">here</a>.</p>
+</div>
+<dl class="docutils" id="docker-api-version">
+<dt><code class="docutils literal"><span class="pre">DOCKER_API_VERSION</span></code></dt>
+<dd><p class="first">Controls what version of the Docker API should be used when
+interacting with Docker.</p>
+<p class="last">Defaults to 1.23</p>
+</dd>
+</dl>
+<dl class="docutils" id="relay-cog-enable-ssl">
+<dt><code class="docutils literal"><span class="pre">RELAY_COG_ENABLE_SSL</span></code></dt>
+<dd><p class="first">Encrypts MQTT traffic between Relay and Cog.</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">false</span></code>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="relay-cog-host">
+<dt><code class="docutils literal"><span class="pre">RELAY_COG_HOST</span></code></dt>
+<dd><p class="first">The host name or IP address of the Cog server.</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">127.0.0.1</span></code>. See also <a class="reference internal" href="cog_server_configuration.html#cog-mqtt-host"><span class="std std-ref">[COG_MQTT_HOST]</span></a>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="relay-cog-port">
+<dt><code class="docutils literal"><span class="pre">RELAY_COG_PORT</span></code></dt>
+<dd><p class="first">The MQTT listen port of the Cog server.</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">1883</span></code>. See also <a class="reference internal" href="cog_server_configuration.html#cog-mqtt-port"><span class="std std-ref">[COG_MQTT_PORT]</span></a>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="relay-cog-refresh-interval">
+<dt><code class="docutils literal"><span class="pre">RELAY_COG_REFRESH_INTERVAL</span></code></dt>
+<dd><p class="first">Controls how often Relay refreshes its list of installed bundles and
+Docker images.</p>
+<p>Valid time units are <code class="docutils literal"><span class="pre">s</span></code> (seconds), <code class="docutils literal"><span class="pre">m</span></code> (minutes), and <code class="docutils literal"><span class="pre">h</span></code>
+(hours).</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">15m</span></code>. Consider reducing this interval to <code class="docutils literal"><span class="pre">1m</span></code> or
+less when frequently updating bundles.</p>
+</dd>
+</dl>
+<dl class="docutils" id="relay-cog-ssl-cert-path">
+<dt><code class="docutils literal"><span class="pre">RELAY_COG_SSL_CERT_PATH</span></code></dt>
+<dd><p class="first">Path to the Cog server’s SSL certificate.</p>
+<p class="last">Enables certificate verification if set.</p>
+</dd>
+</dl>
+<dl class="docutils" id="relay-cog-token">
+<dt><code class="docutils literal"><span class="pre">RELAY_COG_TOKEN</span></code></dt>
+<dd><p class="first">Shared secret between Cog and a given Relay.</p>
+<p class="last">Corresponds to the <code class="docutils literal"><span class="pre">TOKEN</span></code> argument used when creating a Relay via
+<code class="docutils literal"><span class="pre">cogctl</span></code>.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is a required setting.</p>
+</div>
+<dl class="docutils" id="relay-docker-clean-interval">
+<dt><code class="docutils literal"><span class="pre">RELAY_DOCKER_CLEAN_INTERVAL</span></code></dt>
+<dd><p class="first">Controls how frequently Relay will remove unused Docker containers.</p>
+<p>Uses the same time unit notation as
+<a class="reference internal" href="#relay-cog-refresh-interval"><span class="std std-ref">[RELAY_COG_REFRESH_INTERVAL]</span></a>.</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">5m</span></code>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="relay-docker-container-memory">
+<dt><code class="docutils literal"><span class="pre">RELAY_DOCKER_CONTAINER_MEMORY</span></code></dt>
+<dd><p class="first">Controls how much memory (in megabytes) is allocated to each Docker
+container Relay uses to execute a command.</p>
+<p>Docker requires a minimum of 4MB per container.</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">16</span></code>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="relay-docker-registry-host">
+<dt><code class="docutils literal"><span class="pre">RELAY_DOCKER_REGISTRY_HOST</span></code></dt>
+<dd><p class="first">Docker image registry host name.</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">index.docker.io</span></code>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="relay-docker-registry-email">
+<dt><code class="docutils literal"><span class="pre">RELAY_DOCKER_REGISTRY_EMAIL</span></code></dt>
+<dd>Email address credential used to access an authenticating Docker
+registry.</dd>
+</dl>
+<dl class="docutils" id="relay-docker-registry-user">
+<dt><code class="docutils literal"><span class="pre">RELAY_DOCKER_REGISTRY_USER</span></code></dt>
+<dd>Username credential used to access an authenticating Docker
+registry.</dd>
+</dl>
+<dl class="docutils" id="relay-docker-registry-password">
+<dt><code class="docutils literal"><span class="pre">RELAY_DOCKER_REGISTRY_PASSWORD</span></code></dt>
+<dd>Password credential used to access an authenticating Docker
+registry.</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal"><span class="pre">RELAY_DOCKER_REGISTRY_EMAIL</span></code>, <code class="docutils literal"><span class="pre">RELAY_DOCKER_REGISTRY_USER</span></code>, and
+<code class="docutils literal"><span class="pre">RELAY_DOCKER_REGISTRY_PASSWORD</span></code> are required when using Relay
+with private Docker repositories or private registries.</p>
+</div>
+<dl class="docutils" id="relay-docker-socket-path">
+<dt><code class="docutils literal"><span class="pre">RELAY_DOCKER_SOCKET_PATH</span></code></dt>
+<dd><p class="first">Location of Docker’s Unix socket. Must begin with either <code class="docutils literal"><span class="pre">unix://</span></code>
+or <code class="docutils literal"><span class="pre">tcp://</span></code>.</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">unix:///var/run/docker.sock</span></code>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="relay-docker-use-env">
+<dt><code class="docutils literal"><span class="pre">RELAY_DOCKER_USE_ENV</span></code></dt>
+<dd>Controls whether or not Relay uses environment variables to set up
+its Docker connection. If <code class="docutils literal"><span class="pre">true</span></code>, Relay will use the environment
+variables <code class="docutils literal"><span class="pre">DOCKER_HOST</span></code>, <code class="docutils literal"><span class="pre">DOCKER_TLS_VERIFY</span></code>, and
+<code class="docutils literal"><span class="pre">DOCKER_CERT_PATH</span></code> to connect.</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is a required setting when using Relay with Docker running
+inside <a class="reference external" href="https://docs.docker.com/machine">docker-machine</a>.</p>
+</div>
+<dl class="docutils" id="relay-enabled-engines">
+<dt><code class="docutils literal"><span class="pre">RELAY_ENABLED_ENGINES</span></code></dt>
+<dd><p class="first">Comma separated list of command execution engines. Valid engine
+names are:</p>
+<ul class="last">
+<li><p class="first"><code class="docutils literal"><span class="pre">native</span></code>: Runs commands distributed as native executables
+installed directly on the Relay host.</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">docker</span></code>: Runs commands distributed as Docker container images</p>
+<p>Defaults to <code class="docutils literal"><span class="pre">native,docker</span></code>. At least one engine must be
+enabled.</p>
+</li>
+</ul>
+</dd>
+</dl>
+<dl class="docutils" id="relay-id">
+<dt><code class="docutils literal"><span class="pre">RELAY_ID</span></code></dt>
+<dd>UUID assigned to the Relay.</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is a required setting.</p>
+</div>
+<dl class="docutils" id="relay-log-json">
+<dt><code class="docutils literal"><span class="pre">RELAY_LOG_JSON</span></code></dt>
+<dd><p class="first">Controls if Relay logs in plain text or JSON.</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">false</span></code>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="relay-log-level">
+<dt><code class="docutils literal"><span class="pre">RELAY_LOG_LEVEL</span></code></dt>
+<dd><p class="first">Controls logging verbosity.</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">info</span></code>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="relay-log-path">
+<dt><code class="docutils literal"><span class="pre">RELAY_LOG_PATH</span></code></dt>
+<dd><p class="first">Controls where Relay sends its log output. Valid values are:</p>
+<ul class="last">
+<li><p class="first">Any valid file path</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">stdout</span></code> or <code class="docutils literal"><span class="pre">console</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">stderr</span></code></p>
+<p>Defaults to <code class="docutils literal"><span class="pre">console</span></code>.</p>
+</li>
+</ul>
+</dd>
+</dl>
+<dl class="docutils" id="relay-max-concurrent">
+<dt><code class="docutils literal"><span class="pre">RELAY_MAX_CONCURRENT</span></code></dt>
+<dd><p class="first">Maximum number of concurrent command invocations.</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">16</span></code>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="relay-managed-dynamic-config">
+<dt><code class="docutils literal"><span class="pre">RELAY_MANAGED_DYNAMIC_CONFIG</span></code></dt>
+<dd><p class="first">Controls whether or not Relay pulls dynamic configuration for
+installed command bundles from Cog.</p>
+<p>If set to true, Relay will retrieve dynamic configuration files from
+the Cog server, instead of relying on files placed on the Relay host
+itself. Configuration changes can be submitted to Cog via the API,
+and will be picked up by Relay when it checks in periodically. See
+<a class="reference internal" href="#relay-managed-dynamic-config-interval"><span class="std std-ref">[RELAY_MANAGED_DYNAMIC_CONFIG_INTERVAL]</span></a>.</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">true</span></code>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="relay-dynamic-config-root">
+<dt><code class="docutils literal"><span class="pre">RELAY_DYNAMIC_CONFIG_ROOT</span></code></dt>
+<dd>File path used to store dynamic bundle configuration files. A
+missing or empty value disables this feature. Nonexistent paths will
+be created on first use.</dd>
+</dl>
+<dl class="docutils" id="relay-managed-dynamic-config-interval">
+<dt><code class="docutils literal"><span class="pre">RELAY_MANAGED_DYNAMIC_CONFIG_INTERVAL</span></code></dt>
+<dd><p class="first">Controls how often Relay polls Cog for dynamic configuration
+updates.</p>
+<p>Uses the same time units as
+<a class="reference internal" href="#relay-cog-refresh-interval"><span class="std std-ref">[RELAY_COG_REFRESH_INTERVAL]</span></a>.</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">5s</span></code>.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This setting only takes effect when managed dynamic configuration is
+enabled.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="command_output_tags.html" class="btn btn-neutral float-right" title="26. Command Output Tags" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cog_server_configuration.html" class="btn btn-neutral" title="24. Cog Server Configuration" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 Operable, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61670076-4', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  
+
+
+</body>
+</html>

@@ -1,0 +1,560 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>5. Managing Bundles &mdash; Cog Book 1.0.0 documentation</title>
+  
+
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Cog Book 1.0.0 documentation" href="../index.html"/>
+        <link rel="next" title="6. Writing A Command Bundle" href="writing_a_command_bundle.html"/>
+        <link rel="prev" title="4. Commands and Bundles" href="commands_and_bundles.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cog Book
+          
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+          </a>
+
+          
+            <img src="../_static/cog_peek.svg" class="logo" />
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bootstrapping_cog.html">2. Bootstrapping Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_and_managing_relays.html">3. Installing and Managing Relays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands_and_bundles.html">4. Commands and Bundles</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Managing Bundles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">5.1. Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-bundles">5.2. Installing bundles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-config-file">5.3. The config file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#templates">5.4. Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enabling-and-disabling-bundle-versions">5.5. Enabling and Disabling Bundle Versions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#relay-groups">5.5.1. Relay Groups</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uninstalling-bundles-and-bundle-versions">5.6. Uninstalling Bundles and Bundle Versions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="writing_a_command_bundle.html">6. Writing A Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_password_resets.html">7. Configuring password resets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions_and_rules.html">8. Permissions and Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_execution_rules.html">9. Command Execution Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundle_configs.html">10. Bundle Configs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_environment_variables.html">11. Command Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic_command_configuration.html">12. Dynamic Command Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="returning_data_from_cog.html">13. Returning data from Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services.html">14. Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">15. Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_your_first_command_bundle.html">16. Installing Your First Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing_a_trigger.html">17. Developing a Trigger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cog_architecture.html">18. Cog Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_pipelines.html">19. Command pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="redirecting_pipeline_output.html">20. Redirecting Pipeline Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">21. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_management.html">22. User management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributor_license_agreement.html">23. Contributor License Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/cog_server_configuration.html">24. Cog Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/relay_configuration.html">25. Relay Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/command_output_tags.html">26. Command Output Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/greenbar_tags.html">27. Greenbar Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/audit_log_events.html">28. Audit Log Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/glossary.html">29. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/designing_for_chatops.html">30. Designing ChatOps Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/chat_platforms.html">31. Notes on Chat Platform Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Cog Book</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>5. Managing Bundles</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/operable/cog-book/blob/HEAD/cog-book/source/sections/managing_bundles.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="managing-bundles">
+<h1>5. Managing Bundles<a class="headerlink" href="#managing-bundles" title="Permalink to this headline">¶</a></h1>
+<p>This document details the commands used to manage bundles.</p>
+<p>All command bundles (with the exception of the embedded <code class="docutils literal"><span class="pre">operable</span></code>
+bundle) run under one or more
+<a class="reference external" href="https://github.com/operable/go-relay">Relay</a> processes, which can be
+on the same machine as the Cog bot or on different machines.</p>
+<p>To learn more about <a class="reference internal" href="commands_and_bundles.html"><span class="doc">bundles</span></a> or
+<a class="reference internal" href="installing_and_managing_relays.html"><span class="doc">relays</span></a> check out the corresponding
+docs.</p>
+<div class="section" id="prerequisites">
+<h2>5.1. Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>For simplicity we will be using
+<a class="reference external" href="https://github.com/operable/cogctl">cogctl</a> to demonstrate bundle
+management. Bundle management mostly involves use of the <em>bundles</em>
+subcommand. However, you aren’t explicitly required to use <code class="docutils literal"><span class="pre">cogctl</span></code> to
+manage bundles, you can just make calls to the api directly if you like,
+but it does make things a bit easier.</p>
+<p>So given that, I’m going to assume you have a working installation of
+both Cog, Relay and <code class="docutils literal"><span class="pre">cogctl</span></code>.</p>
+</div>
+<div class="section" id="installing-bundles">
+<h2>5.2. Installing bundles<a class="headerlink" href="#installing-bundles" title="Permalink to this headline">¶</a></h2>
+<p>Bundles are installed by uploading bundle configs to Cog. Cog then
+registers the bundle. Registration includes the creation of the
+permissions declared by the bundle, as well as any default rules
+specified in the bundle’s metadata.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">After installation your command will be available but it may not be
+executable by anyone yet. Before anyone can execute the new command,
+make sure their permissions are set properly. Check out
+<a class="reference internal" href="permissions_and_rules.html"><span class="doc">Permissions and Rules</span></a> to learn more.</p>
+</div>
+<p>Bundles are installed via the <code class="docutils literal"><span class="pre">bundle</span> <span class="pre">install</span></code> sub-command in cogctl.</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span>$ cogctl bundle install --help
+Usage: cogctl bundle install [OPTIONS] BUNDLE_OR_PATH [VERSION]
+
+  Install a bundle.
+
+  Bundles may be installed from either a file (i.e., the `config.yaml` file
+  of a bundle), or from Operable&#39;s Warehouse bundle registry
+  (https://warehouse.operable.io).
+
+  When installing from a file, you may either give the path to the file, as
+  in:
+
+      cogctl bundle install /path/to/my/bundle/config.yaml
+
+  or you may give the path as `-`, in which case standard input is used:
+
+      cat config.yaml | cogctl bundle install -
+
+  When installing from the bundle registry, you should instead provide the
+  name of the bundle, as well as an optional version to install. No version
+  means the latest will be installed.
+
+      cogctl bundle install cfn
+
+      cogctl bundle install cfn 0.5.13
+
+Options:
+  -e, --enable               Automatically enable a bundle after installing?
+                             [default: False]
+  -f, --force                Install even if a bundle with the same version is
+                             already installed. Applies only to bundles
+                             installed from a file, and not from the Warehouse
+                             bundle registry. Use this to shorten iteration
+                             cycles in bundle development.  [default: False]
+  -r, --relay-group TEXT     Relay group to assign the bundle to. Can be
+                             specified multiple times.
+  -t, --templates DIRECTORY  Path to templates directory. Template bodies will
+                             be inserted into the bundle configuration prior
+                             to uploading. This makes it easier to manage
+                             complex templates.
+  --help                     Show this message and exit.
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-config-file">
+<h2>5.3. The config file<a class="headerlink" href="#the-config-file" title="Permalink to this headline">¶</a></h2>
+<p>The only required argument for <code class="docutils literal"><span class="pre">cogctl</span> <span class="pre">bundle</span> <span class="pre">install</span></code> is the path to
+the bundle config file.</p>
+<p>All bundles have a config file. The file is formatted in yaml and
+contains information for installing and executing commands in your
+bundle. To learn more about config files read up on
+<a class="reference internal" href="bundle_configs.html"><span class="doc">Bundle Configs</span></a>. We won’t talk in detail about bundle configs
+in this doc, but minimally the file must contain:</p>
+<ul class="simple">
+<li><strong>name</strong> - The name of your bundle</li>
+<li><strong>version</strong> - The version of your bundle in semver format.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Version must be a string. If you drop the patch number from the
+version, yaml will interpret it as a number and the config will fail
+validation. So if you want to just use major and minor numbers, wrap
+the version in quotes. ex: &#8220;0.1&#8221;</p>
+</div>
+<ul class="simple">
+<li><strong>cog_bundle_version</strong> - The version of the config file format
+(currently we support version 3 and 4)</li>
+<li><strong>commands</strong> - A hash of commands to be included with the bundle</li>
+</ul>
+<p>A minimal bundle config might look something like this:</p>
+<div class="code YAML highlight-default"><div class="highlight"><pre><span></span><span class="o">---</span>
+<span class="n">cog_bundle_version</span><span class="p">:</span> <span class="mi">4</span>
+
+<span class="n">name</span><span class="p">:</span> <span class="n">my_bundle</span>
+<span class="n">description</span><span class="p">:</span> <span class="n">My</span> <span class="n">bundle</span>
+<span class="n">version</span><span class="p">:</span> <span class="s2">&quot;0.1&quot;</span>
+<span class="n">commands</span><span class="p">:</span>
+  <span class="n">date</span><span class="p">:</span>
+    <span class="n">executable</span><span class="p">:</span> <span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">date</span>
+    <span class="n">rules</span><span class="p">:</span>
+    <span class="o">-</span> <span class="s2">&quot;allow&quot;</span>
+</pre></div>
+</div>
+<p>The command to install the bundle would be
+<code class="docutils literal"><span class="pre">cogctl</span> <span class="pre">bundle</span> <span class="pre">install</span> <span class="pre">/path/to/my_bundle.yaml</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A bundle is disabled when it is first installed. You must enable it
+before use.</p>
+</div>
+</div>
+<div class="section" id="templates">
+<h2>5.4. Templates<a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h2>
+<p>The templates flag points to a directory containing any templates for
+your bundle.</p>
+<p>Templates are used by Cog to format command output. They are singular to
+a specific command/adapter combo. So for example; if we wanted to
+support both HipChat and Slack for our date command, we would need to
+supply two templates.</p>
+<p>When added to the config file the templates section might look something
+like this:</p>
+<div class="code YAML highlight-default"><div class="highlight"><pre><span></span>---
+...
+templates:
+  date:
+    body: |
+      ~each var=$results~
+      `~$item.date~`
+      ~end~
+...
+</pre></div>
+</div>
+<p>This works great for simple templates, but can get confusing when things
+start to get more complicated. To remedy that cogctl provides some
+helpers.</p>
+<p>If you store your templates in a directory, you&#8217;ll need to pass the
+<code class="docutils literal"><span class="pre">--templates</span></code> option; <code class="docutils literal"><span class="pre">cogctl</span></code> does not infer this by default. The
+directory should contain one directory per adapter and each adapter
+directory should contain a mustache file for each command. So for our
+date command we would have something like this:</p>
+<div class="code Bash highlight-default"><div class="highlight"><pre><span></span>$ tree templates
+templates
+└── date.greenbar
+</pre></div>
+</div>
+<p>Given a structure like this <code class="docutils literal"><span class="pre">cogctl</span></code> will automatically append all of
+the templates in the directory to your bundle config before uploading.</p>
+</div>
+<div class="section" id="enabling-and-disabling-bundle-versions">
+<h2>5.5. Enabling and Disabling Bundle Versions<a class="headerlink" href="#enabling-and-disabling-bundle-versions" title="Permalink to this headline">¶</a></h2>
+<p>When a new version of a bundle is installed it is disabled by default.
+Only one version can be enabled at a time and a version must be
+explicitly enabled before Cog will route anything to it.</p>
+<p>Enabling and disabling bundle versions is easy. Let’s say you already
+have version 1.0.0 of “my-bundle” installed:</p>
+<div class="code Bash highlight-default"><div class="highlight"><pre><span></span>$ cogctl bundle versions my-bundle
+BUNDLE     VERSION  STATUS
+my-bundle  1.0.0    Enabled
+</pre></div>
+</div>
+<p>You can install version 2.0.0 straightforwardly:</p>
+<div class="code Bash highlight-default"><div class="highlight"><pre><span></span>$ cogctl bundle install /path/to/my-bundle/v2/config.yaml
+$ cogctl bundle versions my-bundle
+BUNDLE     VERSION  STATUS
+my-bundle  1.0.0    Enabled
+my-bundle  2.0.0    Disabled
+</pre></div>
+</div>
+<p>As always, a newly-installed bundle is disabled by default. At this
+point, invoking any commands from the “my-bundle” bundle will still
+execute from version 1.0.0.</p>
+<p>Switching to the new version is as simple as:</p>
+<div class="code Bash highlight-default"><div class="highlight"><pre><span></span>$ cogctl bundle enable my-bundle 2.0.0
+$ cogctl bundle versions my-bundle
+BUNDLE     VERSION  STATUS
+my-bundle  1.0.0    Disabled
+my-bundle  2.0.0    Enabled
+</pre></div>
+</div>
+<p>Now that version 2.0.0 is enabled, the update will percolate to any
+Relays that “my-bundle” has been assigned to. From that point, any
+“my-bundle” command invocations will execute from version 2.0.0, using
+whatever access rules have been defined in that version.</p>
+<p>And if you decide you don’t like version 2.0.0 for any reason, you can
+always drop back to 1.0.0:</p>
+<div class="code Bash highlight-default"><div class="highlight"><pre><span></span>$ cogctl bundle enable my-bundle 1.0.0
+$ cogctl bundle versions my-bundle
+BUNDLE     VERSION  STATUS
+my-bundle  1.0.0    Enabled
+my-bundle  2.0.0    Disabled
+</pre></div>
+</div>
+<p>You can also enable and disable bundles through chat commands:</p>
+<div class="section" id="relay-groups">
+<h3>5.5.1. Relay Groups<a class="headerlink" href="#relay-groups" title="Permalink to this headline">¶</a></h3>
+<p>Cog manages all of your command bundles and relays. Bundles are
+associated to relays via relay-groups. When a bundle is installed and
+assigned to a relay-group, Cog pushes the command config to the
+appropriate relay or relays. When a command is invoked, Cog uses the
+relay-group to select which relay is capable of running which command.</p>
+<p>Relay groups are managed through <code class="docutils literal"><span class="pre">cogctl</span></code> with the <code class="docutils literal"><span class="pre">relay-group</span></code>
+sub-command. For more information read up on
+<a class="reference internal" href="installing_and_managing_relays.html"><span class="doc">Installing and Managing Relays</span></a>.</p>
+<p>Optionally during bundle creation you can pass the <code class="docutils literal"><span class="pre">--relay-group</span></code> option multiple times.</p>
+<p>Bundles are assigned to relays via relay groups using <code class="docutils literal"><span class="pre">cogctl</span></code>.</p>
+<div class="code Bash highlight-default"><div class="highlight"><pre><span></span>$ cogctl relay-group assign my_relay_group my_bundle
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The default refresh interval for a relay is 15 minutes (set in the
+relay configuration file - <code class="docutils literal"><span class="pre">relay.conf</span></code>). Be sure to wait for the
+specified amount time in order to see the bundle appear on the
+relays in the assigned relay group.</p>
+</div>
+</div>
+</div>
+<div class="section" id="uninstalling-bundles-and-bundle-versions">
+<h2>5.6. Uninstalling Bundles and Bundle Versions<a class="headerlink" href="#uninstalling-bundles-and-bundle-versions" title="Permalink to this headline">¶</a></h2>
+<p>You may uninstall a specific version of a bundle or all versions of a
+bundle. Uninstalling a specific version will remove rules and
+permissions only associated with that version. Uninstalling all bundle
+versions involves <em>complete</em> removal of all authorization rules
+governing its commands as well as deletion of all the bundle’s
+permissions. Any custom rules you may have written concerning the
+commands in the bundle will also be deleted. In this regard, bundle
+uninstallation is not reversible. You can re-install to get back the
+bundle permissions and default rules, but your custom ones will be gone
+forever. If you only wish to disable a bundle, see
+<a class="reference internal" href="#enabling-and-disabling-bundle-versions">Enabling and Disabling Bundle Versions</a> above instead.</p>
+<p>Before a bundle can be uninstalled it must first be disabled. To
+uninstall a bundle just use <code class="docutils literal"><span class="pre">cogctl</span></code>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Since uninstalling all versions of a bundle can be quite
+destructive, you must pass the <code class="docutils literal"><span class="pre">--all</span></code> flag to <code class="docutils literal"><span class="pre">cogctl</span></code>.
+Otherwise nothing will happen.</p>
+</div>
+<div class="code Bash highlight-default"><div class="highlight"><pre><span></span>$ cogctl bundle uninstall --help
+Usage: cogctl bundle uninstall [OPTIONS] NAME [VERSION]
+
+  Uninstall bundles.
+
+Options:
+  -c, --clean         Uninstall all disabled bundle versions
+  -x, --incompatible  Uninstall all incompatible versions of the bundle
+  -a, --all           Uninstall all versions of the bundle
+  --help              Show this message and exit.
+
+$ cogctl bundle uninstall my_bundle 0.1.0
+Uninstalled my_bundle 0.1.0
+
+$ cogctl bundle uninstall my_bundle
+Usage: cogctl bundle uninstall [OPTIONS] NAME [VERSION]
+
+Error: Invalid value for &quot;version&quot;: Can&#39;t uninstall without specifying a version, or --incompatible, --all, --clean
+
+$ cogctl bundle uninstall date 0.1.0
+Usage: cogctl bundle uninstall [OPTIONS] NAME [VERSION]
+
+Error: Invalid value for &quot;version&quot;: Cannot uninstall enabled version. Please disable the bundle first
+
+$ cogctl bundle uninstall date --all
+Usage: cogctl bundle uninstall [OPTIONS] NAME [VERSION]
+
+Error: Invalid value for &quot;bundle&quot;: date 0.1.0 is currently enabled. Please disable the bundle first.
+
+$ cogctl bundle disable date
+Disabled date
+
+$ cogctl bundle uninstall date --all
+Uninstalled date 0.0.1
+Uninstalled date 0.0.1
+Uninstalled date 0.1.0
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="writing_a_command_bundle.html" class="btn btn-neutral float-right" title="6. Writing A Command Bundle" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="commands_and_bundles.html" class="btn btn-neutral" title="4. Commands and Bundles" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 Operable, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61670076-4', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  
+
+
+</body>
+</html>

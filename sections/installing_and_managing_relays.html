@@ -1,0 +1,356 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3. Installing and Managing Relays &mdash; Cog Book 1.0.0 documentation</title>
+  
+
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Cog Book 1.0.0 documentation" href="../index.html"/>
+        <link rel="next" title="4. Commands and Bundles" href="commands_and_bundles.html"/>
+        <link rel="prev" title="2. Bootstrapping Cog" href="bootstrapping_cog.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cog Book
+          
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+          </a>
+
+          
+            <img src="../_static/cog_peek.svg" class="logo" />
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bootstrapping_cog.html">2. Bootstrapping Cog</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Installing and Managing Relays</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-a-new-relay">3.1. Configuring A New Relay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#relays-relay-groups">3.2. Relays &amp; Relay Groups</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="commands_and_bundles.html">4. Commands and Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="managing_bundles.html">5. Managing Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_a_command_bundle.html">6. Writing A Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_password_resets.html">7. Configuring password resets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions_and_rules.html">8. Permissions and Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_execution_rules.html">9. Command Execution Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundle_configs.html">10. Bundle Configs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_environment_variables.html">11. Command Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic_command_configuration.html">12. Dynamic Command Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="returning_data_from_cog.html">13. Returning data from Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services.html">14. Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">15. Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_your_first_command_bundle.html">16. Installing Your First Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing_a_trigger.html">17. Developing a Trigger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cog_architecture.html">18. Cog Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_pipelines.html">19. Command pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="redirecting_pipeline_output.html">20. Redirecting Pipeline Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">21. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_management.html">22. User management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributor_license_agreement.html">23. Contributor License Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/cog_server_configuration.html">24. Cog Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/relay_configuration.html">25. Relay Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/command_output_tags.html">26. Command Output Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/greenbar_tags.html">27. Greenbar Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/audit_log_events.html">28. Audit Log Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/glossary.html">29. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/designing_for_chatops.html">30. Designing ChatOps Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/chat_platforms.html">31. Notes on Chat Platform Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Cog Book</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>3. Installing and Managing Relays</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/operable/cog-book/blob/HEAD/cog-book/source/sections/installing_and_managing_relays.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installing-and-managing-relays">
+<h1>3. Installing and Managing Relays<a class="headerlink" href="#installing-and-managing-relays" title="Permalink to this headline">¶</a></h1>
+<p>To effectively route commands to Relay, we need to inform Cog of each
+Relay and configure each Relay to communicate with Cog via the message
+bus.</p>
+<div class="section" id="configuring-a-new-relay">
+<h2>3.1. Configuring A New Relay<a class="headerlink" href="#configuring-a-new-relay" title="Permalink to this headline">¶</a></h2>
+<p>Cog needs at least one Relay in order to deploy command bundles and
+execute commands. Configuring Cog to know about a new Relay instance is
+a simple three step process.</p>
+<ol class="arabic simple">
+<li>Pick a secret word or phrase shared between Cog and the new Relay
+instance. Cog’s API refers to this secret as a <em>token</em>.</li>
+<li>Use <code class="docutils literal"><span class="pre">cogctl</span></code> to tell Cog about the Relay and its secret.</li>
+</ol>
+<p><strong>Configuring a new relay.</strong></p>
+<p>You&#8217;ll need to create an ID for your relay (a UUID), as well as create
+a shared secret (a &#8220;token&#8221;) and then give these to Cog:</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span>$ cogctl relay create my_new_relay bd03d7f0-b670-4721-9121-c23e62583e49 &quot;my fancy sekrit&quot;
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li>Use the ID and token from step #2 to start the Relay instance.</li>
+</ol>
+<p><strong>Relay starting up.</strong></p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span>$ RELAY_ID=bd03d7f0-b670-4721-9121-c23e62583e49 RELAY_COG_TOKEN=&quot;my fancy sekrit&quot; relay
+INFO[2016-04-18T14:42:57-04:00] Loaded configuration file ./cog_relay.conf.
+INFO[2016-04-18T14:42:57-04:00] Relay f8e3ead2-57e0-4fb2-81e9-24bf6c104202 is initializing.
+INFO[2016-04-18T14:42:57-04:00] Docker execution engine enabled.
+INFO[2016-04-18T14:42:57-04:00] Native execution engine enabled.
+INFO[2016-04-18T14:42:57-04:00] Verifying Docker registry credentials.
+INFO[2016-04-18T14:42:58-04:00] Docker configuration verified.
+INFO[2016-04-18T14:42:58-04:00] Started 8 workers.
+INFO[2016-04-18T14:43:00-04:00] Connected to Cog host 10.10.2.12.
+INFO[2016-04-18T14:43:00-04:00] Refreshing bundles and related assets every 30s.
+INFO[2016-04-18T14:43:00-04:00] Cleaning up expired Docker assets every 5m0s.
+INFO[2016-04-18T14:43:00-04:00] Refreshing command bundles.
+INFO[2016-04-18T14:43:00-04:00] Bundle refresh complete.
+INFO[2016-04-18T14:43:00-04:00] Relay f8e3ead2-57e0-4fb2-81e9-24bf6c104202 ready.
+</pre></div>
+</div>
+<p>A fully commented example <code class="docutils literal"><span class="pre">relay.conf</span></code> file can be found
+<a class="reference external" href="https://github.com/operable/go-relay/blob/master/example_relay.conf">here</a>.</p>
+</div>
+<div class="section" id="relays-relay-groups">
+<span id="relays-and-relay-groups"></span><h2>3.2. Relays &amp; Relay Groups<a class="headerlink" href="#relays-relay-groups" title="Permalink to this headline">¶</a></h2>
+<p>Once a Relay has been created it can be assigned to one or more <em>relay
+groups</em>. Relay groups are merely named groups of Relays used to organize
+many Relays into logical groupings.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can read about how Cog uses relay groups to simplify command
+bundle deployment in <a class="reference internal" href="managing_bundles.html"><span class="doc">Managing Bundles</span></a>.</p>
+</div>
+<p>No relay groups are defined when Cog is first installed so you’ll need
+to use <code class="docutils literal"><span class="pre">cogctl</span></code> to create at least one.</p>
+<p><strong>Creating a relay group.</strong></p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span>$ cogctl relay-group create my_relay_group
+Created relay group &#39;my_relay_group&#39;
+</pre></div>
+</div>
+<p>You can also create a relay group and assign Relays to it in a single
+command, too.</p>
+<p><strong>Creating a relay group with members.</strong></p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span>$ cogctl relay-groups create my_newer_group my_new_relay
+Created relay group &#39;my_newer_group&#39;
+Relay group &#39;my_newer_group&#39; has the following relay members: my_new_relay
+</pre></div>
+</div>
+<p>Members can be added or removed from a relay group at any time with
+<code class="docutils literal"><span class="pre">cogctl</span></code> &#8216;s <code class="docutils literal"><span class="pre">relay-group</span> <span class="pre">add</span></code> and <code class="docutils literal"><span class="pre">relay-group</span> <span class="pre">remove</span></code> actions.</p>
+<p><strong>Adding and removing group members.</strong></p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span>$ cogctl relay-group add my_relay_group my_new_relay
+Relay group &#39;my_relay_group&#39; has the following relay members: my_new_relay, my_other_relay
+$ cogctl relay-group remove my_relay_group my_other_relay
+Relay group &#39;my_relay_group&#39; has the following relay members: my_new_relay
+</pre></div>
+</div>
+<p>Finally, you can view a detailed description of a relay group with
+<code class="docutils literal"><span class="pre">cogctl</span></code> &#8216;s <code class="docutils literal"><span class="pre">relay-group</span> <span class="pre">info</span></code> action.</p>
+<p><strong>Viewing a relay group.</strong></p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span>$ cogctl relay-group info my_relay_group
+Name           my_relay_group
+ID             c3d29691-dc5b-4adf-a88b-53aff0e2bfa4
+Creation Time  2016-04-19T18:55:52Z
+
+Relays
+NAME   ID
+my_new_relay  f8e3ead2-57e0-4fb2-81e9-24bf6c104202
+$
+</pre></div>
+</div>
+<p>Now you are ready to add <a class="reference internal" href="managing_bundles.html"><span class="doc">Managing Bundles</span></a> to your relays
+in order to execute your installed commands.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="commands_and_bundles.html" class="btn btn-neutral float-right" title="4. Commands and Bundles" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="bootstrapping_cog.html" class="btn btn-neutral" title="2. Bootstrapping Cog" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 Operable, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61670076-4', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  
+
+
+</body>
+</html>

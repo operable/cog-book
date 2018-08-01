@@ -1,0 +1,614 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>15. Templates &mdash; Cog Book 1.0.0 documentation</title>
+  
+
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Cog Book 1.0.0 documentation" href="../index.html"/>
+        <link rel="next" title="16. Installing Your First Command Bundle" href="installing_your_first_command_bundle.html"/>
+        <link rel="prev" title="14. Services" href="services.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cog Book
+          
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+          </a>
+
+          
+            <img src="../_static/cog_peek.svg" class="logo" />
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bootstrapping_cog.html">2. Bootstrapping Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_and_managing_relays.html">3. Installing and Managing Relays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands_and_bundles.html">4. Commands and Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="managing_bundles.html">5. Managing Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_a_command_bundle.html">6. Writing A Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_password_resets.html">7. Configuring password resets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions_and_rules.html">8. Permissions and Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_execution_rules.html">9. Command Execution Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundle_configs.html">10. Bundle Configs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_environment_variables.html">11. Command Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic_command_configuration.html">12. Dynamic Command Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="returning_data_from_cog.html">13. Returning data from Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services.html">14. Services</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">15. Templates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic-greenbar-syntax">15.1. Basic Greenbar Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#overall-template-processing-logic">15.2. Overall Template Processing Logic</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#all-pipelines-return-a-results-list">15.2.1. All pipelines return a &#8220;results&#8221; list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#commands-can-specify-a-template-when-they-return-to-cog">15.2.2. Commands can specify a template when they return to Cog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#last-output-wins">15.2.3. Last output &#8220;wins&#8221;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#meta-templates-not-templates">15.2.4. Meta-templates, not Templates</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#advanced-greenbar-usage">15.3. Advanced Greenbar Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#writing-a-custom-tag">15.4. Writing a custom tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#customizing-the-standard-error-template">15.5. Customizing the standard error template</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuring">15.5.1. Configuring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#error-greenbar">15.5.2. error.greenbar</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installing_your_first_command_bundle.html">16. Installing Your First Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing_a_trigger.html">17. Developing a Trigger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cog_architecture.html">18. Cog Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_pipelines.html">19. Command pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="redirecting_pipeline_output.html">20. Redirecting Pipeline Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">21. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_management.html">22. User management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributor_license_agreement.html">23. Contributor License Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/cog_server_configuration.html">24. Cog Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/relay_configuration.html">25. Relay Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/command_output_tags.html">26. Command Output Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/greenbar_tags.html">27. Greenbar Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/audit_log_events.html">28. Audit Log Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/glossary.html">29. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/designing_for_chatops.html">30. Designing ChatOps Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/chat_platforms.html">31. Notes on Chat Platform Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Cog Book</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>15. Templates</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/operable/cog-book/blob/HEAD/cog-book/source/sections/templates.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="templates">
+<h1>15. Templates<a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h1>
+<p><em>Formatting pipeline output for humans!</em></p>
+<p>In contrast to traditional command-line programs, the output of a Cog
+command is not plain text, but a JSON object. This common structure
+makes it easy to chain commands together into pipelines because
+downstream commands can easily reach into the JSON output to extract the
+data they need, without having to jump through the various text
+manipulation steps that are so frequently part of traditional
+command-line pipelines. When it’s time to present the final output of a
+pipeline, however, we often want something a bit more user-friendly than
+a dump of JSON data in our chat window.</p>
+<p>To address this, Cog commands have the ability to specify a template
+that will be used to process the final pipeline output into a more
+readable format. This allows commands to return rich JSON objects for
+maximum flexibility in pipelines, but also condense these objects down
+to the salient information that humans need in chat (&#8220;Bundle <em>foo</em>,
+version <em>1.0.0</em> was enabled&#8221;, for example).</p>
+<div class="section" id="basic-greenbar-syntax">
+<span id="id1"></span><h2>15.1. Basic Greenbar Syntax<a class="headerlink" href="#basic-greenbar-syntax" title="Permalink to this headline">¶</a></h2>
+<p>The template language used by Cog is
+<a class="reference external" href="https://github.com/operable/greenbar">Greenbar</a>, a language created
+by Operable for the needs of Cog. It is probably best described as a
+Markdown variant, with support for ERB-like tags.</p>
+<p>Many familiar Markdown features are available, including boldface,
+italics, ordered and unordered lists, and monospace formatting; even
+tables. Iteration and conditional logic (among other features) are
+achieved through the use of &#8220;tags&#8221;. Data from result objects can be
+accessed through variable references. This example will illustrate many
+Greenbar features:</p>
+<p><strong>Example Greenbar Template.</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>~if cond=length($results) == 1~
+The _only_ member of the group is **~$results[0].username~**.
+~end~
+~if cond=length($results) &gt; 1~
+The group has the following members:
+~each var=$results as=user~
+1. ~$user.username~
+~end~
+~end~
+</pre></div>
+</div>
+<p>Note that all Greenbar instructions are enclosed in <code class="docutils literal"><span class="pre">~</span></code> characters.
+Some, like <code class="docutils literal"><span class="pre">~if~</span></code> and <code class="docutils literal"><span class="pre">~each~</span></code> have bodies, with corresponding
+<code class="docutils literal"><span class="pre">~end~</span></code> terminators; bodies may contain plain text, or other Greenbar
+instructions. Variable dereferencing is achieved with the use of the
+<code class="docutils literal"><span class="pre">$</span></code> operator within Greenbar instructions. Complex objects can be
+navigated using familiar dot notation, and individual array members can
+be addressed by a zero-based index. Markdown does not require special
+Greenbar instructions, but is used directly (observe the italics on
+&#8220;only&#8221;, the bolding of the single user’s name, and the generation of an
+ordered list in the <code class="docutils literal"><span class="pre">~each~</span></code> iterator). Note also the presence of the
+top-level &#8220;results&#8221; key, containing all the output of the Cog pipeline.</p>
+<p>If you’re looking for more information on how to write templates, skip
+on down to <a class="reference internal" href="#advanced-greenbar-usage"><span class="std std-ref">Advanced Greenbar Usage</span></a>.</p>
+</div>
+<div class="section" id="overall-template-processing-logic">
+<h2>15.2. Overall Template Processing Logic<a class="headerlink" href="#overall-template-processing-logic" title="Permalink to this headline">¶</a></h2>
+<p>In order to write effective templates, it helps to understand a bit
+about how Cog processes the output of pipelines, how templates are
+chosen, and how pipeline data is presented to the template.</p>
+<div class="section" id="all-pipelines-return-a-results-list">
+<h3>15.2.1. All pipelines return a &#8220;results&#8221; list<a class="headerlink" href="#all-pipelines-return-a-results-list" title="Permalink to this headline">¶</a></h3>
+<p>For all successful pipeline runs, Cog will return a single JSON object
+to the template. This object will have a &#8220;results&#8221; key, which is always
+a list of objects returned from individual command invocations (it’s a
+list whether there is only a single result object or many).</p>
+</div>
+<div class="section" id="commands-can-specify-a-template-when-they-return-to-cog">
+<h3>15.2.2. Commands can specify a template when they return to Cog<a class="headerlink" href="#commands-can-specify-a-template-when-they-return-to-cog" title="Permalink to this headline">¶</a></h3>
+<p>When each command runs, it has the option of specifying a template to
+use when formatting the output by returning a <code class="docutils literal"><span class="pre">COG_TEMPLATE</span></code> value in
+the output. The name of the template is resolved relative to the bundle
+the command is a member of. If no template is specified, then Cog will
+fall back to one of two &#8220;common&#8221; templates. If the command returns bare
+text (instead of JSON, as is customary), then a special &#8220;text&#8221; template
+is used. On the other hand, if JSON is returned, then the &#8220;raw&#8221; template
+is used, which will pretty-print the results.</p>
+</div>
+<div class="section" id="last-output-wins">
+<h3>15.2.3. Last output &#8220;wins&#8221;<a class="headerlink" href="#last-output-wins" title="Permalink to this headline">¶</a></h3>
+<p>The return value of every Cog command invocation can specify a template
+to use, but pipelines can trigger multiple invocations in the course of
+processing. That can theoretically result in multiple templates being
+specified.</p>
+<p>Templates are only truly needed at the end of a pipeline, however. If a
+command in the middle of a pipeline declares that its output should be
+formatted with the &#8220;foo&#8221; template, we don’t care, because we know that
+output is going to be modified further by the downstream commands. As
+soon as Cog wraps up one pipeline stage and moves on to the next, all
+template information collected to that point is discarded.</p>
+<p>With respect to templating, it is the final stage that we care about.
+With Cog’s current implementation, each invocation can theoretically
+specify a different template; in reality, though, only the template
+specified by the final invocation is used to template all the data.</p>
+</div>
+<div class="section" id="meta-templates-not-templates">
+<h3>15.2.4. Meta-templates, not Templates<a class="headerlink" href="#meta-templates-not-templates" title="Permalink to this headline">¶</a></h3>
+<p>Cog’s templates are not actually templates, but rather &#8220;meta-templates&#8221;.
+They do not generate text, but rather <em>directives</em>, instructions on how
+to render text. This allows individual chat providers to determine
+exactly how to format a given template. For example, the Slack provider
+can interpret a <code class="docutils literal"><span class="pre">bold</span></code> directive as <code class="docutils literal"><span class="pre">*bold</span> <span class="pre">text*</span></code>, while a HipChat
+provider can interpret the same directive as <code class="docutils literal"><span class="pre">&lt;b&gt;bold</span> <span class="pre">text&lt;/b&gt;</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can see how Greenbar directives are processed for Slack in the
+code
+<a class="reference external" href="https://github.com/operable/cog/blob/72308c31f49e8d8369f48ec1dd932403117e232c/lib/cog/chat/slack/template_processor.ex">here</a>.</p>
+</div>
+<p>By using this architecture, command authors only need to write a single
+template, which each chat provider can interpret in the best way for its
+host platform, instead of having to supply a template for each chat
+provider individually.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The rendering of Greenbar templates to general directives, which are
+then processed by chat adapter-specific processors, is analogous to
+the interpretation of Java bytecode on platform-specific VMs, or the
+rendering of OpenGL directives by different graphics processors.</p>
+</div>
+</div>
+</div>
+<div class="section" id="advanced-greenbar-usage">
+<span id="id2"></span><h2>15.3. Advanced Greenbar Usage<a class="headerlink" href="#advanced-greenbar-usage" title="Permalink to this headline">¶</a></h2>
+<p>Greenbar includs a variety of tags to help you better organze your
+output and also fully utilize the formatting options available from your
+chat provider. To view more information about all tags that come with
+Greenbar with examples for each, jump down to the Reference section
+titled <a class="reference internal" href="../references/greenbar_tags.html"><span class="doc">Greenbar Tags</span></a>. And, if you haven’t been able to find
+the tag you’re looking for, Greenbar also supports custom tags.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">While this document gives an overview of Greenbar and gives you a
+reference for tags you can use, we’re still pretty short on
+examples. If you want to see what some real life templates look like
+and all the ways tags can be used to accomplish normal formatting,
+take a look at all the <a class="reference external" href="https://github.com/operable/cog/tree/master/priv/templates">templates used by commands included in
+Cog</a>.</p>
+</div>
+</div>
+<div class="section" id="writing-a-custom-tag">
+<h2>15.4. Writing a custom tag<a class="headerlink" href="#writing-a-custom-tag" title="Permalink to this headline">¶</a></h2>
+<p>All of the tags we’ve covered were implemented in Elixir using the
+<code class="docutils literal"><span class="pre">Greenbar.Tag</span></code> module, which you can also use to write your own custom
+tags. Before we dive into writing our own, let’s take a look at a
+super-simple example, the <code class="docutils literal"><span class="pre">~br~</span></code> tag:</p>
+<div class="code Elixir highlight-default"><div class="highlight"><pre><span></span><span class="n">defmodule</span> <span class="n">Greenbar</span><span class="o">.</span><span class="n">Tags</span><span class="o">.</span><span class="n">Break</span> <span class="n">do</span>
+  <span class="n">use</span> <span class="n">Greenbar</span><span class="o">.</span><span class="n">Tag</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;br&quot;</span>
+
+  <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="n">_id</span><span class="p">,</span> <span class="n">_attrs</span><span class="p">,</span> <span class="n">scope</span><span class="p">)</span> <span class="n">do</span>
+    <span class="p">{:</span><span class="n">halt</span><span class="p">,</span> <span class="o">%</span><span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="p">:</span><span class="n">newline</span><span class="p">},</span> <span class="n">scope</span><span class="p">}</span>
+  <span class="n">end</span>
+<span class="n">end</span>
+</pre></div>
+</div>
+<p>First, we <code class="docutils literal"><span class="pre">use</span> <span class="pre">Greenbar.Tag</span></code> to set the name of the tag that we’ll use
+in the template. Then, we implement <code class="docutils literal"><span class="pre">render</span></code> which returns a newline.
+The <code class="docutils literal"><span class="pre">:halt</span></code> symbol in the tuple returned means that the tag has
+finished rendering and we can continue processing the rest of the
+template. There are a few more ways we can output values which are more
+useful in tags that accept a body as we’ll see in the next example.</p>
+<p>Now to implement our own tag. Let’s build a tag that converts the body
+to uppercase. For a template like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">~</span><span class="n">upcase</span><span class="o">~</span>
+<span class="n">hello</span> <span class="n">world</span>
+<span class="o">~</span><span class="n">end</span><span class="o">~</span>
+</pre></div>
+</div>
+<p>we’ll expect the final result to be:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">HELLO</span> <span class="n">WORLD</span>
+</pre></div>
+</div>
+<p>To start we can open up a new file named <code class="docutils literal"><span class="pre">upcase.ex</span></code> and start out
+with an empty module and <code class="docutils literal"><span class="pre">use</span> <span class="pre">Greenbar.Tag</span></code> to set the name.</p>
+<div class="code Elixir highlight-default"><div class="highlight"><pre><span></span><span class="n">defmodule</span> <span class="n">Upcase</span> <span class="n">do</span>
+  <span class="n">use</span> <span class="n">Greenbar</span><span class="o">.</span><span class="n">Tag</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;upcase&quot;</span>
+<span class="n">end</span>
+</pre></div>
+</div>
+<p>Next, we need to implement the <code class="docutils literal"><span class="pre">render</span></code> function using a new tuple,
+<code class="docutils literal"><span class="pre">{:once,</span>
+<span class="pre">scope,</span> <span class="pre">child_scope}</span></code>. This creates a new scope for our tag body.</p>
+<div class="code Elixir highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="n">_id</span><span class="p">,</span> <span class="n">_attrs</span><span class="p">,</span> <span class="n">scope</span><span class="p">)</span> <span class="n">do</span>
+  <span class="n">child_scope</span> <span class="o">=</span> <span class="n">new_scope</span><span class="p">(</span><span class="n">scope</span><span class="p">)</span>
+  <span class="p">{:</span><span class="n">once</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">child_scope</span><span class="p">}</span>
+<span class="n">end</span>
+</pre></div>
+</div>
+<p>I know what you’re thinking, &#8220;Where’s the <code class="docutils literal"><span class="pre">String.upcase</span></code> call?&#8221; Well,
+the render call is useful for changing scope and returning pre-defined
+results, but if you want to modify the body of a tag, you’ll need to
+implement a <code class="docutils literal"><span class="pre">post_body</span></code> function. <code class="docutils literal"><span class="pre">post_body</span></code> gives you access to
+the attributes of the tag, the outside scope, the scope of the body and
+a buffer containing all the parsed items from the template. All we need
+to do is to iterate over the items in the buffer and upcase anything
+that contains text.</p>
+<div class="code Elixir highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">post_body</span><span class="p">(</span><span class="n">_id</span><span class="p">,</span> <span class="n">_attrs</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">_body_scope</span><span class="p">,</span> <span class="o">%</span><span class="n">Buffer</span><span class="p">{</span><span class="n">items</span><span class="p">:</span> <span class="n">items</span><span class="p">})</span> <span class="n">do</span>
+  <span class="p">{:</span><span class="n">ok</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="o">%</span><span class="n">Buffer</span><span class="p">{</span><span class="n">items</span><span class="p">:</span> <span class="n">Enum</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">upcase_directive</span><span class="o">/</span><span class="mi">1</span><span class="p">)}}</span>
+<span class="n">end</span>
+
+<span class="k">def</span> <span class="nf">upcase_directive</span><span class="p">(</span><span class="o">%</span><span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="p">:</span><span class="n">text</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="n">text</span><span class="p">}</span> <span class="o">=</span> <span class="n">directive</span><span class="p">),</span>
+  <span class="n">do</span><span class="p">:</span> <span class="o">%</span><span class="p">{</span><span class="n">directive</span> <span class="o">|</span> <span class="n">text</span><span class="p">:</span> <span class="n">String</span><span class="o">.</span><span class="n">upcase</span><span class="p">(</span><span class="n">text</span><span class="p">)}</span>
+<span class="k">def</span> <span class="nf">upcase_directive</span><span class="p">(</span><span class="n">directive</span><span class="p">),</span>
+  <span class="n">do</span><span class="p">:</span> <span class="n">directive</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You’ll also have to include <code class="docutils literal"><span class="pre">alias</span> <span class="pre">Greenbar.Runtime.Buffer</span></code> at the
+top of the module.</p>
+</div>
+<p>And that should do it. Your final custom tag module will look like the
+following:</p>
+<div class="code Elixir highlight-default"><div class="highlight"><pre><span></span><span class="n">defmodule</span> <span class="n">Cog</span><span class="o">.</span><span class="n">Tags</span><span class="o">.</span><span class="n">Upcase</span> <span class="n">do</span>
+  <span class="n">use</span> <span class="n">Greenbar</span><span class="o">.</span><span class="n">Tag</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;upcase&quot;</span><span class="p">,</span> <span class="n">body</span><span class="p">:</span> <span class="n">true</span>
+  <span class="n">alias</span> <span class="n">Greenbar</span><span class="o">.</span><span class="n">Runtime</span><span class="o">.</span><span class="n">Buffer</span>
+
+  <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="n">_id</span><span class="p">,</span> <span class="n">_attrs</span><span class="p">,</span> <span class="n">scope</span><span class="p">)</span> <span class="n">do</span>
+    <span class="n">child_scope</span> <span class="o">=</span> <span class="n">new_scope</span><span class="p">(</span><span class="n">scope</span><span class="p">)</span>
+    <span class="p">{:</span><span class="n">once</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">child_scope</span><span class="p">}</span>
+  <span class="n">end</span>
+
+  <span class="k">def</span> <span class="nf">post_body</span><span class="p">(</span><span class="n">_id</span><span class="p">,</span> <span class="n">_attrs</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">_body_scope</span><span class="p">,</span> <span class="o">%</span><span class="n">Buffer</span><span class="p">{</span><span class="n">items</span><span class="p">:</span> <span class="n">items</span><span class="p">})</span> <span class="n">do</span>
+    <span class="p">{:</span><span class="n">ok</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="o">%</span><span class="n">Buffer</span><span class="p">{</span><span class="n">items</span><span class="p">:</span> <span class="n">Enum</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">upcase_directive</span><span class="o">/</span><span class="mi">1</span><span class="p">)}}</span>
+  <span class="n">end</span>
+
+  <span class="k">def</span> <span class="nf">upcase_directive</span><span class="p">(</span><span class="o">%</span><span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="p">:</span><span class="n">text</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="n">text</span><span class="p">}</span> <span class="o">=</span> <span class="n">directive</span><span class="p">),</span>
+    <span class="n">do</span><span class="p">:</span> <span class="o">%</span><span class="p">{</span><span class="n">directive</span> <span class="o">|</span> <span class="n">text</span><span class="p">:</span> <span class="n">String</span><span class="o">.</span><span class="n">upcase</span><span class="p">(</span><span class="n">text</span><span class="p">)}</span>
+  <span class="k">def</span> <span class="nf">upcase_directive</span><span class="p">(</span><span class="n">directive</span><span class="p">),</span>
+    <span class="n">do</span><span class="p">:</span> <span class="n">directive</span>
+<span class="n">end</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Modifying Cog’s source code to include custom tags is not ideal and
+wont be easy for everyone to include in their deploy process. Future
+versions of Cog will have a better way to include custom tags
+without modifying Cog or Greenbar, which can be more easily used
+with our Docker Compose install, for example.</p>
+</div>
+<p>To use this with Cog, we’re going to need to include this module in the
+Cog codebase and set it as an available tag when creating the
+<code class="docutils literal"><span class="pre">Greenbar.Engine</span></code>. Move the <code class="docutils literal"><span class="pre">upcase.ex</span></code> file we just created to
+<code class="docutils literal"><span class="pre">lib/cog/tags/upcase.ex</span></code> and rename the module to <code class="docutils literal"><span class="pre">Cog.Tags.Upcase</span></code>.
+Now open up <code class="docutils literal"><span class="pre">lib/cog/template/new/evaluator.ex</span></code> and scroll down to the
+bottom of the file to find the <code class="docutils literal"><span class="pre">do_evaluate</span></code> function. We need to add
+the <code class="docutils literal"><span class="pre">upcase</span></code> tag to the engine. Directly after the line where we
+create the engine, include this line to add our tag:</p>
+<div class="code Elixir highlight-default"><div class="highlight"><pre><span></span><span class="p">{:</span><span class="n">ok</span><span class="p">,</span> <span class="n">engine</span><span class="p">}</span> <span class="o">=</span> <span class="n">Engine</span><span class="o">.</span><span class="n">add_tag</span><span class="p">(</span><span class="n">engine</span><span class="p">,</span> <span class="n">Cog</span><span class="o">.</span><span class="n">Tags</span><span class="o">.</span><span class="n">Upcase</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The end result should look like:</p>
+<div class="code Elixir highlight-default"><div class="highlight"><pre><span></span>def do_evaluate(name, source, data) do
+  {:ok, engine} = Engine.new
+  {:ok, engine} = Engine.add_tag(engine, Cog.Tags.Upcase)
+  engine
+  |&gt; Engine.compile!(name, source)
+  |&gt; Engine.eval!(name, data)
+end
+</pre></div>
+</div>
+<p>And that’s it, just restart Cog and you can use your new <code class="docutils literal"><span class="pre">~upcase~</span></code>
+tag in any template.</p>
+</div>
+<div class="section" id="customizing-the-standard-error-template">
+<span id="id3"></span><h2>15.5. Customizing the standard error template<a class="headerlink" href="#customizing-the-standard-error-template" title="Permalink to this headline">¶</a></h2>
+<p>Cog uses a standard template to render errors that might occur when
+processing a pipeline. For example, when a user types the name of a
+command that does not exists, or if a command were to crash
+unexpectedly. The standard template contains a lot of information that
+is useful when developing bundles, but may a bit to much info for the
+average user. For this reason, it can be easily customized.</p>
+<div class="section" id="configuring">
+<h3>15.5.1. Configuring<a class="headerlink" href="#configuring" title="Permalink to this headline">¶</a></h3>
+<p>Configuring Cog to use a custom error template is a two step process.
+First create a template called <code class="docutils literal"><span class="pre">error.greenbar</span></code> and place it in an
+empty directory accessible to Cog. Then set
+<a class="reference internal" href="../references/cog_server_configuration.html#cog-custom-template-dir"><span class="std std-ref">COG_CUSTOM_TEMPLATE_DIR</span></a> to the path of said directory. After
+setting the env var you can update or remove the custom template file
+directly. No Cog restarts are required.</p>
+</div>
+<div class="section" id="error-greenbar">
+<h3>15.5.2. error.greenbar<a class="headerlink" href="#error-greenbar" title="Permalink to this headline">¶</a></h3>
+<p>Like all templates in Cog, the standard error template is written in
+greenbar. See <a class="reference internal" href="#basic-greenbar-syntax"><span class="std std-ref">Basic Greenbar Syntax</span></a> for more info. Unlike
+templates defined for commands though, the standard error template does
+not receive a &#8220;results&#8221; list. Instead it receives a single object
+containing information about the error.</p>
+<p>The error object contains the following keys:</p>
+<dl class="docutils">
+<dt>id</dt>
+<dd>The id of the pipeline.</dd>
+<dt>started</dt>
+<dd>The time stamp for the start of the pipeline.</dd>
+<dt>initiator</dt>
+<dd>The username of the one who initiated the pipeline.</dd>
+<dt>pipeline_text</dt>
+<dd>The complete text of the pipeline.</dd>
+<dt>error_message</dt>
+<dd>The error message returned by the pipeline.</dd>
+<dt>planning_failure</dt>
+<dd>When a pipeline fails during it’s planning stage, ie during variable
+binding or when interpreting options, this will contain the portion
+of the pipeline that generated the error. Otherwise this will be
+<code class="docutils literal"><span class="pre">false</span></code>.</dd>
+<dt>execution_failure</dt>
+<dd>Similar to <code class="docutils literal"><span class="pre">$planning_failure</span></code>; when a pipeline fails during
+execution of the pipeline, this will contain the portion of the
+pipeline that caused the error. Otherwise this is set to <code class="docutils literal"><span class="pre">false</span></code>.</dd>
+</dl>
+<p><strong>The default error.greenbar as an example.</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>~attachment title=&quot;Command Error&quot; color=&quot;#ff3333&quot; Caller=$initiator Pipeline=$pipeline_text &quot;Pipeline ID&quot;=$id Started=$started~
+~if cond=$planning_failure ~
+The pipeline failed planning the invocation:
+~br~
+```
+~$planning_failure~
+```
+~end~
+~if cond=$execution_failure~
+The pipeline failed executing the command:
+~br~
+```
+~$execution_failure~
+```
+~end~
+~br~
+~br~
+The specific error was:
+~br~
+```
+~$error_message~
+```
+~end~
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="installing_your_first_command_bundle.html" class="btn btn-neutral float-right" title="16. Installing Your First Command Bundle" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="services.html" class="btn btn-neutral" title="14. Services" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 Operable, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61670076-4', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  
+
+
+</body>
+</html>

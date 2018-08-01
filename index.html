@@ -1,0 +1,607 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Welcome to the Cog Book! &mdash; Cog Book 1.0.0 documentation</title>
+  
+
+
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Cog Book 1.0.0 documentation" href="#"/>
+        <link rel="next" title="1. Getting Started" href="sections/getting_started.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> Cog Book
+          
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+          </a>
+
+          
+            <img src="_static/cog_peek.svg" class="logo" />
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="sections/getting_started.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/bootstrapping_cog.html">2. Bootstrapping Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/installing_and_managing_relays.html">3. Installing and Managing Relays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/commands_and_bundles.html">4. Commands and Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/managing_bundles.html">5. Managing Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/writing_a_command_bundle.html">6. Writing A Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/configuring_password_resets.html">7. Configuring password resets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/permissions_and_rules.html">8. Permissions and Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/command_execution_rules.html">9. Command Execution Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/bundle_configs.html">10. Bundle Configs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/command_environment_variables.html">11. Command Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/dynamic_command_configuration.html">12. Dynamic Command Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/returning_data_from_cog.html">13. Returning data from Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/services.html">14. Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/templates.html">15. Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/installing_your_first_command_bundle.html">16. Installing Your First Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/developing_a_trigger.html">17. Developing a Trigger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/cog_architecture.html">18. Cog Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/command_pipelines.html">19. Command pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/redirecting_pipeline_output.html">20. Redirecting Pipeline Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/triggers.html">21. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/user_management.html">22. User management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/contributor_license_agreement.html">23. Contributor License Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references/cog_server_configuration.html">24. Cog Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references/relay_configuration.html">25. Relay Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references/command_output_tags.html">26. Command Output Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references/greenbar_tags.html">27. Greenbar Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references/audit_log_events.html">28. Audit Log Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendices/glossary.html">29. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendices/designing_for_chatops.html">30. Designing ChatOps Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendices/chat_platforms.html">31. Notes on Chat Platform Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">Cog Book</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="#">Docs</a> &raquo;</li>
+      
+    <li>Welcome to the Cog Book!</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/operable/cog-book/blob/HEAD/cog-book/source/index.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="welcome-to-the-cog-book">
+<h1>Welcome to the Cog Book!<a class="headerlink" href="#welcome-to-the-cog-book" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This book is released under the <a class="reference external" href="https://github.com/operable/cog-book/blob/master/LICENSE">Apache 2</a> license. More information about contributing to this book along with access to the source code and previous releases is available at <a class="reference external" href="https://github.com/operable/cog-book/">GitHub</a>.</p>
+</div>
+<div class="section" id="cog-is-built-for-chatops">
+<h2>Cog is Built for ChatOps.<a class="headerlink" href="#cog-is-built-for-chatops" title="Permalink to this headline">¶</a></h2>
+<p>Use Cog to manage your infrastructure, support peer learning, and conduct collaborative research at the same time, right from chat. Cog is easy to install and simple to operate while remaining powerful enough to handle complex enterprise workflows.</p>
+</div>
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sections/getting_started.html">1. Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/introducing_cog.html">1.1. Introducing Cog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/introducing_cog.html#current-features">1.2. Current Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/introducing_cog.html#extensibility">1.2.1. Extensibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/introducing_cog.html#adaptability">1.2.2. Adaptability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/introducing_cog.html#security">1.2.3. Security</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/introducing_cog.html#chat-provider-agnostic">1.2.4. Chat-Provider Agnostic</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sections/introducing_cog.html#get-started">1.3. Get Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/introducing_cog.html#communication">1.4. Communication</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/introducing_cog.html#github-issues">1.4.1. GitHub Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/introducing_cog.html#cog-public-chat-via-slack">1.4.2. Cog Public Chat via Slack</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sections/introducing_cog.html#user-experience-feedback">1.5. User experience feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/installation_guide.html">1.6. Installation Guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/installation_guide.html#installing-and-running-cog-with-docker-compose">1.6.1. Installing and Running Cog with Docker Compose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/installation_guide.html#connecting-cog-to-slack">1.6.2. Connecting Cog To Slack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/installation_guide.html#connecting-cog-to-hipchat">1.6.3. Connecting Cog to HipChat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/installation_guide.html#creating-a-user-and-running-a-command">1.6.4. Creating a User and Running a Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/installation_guide.html#installing-and-configuring-a-bundle">1.6.5. Installing and Configuring a Bundle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sections/building_cog_from_scratch.html">1.7. Building and Running Cog from Scratch</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/bootstrapping_cog.html">2. Bootstrapping Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/installing_and_managing_relays.html">3. Installing and Managing Relays</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/installing_and_managing_relays.html#configuring-a-new-relay">3.1. Configuring A New Relay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/installing_and_managing_relays.html#relays-relay-groups">3.2. Relays &amp; Relay Groups</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/commands_and_bundles.html">4. Commands and Bundles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/commands_and_bundles.html#commands">4.1. Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/commands_and_bundles.html#bundles">4.2. Bundles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/commands_and_bundles.html#bundle-permissions-and-rules">4.2.1. Bundle Permissions and Rules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/commands_and_bundles.html#example-the-operable-bundle">4.2.2. Example: The <code class="docutils literal"><span class="pre">operable</span></code> Bundle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sections/commands_and_bundles.html#invoking-commands">4.3. Invoking Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/commands_and_bundles.html#shortcuts">4.3.1. Shortcuts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sections/commands_and_bundles.html#implementation-details">4.4. Implementation Details</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/managing_bundles.html">5. Managing Bundles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/managing_bundles.html#prerequisites">5.1. Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/managing_bundles.html#installing-bundles">5.2. Installing bundles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/managing_bundles.html#the-config-file">5.3. The config file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/managing_bundles.html#templates">5.4. Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/managing_bundles.html#enabling-and-disabling-bundle-versions">5.5. Enabling and Disabling Bundle Versions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/managing_bundles.html#relay-groups">5.5.1. Relay Groups</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sections/managing_bundles.html#uninstalling-bundles-and-bundle-versions">5.6. Uninstalling Bundles and Bundle Versions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/writing_a_command_bundle.html">6. Writing A Command Bundle</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/writing_a_command_bundle.html#scenario-tweet-from-cog">6.1. Scenario: Tweet from Cog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/writing_a_command_bundle.html#tweet-from-plain-ruby">6.2. Tweet from Plain Ruby</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/writing_a_command_bundle.html#first-steps-toward-cog-arguments">6.3. First Steps Toward Cog: Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/writing_a_command_bundle.html#describe-it-to-cog-bundle-definitions">6.4. Describe it to Cog: Bundle Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/writing_a_command_bundle.html#installing-the-bundle">6.5. Installing the Bundle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/writing_a_command_bundle.html#dynamic-configuration">6.6. Dynamic Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/writing_a_command_bundle.html#output">6.7. Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/writing_a_command_bundle.html#templating-output">6.7.1. Templating Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sections/writing_a_command_bundle.html#tweet-permissions-and-rules">6.8. Tweet Permissions and Rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/writing_a_command_bundle.html#options-tweet-from-different-accounts">6.9. Options: Tweet from different accounts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/writing_a_command_bundle.html#packaging-with-docker">6.10. Packaging with Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/writing_a_command_bundle.html#handling-input">6.11. Handling Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/writing_a_command_bundle.html#usecase-getting-statistics-on-recent-tweets">6.11.1. Usecase: Getting Statistics on Recent Tweets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/writing_a_command_bundle.html#a-recent-tweets-command">6.11.2. A <code class="docutils literal"><span class="pre">recent_tweets</span></code> Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/writing_a_command_bundle.html#tweet-statistics-favorites-and-retweets">6.11.3. Tweet Statistics: Favorites and Retweets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sections/writing_a_command_bundle.html#error-handling">6.12. Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/writing_a_command_bundle.html#logging">6.13. Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/writing_a_command_bundle.html#summary">6.14. Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/configuring_password_resets.html">7. Configuring password resets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/permissions_and_rules.html">8. Permissions and Rules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/permissions_and_rules.html#authorization-rules">8.1. Authorization Rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/permissions_and_rules.html#components-of-the-authorization-system">8.2. Components of the Authorization System</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/permissions_and_rules.html#permissions">8.2.1. Permissions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/permissions_and_rules.html#roles">8.2.2. Roles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/permissions_and_rules.html#users">8.2.3. Users</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/permissions_and_rules.html#groups">8.2.4. Groups</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sections/permissions_and_rules.html#bringing-it-all-together">8.3. Bringing It All Together</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/command_execution_rules.html">9. Command Execution Rules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/command_execution_rules.html#rule-structure">9.1. Rule Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/command_execution_rules.html#arguments-and-options-qualifiers">9.2. Arguments and Options Qualifiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/command_execution_rules.html#permissions">9.3. Permissions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/command_execution_rules.html#site-namespace">9.4. Site Namespace</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/bundle_configs.html">10. Bundle Configs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/bundle_configs.html#simple-bundle-configs">10.1. Simple bundle configs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/bundle_configs.html#commands">10.2. Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/bundle_configs.html#other-fields">10.3. Other fields</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/bundle_configs.html#permissions">10.3.1. Permissions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sections/bundle_configs.html#standard-bundle-configs">10.4. Standard bundle configs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/bundle_configs.html#documentation-fields">10.4.1. Documentation fields</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sections/bundle_configs.html#bundle">10.4.1.1. Bundle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sections/bundle_configs.html#command">10.4.1.2. Command</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sections/bundle_configs.html#conclusion">10.5. Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/command_environment_variables.html">11. Command Environment Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/command_environment_variables.html#arguments">11.1. Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/command_environment_variables.html#options">11.2. Options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/command_environment_variables.html#list-valued-options">11.2.1. List-valued Options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sections/command_environment_variables.html#general-metadata">11.3. General Metadata</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/dynamic_command_configuration.html">12. Dynamic Command Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/dynamic_command_configuration.html#core-concepts">12.1. Core Concepts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/dynamic_command_configuration.html#layers">12.1.1. Layers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sections/dynamic_command_configuration.html#how-to-manage-dynamic-configuration-values">12.2. How To Manage Dynamic Configuration Values</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/dynamic_command_configuration.html#manual-management-of-dynamic-configuration">12.2.1. Manual Management of Dynamic Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/dynamic_command_configuration.html#cog-managed-dynamic-configuration">12.2.2. Cog-managed Dynamic Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sections/dynamic_command_configuration.html#adding-a-base-layer-of-dynamic-configuration">12.2.2.1. Adding a base layer of dynamic configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sections/dynamic_command_configuration.html#showing-the-layers-that-exist">12.2.2.2. Showing the layers that exist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sections/dynamic_command_configuration.html#deleting-configuration-layers">12.2.2.3. Deleting Configuration Layers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/returning_data_from_cog.html">13. Returning data from Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/services.html">14. Services</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/services.html#overview">14.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/services.html#design-journey">14.2. Design Journey</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/services.html#cog-services-api">14.3. Cog Services API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/services.html#authentication-and-authorization">14.3.1. Authentication and Authorization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/services.html#routes">14.3.2. Routes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/services.html#v1-services-meta">14.3.3. /v1/services/meta</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sections/services.html#memory-service">14.4. Memory Service</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/services.html#data-model">14.4.1. Data Model</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sections/services.html#accumulate-default">14.4.1.1. Accumulate (Default)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sections/services.html#replace">14.4.1.2. Replace</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sections/services.html#chat-service">14.5. Chat Service</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/templates.html">15. Templates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/templates.html#basic-greenbar-syntax">15.1. Basic Greenbar Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/templates.html#overall-template-processing-logic">15.2. Overall Template Processing Logic</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/templates.html#all-pipelines-return-a-results-list">15.2.1. All pipelines return a &#8220;results&#8221; list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/templates.html#commands-can-specify-a-template-when-they-return-to-cog">15.2.2. Commands can specify a template when they return to Cog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/templates.html#last-output-wins">15.2.3. Last output &#8220;wins&#8221;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/templates.html#meta-templates-not-templates">15.2.4. Meta-templates, not Templates</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sections/templates.html#advanced-greenbar-usage">15.3. Advanced Greenbar Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/templates.html#writing-a-custom-tag">15.4. Writing a custom tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/templates.html#customizing-the-standard-error-template">15.5. Customizing the standard error template</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/templates.html#configuring">15.5.1. Configuring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/templates.html#error-greenbar">15.5.2. error.greenbar</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/installing_your_first_command_bundle.html">16. Installing Your First Command Bundle</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/installing_your_first_command_bundle.html#creating-your-bundle">16.1. Creating your bundle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/installing_your_first_command_bundle.html#assigning-your-bundle-to-a-relay">16.2. Assigning your bundle to a relay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/installing_your_first_command_bundle.html#enabling-your-bundle">16.3. Enabling your bundle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/installing_your_first_command_bundle.html#profit">16.4. Profit!</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/developing_a_trigger.html">17. Developing a Trigger</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/developing_a_trigger.html#lets-make-it-more-interesting">17.1. Let’s Make It More Interesting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/developing_a_trigger.html#going-further-composability-and-flexibility">17.2. Going Further: Composability and Flexibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/developing_a_trigger.html#filtering">17.3. Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/developing_a_trigger.html#validation">17.4. Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/developing_a_trigger.html#conclusion">17.5. Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/cog_architecture.html">18. Cog Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/cog_architecture.html#cog">18.1. Cog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/cog_architecture.html#postgresql">18.2. PostgreSQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/cog_architecture.html#mqtt">18.3. MQTT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/cog_architecture.html#relay">18.4. Relay</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/cog_architecture.html#code-isolation">18.4.1. Code isolation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/cog_architecture.html#availability">18.4.2. Availability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/cog_architecture.html#language-choice">18.4.3. Language Choice</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sections/cog_architecture.html#cogctl">18.5. cogctl</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/cog_architecture.html#more-information">18.5.1. More information</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/command_pipelines.html">19. Command pipelines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/command_pipelines.html#pipelines">19.1. Pipelines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/command_pipelines.html#command-execution">19.1.1. Command Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sections/command_pipelines.html#collecting-results">19.1.1.1. Collecting results</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sections/command_pipelines.html#variable-substitution">19.1.2. Variable Substitution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/redirecting_pipeline_output.html">20. Redirecting Pipeline Output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/redirecting_pipeline_output.html#redirection-destinations">20.1. Redirection Destinations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/redirecting_pipeline_output.html#multiple-redirect-destinations">20.2. Multiple Redirect Destinations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/redirecting_pipeline_output.html#easter-egg-trolling-your-coworkers">20.3. Easter Egg: Trolling Your Coworkers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/triggers.html">21. Triggers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/triggers.html#anatomy-of-a-trigger">21.1. Anatomy of a Trigger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/triggers.html#manipulating-triggers">21.2. Manipulating Triggers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/triggers.html#create-a-trigger">21.2.1. Create a Trigger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/triggers.html#show-a-trigger">21.2.2. Show a Trigger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/triggers.html#showing-all-triggers">21.2.3. Showing all Triggers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/triggers.html#update-a-trigger">21.2.4. Update a Trigger</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sections/triggers.html#deleting-a-trigger">21.3. Deleting a Trigger</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/triggers.html#enabling-disabling-a-trigger">21.3.1. Enabling / Disabling a Trigger</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sections/triggers.html#invoking-a-trigger">21.4. Invoking a Trigger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/triggers.html#initial-calling-environment-for-trigger-invoked-pipelines">21.5. Initial Calling Environment for Trigger-Invoked Pipelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/triggers.html#response-disposition-in-triggers">21.6. Response Disposition In Triggers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sections/triggers.html#redirect-destinations-in-triggered-pipelines">21.6.1. Redirect Destinations in Triggered Pipelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/triggers.html#trigger-timeouts">21.6.2. Trigger Timeouts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sections/triggers.html#errors-and-empty-pipelines">21.6.3. Errors and &#8220;Empty&#8221; Pipelines</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/user_management.html">22. User management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/user_management.html#self-registration">22.1. Self Registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/user_management.html#user-management-via-cogctl">22.2. User Management via Cogctl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/user_management.html#user-management-via-cogs-api">22.3. User Management via Cog’s API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/contributor_license_agreement.html">23. Contributor License Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references/cog_server_configuration.html">24. Cog Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references/relay_configuration.html">25. Relay Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references/command_output_tags.html">26. Command Output Tags</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="references/command_output_tags.html#examples">26.1. Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references/command_output_tags.html#tags">26.2. Tags</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="references/greenbar_tags.html">27. Greenbar Tags</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="references/greenbar_tags.html#if">27.1. if</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="references/greenbar_tags.html#example">27.1.1. Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="references/greenbar_tags.html#operators">27.1.2. Operators</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="references/greenbar_tags.html#each">27.2. Each</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="references/greenbar_tags.html#examples">27.2.1. Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="references/greenbar_tags.html#join">27.3. Join</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="references/greenbar_tags.html#id1">27.3.1. Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="references/greenbar_tags.html#count">27.4. Count</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="references/greenbar_tags.html#id2">27.4.1. Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="references/greenbar_tags.html#break">27.5. Break</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="references/greenbar_tags.html#id3">27.5.1. Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="references/greenbar_tags.html#attachment">27.6. Attachment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="references/greenbar_tags.html#attributes">27.6.1. Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="references/greenbar_tags.html#id4">27.6.2. Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="references/greenbar_tags.html#json">27.7. Json</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="references/greenbar_tags.html#id5">27.7.1. Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="references/audit_log_events.html">28. Audit Log Events</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="references/audit_log_events.html#api-events">28.1. API Events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="references/audit_log_events.html#api-event-types">28.1.1. API Event Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="references/audit_log_events.html#common-fields">28.1.2. Common Fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="references/audit_log_events.html#api-event-specific-data">28.1.3. API Event-specific Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="references/audit_log_events.html#pipeline-events">28.2. Pipeline Events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="references/audit_log_events.html#pipeline-event-types">28.2.1. Pipeline Event Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="references/audit_log_events.html#id1">28.2.2. Common Fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="references/audit_log_events.html#pipeline-event-specific-data">28.2.3. Pipeline Event-specific Data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="appendices/glossary.html">29. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendices/designing_for_chatops.html">30. Designing ChatOps Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendices/designing_for_chatops.html#small-sharp-tools">30.1. Small Sharp Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendices/designing_for_chatops.html#naming">30.2. Naming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendices/designing_for_chatops.html#designing-command-interfaces">30.3. Designing Command Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendices/designing_for_chatops.html#pipeline-friendly-output">30.4. Pipeline Friendly Output</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="appendices/chat_platforms.html">31. Notes on Chat Platform Support</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendices/chat_platforms.html#no-emoji-or-auto-linking-in-hipchat">31.1. No Emoji or Auto-Linking in HipChat</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sections/getting_started.html" class="btn btn-neutral float-right" title="1. Getting Started" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 Operable, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61670076-4', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  
+
+
+</body>
+</html>

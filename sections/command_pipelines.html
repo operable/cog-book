@@ -1,0 +1,526 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>19. Command pipelines &mdash; Cog Book 1.0.0 documentation</title>
+  
+
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Cog Book 1.0.0 documentation" href="../index.html"/>
+        <link rel="next" title="20. Redirecting Pipeline Output" href="redirecting_pipeline_output.html"/>
+        <link rel="prev" title="18. Cog Architecture" href="cog_architecture.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cog Book
+          
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+          </a>
+
+          
+            <img src="../_static/cog_peek.svg" class="logo" />
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bootstrapping_cog.html">2. Bootstrapping Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_and_managing_relays.html">3. Installing and Managing Relays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands_and_bundles.html">4. Commands and Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="managing_bundles.html">5. Managing Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_a_command_bundle.html">6. Writing A Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_password_resets.html">7. Configuring password resets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions_and_rules.html">8. Permissions and Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_execution_rules.html">9. Command Execution Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundle_configs.html">10. Bundle Configs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_environment_variables.html">11. Command Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic_command_configuration.html">12. Dynamic Command Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="returning_data_from_cog.html">13. Returning data from Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services.html">14. Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">15. Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_your_first_command_bundle.html">16. Installing Your First Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing_a_trigger.html">17. Developing a Trigger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cog_architecture.html">18. Cog Architecture</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">19. Command pipelines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pipelines">19.1. Pipelines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#command-execution">19.1.1. Command Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#collecting-results">19.1.1.1. Collecting results</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#variable-substitution">19.1.2. Variable Substitution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="redirecting_pipeline_output.html">20. Redirecting Pipeline Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">21. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_management.html">22. User management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributor_license_agreement.html">23. Contributor License Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/cog_server_configuration.html">24. Cog Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/relay_configuration.html">25. Relay Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/command_output_tags.html">26. Command Output Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/greenbar_tags.html">27. Greenbar Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/audit_log_events.html">28. Audit Log Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/glossary.html">29. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/designing_for_chatops.html">30. Designing ChatOps Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/chat_platforms.html">31. Notes on Chat Platform Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Cog Book</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>19. Command pipelines</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/operable/cog-book/blob/HEAD/cog-book/source/sections/command_pipelines.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="command-pipelines">
+<h1>19. Command pipelines<a class="headerlink" href="#command-pipelines" title="Permalink to this headline">¶</a></h1>
+<p>Piping the output of one command into another is a staple of the Unix
+command-line experience. It enables the &#8220;Unix Philosophy&#8221; of having
+simple tools that do one thing and do it well, allowing users to
+construct processing pipelines to do complex tasks using simple building
+blocks.</p>
+<p>What if you could do the same thing with your chat ops tools? With Cog,
+you can.</p>
+<div class="section" id="pipelines">
+<h2>19.1. Pipelines<a class="headerlink" href="#pipelines" title="Permalink to this headline">¶</a></h2>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>!ec2:list | filter --field=&quot;zone&quot; --matches=&quot;us-east-1a&quot; | ec2:terminate $instance-id
+</pre></div>
+</div>
+<p>Pipelines allow you to pass the output of one command into a subsequent
+invocation, allowing you to achieve things like the above invocation. In
+English: &#8220;List all my EC2 nodes, keep only those in the <code class="docutils literal"><span class="pre">us-east-1a</span></code>
+availability zone, and terminate just those instances&#8221;. It’s much easier
+to compose simple commands in this way, versus writing one command that
+incorporates listing, filtering, and termination into one operation.</p>
+<div class="section" id="command-execution">
+<h3>19.1.1. Command Execution<a class="headerlink" href="#command-execution" title="Permalink to this headline">¶</a></h3>
+<p>Commands return results formatted as maps of key-value pairs. Commands
+may return one or multiple results. In either case results are always
+returned contained in a list. Commands operate on each result from
+previous commands individually and independently of any others (that is,
+the command is run <em>multiple times</em>, one for each result).</p>
+<p>Some examples will be illustrative. In each case, we’ll pipe the output
+through the <code class="docutils literal"><span class="pre">operable:raw</span></code> command, which exposes the raw structure of
+these response maps.</p>
+<p>To show all the rules currently in effect for the
+<code class="docutils literal"><span class="pre">operable:permissions</span></code> command, I can execute the following command:</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">operable</span><span class="p">:</span><span class="n">rule</span> <span class="nb">list</span> <span class="o">--</span><span class="n">command</span><span class="o">=</span><span class="n">operable</span><span class="p">:</span><span class="n">permissions</span> <span class="o">|</span> <span class="n">raw</span>
+</pre></div>
+</div>
+<p>The response is actually a list of maps, one for each rule. Here, we can
+see there are three:</p>
+<div class="code json highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;rule&quot;</span><span class="p">:</span> <span class="s2">&quot;when command is operable:permissions with option[user] == /.*/ must have operable:manage_users&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;f96ec769-dc85-4c95-a7f0-d87c330510bf&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;command&quot;</span><span class="p">:</span> <span class="s2">&quot;operable:permissions&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;rule&quot;</span><span class="p">:</span> <span class="s2">&quot;when command is operable:permissions with option[role] == /.*/ must have operable:manage_roles&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;32938757-6e75-48d4-ad6f-6a4012ff0b15&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;command&quot;</span><span class="p">:</span> <span class="s2">&quot;operable:permissions&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;rule&quot;</span><span class="p">:</span> <span class="s2">&quot;when command is operable:permissions with option[group] == /.*/ must have operable:manage_groups&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;9c75a1e5-8591-4577-97a9-3bfeeaf4317c&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;command&quot;</span><span class="p">:</span> <span class="s2">&quot;operable:permissions&quot;</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>If we were to add echo to our pipeline, we would expect it to be
+executed 3 times (once for each input).</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>operable:rule list --command=operable:permissions | echo $rule | raw
+</pre></div>
+</div>
+<p>This is exactly what we get:</p>
+<div class="code json highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;when command is operable:permissions with option[user] == /.*/ must have operable:manage_users&quot;</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;when command is operable:permissions with option[role] == /.*/ must have operable:manage_roles&quot;</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;when command is operable:permissions with option[group] == /.*/ must have operable:manage_groups&quot;</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The output of an <code class="docutils literal"><span class="pre">echo</span></code> invocation is a map, even though we
+are echoing a simple string: the rule text. The pipeline execution logic
+ensures that such data is wrapped in a map to ensure a consistent
+interface for all commands.</p>
+</div>
+<div class="section" id="collecting-results">
+<h4>19.1.1.1. Collecting results<a class="headerlink" href="#collecting-results" title="Permalink to this headline">¶</a></h4>
+<p>Usually it’s best to operate on input from previous commands one result
+at a time. This helps to keep commands simple and to the point. But
+there are occasions when you may want to operate on all of the results
+at once. Let’s continue our previous example to see why.</p>
+<p>First, let’s just echo the command a rule applies to:</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>operable:rule list --command=operable:permissions | echo $command | raw
+</pre></div>
+</div>
+<p>Since all rules are from the same command, we simply get the command
+name repeated for as many times as there are rules:</p>
+<div class="code json highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;operable:permissions&quot;</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;operable:permissions&quot;</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;operable:permissions&quot;</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Now, we add <code class="docutils literal"><span class="pre">operable:unique</span></code> to the pipeline.</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>operable:rule list --command=operable:permissions | echo $command | unique | raw
+</pre></div>
+</div>
+<div class="code json highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;operable:permissions&quot;</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>As expected, our collection of three results is reduced down to a single
+result. Unlike many commands <code class="docutils literal"><span class="pre">operable:unique</span></code> requires access to the
+entire list of inputs in order to do it’s job. Cog provides a few
+additional tools to make this possible.</p>
+<p>There are two env vars that are of note: <code class="docutils literal"><span class="pre">COG_INVOCATION_ID</span></code> and
+<code class="docutils literal"><span class="pre">COG_INVOCATION_STEP</span></code>.</p>
+<ul>
+<li><p class="first"><code class="docutils literal"><span class="pre">COG_INVOCATION_ID</span></code> contains the id of the current invocation. The
+invocation id will be the same for each execution of the command on a
+particular set of inputs. When the same command is called multiple
+times in the same pipeline this id will be different for each set of
+inputs. For example:</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>seed &#39;[{&quot;foo&quot;: &quot;bar&quot;},{&quot;foo&quot;:&quot;baz&quot;}]&#39; | echo $foo
+</pre></div>
+</div>
+<p>In this case echo will execute twice, once for each result from seed.
+For both executions <code class="docutils literal"><span class="pre">COG_INVOCATION_ID</span></code> will be the same.</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">COG_INVOCATION_STEP</span></code> specifies where we are in the current
+invocation. It can contain one of three values: <code class="docutils literal"><span class="pre">FIRST</span></code>, <code class="docutils literal"><span class="pre">LAST</span></code>
+or the environment variable will not exist. <code class="docutils literal"><span class="pre">FIRST</span></code> for the first
+execution, <code class="docutils literal"><span class="pre">LAST</span></code> for the last execution. Another example might be
+useful:</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>seed &#39;[{&quot;foo&quot;:&quot;bar&quot;,{&quot;foo&quot;:&quot;baz&quot;},{&quot;foo&quot;:&quot;qux&quot;}]&#39; | echo $foo
+</pre></div>
+</div>
+<p>Here echo will be executed three times. The first step will be
+<code class="docutils literal"><span class="pre">FIRST</span></code>, the second will not get that environment variable, and the
+last, <code class="docutils literal"><span class="pre">LAST</span></code>. In the case that there is only a single item in the
+input list, meaning the stage is technically the first and last step,
+the step will be <code class="docutils literal"><span class="pre">LAST</span></code>.</p>
+</li>
+</ul>
+<p>Given this you can collect state using the memory service, see
+<a class="reference internal" href="services.html"><span class="doc">Services</span></a>, and process the results as a whole once you have
+received everything.</p>
+</div>
+</div>
+<div class="section" id="variable-substitution">
+<h3>19.1.2. Variable Substitution<a class="headerlink" href="#variable-substitution" title="Permalink to this headline">¶</a></h3>
+<p>During command execution, we select which fields of an incoming result
+map are available to the command by using variable substitution to bind
+values from a result to either an option or argument of the command.
+This technique was used without discussion earlier, but here we take a
+closer look.</p>
+<p>To illustrate, we’ll use the <code class="docutils literal"><span class="pre">operable:seed</span></code> command, which can be
+used to create arbitrary result maps to feed into a pipeline. Simply
+pass <code class="docutils literal"><span class="pre">seed</span></code> a valid JSON string, and the resulting data structure will
+be passed on to downstream commands.</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">seed</span> <span class="s1">&#39;{&quot;thing&quot;:&quot;stuff&quot;}&#39;</span>
+</pre></div>
+</div>
+<div class="code json highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;thing&quot;</span><span class="p">:</span> <span class="s2">&quot;stuff&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Using this simple seed data, we can start to experiment with variable
+binding. Let’s use <code class="docutils literal"><span class="pre">echo</span></code> to return the value of the <code class="docutils literal"><span class="pre">thing</span></code> key:</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>seed &#39;{&quot;thing&quot;:&quot;stuff&quot;}&#39; | echo $thing
+</pre></div>
+</div>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">stuff</span>
+</pre></div>
+</div>
+<p>Cog has taken the <em>value</em> found at the <code class="docutils literal"><span class="pre">thing</span></code> key in the result map
+and binds it to argument 0 of the <code class="docutils literal"><span class="pre">echo</span></code> command. The result is the
+same as if you typed <code class="docutils literal"><span class="pre">echo</span> <span class="pre">stuff</span></code> directly.</p>
+<p>Cog can bind variables in several positions. We have already seen
+binding arguments. We can also bind option values:</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>seed &#39;{&quot;command&quot;:&quot;operable:permissions&quot;}&#39; | rule list --command=$command | raw
+</pre></div>
+</div>
+<div class="code json highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;rule&quot;</span><span class="p">:</span> <span class="s2">&quot;when command is operable:permissions with option[user] == /.*/ must have operable:manage_users&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;b0877b77-5c56-4514-bf33-3a1f5d5d8ae8&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;command&quot;</span><span class="p">:</span> <span class="s2">&quot;operable:permissions&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;rule&quot;</span><span class="p">:</span> <span class="s2">&quot;when command is operable:permissions with option[role] == /.*/ must have operable:manage_roles&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;7da40026-aaed-41fb-9e5e-f0148e48444c&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;command&quot;</span><span class="p">:</span> <span class="s2">&quot;operable:permissions&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;rule&quot;</span><span class="p">:</span> <span class="s2">&quot;when command is operable:permissions with option[group] == /.*/ must have operable:manage_groups&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;da83eb97-8d44-4af0-b8a7-bc7abde63622&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;command&quot;</span><span class="p">:</span> <span class="s2">&quot;operable:permissions&quot;</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Option names themselves can also be bound:</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>seed &#39;{&quot;flag&quot;:&quot;words&quot;}&#39; | wc --$flag &quot;hello world&quot;
+</pre></div>
+</div>
+<div class="code json highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;words&quot;</span><span class="p">:</span> <span class="mi">2</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that commands only have access to the results emitted by the
+command immediately preceeding them in the pipeline. This command
+succeeds:</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>seed &#39;{&quot;flag&quot;:&quot;words&quot;}&#39; | wc --$flag &quot;hello world&quot; | echo $words
+</pre></div>
+</div>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="mi">2</span>
+</pre></div>
+</div>
+<p>But this command fails because <code class="docutils literal"><span class="pre">wc</span></code> does not produce a result map with
+a <code class="docutils literal"><span class="pre">flag</span></code> key:</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>seed &#39;{&quot;flag&quot;:&quot;words&quot;}&#39; | wc --$flag &quot;hello world&quot; | echo $flag
+</pre></div>
+</div>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">I</span> <span class="n">cannot</span> <span class="n">find</span> <span class="n">the</span> <span class="n">variable</span> <span class="s1">&#39;$flag&#39;</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>You can bind multiple values in an invocation, too:</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>seed &#39;{&quot;flag&quot;:&quot;words&quot;,&quot;input&quot;:&quot;hello world&quot;}&#39; | wc --$flag $input
+</pre></div>
+</div>
+<div class="code json highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;words&quot;</span><span class="p">:</span> <span class="mi">2</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="redirecting_pipeline_output.html" class="btn btn-neutral float-right" title="20. Redirecting Pipeline Output" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cog_architecture.html" class="btn btn-neutral" title="18. Cog Architecture" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 Operable, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61670076-4', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  
+
+
+</body>
+</html>

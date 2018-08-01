@@ -1,0 +1,379 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1.7. Building and Running Cog from Scratch &mdash; Cog Book 1.0.0 documentation</title>
+  
+
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Cog Book 1.0.0 documentation" href="../index.html"/>
+        <link rel="up" title="1. Getting Started" href="getting_started.html"/>
+        <link rel="next" title="2. Bootstrapping Cog" href="bootstrapping_cog.html"/>
+        <link rel="prev" title="1.6. Installation Guide" href="installation_guide.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cog Book
+          
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+          </a>
+
+          
+            <img src="../_static/cog_peek.svg" class="logo" />
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="getting_started.html">1. Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introducing_cog.html">1.1. Introducing Cog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introducing_cog.html#current-features">1.2. Current Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introducing_cog.html#get-started">1.3. Get Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introducing_cog.html#communication">1.4. Communication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introducing_cog.html#user-experience-feedback">1.5. User experience feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation_guide.html">1.6. Installation Guide</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1.7. Building and Running Cog from Scratch</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bootstrapping_cog.html">2. Bootstrapping Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_and_managing_relays.html">3. Installing and Managing Relays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands_and_bundles.html">4. Commands and Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="managing_bundles.html">5. Managing Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_a_command_bundle.html">6. Writing A Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_password_resets.html">7. Configuring password resets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions_and_rules.html">8. Permissions and Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_execution_rules.html">9. Command Execution Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundle_configs.html">10. Bundle Configs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_environment_variables.html">11. Command Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic_command_configuration.html">12. Dynamic Command Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="returning_data_from_cog.html">13. Returning data from Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services.html">14. Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">15. Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_your_first_command_bundle.html">16. Installing Your First Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing_a_trigger.html">17. Developing a Trigger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cog_architecture.html">18. Cog Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_pipelines.html">19. Command pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="redirecting_pipeline_output.html">20. Redirecting Pipeline Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">21. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_management.html">22. User management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributor_license_agreement.html">23. Contributor License Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/cog_server_configuration.html">24. Cog Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/relay_configuration.html">25. Relay Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/command_output_tags.html">26. Command Output Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/greenbar_tags.html">27. Greenbar Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/audit_log_events.html">28. Audit Log Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/glossary.html">29. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/designing_for_chatops.html">30. Designing ChatOps Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/chat_platforms.html">31. Notes on Chat Platform Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Cog Book</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="getting_started.html">1. Getting Started</a> &raquo;</li>
+      
+    <li>1.7. Building and Running Cog from Scratch</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/operable/cog-book/blob/HEAD/cog-book/source/sections/building_cog_from_scratch.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="building-and-running-cog-from-scratch">
+<h1>1.7. Building and Running Cog from Scratch<a class="headerlink" href="#building-and-running-cog-from-scratch" title="Permalink to this headline">¶</a></h1>
+<p>To run Cog you’ll need to start three separate processes: Postgres,
+Relay and Cog itself, all of which will require a few dependencies.</p>
+<ul class="simple">
+<li>Postgres 9.4+</li>
+<li>Erlang 18+</li>
+<li>Elixir 1.3+</li>
+<li>Go 1.6+</li>
+<li>Docker 1.10.3+</li>
+<li>GCC</li>
+</ul>
+<p>Downloading and installing Postgres 9.4+ should be straight forward.
+Take a look at <a class="reference external" href="https://www.postgresql.org/download/">their download
+page</a> for more details.</p>
+<p>Next, let’s build Relay. You’ll need to install Go 1.6+ and Docker
+1.10.3+. Why do we still need Docker? Bundles have the option to define
+an image on Docker Hub in which to run the command. So, Relay needs to
+know how to download those images and start containers to run some
+commands.</p>
+<p>Download the source in your <code class="docutils literal"><span class="pre">$GOPATH</span></code> and build it.</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span>mkdir -p $GOPATH/src/github.com/operable
+git clone git@github.com:operable/go-relay.git $GOPATH/src/github.com/operable/go-relay
+cd $GOPATH/src/github.com/operable/go-relay
+make
+</pre></div>
+</div>
+<p>You should have an executable in <code class="docutils literal"><span class="pre">_build</span></code> ready to go. We’ll come back
+to it in a mintue.</p>
+<p>Now, to build Cog. Cog is written in Elixir, which means you’ll need to
+install both Erlang 18+ and Elixir 1.3+. You can find more information
+about how to install Elixir on their <a class="reference external" href="http://elixir-lang.org/install.html">installation
+guide</a>. Once you have Elixir
+installed run the following to clone the Cog repo, download deps, setup
+the database, compile and run Cog.</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">operable</span><span class="o">/</span><span class="n">cog</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">cog</span>
+<span class="n">make</span> <span class="n">setup</span> <span class="n">run</span>
+</pre></div>
+</div>
+<p>You’ll notice that the <code class="docutils literal"><span class="pre">run</span></code> target crashed as we didn’t provide a
+<code class="docutils literal"><span class="pre">SLACK_API_TOKEN</span></code> environment variable. To fully configure Cog and
+Relay we’ll need to set a few environment variables. If you need more
+customization than is explained in this guide checkout the full listing
+of environment variables and their descriptions for both
+<a class="reference internal" href="../references/cog_server_configuration.html"><span class="doc">Cog Server Configuration</span></a> and <a class="reference internal" href="../references/relay_configuration.html"><span class="doc">Relay Configuration</span></a>.</p>
+<p>For now let’s just provide the minimum to get things up and running. For
+Cog, we’ll just need to set <code class="docutils literal"><span class="pre">COG_SLACK_ENABLED</span></code> and
+<code class="docutils literal"><span class="pre">SLACK_API_TOKEN</span></code> as everything else has a sensible default. You can
+get a <code class="docutils literal"><span class="pre">SLACK_API_TOKEN</span></code> for your bot by creating a <a class="reference external" href="https://my.slack.com/services/new/bot">new bot
+integration</a>. So let’s try
+running Cog again, now with our token exported.</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">COG_SLACK_ENABLED</span><span class="o">=</span><span class="n">true</span>
+<span class="n">export</span> <span class="n">SLACK_API_TOKEN</span><span class="o">=</span><span class="n">xoxb</span><span class="o">-</span><span class="mi">87931061512</span><span class="o">-</span><span class="n">notarealtokenLNjTMuxxozUo</span>
+<span class="n">make</span> <span class="n">run</span>
+</pre></div>
+</div>
+<p>To get Relay running, we’ll need to supply both <code class="docutils literal"><span class="pre">RELAY_ID</span></code> and
+<code class="docutils literal"><span class="pre">RELAY_COG_TOKEN</span></code> which are used to both identify our Relay and allow
+it to connect to Cog. I would recommend using a uuid for <code class="docutils literal"><span class="pre">RELAY_ID</span></code>
+and a random string for the <code class="docutils literal"><span class="pre">RELAY_COG_TOKEN</span></code>. If you have <code class="docutils literal"><span class="pre">uuid</span></code>
+and <code class="docutils literal"><span class="pre">openssl</span></code> installed you could use the following commands like
+these to generate them. After, exporting those variables we can run the
+run the binary we previously built.</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span>export RELAY_ID=`uuid` &amp;&amp; echo $RELAY_ID
+export RELAY_COG_TOKEN=`openssl rand -hex 12` &amp;&amp; echo $RELAY_COG_TOKEN
+export RELAY_DYNAMIC_CONFIG_ROOT=/tmp/dynamic_configs
+_build/relay
+</pre></div>
+</div>
+<p>You’ll see a warning about a missing configuration file, which you can
+ignore since we’re not using one.</p>
+<p>Ok, so now we have both Cog and Relay up and running, but they aren’t
+actually aware of each other yet. Because Cog was designed to be run
+with multiple Relays on multiple hosts, we need to tell Cog about our
+Relay before it can connect. It’s worth noting, that in this example
+we’ve bound to <code class="docutils literal"><span class="pre">localhost</span></code> so certain features like enforcing a
+matching <code class="docutils literal"><span class="pre">RELAY_TOKEN</span></code> are disabled. But, to add a Relay to Cog, we
+need to build and run Cogctl.</p>
+<p>Cogctl is written in Python 3, but can be compiled to a standalone,
+self-contained binary. Setting up a Python development environment is
+beyond the scope of this document, but up-to-date instructions can be
+found in the README of the <a class="reference external" href="https://github.com/operable/cogctl">cogctl repository</a>.</p>
+<p>Once you build the binary, you’ll have a <code class="docutils literal"><span class="pre">cogctl</span></code> executable in the
+<code class="docutils literal"><span class="pre">dist</span></code> directory of your <code class="docutils literal"><span class="pre">cogctl</span></code> checkout. You can run this from
+its current location, or move it anywhere you like.</p>
+<p>Ok, now we just need to bootstrap Cog and create a record for our Relay.
+Here’s a snippet:</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span>./cogctl bootstrap http://localhost:4000
+./cogctl relay create my-relay $RELAY_ID $RELAY_COG_TOKEN
+</pre></div>
+</div>
+<p>And now you should be in business. But there’s one last step we need to
+take care of before you can run commands. You’ll need to create an
+account for yourself. Copying this run the Docker-based walkthrough, run
+this:</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">cogctl</span> <span class="n">user</span> <span class="n">create</span> <span class="n">patrick</span> \
+  <span class="o">--</span><span class="n">first</span><span class="o">-</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Patrick&quot;</span> \
+  <span class="o">--</span><span class="n">last</span><span class="o">-</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Van Stee&quot;</span> \
+  <span class="o">--</span><span class="n">email</span><span class="o">=</span><span class="s2">&quot;patrick@operable.io&quot;</span> \
+  <span class="o">--</span><span class="n">password</span><span class="o">=</span><span class="s2">&quot;supersecret&quot;</span>
+
+<span class="o">./</span><span class="n">cogctl</span> <span class="n">chat</span><span class="o">-</span><span class="n">handle</span> <span class="n">create</span> <span class="n">patrick</span> <span class="n">slack</span> <span class="n">vanstee</span>
+
+<span class="o">./</span><span class="n">cogctl</span> <span class="n">group</span> <span class="n">add</span> <span class="n">cog</span><span class="o">-</span><span class="n">admin</span> <span class="n">patrick</span>
+</pre></div>
+</div>
+<p>And now you should be all set. For a quick walkthrough of installing
+your first bundle and running a command, jump back up to the section
+titled &#8220;Installing and Configuring a Bundle.&#8221;</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="bootstrapping_cog.html" class="btn btn-neutral float-right" title="2. Bootstrapping Cog" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installation_guide.html" class="btn btn-neutral" title="1.6. Installation Guide" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 Operable, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61670076-4', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  
+
+
+</body>
+</html>

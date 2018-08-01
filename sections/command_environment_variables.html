@@ -1,0 +1,379 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>11. Command Environment Variables &mdash; Cog Book 1.0.0 documentation</title>
+  
+
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Cog Book 1.0.0 documentation" href="../index.html"/>
+        <link rel="next" title="12. Dynamic Command Configuration" href="dynamic_command_configuration.html"/>
+        <link rel="prev" title="10. Bundle Configs" href="bundle_configs.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cog Book
+          
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+          </a>
+
+          
+            <img src="../_static/cog_peek.svg" class="logo" />
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bootstrapping_cog.html">2. Bootstrapping Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_and_managing_relays.html">3. Installing and Managing Relays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands_and_bundles.html">4. Commands and Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="managing_bundles.html">5. Managing Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_a_command_bundle.html">6. Writing A Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_password_resets.html">7. Configuring password resets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions_and_rules.html">8. Permissions and Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_execution_rules.html">9. Command Execution Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundle_configs.html">10. Bundle Configs</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">11. Command Environment Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#arguments">11.1. Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options">11.2. Options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#list-valued-options">11.2.1. List-valued Options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#general-metadata">11.3. General Metadata</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic_command_configuration.html">12. Dynamic Command Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="returning_data_from_cog.html">13. Returning data from Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services.html">14. Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">15. Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_your_first_command_bundle.html">16. Installing Your First Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing_a_trigger.html">17. Developing a Trigger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cog_architecture.html">18. Cog Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_pipelines.html">19. Command pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="redirecting_pipeline_output.html">20. Redirecting Pipeline Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">21. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_management.html">22. User management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributor_license_agreement.html">23. Contributor License Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/cog_server_configuration.html">24. Cog Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/relay_configuration.html">25. Relay Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/command_output_tags.html">26. Command Output Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/greenbar_tags.html">27. Greenbar Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/audit_log_events.html">28. Audit Log Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/glossary.html">29. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/designing_for_chatops.html">30. Designing ChatOps Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/chat_platforms.html">31. Notes on Chat Platform Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Cog Book</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>11. Command Environment Variables</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/operable/cog-book/blob/HEAD/cog-book/source/sections/command_environment_variables.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="command-environment-variables">
+<h1>11. Command Environment Variables<a class="headerlink" href="#command-environment-variables" title="Permalink to this headline">¶</a></h1>
+<p>When you send a command invocation to Cog, it can have many arguments
+and options. There are also several other pieces of important metadata
+that can be useful for commands to be aware of during execution. To get
+these data into the actual executable running that command, we expose
+them as environment variables. While libraries like
+<a class="reference external" href="https://github.com/operable/cog-rb">cog-rb</a> and
+<a class="reference external" href="https://github.com/operable/pycog3">pycog3</a> provide
+language-friendly abstractions to interact with these data, it can be
+useful to know the details of how they are structured, in case you need
+to perform some unique processing, or are writing commands in a language
+where a Cog library does not yet exist.</p>
+<p>In general, all Cog-related environment variables will be prefixed with
+<code class="docutils literal"><span class="pre">COG_</span></code>.</p>
+<div class="section" id="arguments">
+<h2>11.1. Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline">¶</a></h2>
+<p>Arguments to Cog commands are represent in much the same way as they are
+in traditional UNIX shell scripting.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">COG_ARGC</span></code>: the number of arguments</li>
+<li><code class="docutils literal"><span class="pre">COG_ARGV_&lt;N&gt;</span></code>: The <em>nth</em> argument, starting at <code class="docutils literal"><span class="pre">N</span> <span class="pre">=</span> <span class="pre">0</span></code></li>
+</ul>
+<p>For example, given the notional command invocation
+<code class="docutils literal"><span class="pre">my:command</span> <span class="pre">foo</span> <span class="pre">bar</span> <span class="pre">baz</span></code>, the executable would access the arguments
+through the following environment variables:</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">COG_ARGC</span><span class="o">=</span><span class="mi">3</span>
+<span class="n">COG_ARGV_0</span><span class="o">=</span><span class="s2">&quot;foo&quot;</span>
+<span class="n">COG_ARGV_1</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span>
+<span class="n">COG_ARGV_2</span><span class="o">=</span><span class="s2">&quot;baz&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="options">
+<h2>11.2. Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>As they behave like a map, options are handled a bit differently</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">COG_OPTS</span></code>: a comma-delimited list of all option names</li>
+<li><code class="docutils literal"><span class="pre">COG_OPT_&lt;NAME&gt;</span></code>: the value of the <code class="docutils literal"><span class="pre">NAME</span></code> option</li>
+</ul>
+<p>For example: the executable processing the invocation
+<code class="docutils literal"><span class="pre">my:command</span> <span class="pre">--verbose</span> <span class="pre">--force</span> <span class="pre">--foo=bar</span></code> would access the options
+through the following variables:</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">COG_OPTS</span><span class="o">=</span><span class="s2">&quot;verbose,force,foo&quot;</span>
+<span class="n">COG_OPT_VERBOSE</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+<span class="n">COG_OPT_FORCE</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+<span class="n">COG_OPT_FOO</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span>
+</pre></div>
+</div>
+<p>Note that the names given in <code class="docutils literal"><span class="pre">COG_OPTS</span></code> are lowercase, while the names
+of all environment variables provided by Cog are all uppercase.</p>
+<div class="section" id="list-valued-options">
+<h3>11.2.1. List-valued Options<a class="headerlink" href="#list-valued-options" title="Permalink to this headline">¶</a></h3>
+<p>The above model works fine for options that have scalar values. For
+option values that are lists, we use an approach that is a hybrid
+between the argument processing and the scalar option processing we
+discussed above.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">COG_OPT_&lt;NAME&gt;_COUNT</span></code>: The number of values for the <code class="docutils literal"><span class="pre">NAME</span></code>
+option</li>
+<li><code class="docutils literal"><span class="pre">COG_OPT_&lt;NAME&gt;_&lt;N&gt;</span></code>: The <em>nth</em> value of the <code class="docutils literal"><span class="pre">NAME</span></code> option,
+starting at <code class="docutils literal"><span class="pre">N</span> <span class="pre">=</span> <span class="pre">0</span></code>.</li>
+</ul>
+<p>For an invocation like <code class="docutils literal"><span class="pre">my:command</span> <span class="pre">--foo=one</span> <span class="pre">--foo=two</span> <span class="pre">--foo=three</span></code>,
+the executable would access the values of <code class="docutils literal"><span class="pre">foo</span></code> with these variables:</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">COG_OPT_FOO_COUNT</span><span class="o">=</span><span class="mi">3</span>
+<span class="n">COG_OPT_FOO_0</span><span class="o">=</span><span class="s2">&quot;one&quot;</span>
+<span class="n">COG_OPT_FOO_1</span><span class="o">=</span><span class="s2">&quot;two&quot;</span>
+<span class="n">COG_OPT_FOO_2</span><span class="o">=</span><span class="s2">&quot;three&quot;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Only scalar-valued option values will have a <code class="docutils literal"><span class="pre">COG_OPT_&lt;NAME&gt;</span></code>
+environment variable. Variables pertaining to list-valued options
+will always end in either <code class="docutils literal"><span class="pre">_COUNT</span></code> or <code class="docutils literal"><span class="pre">_N</span></code> (where <code class="docutils literal"><span class="pre">N</span></code> is an
+integer).</p>
+</div>
+</div>
+</div>
+<div class="section" id="general-metadata">
+<h2>11.3. General Metadata<a class="headerlink" href="#general-metadata" title="Permalink to this headline">¶</a></h2>
+<p>The following variables are set for all commands.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">COG_BUNDLE</span></code>: The name of the bundle the current command is a
+member of.</li>
+<li><code class="docutils literal"><span class="pre">COG_CHAT_HANDLE</span></code>: the chat handle of the user executing the
+command. This is the bare handle; if I am <code class="docutils literal"><span class="pre">&#64;user</span></code> in Slack, the
+value will be just <code class="docutils literal"><span class="pre">&quot;user&quot;</span></code></li>
+<li><code class="docutils literal"><span class="pre">COG_COMMAND</span></code>: The name of the current command being executed. Does
+<em>not</em> include the bundle; that is, when executing the command
+<code class="docutils literal"><span class="pre">twitter:tweet</span></code>, for example, <code class="docutils literal"><span class="pre">COG_COMMAND</span></code> will equal
+<code class="docutils literal"><span class="pre">&quot;tweet&quot;</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">COG_INVOCATION_ID</span></code>: a unique ID string identifying the specific
+invocation within a pipeline stage .</li>
+<li><code class="docutils literal"><span class="pre">COG_INVOCATION_STEP</span></code>: the string <code class="docutils literal"><span class="pre">&quot;first&quot;</span></code> if this is the first
+invocation of a command for a given stage of a pipeline, the string
+<code class="docutils literal"><span class="pre">&quot;last&quot;</span></code> if it is the last invocation, and unset if any
+intermediate invocation. If there is only a single invocation to be
+run in a given stage, the value will be <code class="docutils literal"><span class="pre">&quot;last&quot;</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">COG_PIPELINE_ID</span></code>: a unique ID string assigned to each pipeline.
+All commands in a given pipeline will receive the same value.</li>
+<li><code class="docutils literal"><span class="pre">COG_ROOM</span></code>: the chat room where the command was invoked. This is
+the bare room name; if it was executed in the <code class="docutils literal"><span class="pre">#general</span></code> channel in
+Slack, the value would be just <code class="docutils literal"><span class="pre">&quot;general&quot;</span></code>. For 1-on-1
+interactions, this will be the string <code class="docutils literal"><span class="pre">&quot;direct&quot;</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">COG_SERVICE_TOKEN</span></code>: a unique token for accessing Cog’s service
+infrastructure.</li>
+<li><code class="docutils literal"><span class="pre">COG_SERVICES_ROOT</span></code>: Host and port for accessing Cog’s service
+infrastructure.</li>
+</ul>
+<p>All other environment variables (e.g., <code class="docutils literal"><span class="pre">PATH</span></code>, <code class="docutils literal"><span class="pre">USER</span></code>, etc.) are
+inherited from the Relay process.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dynamic_command_configuration.html" class="btn btn-neutral float-right" title="12. Dynamic Command Configuration" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="bundle_configs.html" class="btn btn-neutral" title="10. Bundle Configs" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 Operable, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61670076-4', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  
+
+
+</body>
+</html>

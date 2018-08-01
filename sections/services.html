@@ -1,0 +1,635 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>14. Services &mdash; Cog Book 1.0.0 documentation</title>
+  
+
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Cog Book 1.0.0 documentation" href="../index.html"/>
+        <link rel="next" title="15. Templates" href="templates.html"/>
+        <link rel="prev" title="13. Returning data from Cog" href="returning_data_from_cog.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cog Book
+          
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+          </a>
+
+          
+            <img src="../_static/cog_peek.svg" class="logo" />
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bootstrapping_cog.html">2. Bootstrapping Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_and_managing_relays.html">3. Installing and Managing Relays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands_and_bundles.html">4. Commands and Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="managing_bundles.html">5. Managing Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_a_command_bundle.html">6. Writing A Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_password_resets.html">7. Configuring password resets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions_and_rules.html">8. Permissions and Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_execution_rules.html">9. Command Execution Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundle_configs.html">10. Bundle Configs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_environment_variables.html">11. Command Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic_command_configuration.html">12. Dynamic Command Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="returning_data_from_cog.html">13. Returning data from Cog</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">14. Services</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">14.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#design-journey">14.2. Design Journey</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cog-services-api">14.3. Cog Services API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#authentication-and-authorization">14.3.1. Authentication and Authorization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routes">14.3.2. Routes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#v1-services-meta">14.3.3. /v1/services/meta</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#memory-service">14.4. Memory Service</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data-model">14.4.1. Data Model</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#accumulate-default">14.4.1.1. Accumulate (Default)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#replace">14.4.1.2. Replace</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#chat-service">14.5. Chat Service</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">15. Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_your_first_command_bundle.html">16. Installing Your First Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing_a_trigger.html">17. Developing a Trigger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cog_architecture.html">18. Cog Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_pipelines.html">19. Command pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="redirecting_pipeline_output.html">20. Redirecting Pipeline Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">21. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_management.html">22. User management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributor_license_agreement.html">23. Contributor License Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/cog_server_configuration.html">24. Cog Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/relay_configuration.html">25. Relay Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/command_output_tags.html">26. Command Output Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/greenbar_tags.html">27. Greenbar Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/audit_log_events.html">28. Audit Log Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/glossary.html">29. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/designing_for_chatops.html">30. Designing ChatOps Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/chat_platforms.html">31. Notes on Chat Platform Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Cog Book</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>14. Services</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/operable/cog-book/blob/HEAD/cog-book/source/sections/services.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="services">
+<h1>14. Services<a class="headerlink" href="#services" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>14.1. Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The majority of chat commands are not full fledged applications by
+themselves. They require access to external application APIs and other
+resources to function. Given there are a finite (but still large) number
+of applications and a much smaller number of ways to access them it’s
+not all that surprising to see unrelated chat commands sharing a common
+set of requirements.</p>
+<p>Examples of these requirements include:</p>
+<ul class="simple">
+<li>Managing state related to chat users and/or command execution</li>
+<li>&#8220;Shelling out&#8221; to aliases/pipelines/commands</li>
+<li>Accessing REST APIs</li>
+</ul>
+</div>
+<div class="section" id="design-journey">
+<h2>14.2. Design Journey<a class="headerlink" href="#design-journey" title="Permalink to this headline">¶</a></h2>
+<p>Cog provides a suite of services — and later a user-extendible API — to
+satisfy requirements like these. This document will discuss the general
+design principles of Cog services and specifics on the two services
+included in Cog 0.5.0: <code class="docutils literal"><span class="pre">memory</span></code> and <code class="docutils literal"><span class="pre">exec</span></code>.</p>
+<p>Four design criteria heavily influenced the design and technology
+choices of what became Cog Services.</p>
+<ol class="arabic">
+<li><div class="first line-block">
+<div class="line">Security</div>
+<div class="line">Only authorized users should be able to access services. Cog must
+aggressively identify and validate each access.</div>
+</div>
+</li>
+<li><div class="first line-block">
+<div class="line">Audit</div>
+<div class="line">Service use must be part of Cog’s audit log. Administrators should
+regard the log as a comprehensive journal of user &lt;→ Cog
+interactions.</div>
+</div>
+</li>
+<li><div class="first line-block">
+<div class="line">Flexibility</div>
+<div class="line">The overall service API design shouldn’t impose unnecessary
+implementation limits on the types and kinds of services offered.</div>
+</div>
+</li>
+<li><div class="first line-block">
+<div class="line">Ease of use</div>
+<div class="line">Interacting with services should be a pleasant experience for
+command authors. Given Cog’s language agnostic design this implies
+services will be accessible from a wide variety of programming
+languages and environments.</div>
+</div>
+</li>
+</ol>
+<p>Several candidate designs and technologies were evaluated against the
+above principles.</p>
+<ul>
+<li><div class="first line-block">
+<div class="line"><strong>Services Over MQTT</strong></div>
+<div class="line">The first idea was to leverage Cog’s internal message bus as a
+service transport exposing services directly to commands via
+Relay’s command runtime environment.</div>
+</div>
+<ul class="simple">
+<li>Pros: Good security and auditability via tight integration w/Cog’s
+existing infrastructure; Simplified service access via Relay.</li>
+<li>Cons: Requires design and implementation of an entire RPC path and
+data encoding; Service clients would necessarily be one-off and
+custom preventing any reuse of existing libraries or protocols;
+Maintaining lots of custom client code eventually slows down our
+velocity and impacts overall flexibility; Asking users to learn
+yet another service client API negatively impacts ease of use.</li>
+<li>Status: DISCARDED</li>
+</ul>
+</li>
+<li><div class="first line-block">
+<div class="line"><strong>REST-enabled Services w/Relay Proxies</strong></div>
+<div class="line">We then considered exposing services over HTTP with a REST-style
+API. Services would be hosted on Cog, &#8220;tunneled&#8221; over MQTT, and
+published on each Relay as REST APIs served by HTTP servers bound
+to localhost.</div>
+</div>
+<ul class="simple">
+<li>Pros: Restricting service access to processes running on Relay
+hosts reduces service’s overall attack footprint; Using HTTP
+transport and REST API design allows us to leverage existing
+libraries across a wide range of programming langauges.</li>
+<li>Cons: Two service APIs are required: MQTT and HTTP/REST; Unclear
+how to simply map a message-driven API to REST especially in an
+automated fashion; Proxying calls from Relay to Cog is non-trivial
+and likely to become more complicated over time</li>
+<li>Status: DISCARDED</li>
+</ul>
+</li>
+<li><div class="first line-block">
+<div class="line"><strong>REST-enabled Services w/Token-based authentication</strong></div>
+<div class="line">Finally, we considered a refined version of the prior idea.
+REST-style services would be hosted and published on Cog via a
+separate HTTP listener, a la pipeline triggers. Accessing services
+will require a special token unique to each pipeline instance. This
+allows Cog to connect a service call with a user which preserves
+auditability. Cog can also use the token to propagate a user’s
+identity and permissions across service calls thereby supporting a
+strong security model.</div>
+</div>
+<ul class="simple">
+<li>Pros: Relatively straightforward to design and implement; Reuses
+existing concepts (and potentially code) from other Cog subsystems
+including ACL evaluation and pipeline triggers; Allows command
+author’s to use their preferred HTTP/REST library; Well defined
+API semantics; Clear path to user extensibility in the future</li>
+<li>Cons: Some complexity around pipeline token generation and
+invalidation; Increased attack surface compared to previous
+options</li>
+<li>Status: SELECTED</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="cog-services-api">
+<h2>14.3. Cog Services API<a class="headerlink" href="#cog-services-api" title="Permalink to this headline">¶</a></h2>
+<p>Cog services will be managed by a separate Phoenix endpoint named
+<code class="docutils literal"><span class="pre">Cog.PlatformServicesEndpoint</span></code>. Building the API as a separate
+endpoint instead of a separate Phoenix app was chosen to avoid packaging
+and reuse issues with Cog (since it was never designed to be a reusable
+library) and also reduce the coding effort. An endpoint-based
+implementation strikes a good balance between isolation, modularity, and
+speed of development without constraining future choices.</p>
+<p>The endpoint will contain its own HTTP router with the majority of
+application logic contained in controllers and views. The root URL of
+the services API will be exported to the command runtime environment
+under the environment variable <code class="docutils literal"><span class="pre">COG_SERVICES_ROOT</span></code>. It shall be a
+valid URL starting with either <code class="docutils literal"><span class="pre">http://</span></code> or <code class="docutils literal"><span class="pre">https://</span></code>, depending on
+user configuration, followed by the host name or IP address and
+listening port number. Examples: <code class="docutils literal"><span class="pre">http://192.168.2.22:4005</span></code>,
+<code class="docutils literal"><span class="pre">https://mycog.somecorp.com:4100</span></code>.</p>
+<div class="section" id="authentication-and-authorization">
+<h3>14.3.1. Authentication and Authorization<a class="headerlink" href="#authentication-and-authorization" title="Permalink to this headline">¶</a></h3>
+<p>Cog will generate a unique pipeline token upon pipeline initialization.
+The token will correlate a pipeline to the calling user much like REST
+API tokens correlate REST API sessions to calling users. Pipeline tokens
+have a finite lifespan. Their expiration will be triggered by the
+completion (regardless of status) of the owning pipeline.</p>
+<p>The token will be exported to the command runtime environment under the
+environment variable <code class="docutils literal"><span class="pre">COG_PIPELINE_TOKEN</span></code>. All calls to the Cog
+Service API <em>must</em> include the token in their <code class="docutils literal"><span class="pre">Authorization</span></code> HTTP
+header like so: <code class="docutils literal"><span class="pre">Authorization:</span> <span class="pre">pipeline</span> <span class="pre">&lt;token&gt;</span></code>. Requests without a
+properly formed <code class="docutils literal"><span class="pre">Authorization</span></code> header or referencing an expired or
+invalid pipeline token will receive <code class="docutils literal"><span class="pre">401</span> <span class="pre">Unauthorized</span></code>.</p>
+</div>
+<div class="section" id="routes">
+<h3>14.3.2. Routes<a class="headerlink" href="#routes" title="Permalink to this headline">¶</a></h3>
+<p>The Services API provides an informational API to assist monitoring,
+service discovery, and service enumeration. These endpoints are listed
+below.</p>
+</div>
+<div class="section" id="v1-services-meta">
+<h3>14.3.3. /v1/services/meta<a class="headerlink" href="#v1-services-meta" title="Permalink to this headline">¶</a></h3>
+<p>Returns a JSON object describing Cog version, Cog Services API version,
+and basic information about each hosted service. The below JSON document
+can be used as a normative reference.</p>
+<p><strong>Request.</strong></p>
+<div class="code http highlight-default"><div class="highlight"><pre><span></span><span class="n">GET</span> <span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">meta</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+<span class="n">Authorization</span><span class="p">:</span> <span class="n">pipeline</span> <span class="mi">123456789</span>
+</pre></div>
+</div>
+<p><strong>Response.</strong></p>
+<div class="code http highlight-default"><div class="highlight"><pre><span></span><span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span> <span class="mi">200</span> <span class="n">OK</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Length</span><span class="p">:</span> <span class="o">...</span>
+
+<span class="p">{</span><span class="s2">&quot;info&quot;</span><span class="p">:</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;cog_version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.5.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cog_services_api_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;services&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;exec&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">},</span>
+                 <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;state&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">}]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="memory-service">
+<h2>14.4. Memory Service<a class="headerlink" href="#memory-service" title="Permalink to this headline">¶</a></h2>
+<p>Command invocations are essentially stateless. Cog’s pipeline execution
+model instantiates a fresh command instance for each invocation,
+operating system process or Docker container depending on command bundle
+packaging, with no ability to refer to data from previous invocations or
+store data for future invocations. This is by design as it simplifies
+pipeline management and execution and encourages development of small,
+composable, stateless commands.</p>
+<p>There are times where state is simply required. Commands which need
+access to all prior pipeline output are difficult if not impossible to
+build without state. Unix CLI like <code class="docutils literal"><span class="pre">sort</span></code> and <code class="docutils literal"><span class="pre">uniq</span></code> are good
+examples. The memory service is intended to address precisely these
+kinds of requirements.</p>
+<div class="section" id="data-model">
+<h3>14.4.1. Data Model<a class="headerlink" href="#data-model" title="Permalink to this headline">¶</a></h3>
+<p>The memory service’s API resembles a hash map with two kinds of put
+(accumulating or replacing) and delete.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The visibility and lifetime of data stored in the memory service is
+tied to the lifetime of the enclosing pipeline. This means commands
+executing under separate pipelines can see different values or even
+no value at all for the same key. Once a pipeline has exited the
+memory service will flush all data stored by command executing in
+that pipeline.</p>
+</div>
+<p>Returns the current value of <code class="docutils literal"><span class="pre">{key}</span></code>. Returns 404 for missing keys.</p>
+<p><strong>Request.</strong></p>
+<div class="code HTTP highlight-default"><div class="highlight"><pre><span></span><span class="n">GET</span> <span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">memory</span><span class="o">/</span><span class="mf">1.0</span><span class="o">/</span><span class="n">foo</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+<span class="n">Authorization</span><span class="p">:</span> <span class="n">pipeline</span> <span class="mi">123456789</span>
+</pre></div>
+</div>
+<p><strong>Response.</strong></p>
+<div class="code HTTP highlight-default"><div class="highlight"><pre><span></span><span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span> <span class="mi">200</span> <span class="n">OK</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Length</span><span class="p">:</span> <span class="o">...</span>
+
+<span class="p">{</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;foo&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]}</span>
+</pre></div>
+</div>
+<p>Stores or updates the value corresponding to <code class="docutils literal"><span class="pre">{key}</span></code>. If <code class="docutils literal"><span class="pre">{key}</span></code>
+already exists then an update will be performed based on the value of
+the <code class="docutils literal"><span class="pre">op</span></code> field.</p>
+<div class="section" id="accumulate-default">
+<h4>14.4.1.1. Accumulate (Default)<a class="headerlink" href="#accumulate-default" title="Permalink to this headline">¶</a></h4>
+<p><strong>Request.</strong></p>
+<div class="code HTTP highlight-default"><div class="highlight"><pre><span></span><span class="n">POST</span> <span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">memory</span><span class="o">/</span><span class="mf">1.0</span><span class="o">/</span><span class="n">foo</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+<span class="n">Authorization</span><span class="p">:</span> <span class="n">pipeline</span> <span class="mi">123456789</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+
+<span class="p">{</span>
+  <span class="s2">&quot;op&quot;</span><span class="p">:</span> <span class="s2">&quot;accum&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">2</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response.</strong></p>
+<div class="code HTTP highlight-default"><div class="highlight"><pre><span></span><span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span> <span class="mi">200</span> <span class="n">OK</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Length</span><span class="p">:</span> <span class="o">...</span>
+
+<span class="p">{</span>
+  <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Request.</strong></p>
+<div class="code HTTP highlight-default"><div class="highlight"><pre><span></span><span class="n">POST</span> <span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">memory</span><span class="o">/</span><span class="mf">1.0</span><span class="o">/</span><span class="n">foo</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+<span class="n">Authorization</span><span class="p">:</span> <span class="n">pipeline</span> <span class="mi">123456789</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+
+<span class="p">{</span>
+  <span class="s2">&quot;op&quot;</span><span class="p">:</span> <span class="s2">&quot;accum&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response.</strong></p>
+<div class="code HTTP highlight-default"><div class="highlight"><pre><span></span><span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span> <span class="mi">200</span> <span class="n">OK</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Length</span><span class="p">:</span> <span class="o">...</span>
+
+<span class="p">{</span>
+  <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Request.</strong></p>
+<div class="code HTTP highlight-default"><div class="highlight"><pre><span></span><span class="n">POST</span> <span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">memory</span><span class="o">/</span><span class="mf">1.0</span><span class="o">/</span><span class="n">foo</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+<span class="n">Authorization</span><span class="p">:</span> <span class="n">pipeline</span> <span class="mi">123456789</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+
+<span class="p">{</span>
+  <span class="s2">&quot;op&quot;</span><span class="p">:</span> <span class="s2">&quot;accum&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response.</strong></p>
+<div class="code HTTP highlight-default"><div class="highlight"><pre><span></span><span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span> <span class="mi">200</span> <span class="n">OK</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Length</span><span class="p">:</span> <span class="o">...</span>
+
+<span class="p">{</span>
+  <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">},</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="replace">
+<h4>14.4.1.2. Replace<a class="headerlink" href="#replace" title="Permalink to this headline">¶</a></h4>
+<p><strong>Request.</strong></p>
+<div class="code HTTP highlight-default"><div class="highlight"><pre><span></span><span class="n">POST</span> <span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">memory</span><span class="o">/</span><span class="mf">1.0</span><span class="o">/</span><span class="n">foo</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+<span class="n">Authorization</span><span class="p">:</span> <span class="n">pipeline</span> <span class="mi">123456789</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+
+<span class="p">{</span>
+  <span class="s2">&quot;op&quot;</span><span class="p">:</span> <span class="s2">&quot;replace&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">2</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response.</strong></p>
+<div class="code HTTP highlight-default"><div class="highlight"><pre><span></span><span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span> <span class="mi">200</span> <span class="n">OK</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Length</span><span class="p">:</span> <span class="o">...</span>
+
+<span class="p">{</span>
+  <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">2</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Request.</strong></p>
+<div class="code HTTP highlight-default"><div class="highlight"><pre><span></span><span class="n">DELETE</span> <span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">memory</span><span class="o">/</span><span class="mf">1.0</span><span class="o">/</span><span class="n">foo</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+<span class="n">Authorization</span><span class="p">:</span> <span class="n">pipeline</span> <span class="mi">123456789</span>
+</pre></div>
+</div>
+<p><strong>Response.</strong></p>
+<div class="code HTTP highlight-default"><div class="highlight"><pre><span></span><span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span> <span class="mi">204</span> <span class="n">OK</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="chat-service">
+<h2>14.5. Chat Service<a class="headerlink" href="#chat-service" title="Permalink to this headline">¶</a></h2>
+<p>The chat service allows you to send messages back to a channel or user
+during command execution. This can be either the originating channel/user
+using COG_ROOM/COG_CHAT_HANDLE environment variables, or to a specific
+channel/user every time.</p>
+<p>POST data should be in json format, usernames should be preceded with <cite>&#64;</cite>
+and room names preceded with <cite>#</cite>.</p>
+<p><strong>Request.</strong></p>
+<div class="code http highlight-default"><div class="highlight"><pre><span></span><span class="n">POST</span> <span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">chat</span><span class="o">/</span><span class="mf">1.0</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">send_message</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+<span class="n">Authorization</span><span class="p">:</span> <span class="n">pipeline</span> <span class="mi">123456789</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+
+<span class="p">{</span>
+  <span class="s2">&quot;destination&quot;</span><span class="p">:</span> <span class="s2">&quot;@username&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Command started.&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response.</strong></p>
+<div class="code http highlight-default"><div class="highlight"><pre><span></span><span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span> <span class="mi">200</span> <span class="n">OK</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Length</span><span class="p">:</span> <span class="o">...</span>
+
+<span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;sent&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="templates.html" class="btn btn-neutral float-right" title="15. Templates" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="returning_data_from_cog.html" class="btn btn-neutral" title="13. Returning data from Cog" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 Operable, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61670076-4', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  
+
+
+</body>
+</html>

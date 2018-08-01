@@ -1,0 +1,356 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. Bootstrapping Cog &mdash; Cog Book 1.0.0 documentation</title>
+  
+
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Cog Book 1.0.0 documentation" href="../index.html"/>
+        <link rel="next" title="3. Installing and Managing Relays" href="installing_and_managing_relays.html"/>
+        <link rel="prev" title="1.7. Building and Running Cog from Scratch" href="building_cog_from_scratch.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cog Book
+          
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+          </a>
+
+          
+            <img src="../_static/cog_peek.svg" class="logo" />
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">1. Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Bootstrapping Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_and_managing_relays.html">3. Installing and Managing Relays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands_and_bundles.html">4. Commands and Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="managing_bundles.html">5. Managing Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_a_command_bundle.html">6. Writing A Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_password_resets.html">7. Configuring password resets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions_and_rules.html">8. Permissions and Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_execution_rules.html">9. Command Execution Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundle_configs.html">10. Bundle Configs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_environment_variables.html">11. Command Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic_command_configuration.html">12. Dynamic Command Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="returning_data_from_cog.html">13. Returning data from Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services.html">14. Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">15. Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_your_first_command_bundle.html">16. Installing Your First Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing_a_trigger.html">17. Developing a Trigger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cog_architecture.html">18. Cog Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_pipelines.html">19. Command pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="redirecting_pipeline_output.html">20. Redirecting Pipeline Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">21. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_management.html">22. User management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributor_license_agreement.html">23. Contributor License Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/cog_server_configuration.html">24. Cog Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/relay_configuration.html">25. Relay Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/command_output_tags.html">26. Command Output Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/greenbar_tags.html">27. Greenbar Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/audit_log_events.html">28. Audit Log Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/glossary.html">29. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/designing_for_chatops.html">30. Designing ChatOps Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/chat_platforms.html">31. Notes on Chat Platform Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Cog Book</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>2. Bootstrapping Cog</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/operable/cog-book/blob/HEAD/cog-book/source/sections/bootstrapping_cog.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="bootstrapping-cog">
+<h1>2. Bootstrapping Cog<a class="headerlink" href="#bootstrapping-cog" title="Permalink to this headline">¶</a></h1>
+<p>Since interactions with Cog require a user account, you’ll need to
+<em>bootstrap</em> your system before you can do anything interesting with it.
+This process will create the necessary administrator role and user
+group, as well as create the first user account and place it into that
+administrator group. At this point, you can interact with Cog as this
+first privileged user in order to create other user accounts (to which
+you can also grant administrative access), install bundles, and perform
+other tasks.</p>
+<p>There are a few ways you can bootstrap. If your Cog system is automated
+in any way (using Chef, Puppet, Ansible, or some flavor of AWS or Heroku
+deployment, for example), you may find it convenient to <a class="reference internal" href="permissions_and_rules.html"><span class="doc">automatically
+bootstrap your new system using environment
+variables</span></a>.</p>
+<p>Alternatively, you can use the <code class="docutils literal"><span class="pre">cogctl</span> <span class="pre">bootstrap</span></code> command, as detailed
+below.</p>
+<p>Whichever way you choose, read further on this page, as the underlying
+principles are the same.</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">cogctl</span> <span class="n">bootstrap</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">cog</span><span class="o">.</span><span class="n">mycompany</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="mi">4000</span>
+<span class="n">Bootstrapping</span> <span class="n">the</span> <span class="n">server</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can run <code class="docutils literal"><span class="pre">cogctl</span> <span class="pre">bootstrap</span></code> multiple times; if the system is
+already bootstrapped, <code class="docutils literal"><span class="pre">cogctl</span></code> will alert you and return a <code class="docutils literal"><span class="pre">1</span></code>
+exit code, but the Cog system itself will remain unaffected.</p>
+</div>
+<p>If you take a look in <code class="docutils literal"><span class="pre">~/.cogctl</span></code>, you’ll begin to see what has
+happened.</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span>cat ~/.cogctl
+[defaults]
+profile=cog.mycompany.com
+
+[cog.mycompany.com]
+url=http://cog.mycompany.com:4000
+password=BgEocTFGzON$U39srRt5^fi(ZD0KxV*1
+user=admin
+</pre></div>
+</div>
+<p>Here, we can see that a user named <code class="docutils literal"><span class="pre">admin</span></code> has been created for us on
+the Cog instance running on this machine. A password has also been
+generated for this user. Now, whenever we run any <code class="docutils literal"><span class="pre">cogctl</span></code> commands
+from this machine, these credentials will be used by default to make
+authenticated API calls.</p>
+<p>Cog’s REST API is guarded by Cog’s authorization system, which means
+that the admin user must have permissions to access the API somehow. As
+detailed in <a class="reference internal" href="permissions_and_rules.html"><span class="doc">Permissions and Rules</span></a>, permissions must be
+attached to a user somehow through a combination of roles and groups. As
+you can probably guess, the bootstrapping process handles all this.
+Let’s use <code class="docutils literal"><span class="pre">cogctl</span></code> to examine what has been done.</p>
+<p>First, let’s just check that we actually exist :smile:</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">cogctl</span> <span class="n">user</span>
+<span class="n">USERNAME</span>  <span class="n">FULL</span> <span class="n">NAME</span>          <span class="n">EMAIL</span> <span class="n">ADDRESS</span>
+<span class="n">admin</span>     <span class="n">Cog</span> <span class="n">Administrator</span>  <span class="n">cog</span><span class="nd">@localhost</span>
+</pre></div>
+</div>
+<p><em>phew!</em></p>
+<p>Now let’s examine the core permissions of the Cog system. These govern
+fine-grained access to the various REST API endpoints and chat commands.</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">cogctl</span> <span class="n">permission</span>
+<span class="n">NAME</span>                         <span class="n">ID</span>
+<span class="n">operable</span><span class="p">:</span><span class="n">manage_commands</span>     <span class="n">a8cd921d</span><span class="o">-</span><span class="mi">49</span><span class="n">a9</span><span class="o">-</span><span class="mi">497</span><span class="n">a</span><span class="o">-</span><span class="n">a977</span><span class="o">-</span><span class="mi">79</span><span class="n">ad50512df9</span>
+<span class="n">operable</span><span class="p">:</span><span class="n">manage_groups</span>       <span class="n">fa9d0311</span><span class="o">-</span><span class="mi">2791</span><span class="o">-</span><span class="mi">462</span><span class="n">a</span><span class="o">-</span><span class="mi">9</span><span class="n">bf9</span><span class="o">-</span><span class="mi">05</span><span class="n">fe29299109</span>
+<span class="n">operable</span><span class="p">:</span><span class="n">manage_permissions</span>  <span class="n">cf604203</span><span class="o">-</span><span class="n">f546</span><span class="o">-</span><span class="mi">43</span><span class="n">cb</span><span class="o">-</span><span class="mi">8677</span><span class="o">-</span><span class="mi">51</span><span class="n">c698140867</span>
+<span class="n">operable</span><span class="p">:</span><span class="n">manage_relays</span>       <span class="mi">365228</span><span class="n">d2</span><span class="o">-</span><span class="n">d082</span><span class="o">-</span><span class="mi">4</span><span class="n">bfa</span><span class="o">-</span><span class="n">ac7d</span><span class="o">-</span><span class="n">ff731a92100d</span>
+<span class="n">operable</span><span class="p">:</span><span class="n">manage_roles</span>        <span class="n">fec52faa</span><span class="o">-</span><span class="mi">5106</span><span class="o">-</span><span class="mi">4982</span><span class="o">-</span><span class="n">ad0b</span><span class="o">-</span><span class="n">cbe5307c26ec</span>
+<span class="n">operable</span><span class="p">:</span><span class="n">manage_triggers</span>     <span class="mi">4</span><span class="n">b6b01d7</span><span class="o">-</span><span class="mi">0</span><span class="n">d54</span><span class="o">-</span><span class="mi">4435</span><span class="o">-</span><span class="n">befd</span><span class="o">-</span><span class="n">c9bb23212404</span>
+<span class="n">operable</span><span class="p">:</span><span class="n">manage_users</span>        <span class="mi">65</span><span class="n">de7570</span><span class="o">-</span><span class="mi">7</span><span class="n">b3f</span><span class="o">-</span><span class="mi">4</span><span class="n">ebd</span><span class="o">-</span><span class="mi">98</span><span class="n">fd</span><span class="o">-</span><span class="mi">786</span><span class="n">f9e9b5cc2</span>
+</pre></div>
+</div>
+<p>That’s a lot of permissions; Cog helps us out by creating a
+<code class="docutils literal"><span class="pre">cog-admin</span></code> role to collect them all together.</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">cogctl</span> <span class="n">role</span> <span class="n">info</span> <span class="n">cog</span><span class="o">-</span><span class="n">admin</span>
+<span class="n">Name</span>         <span class="n">cog</span><span class="o">-</span><span class="n">admin</span>
+<span class="n">ID</span>           <span class="mi">15</span><span class="n">c77231</span><span class="o">-</span><span class="n">e53f</span><span class="o">-</span><span class="mi">4</span><span class="n">ab9</span><span class="o">-</span><span class="n">b438</span><span class="o">-</span><span class="mi">64</span><span class="n">b4a2f636d6</span>
+<span class="n">Permissions</span>  <span class="n">manage_commands</span><span class="p">,</span> <span class="n">manage_groups</span><span class="p">,</span> <span class="n">manage_permissions</span><span class="p">,</span> <span class="n">manage_relays</span><span class="p">,</span> <span class="n">manage_roles</span><span class="p">,</span> <span class="n">manage_triggers</span><span class="p">,</span> <span class="n">manage_user_pipeline</span><span class="p">,</span> <span class="n">manage_users</span>
+<span class="n">Groups</span>       <span class="n">cog</span><span class="o">-</span><span class="n">admin</span>
+</pre></div>
+</div>
+<p>To complete the loop, we have a group that is also named <code class="docutils literal"><span class="pre">cog-admin</span></code>
+with the <code class="docutils literal"><span class="pre">admin</span></code> user as its sole member. This group is granted the
+<code class="docutils literal"><span class="pre">cog-admin</span></code> role.</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">cogctl</span> <span class="n">group</span> <span class="n">info</span> <span class="n">cog</span><span class="o">-</span><span class="n">admin</span>
+<span class="n">ID</span>     <span class="mi">88</span><span class="n">f30dec</span><span class="o">-</span><span class="n">ca13</span><span class="o">-</span><span class="mi">4</span><span class="n">d92</span><span class="o">-</span><span class="n">a6bd</span><span class="o">-</span><span class="mi">4631</span><span class="n">acc7424b</span>
+<span class="n">Name</span>   <span class="n">cog</span><span class="o">-</span><span class="n">admin</span>
+<span class="n">Users</span>  <span class="n">admin</span>
+<span class="n">Roles</span>  <span class="n">cog</span><span class="o">-</span><span class="n">admin</span>
+</pre></div>
+</div>
+<p>Though the Cog admin user is named <code class="docutils literal"><span class="pre">admin</span></code>, there’s nothing
+particularly special about that name. As this tour of the bootstrapping
+process has shown us, the <code class="docutils literal"><span class="pre">admin</span></code> user functions as an administrator,
+able to perform any task in the Cog system, only because it resides in a
+group that has been granted all the core permissions. <em>Any</em> user in this
+group would have the same capabilities.</p>
+<p>This also shows how to make any Cog user an administrator; simply add
+them to the <code class="docutils literal"><span class="pre">cog-admin</span></code> group.</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="installing_and_managing_relays.html" class="btn btn-neutral float-right" title="3. Installing and Managing Relays" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="building_cog_from_scratch.html" class="btn btn-neutral" title="1.7. Building and Running Cog from Scratch" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 Operable, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61670076-4', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  
+
+
+</body>
+</html>

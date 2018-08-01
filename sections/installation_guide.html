@@ -1,0 +1,525 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1.6. Installation Guide &mdash; Cog Book 1.0.0 documentation</title>
+  
+
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Cog Book 1.0.0 documentation" href="../index.html"/>
+        <link rel="up" title="1. Getting Started" href="getting_started.html"/>
+        <link rel="next" title="1.7. Building and Running Cog from Scratch" href="building_cog_from_scratch.html"/>
+        <link rel="prev" title="1.1. Introducing Cog" href="introducing_cog.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cog Book
+          
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+          </a>
+
+          
+            <img src="../_static/cog_peek.svg" class="logo" />
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="getting_started.html">1. Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introducing_cog.html">1.1. Introducing Cog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introducing_cog.html#current-features">1.2. Current Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introducing_cog.html#get-started">1.3. Get Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introducing_cog.html#communication">1.4. Communication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introducing_cog.html#user-experience-feedback">1.5. User experience feedback</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1.6. Installation Guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installing-and-running-cog-with-docker-compose">1.6.1. Installing and Running Cog with Docker Compose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#connecting-cog-to-slack">1.6.2. Connecting Cog To Slack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#connecting-cog-to-hipchat">1.6.3. Connecting Cog to HipChat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-user-and-running-a-command">1.6.4. Creating a User and Running a Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-and-configuring-a-bundle">1.6.5. Installing and Configuring a Bundle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="building_cog_from_scratch.html">1.7. Building and Running Cog from Scratch</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bootstrapping_cog.html">2. Bootstrapping Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_and_managing_relays.html">3. Installing and Managing Relays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands_and_bundles.html">4. Commands and Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="managing_bundles.html">5. Managing Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_a_command_bundle.html">6. Writing A Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_password_resets.html">7. Configuring password resets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions_and_rules.html">8. Permissions and Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_execution_rules.html">9. Command Execution Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundle_configs.html">10. Bundle Configs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_environment_variables.html">11. Command Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic_command_configuration.html">12. Dynamic Command Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="returning_data_from_cog.html">13. Returning data from Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services.html">14. Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">15. Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_your_first_command_bundle.html">16. Installing Your First Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing_a_trigger.html">17. Developing a Trigger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cog_architecture.html">18. Cog Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_pipelines.html">19. Command pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="redirecting_pipeline_output.html">20. Redirecting Pipeline Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">21. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_management.html">22. User management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributor_license_agreement.html">23. Contributor License Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/cog_server_configuration.html">24. Cog Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/relay_configuration.html">25. Relay Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/command_output_tags.html">26. Command Output Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/greenbar_tags.html">27. Greenbar Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/audit_log_events.html">28. Audit Log Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/glossary.html">29. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/designing_for_chatops.html">30. Designing ChatOps Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/chat_platforms.html">31. Notes on Chat Platform Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Cog Book</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="getting_started.html">1. Getting Started</a> &raquo;</li>
+      
+    <li>1.6. Installation Guide</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/operable/cog-book/blob/HEAD/cog-book/source/sections/installation_guide.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installation-guide">
+<span id="id1"></span><h1>1.6. Installation Guide<a class="headerlink" href="#installation-guide" title="Permalink to this headline">¶</a></h1>
+<p>So, you’re ready to get in there and give Cog a shot? Well, you’re in
+luck. We’ve made it pretty straight forward to get up and running
+whether you want to use our recommended Docker Compose configuration or
+manually build and run Cog on your own. In this guide, we’ll walk you
+through:</p>
+<ul class="simple">
+<li>Installing and Running Cog with Docker Compose</li>
+<li>Connecting Cog to Slack</li>
+<li>Installing and Configuring a Bundle</li>
+<li>Running a Command Pipeline</li>
+</ul>
+<p>If you don’t want to use Docker Compose to install Cog or you want to
+connect to HipChat instead of Slack, take a look at the alternative
+sections below:</p>
+<ul class="simple">
+<li><a class="reference internal" href="building_cog_from_scratch.html"><span class="doc">Building and Running Cog from Scratch</span></a></li>
+<li><a class="reference internal" href="#installation-guide-hipchat"><span class="std std-ref">Connecting Cog to HipChat</span></a></li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you have any trouble during this guide or just want to
+ask a question, head on over to the <a class="reference external" href="http://slack.operable.io">Cog Public Slack
+channel</a> to get help from the core team, or even the author of this guide.</p>
+</div>
+<div class="section" id="installing-and-running-cog-with-docker-compose">
+<span id="installation-guide-docker-compose"></span><h2>1.6.1. Installing and Running Cog with Docker Compose<a class="headerlink" href="#installing-and-running-cog-with-docker-compose" title="Permalink to this headline">¶</a></h2>
+<p>We’ve provided a set of docker-compose files for running and configuring
+Cog: <code class="docutils literal"><span class="pre">docker-compose.yml</span></code>, <code class="docutils literal"><span class="pre">docker-compose.common.yml</span></code> and
+<code class="docutils literal"><span class="pre">docker-compose.override.slack_example.yml</span></code> for running and
+configuring Cog. To run the images specified in the
+<code class="docutils literal"><span class="pre">docker-compose.yml</span></code> you’ll need to have both Docker and Docker
+Compose installed. If you’d rather manually build and install Cog, see the section titled, <a class="reference internal" href="building_cog_from_scratch.html"><span class="doc">Building and Running Cog from Scratch</span></a>.</p>
+<p>First, make sure you have Docker and Docker Compose installed. If you
+haven’t installed Docker, we recommend using <a class="reference external" href="https://www.docker.com/products/docker">Docker for
+Mac</a> (or the native
+application for your OS), but you can also use <code class="docutils literal"><span class="pre">docker-machine</span></code> with a
+bit of configuration. Then, you’ll also need to install docker-compose.
+You can follow any of the directions posted on <a class="reference external" href="https://docs.docker.com/compose/install/">Docker Compose’s
+installation guide</a>.</p>
+<p>Next, we’ll need to grab the <code class="docutils literal"><span class="pre">docker-compose.yml</span></code>,
+<code class="docutils literal"><span class="pre">docker-compose.common.yml</span></code> and
+<code class="docutils literal"><span class="pre">docker-compose.override.slack_example.yml</span></code> files from the Cog repo.</p>
+<p>If you’d rather connect Cog to HipChat, skip down to the section titled
+<a class="reference internal" href="#connecting-cog-to-hipchat">Connecting Cog to HipChat</a>.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>curl -o docker-compose.yml <span class="se">\</span>
+  https://raw.githubusercontent.com/operable/cog/1.0.0/docker-compose.yml
+
+curl -o docker-compose.common.yml <span class="se">\</span>
+  https://raw.githubusercontent.com/operable/cog/1.0.0/docker-compose.common.yml
+
+curl -o docker-compose.override.yml <span class="se">\</span>
+  https://raw.githubusercontent.com/operable/cog/1.0.0/docker-compose.override.slack_example.yml
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">docker-compose.yml</span></code> defines which images to run and how they’ll
+talk to each other, while <code class="docutils literal"><span class="pre">docker-compose.common.yml</span></code> and
+<code class="docutils literal"><span class="pre">docker-compose.override.yml</span></code> set values for the environment variables
+passed into each container. The default <code class="docutils literal"><span class="pre">docker-compose.override.yml</span></code>
+has everything you’ll need to start a working Cog instance. But, we
+recommend that you set each environment variable starting with
+<code class="docutils literal"><span class="pre">BOOTSTRAP</span></code> to automatically create an admin user for yourself upon
+startup.</p>
+</div>
+<div class="section" id="connecting-cog-to-slack">
+<span id="installation-guide-slack"></span><h2>1.6.2. Connecting Cog To Slack<a class="headerlink" href="#connecting-cog-to-slack" title="Permalink to this headline">¶</a></h2>
+<p>Ok, we’re almost ready to start Cog, but one last thing we’ll need is a
+bot token so Cog can connect to our Slack channel. Head over to the <a class="reference external" href="https://my.slack.com/services/new/bot">New
+Bot Integration Page</a>, create
+a new bot, and copy the newly generated token; it should look something
+like <code class="docutils literal"><span class="pre">xoxb-87931061512-4m0DshC79h8tLNjTMuxxozUo</span></code>.</p>
+<p>While you are over in Slack making your bot, add a cute Cog avatar, too.
+Find a Cog avatar and other Cog branded goodies in the <a class="reference external" href="https://drive.google.com/open?id=0B9shLHjT25r-SkhqSTU2MG05dG8">Operable + Cog
+Brand
+Folder</a></p>
+<p>You’ll also need to export a <code class="docutils literal"><span class="pre">COG_HOST</span></code> variable. This is not a proper
+<a class="reference internal" href="../references/cog_server_configuration.html"><span class="doc">Cog Server Configuration</span></a>
+but one specifically for use with this <code class="docutils literal"><span class="pre">docker-compose</span></code> example. This
+is the host that the Cog API will be made available at. Set this to
+point to your Docker host. If you’re using <a class="reference external" href="https://docs.docker.com/machine/">docker-machine for
+example</a>, this would suffice:</p>
+<p><strong>Export Environment Variables.</strong></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">SLACK_API_TOKEN</span><span class="o">=</span>&lt;your_token&gt;
+<span class="nb">export</span> <span class="nv">COG_HOST</span><span class="o">=</span><span class="k">$(</span>docker-machine ip default<span class="k">)</span>
+</pre></div>
+</div>
+<p>Now it’s time to run <code class="docutils literal"><span class="pre">docker-compose</span></code>. From the same directory
+containing the <code class="docutils literal"><span class="pre">docker-compose.yml</span></code>, run the following with the bot
+token you just generated.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">SLACK_API_TOKEN</span><span class="o">=</span>xoxb-87931061512-notarealtokentLNjTMuxxozUo
+docker-compose up
+</pre></div>
+</div>
+<p>You should see Docker downloading and starting images for Cog, Relay and
+a database. This might take a while, but once it’s done starting up and
+has connected you should start seeing logs like the following:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">cog\_1 \| 2016-10-07T00:38:51.0504 (Cog.BusEnforcer:60) [info] Allowed connection for Relay 00000000-0000-0000-0000-000000000000</span>
+</pre></div>
+</div>
+<p>For the last step, let’s check and see if our bot is available in the
+chat room. Open up Slack and try the following command. Keep in mind
+that you’ll have to invite the bot to whatever room you first message it
+from.</p>
+<div class="highlight-chat"><div class="highlight"><pre><span></span>vanstee 11:03AM @cog help
+cog     11:03AM @vanstee: I&#39;m terribly sorry, but either I don&#39;t
+                have a Cog account for you, or your Slack chat handle has not been registered.
+                Currently, only registered users can interact with me.
+
+                You&#39;ll need to ask a Cog administrator to fix this situation and to register your Slack handle.
+</pre></div>
+</div>
+<p>That’s because Cog doesn’t respond to people it doesn’t know about.</p>
+<p>Now you can move on to the section titled
+<a class="reference internal" href="#creating-a-user-and-running-a-command">Creating a User and Running a Command</a> where we’ll create a Cog user associated with your Slack user
+and give it some permissions, so you can start running some commands.</p>
+</div>
+<div class="section" id="connecting-cog-to-hipchat">
+<span id="installation-guide-hipchat"></span><h2>1.6.3. Connecting Cog to HipChat<a class="headerlink" href="#connecting-cog-to-hipchat" title="Permalink to this headline">¶</a></h2>
+<p>Ok, so you’ve already installed Docker and Docker Compose. Next, we’ll
+need to grab the <code class="docutils literal"><span class="pre">docker-compose.yml</span></code>, <code class="docutils literal"><span class="pre">docker-compose.common.yml</span></code>
+and <code class="docutils literal"><span class="pre">docker-compose.override.hipchat_example.yml</span></code> files from the Cog
+repo.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>curl -o docker-compose.yml <span class="se">\</span>
+  https://raw.githubusercontent.com/operable/cog/1.0.0/docker-compose.yml
+
+curl -o docker-compose.common.yml <span class="se">\</span>
+  https://raw.githubusercontent.com/operable/cog/1.0.0/docker-compose.common.yml
+
+curl -o docker-compose.override.yml <span class="se">\</span>
+  https://raw.githubusercontent.com/operable/cog/1.0.0/docker-compose.override.hipchat_example.yml
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">docker-compose.yml</span></code> defines which images to run and how they’ll
+talk to each other, while the <code class="docutils literal"><span class="pre">docker-compose.override.yml</span></code> sets
+values for the environment variables passed into each container. The
+default <code class="docutils literal"><span class="pre">docker-compose.override.yml</span></code> has everything you’ll need to
+start a working Cog instance. But, we recommend that you set each
+environment variable starting with <code class="docutils literal"><span class="pre">BOOTSTRAP</span></code> to automatically create
+an admin user for yourself upon startup.</p>
+<p>Ok, we’re almost ready to start Cog, but one last thing we’ll need is a
+new HipChat user for your bot. Invite a new user and login as that user
+and navigate to the Profile page. First click on API Access to generate
+a new API token; you’ll need to allow all the scopes that start with
+&#8220;View&#8221; and &#8220;Send&#8221;. Then, navigate to XMPP/Jabber info to lookup the rest
+of the environment variables you’ll need.</p>
+<p>Now it’s time to run <code class="docutils literal"><span class="pre">docker-compose</span></code>. From the same directory
+containing the <code class="docutils literal"><span class="pre">docker-compose.yml</span></code> and your edited
+<code class="docutils literal"><span class="pre">docker-compose.override.yml</span></code>, run the following with the API token
+you generated and the XMPP configuration you looked up.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Your <code class="docutils literal"><span class="pre">HIPCHAT_JABBER_PASSWORD</span></code> is just your normal HipChat
+password for that account and your <code class="docutils literal"><span class="pre">HIPCHAT_NICKNAME</span></code> is the unique mention name for your user without the <code class="docutils literal"><span class="pre">&#64;</span></code> prefix.</p>
+</div>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">HIPCHAT_API_TOKEN</span><span class="o">=</span>0bnYC5notarealtokenP8TxMfzPhtheRl2DkoNZ6
+<span class="nb">export</span> <span class="nv">HIPCHAT_JABBER_ID</span><span class="o">=</span>479543_0000000@chat.hipchat.com
+<span class="nb">export</span> <span class="nv">HIPCHAT_JABBER_PASSWORD</span><span class="o">=</span>sekr3t
+<span class="nb">export</span> <span class="nv">HIPCHAT_NICKNAME</span><span class="o">=</span>cog
+docker-compose up
+</pre></div>
+</div>
+<p>Now you can move on to the section titled
+<a class="reference internal" href="#creating-a-user-and-running-a-command">Creating a User and Running a Command</a>, as the rest isn’t
+Slack specific. The only caveat is that when creating a chat-handle,
+you’ll need to specify <code class="docutils literal"><span class="pre">--chat-provider=hipchat</span></code> instead.</p>
+</div>
+<div class="section" id="creating-a-user-and-running-a-command">
+<span id="installation-guide-create-user"></span><h2>1.6.4. Creating a User and Running a Command<a class="headerlink" href="#creating-a-user-and-running-a-command" title="Permalink to this headline">¶</a></h2>
+<p>It’s pretty obvious that you’d be able to talk to a chat bot via chat.
+But, we’ve included another way to interact with Cog without using chat.
+It’s a command-line tool named <code class="docutils literal"><span class="pre">cogctl</span></code> which is available on the Cog
+container we just started with Docker Compose. To start using it run the
+following command to start a new shell on the Cog container. You’ll need
+to run all future <code class="docutils literal"><span class="pre">cogctl</span></code> commands from this shell.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>docker-compose <span class="nb">exec</span> cog bash
+</pre></div>
+</div>
+<p>Great now let’s create you a new Cog user and associate that user with
+your Slack handle. Your Cog user can be anything you want and is not
+specific to your Slack account, which will come in handy when
+communicating with Cog outside of chat.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>cogctl user create patrick <span class="se">\</span>
+  --first-name<span class="o">=</span><span class="s2">&quot;Patrick&quot;</span> <span class="se">\</span>
+  --last-name<span class="o">=</span><span class="s2">&quot;Van Stee&quot;</span> <span class="se">\</span>
+  --email<span class="o">=</span><span class="s2">&quot;patrick@operable.io&quot;</span> <span class="se">\</span>
+  --password<span class="o">=</span><span class="s2">&quot;supersecret&quot;</span>
+
+cogctl chat-handle create patrick slack vanstee
+</pre></div>
+</div>
+<p>Great, now Cog should know who you are when running a command in chat.
+You can try it out by running that <code class="docutils literal"><span class="pre">help</span></code> command again.</p>
+<p>Great, you can run a command. But, not all commands can be run without
+permissions. For instance, you’ll notice if you type
+<code class="docutils literal"><span class="pre">&#64;cog</span> <span class="pre">bundle</span> <span class="pre">list</span></code> into chat, Cog responds with an error stating
+<code class="docutils literal"><span class="pre">Sorry,</span> <span class="pre">you</span> <span class="pre">aren't</span> <span class="pre">allowed</span> <span class="pre">to</span> <span class="pre">execute</span>
+<span class="pre">'operable:bundle</span> <span class="pre">list'</span></code>. That’s because bundle commands require
+permissions, like many other important commands.</p>
+<p>Using groups, roles, and permissions you can heavily customize who has
+permissions to do what. But, for now, since we just want to explore what
+Cog has to offer, add yourself to the <code class="docutils literal"><span class="pre">cog-admin</span></code> group, which will
+give you permission to run all the pre-installed commands.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>cogctl group add cog-admin patrick
+</pre></div>
+</div>
+<p>You should now be able to list bundles or even install them as you’ll
+see in the next section.</p>
+</div>
+<div class="section" id="installing-and-configuring-a-bundle">
+<span id="installation-guide-bundle"></span><h2>1.6.5. Installing and Configuring a Bundle<a class="headerlink" href="#installing-and-configuring-a-bundle" title="Permalink to this headline">¶</a></h2>
+<p>So, you’ve already run your first command, but you might have noticed
+that Cog only comes with a handful of pre-installed commands. How do we
+go about installing more commands? By installing bundles, of course.</p>
+<p>Bundles are groups of commands, permissions, and templates that can be
+installed either by referencing a config file directly or by name in the
+<a class="reference external" href="https://bundles.operable.io">bundle registry</a>. So, let’s install one
+by running a chat command.</p>
+<div class="highlight-chat"><div class="highlight"><pre><span></span>max 10:52PM @cog bundle install ec2
+</pre></div>
+</div>
+<p>And that’s it. Now, if you run the <code class="docutils literal"><span class="pre">help</span></code> command, you’ll notice the
+new <code class="docutils literal"><span class="pre">ec2</span></code> bundle is listed under &#8220;Disabled Bundles&#8221;. Before we can run
+a command, we need to enable it, tell our Relay that it can run commands
+from this bundle, and configure it with credentials.</p>
+<div class="highlight-chat"><div class="highlight"><pre><span></span>max 10:55PM @cog bundle enable ec2
+max 10:55PM @cog relay-group member assign default ec2
+</pre></div>
+</div>
+<p>Now the the ec2 bundle is enabled, but we still haven’t configured it
+yet. Let’s set our api token with <code class="docutils literal"><span class="pre">cogctl</span></code>.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s1">&#39;AWS_ACCESS_KEY_ID: &quot;AKIBU34ZNOTAREALTOKENQ&quot;&#39;</span> &gt;&gt; config.yaml
+<span class="nb">echo</span> <span class="s1">&#39;AWS_SECRET_ACCESS_KEY: &quot;YQ7h84BCvE4fJnotarealtokenO8zpAIbulblb6MCHkO&quot;&#39;</span> &gt;&gt; config.yaml
+<span class="nb">echo</span> <span class="s1">&#39;AWS_REGION: &quot;us-east-1&quot;&#39;</span> &gt;&gt; config.yaml
+cogctl bundle config create ec2 config.yaml
+</pre></div>
+</div>
+<p>Now there’s just one last step; making sure we have permission to run
+ec2 commands by adding some privileges to the <code class="docutils literal"><span class="pre">cog-admin</span></code> group.</p>
+<div class="highlight-chat"><div class="highlight"><pre><span></span><span class="kd">@cog</span> permission grant ec2:read cog-admin
+<span class="kd">@cog</span> permission grant ec2:write cog-admin
+<span class="kd">@cog</span> permission grant ec2:admin cog-admin
+</pre></div>
+</div>
+<p>Now try it out!</p>
+<div class="highlight-chat"><div class="highlight"><pre><span></span><span class="kd">@cog</span> ec2:instance list
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="building_cog_from_scratch.html" class="btn btn-neutral float-right" title="1.7. Building and Running Cog from Scratch" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="introducing_cog.html" class="btn btn-neutral" title="1.1. Introducing Cog" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 Operable, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61670076-4', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  
+
+
+</body>
+</html>

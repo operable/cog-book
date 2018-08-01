@@ -1,0 +1,720 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>17. Developing a Trigger &mdash; Cog Book 1.0.0 documentation</title>
+  
+
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Cog Book 1.0.0 documentation" href="../index.html"/>
+        <link rel="next" title="18. Cog Architecture" href="cog_architecture.html"/>
+        <link rel="prev" title="16. Installing Your First Command Bundle" href="installing_your_first_command_bundle.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cog Book
+          
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+          </a>
+
+          
+            <img src="../_static/cog_peek.svg" class="logo" />
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bootstrapping_cog.html">2. Bootstrapping Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_and_managing_relays.html">3. Installing and Managing Relays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands_and_bundles.html">4. Commands and Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="managing_bundles.html">5. Managing Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_a_command_bundle.html">6. Writing A Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_password_resets.html">7. Configuring password resets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions_and_rules.html">8. Permissions and Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_execution_rules.html">9. Command Execution Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundle_configs.html">10. Bundle Configs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_environment_variables.html">11. Command Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic_command_configuration.html">12. Dynamic Command Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="returning_data_from_cog.html">13. Returning data from Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services.html">14. Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">15. Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_your_first_command_bundle.html">16. Installing Your First Command Bundle</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">17. Developing a Trigger</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#lets-make-it-more-interesting">17.1. Let’s Make It More Interesting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#going-further-composability-and-flexibility">17.2. Going Further: Composability and Flexibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#filtering">17.3. Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#validation">17.4. Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conclusion">17.5. Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cog_architecture.html">18. Cog Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_pipelines.html">19. Command pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="redirecting_pipeline_output.html">20. Redirecting Pipeline Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">21. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_management.html">22. User management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributor_license_agreement.html">23. Contributor License Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/cog_server_configuration.html">24. Cog Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/relay_configuration.html">25. Relay Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/command_output_tags.html">26. Command Output Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/greenbar_tags.html">27. Greenbar Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/audit_log_events.html">28. Audit Log Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/glossary.html">29. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/designing_for_chatops.html">30. Designing ChatOps Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/chat_platforms.html">31. Notes on Chat Platform Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Cog Book</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>17. Developing a Trigger</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/operable/cog-book/blob/HEAD/cog-book/source/sections/developing_a_trigger.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="developing-a-trigger">
+<h1>17. Developing a Trigger<a class="headerlink" href="#developing-a-trigger" title="Permalink to this headline">¶</a></h1>
+<p><em>Setting up Cog to respond to Github Webhooks</em></p>
+<p>You may have heard about Cog’s <a class="reference internal" href="triggers.html"><span class="doc">Triggers</span></a> and are curious
+how you might use them in your Cog system. In this tutorial, we’ll set
+up a Github webhook to trigger a Cog pipeline in order to explore
+triggers in depth. Along the way, we’ll iteratively develop a pipeline,
+pick up a few tricks about how to develop pipelines in Cog, and see how
+to take maximum advantage of Cog’s composability and flexibility.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<div class="last line-block">
+<div class="line">You can read up on the details of <a class="reference internal" href="triggers.html"><span class="doc">Cog’s trigger
+system</span></a>, but it isn’t necessary for this tutorial;
+we’ll explain &#8220;just enough&#8221; as we go along.</div>
+<div class="line">We’ll also provide links to more detailed documentation in
+callouts like this one throughout the tutorial.</div>
+</div>
+</div>
+<p>At its most basic, a trigger is just a defined Cog pipeline that can run
+in response to an HTTP request. This allows Cog to respond to events
+outside of chat. In this tutorial, we’ll have Cog respond to Github
+<code class="docutils literal"><span class="pre">push</span></code> events to our favorite Github repository by notifying us in
+chat. Yes, there are other ways of receiving simple notifications that
+don’t require triggers, but we’ll soon see how our pipeline can be
+expanded. Think of this as the &#8220;Hello World&#8221; of triggers.</p>
+<p>Since triggers run a defined pipeline, we first need to define the
+pipeline we want to run. For now, we’ll just hard-code the pipeline to
+get something up and running, but later we’ll add in some variable
+interpolation to do some more interesting things. Let’s just output the
+message <code class="docutils literal"><span class="pre">&quot;Somebody</span> <span class="pre">pushed</span> <span class="pre">some</span> <span class="pre">code!&quot;</span></code> to our <code class="docutils literal"><span class="pre">#engineering</span></code> channel
+in Slack:</p>
+<p><strong>Cog.</strong></p>
+<div class="code text highlight-default"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s2">&quot;Somebody pushed some code!&quot;</span> <span class="o">&gt;</span> <span class="n">chat</span><span class="p">:</span><span class="o">//</span><span class="c1">#engineering</span>
+</pre></div>
+</div>
+<p>You can run this directly in Slack and verify it works. If you’ve used
+Cog before, you might notice the new <a class="reference internal" href="redirecting_pipeline_output.html#chat-urls"><span class="std std-ref">URL-style syntax for
+redirects</span></a>. Adding <code class="docutils literal"><span class="pre">chat://</span></code> to the beginning of a
+redirect will route output through the currently configured chat adapter
+(Slack, Hipchat, IRC, etc.). Normally when you’re just interacting with
+Cog through chat, this isn’t required since we default to returning
+output back through adapter that received the request. That is, if you
+typed a pipeline into Slack, Cog will send the output back to Slack.
+However, our trigger will be coming from Github, and Github doesn’t know
+how to access your <code class="docutils literal"><span class="pre">#engineering</span></code> channel! Our <code class="docutils literal"><span class="pre">chat://</span></code> destination
+gives Cog a hint so it knows how to notify you and your colleagues when
+interesting things happen.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li><a class="reference internal" href="redirecting_pipeline_output.html"><span class="doc">Redirecting Pipeline Output</span></a></li>
+<li><a class="reference internal" href="triggers.html#redirect-destinations-in-triggered-pipelines"><span class="std std-ref">Redirect Destinations in Triggered Pipelines</span></a></li>
+</ul>
+</div>
+<p>Now that we know what pipeline we’re going to run, and determined where
+the output is going to go, we need to set up the trigger to run it. With
+the 0.4 release, we have a REST API for managing triggers, as well as
+commands built into <a class="reference external" href="https://github.com/operable/cogctl">cogctl</a>,
+Cog’s command line interface; let’s use <code class="docutils literal"><span class="pre">cogctl</span></code>:</p>
+<p><strong>Creating a trigger.</strong></p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">cogctl</span> <span class="n">trigger</span> <span class="n">create</span> <span class="s1">&#39;github-alert&#39;</span> \
+      <span class="s1">&#39;echo &quot;Somebody pushed some code!&quot; &gt; chat://#engineering&#39;</span> \
+      <span class="o">--</span><span class="n">enable</span> \
+      <span class="o">--</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Now you know when something happens on Github&#39;</span> \
+      <span class="o">--</span><span class="k">as</span><span class="o">-</span><span class="n">user</span><span class="o">=</span><span class="s1">&#39;bobby_tables&#39;</span> \
+      <span class="o">--</span><span class="n">timeout</span><span class="o">=</span><span class="mi">30</span>
+</pre></div>
+</div>
+<p>Here, we create a trigger named <code class="docutils literal"><span class="pre">github-alert</span></code> which runs the pipeline
+we tested earlier. It’s a good idea to provide some documentation for
+your trigger by adding a <code class="docutils literal"><span class="pre">description</span></code>. Triggers <em>can</em> run as the Cog
+user that makes the HTTP request if a Cog authentication token is
+supplied in the <code class="docutils literal"><span class="pre">authorization</span></code> header, but we can also override that
+by specifying a user that the pipeline will execute as. Here,
+<a class="reference external" href="http://xkcd.com/327/">bobby_tables</a> will execute our pipeline.
+Though the <code class="docutils literal"><span class="pre">echo</span></code> command we’re using doesn’t require any special
+permissions, other commands may; in that case, you’ll want to be sure
+that the user you specify has all the required permissions. Obviously,
+<code class="docutils literal"><span class="pre">bobby_tables</span></code> must exist in our Cog system
+for any of this to work.</p>
+<p>We also specify a timeout. Documentation for Github webhooks indicates
+that Github expects a response within <a class="reference external" href="https://developer.github.com/guides/best-practices-for-integrators/#favor-asynchronous-work-over-synchronous">30
+seconds</a>
+of webhook delivery. Other services may have different requirements. Cog
+allows you to set this on a per-trigger basis as appropriate. Here,
+we’ve specified a Github-recommended 30 seconds, even though 30 seconds
+is the default.</p>
+<p>We also specify, for completeness, that this trigger will be enabled,
+though that is also the default. Enabled triggers are active and can be
+run, while disabled triggers cannot.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li><a class="reference internal" href="triggers.html#anatomy-of-a-trigger"><span class="std std-ref">Anatomy of a Trigger</span></a></li>
+<li><a class="reference internal" href="triggers.html#trigger-timeouts"><span class="std std-ref">Trigger Timeouts</span></a></li>
+<li><a class="reference internal" href="triggers.html#manipulating-triggers"><span class="std std-ref">Manipulating Triggers</span></a></li>
+<li><a class="reference internal" href="permissions_and_rules.html#components-of-the-authorization-system"><span class="std std-ref">Components of the Authorization System</span></a></li>
+</ul>
+</div>
+<p>Upon successful trigger creation, you can retrieve details about the
+trigger with <code class="docutils literal"><span class="pre">cogctl</span> <span class="pre">trigger</span> <span class="pre">info</span></code>.</p>
+<p><strong>cogctl Output.</strong></p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">cogctl</span> <span class="n">trigger</span> <span class="n">info</span> <span class="n">github</span><span class="o">-</span><span class="n">alert</span>
+<span class="n">Name</span>            <span class="n">github</span><span class="o">-</span><span class="n">alert</span>
+<span class="n">Pipeline</span>        <span class="n">echo</span> <span class="s2">&quot;Somebody pushed some code!&quot;</span> <span class="o">&gt;</span> <span class="n">chat</span><span class="p">:</span><span class="o">//</span><span class="c1">#engineering</span>
+<span class="n">Enabled</span>         <span class="kc">True</span>
+<span class="n">As</span> <span class="n">User</span>         <span class="n">bobby_tables</span>
+<span class="n">Timeout</span> <span class="n">Sec</span>     <span class="mi">30</span>
+<span class="n">Invocation</span> <span class="n">URL</span>  <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">cog</span><span class="o">.</span><span class="n">mycompany</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="mi">4001</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">triggers</span><span class="o">/</span><span class="n">cd3ba1dc</span><span class="o">-</span><span class="n">b807</span><span class="o">-</span><span class="mi">4</span><span class="n">b52</span><span class="o">-</span><span class="mi">8</span><span class="n">acc</span><span class="o">-</span><span class="mi">75</span><span class="n">c3f4e56b88</span>
+</pre></div>
+</div>
+<p>You’ll notice that the port on the invocation URL is different from the
+one the rest of Cog’s REST API is served from. This is to allow
+fine-tuning of firewall policies so you can restrict outside access to
+just the pipeline triggers and not the entire Cog API.</p>
+<p>We can actually test this out without Github just using something like
+<code class="docutils literal"><span class="pre">curl</span></code>:</p>
+<p><strong>Testing the trigger.</strong></p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="s2">&quot;POST&quot;</span> \
+  <span class="s2">&quot;http://cog.mycompany.com:4001/v1/triggers/cd3ba1dc-b807-4b52-8acc-75c3f4e56b88&quot;</span> \
+        <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> \
+        <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Accept: application/json&quot;</span> \
+        <span class="o">-</span><span class="n">d</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span> \
+  <span class="o">-</span><span class="n">i</span>
+</pre></div>
+</div>
+<p>If you run that, you’ll see something like this in your terminal:</p>
+<p><strong>cURL Output.</strong></p>
+<div class="code text highlight-default"><div class="highlight"><pre><span></span><span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span> <span class="mi">204</span> <span class="n">No</span> <span class="n">Content</span>
+<span class="n">server</span><span class="p">:</span> <span class="n">Cowboy</span>
+<span class="n">date</span><span class="p">:</span> <span class="n">Tue</span><span class="p">,</span> <span class="mi">12</span> <span class="n">Apr</span> <span class="mi">2016</span> <span class="mi">19</span><span class="p">:</span><span class="mi">07</span><span class="p">:</span><span class="mi">25</span> <span class="n">GMT</span>
+<span class="n">content</span><span class="o">-</span><span class="n">length</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">cache</span><span class="o">-</span><span class="n">control</span><span class="p">:</span> <span class="nb">max</span><span class="o">-</span><span class="n">age</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">private</span><span class="p">,</span> <span class="n">must</span><span class="o">-</span><span class="n">revalidate</span>
+<span class="n">x</span><span class="o">-</span><span class="n">request</span><span class="o">-</span><span class="nb">id</span><span class="p">:</span> <span class="n">cc2sl8bmhdjtutu9lloi6k10p5velb9v</span>
+</pre></div>
+</div>
+<ol class="lowerroman simple">
+<li>and you should see something like this in your Slack client:</li>
+</ol>
+<p><img alt="marvin BOT 3:07 PM Somebody pushed some code!" src="../_images/Slack_SomebodyPushedSomeCode.png" /></p>
+<p>We can now take our invocation URL and use it at Github to set up a
+webhook on our favorite repository; any time someone pushes code, we’ll
+get notified by Cog!</p>
+<p><img alt="Add webhook dialogue" src="../_images/Add_webhook.png" /></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li><a class="reference internal" href="triggers.html#invoking-a-trigger"><span class="std std-ref">Invoking a Trigger</span></a></li>
+</ul>
+</div>
+<div class="section" id="lets-make-it-more-interesting">
+<h2>17.1. Let’s Make It More Interesting<a class="headerlink" href="#lets-make-it-more-interesting" title="Permalink to this headline">¶</a></h2>
+<p>This is all well and good, but receiving the same message over and over
+without any additional context is only going to succeed in making your
+colleagues angry with you for crowding out all their cat GIFs with
+<code class="docutils literal"><span class="pre">&quot;Somebody</span> <span class="pre">pushed</span> <span class="pre">some</span> <span class="pre">code!&quot;</span></code>. Let’s make our alerts more useful.</p>
+<p>If you’ve ever used Github webhooks before, you know they send a
+prodigious amount of data in their request bodies. Our initial pipeline
+doesn’t do anything with this data, which seems like a waste; if we had
+some way to get at that information, we could construct a <em>much</em> more
+informative message. Fortunately, Cog makes this easy; in fact, the
+request body, headers, and query parameters of a triggering HTTP request
+are all made available to the command pipeline.</p>
+<p>After looking at the <a class="reference external" href="https://developer.github.com/v3/activity/events/types/#pushevent">documentation for Github push
+events</a>,
+we might come up with this as a more refined message to our
+<code class="docutils literal"><span class="pre">#engineering</span></code> chat channel:</p>
+<p><strong>Cog.</strong></p>
+<div class="code text highlight-default"><div class="highlight"><pre><span></span>echo $body.pusher.name &quot; just pushed code to &quot; $body.ref &quot; in &quot; $body.repository.html_url &quot;. Changes: &quot; $body.compare &gt; chat://#engineering
+</pre></div>
+</div>
+<p>(That’s all a single line, by the way.)</p>
+<p>Here <code class="docutils literal"><span class="pre">body</span></code>, refers to the parsed JSON body of the incoming HTTP
+request (you can also access <code class="docutils literal"><span class="pre">headers</span></code> and <code class="docutils literal"><span class="pre">query_params</span></code>). You can
+refer to arbitrary data within these maps using standard key paths and
+array indexes. We can even &#8220;fake&#8221; this directly in chat to see how it
+would behave by using the <code class="docutils literal"><span class="pre">seed</span></code> command to create some data that has
+this shape:</p>
+<p><strong>Cog.</strong></p>
+<div class="code text highlight-default"><div class="highlight"><pre><span></span>seed &#39;{&quot;body&quot;: {&quot;pusher&quot;: {&quot;name&quot;: &quot;bobbytables&quot;}, &quot;ref&quot;: &quot;refs/heads/master&quot;, &quot;repository&quot;: {&quot;html_url&quot;: &quot;https://github.com/blahblah/blahblah-repo&quot;}, &quot;compare&quot;: &quot;https://github.com/blahblah/blahblah-repo/compare/9049f1265b7d...0d1a26e67d8f&quot;}}&#39; | echo $body.pusher.name &quot; just pushed code to &quot; $body.ref &quot; in &quot; $body.repository.html_url &quot;. Changes: &quot; $body.compare &gt; chat://#engineering
+</pre></div>
+</div>
+<p>This is admittedly a bit long, but this is all one line that you can
+paste into your chat client. Briefly, the <code class="docutils literal"><span class="pre">seed</span></code> command takes a JSON
+string describing a map. It then passes this data to the following
+command, which can then use variables to bind elements of that map to
+option and argument values. Here, we’re simulating the small portion of
+a Github webhook body that our pipeline cares about. A real Github
+webhook request would naturally include much more information.</p>
+<p>It works!</p>
+<p><img alt="marvin BOT 5:06 PM bobbytables just pushed code to /refs/heads/master in https://github.com/blahblah/blahblah-repo/compare/9049f1265b7d...0d1a26e67d8f" src="../_images/seed.png" /></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li><a class="reference internal" href="triggers.html#initial-calling-environment-for-trigger-invoked-pipelines"><span class="std std-ref">Initial Calling Environment for Trigger-Invoked Pipelines</span></a></li>
+</ul>
+</div>
+<p>Now that we’ve got a better pipeline, let’s update our existing trigger
+using <code class="docutils literal"><span class="pre">cogctl</span></code>:</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span>cogctl trigger update github-alert \
+  --pipeline=&#39;echo $body.pusher.name &quot; just pushed code to &quot; $body.ref &quot; in &quot; $body.repository.html_url &quot;. Changes: &quot; $body.compare &gt; chat://#engineering&#39;
+```
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">trigger</span> <span class="pre">update</span></code> command takes the trigger name as an argument,
+as well as all the additional flags that <code class="docutils literal"><span class="pre">trigger</span> <span class="pre">create</span></code> takes; any
+values you specify in an update command will overwrite the corresponding
+values stored in the system.</p>
+<p>At this point, the new pipeline is &#8220;live&#8221;, and the next <code class="docutils literal"><span class="pre">push</span></code> event
+from Github will result in a much more useful message in your chat room.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li><a class="reference internal" href="triggers.html#update-a-trigger"><span class="std std-ref">Update a Trigger</span></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="going-further-composability-and-flexibility">
+<h2>17.2. Going Further: Composability and Flexibility<a class="headerlink" href="#going-further-composability-and-flexibility" title="Permalink to this headline">¶</a></h2>
+<p>One of the fundamental principles of Cog is the &#8220;Unix philosophy&#8221; of
+making tools that do one thing well, allowing users to join primitive
+building blocks into larger constructs to get real work done. While
+we’ve improved our triggered pipeline a great deal, it still has some
+shortcomings. Next, we’ll see how we can improve the pipeline even more.
+At the same time, we’ll show how Cog’s principle of simplicity allows
+you to quickly build powerful pipelines.</p>
+</div>
+<div class="section" id="filtering">
+<h2>17.3. Filtering<a class="headerlink" href="#filtering" title="Permalink to this headline">¶</a></h2>
+<p>Since we’re receiving Github <code class="docutils literal"><span class="pre">push</span></code> events, we’re actually getting an
+event anytime anybody pushes to <em>any</em> branch in the repository.
+Depending on your organization’s approach to <code class="docutils literal"><span class="pre">git</span></code>, this could
+translate to a <em>lot</em> of messages flooding your chat channel. This is
+probably too much, particularly if you really only want widespread
+visibility for pushes to the <code class="docutils literal"><span class="pre">master</span></code> branch. How can we ignore pushes
+to other branches?</p>
+<p>The good news is that the solution is already built into Cog. You don’t
+have to write a new command to do this; you can just use Cog’s existing
+<code class="docutils literal"><span class="pre">filter</span></code> command! Looking again at the structure of the <code class="docutils literal"><span class="pre">push</span></code>
+event, it looks like we are interested in the <code class="docutils literal"><span class="pre">ref</span></code> field, which
+indicates which branch code is being pushed to. In terms of Cog’s
+packaging of request information, that translates to <code class="docutils literal"><span class="pre">body.ref</span></code>. We
+want to only allow processing to continue on push events where
+<code class="docutils literal"><span class="pre">body.ref</span></code> equals <code class="docutils literal"><span class="pre">&quot;refs/heads/master&quot;</span></code>. That translates to the
+following <code class="docutils literal"><span class="pre">filter</span></code> command:</p>
+<p><strong>Cog.</strong></p>
+<div class="code text highlight-default"><div class="highlight"><pre><span></span><span class="nb">filter</span> <span class="o">--</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;body.ref&quot;</span> <span class="o">--</span><span class="n">matches</span><span class="o">=</span><span class="s2">&quot;refs/heads/master&quot;</span>
+</pre></div>
+</div>
+<p>Placing that at the beginning of our existing pipeline will get us what
+we desire, with no extra code required. Any request that comes from the
+<code class="docutils literal"><span class="pre">master</span></code> branch will make it through the filter to the rest of the
+pipeline. Requests from other branches will be filtered out, which
+effectively halts pipeline processing, since there won’t be any data to
+operate on.</p>
+<p>Try updating the trigger pipeline using <code class="docutils literal"><span class="pre">cogctl</span></code> and try pushing to a
+few branches; you’ll only see messages in chat for the master branch.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li><a class="reference internal" href="triggers.html#errors-and-empty-pipelines"><span class="std std-ref">Errors and &#8220;Empty&#8221; Pipelines</span></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="validation">
+<h2>17.4. Validation<a class="headerlink" href="#validation" title="Permalink to this headline">¶</a></h2>
+<p>It’s a good practice to secure your webhooks when you can, and Github
+provides an <a class="reference external" href="https://developer.github.com/webhooks/securing/">easy
+method</a> to do so.
+When you set up your webhook, you can also supply a &#8220;secret&#8221;. Github
+will then hash the body of the request with this secret and include the
+checksum in the request as a header. On the receiving end, you can take
+your secret, hash the body yourself, and compare the resulting checksum.
+If it matches the value supplied in the header, you can be pretty
+confident that it’s coming from Github.</p>
+<p>In the interest of &#8220;doing one thing and doing it well&#8221;, we haven’t baked
+Github webhook validation into the core of Cog; that’s not Cog’s &#8220;one
+thing&#8221;. Conceptually, we’d like to have something like Cog’s <code class="docutils literal"><span class="pre">filter</span></code>
+command that would only let the pipeline proceed if the request can be
+verified. Unfortunately, this is more than Cog’s <code class="docutils literal"><span class="pre">filter</span></code> command can
+do. Fortunately, it’s not very difficult to create a command that can do
+this. In fact, this short Ruby script will do the job.</p>
+<div class="code ruby highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env ruby</span>
+
+<span class="c1"># github_verify.rb</span>
+<span class="c1">#</span>
+<span class="c1"># An implementation of Github webhook verification, as explained</span>
+<span class="c1"># at https://developer.github.com/webhooks/securing/, but for use</span>
+<span class="c1"># in Cog pipelines triggered via webhook.</span>
+
+<span class="n">require</span> <span class="s1">&#39;json&#39;</span>
+<span class="n">require</span> <span class="s1">&#39;openssl&#39;</span>
+
+<span class="c1"># Obtain the checksum from the webhook request header. All headers are</span>
+<span class="c1"># available from the command environment</span>
+<span class="k">def</span> <span class="nf">signature</span><span class="p">(</span><span class="n">cog_env</span><span class="p">)</span>
+  <span class="n">header_value</span> <span class="o">=</span> <span class="n">cog_env</span><span class="p">[</span><span class="s2">&quot;headers&quot;</span><span class="p">][</span><span class="s2">&quot;x-hub-signature&quot;</span><span class="p">]</span>
+  <span class="n">header_value</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;sha1=&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">end</span>
+
+<span class="c1"># Compute our own checksum by hashing the raw body of the request with</span>
+<span class="c1"># our shared secret</span>
+<span class="k">def</span> <span class="nf">compute_signature</span><span class="p">(</span><span class="n">cog_env</span><span class="p">,</span> <span class="n">secret</span><span class="p">)</span>
+  <span class="n">body</span> <span class="o">=</span> <span class="n">cog_env</span><span class="p">[</span><span class="s2">&quot;raw_body&quot;</span><span class="p">]</span>
+  <span class="n">OpenSSL</span><span class="p">::</span><span class="n">HMAC</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">(</span><span class="n">OpenSSL</span><span class="p">::</span><span class="n">Digest</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;sha1&#39;</span><span class="p">),</span> <span class="n">secret</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span>
+<span class="n">end</span>
+
+<span class="c1"># Borrowed from Rack.Utils.secure_compare</span>
+<span class="k">def</span> <span class="nf">secure_compare</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">false</span> <span class="n">unless</span> <span class="n">a</span><span class="o">.</span><span class="n">bytesize</span> <span class="o">==</span> <span class="n">b</span><span class="o">.</span><span class="n">bytesize</span>
+
+  <span class="n">l</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;C*&quot;</span><span class="p">)</span>
+
+  <span class="n">r</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span>
+  <span class="n">b</span><span class="o">.</span><span class="n">each_byte</span> <span class="p">{</span> <span class="o">|</span><span class="n">v</span><span class="o">|</span> <span class="n">r</span> <span class="o">|=</span> <span class="n">v</span> <span class="o">^</span> <span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="o">+=</span><span class="mi">1</span><span class="p">]</span> <span class="p">}</span>
+  <span class="n">r</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="n">end</span>
+
+<span class="c1"># Read the command environment from STDIN</span>
+<span class="n">cog_env</span> <span class="o">=</span> <span class="n">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">ARGF</span><span class="o">.</span><span class="n">read</span><span class="p">)</span>
+
+<span class="c1"># Obtain Github webhook shared secret set up by Cog&#39;s dynamic command</span>
+<span class="c1"># configuration</span>
+<span class="n">secret</span> <span class="o">=</span> <span class="n">ENV</span><span class="p">[</span><span class="s1">&#39;GITHUB_WEBHOOK_SECRET&#39;</span><span class="p">]</span>
+
+<span class="c1"># If GITHUB_WEBHOOK_SECRET isn&#39;t set log an error message and bail</span>
+<span class="k">if</span> <span class="n">secret</span> <span class="o">==</span> <span class="n">nil</span> <span class="n">then</span>
+  <span class="n">STDERR</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;Missing required environment variable $GITHUB_WEBHOOK_SECRET.&quot;</span>
+  <span class="n">exit</span> <span class="mi">1</span>
+<span class="n">end</span>
+<span class="n">signature</span> <span class="o">=</span> <span class="n">signature</span><span class="p">(</span><span class="n">cog_env</span><span class="p">)</span>
+<span class="n">computed</span> <span class="o">=</span> <span class="n">compute_signature</span><span class="p">(</span><span class="n">cog_env</span><span class="p">,</span> <span class="n">secret</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">secure_compare</span><span class="p">(</span><span class="n">signature</span><span class="p">,</span> <span class="n">computed</span><span class="p">)</span>
+  <span class="c1"># Our checksum matches Github&#39;s, so we&#39;ll simply pass all the data</span>
+  <span class="c1"># we received downstream to the rest of our pipeline for processing</span>
+  <span class="n">STDOUT</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;JSON&quot;</span>
+  <span class="n">STDOUT</span><span class="o">.</span><span class="n">puts</span> <span class="n">JSON</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">cog_env</span><span class="p">)</span>
+<span class="k">else</span>
+  <span class="c1"># Something isn&#39;t right; the checksums don&#39;t match, so let&#39;s halt</span>
+  <span class="c1"># pipeline processing now</span>
+  <span class="n">STDERR</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;Signature does not match!&quot;</span>
+  <span class="n">exit</span> <span class="mi">1</span>
+<span class="n">end</span>
+</pre></div>
+</div>
+<p>An in-depth discussion of how to write a command for Cog is outside the
+scope of this tutorial, but hopefully this example illustrates that
+there isn’t much to it; only a small amount of the code is specific to
+Cog commands. The important thing to know is that all the request
+information is provided as a JSON-encoded hash on <code class="docutils literal"><span class="pre">STDIN</span></code> (this is the
+same structure we reach into when we bind option and argument values in
+a Cog pipeline). We can reach into this hash to extract both the
+Github-provided checksum, as well as the raw request body as a string
+(Cog provides the raw body for this very use case).</p>
+<p>We don’t want to hard-code our shared secret into this code. Instead we
+can provide it in a configuration file on our Relay machine. Create the
+file <code class="docutils literal"><span class="pre">$RELAY_DYNAMIC_CONFIG_ROOT/github-trigger/config.yaml</span></code> on your
+Relay machine:</p>
+<div class="code YAML highlight-default"><div class="highlight"><pre><span></span><span class="o">---</span>
+<span class="n">GITHUB_WEBHOOK_SECRET</span><span class="p">:</span> <span class="s2">&quot;supersecretdonttellanybody&quot;</span>
+</pre></div>
+</div>
+<p>Obviously, use your own secret, and don’t forget to add your secret to
+your webhook’s configuration at Github:</p>
+<p><img alt="Webhooks/Manage webhook dialogue" src="../_images/webhook_secret.png" /></p>
+<p>By providing a configuration file on our Relay with our shared secret,
+Cog adds the secret to <code class="docutils literal"><span class="pre">ENV</span></code> when it calls the Ruby script. With this
+last piece in place, we have all we need to verify that the request
+indeed came from Github. If so, we’ll just pass all the request
+information back out as JSON; if not, we’ll exit with a non-zero code to
+halt the pipeline. Thus, this command acts like <code class="docutils literal"><span class="pre">filter</span></code>, albeit a
+filter that does a more involved check than a basic string comparison.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li><a class="reference internal" href="dynamic_command_configuration.html"><span class="doc">Dynamic Command Configuration</span></a></li>
+<li><a class="reference internal" href="installing_and_managing_relays.html#relays-and-relay-groups"><span class="std std-ref">Relays &amp; Relay Groups</span></a></li>
+</ul>
+</div>
+<p>For this tutorial, we’ve created a repository on Github that defines a
+bundle with this command. It even defines a Docker image that can be
+easily installed on your Relay instances to run in your own
+infrastructure.</p>
+<p>icon:github[2x]
+<a class="reference external" href="https://github.com/cog-bundles/github-trigger">cog-bundles/github-trigger</a></p>
+<p>This command bundle is defined by the following configuration file,
+which is included in the <code class="docutils literal"><span class="pre">github-trigger</span></code> repository. Since this is a
+Docker-based command bundle, this is really the only file you need to
+install the bundle in your own infrastructure!</p>
+<div class="code YAML highlight-default"><div class="highlight"><pre><span></span><span class="o">---</span>
+<span class="n">cog_bundle_version</span><span class="p">:</span> <span class="mi">4</span>
+
+<span class="n">name</span><span class="p">:</span> <span class="n">github</span><span class="o">-</span><span class="n">trigger</span>
+<span class="n">description</span><span class="p">:</span> <span class="n">Interact</span> <span class="k">with</span> <span class="n">GitHub</span> <span class="n">webhooks</span>
+<span class="n">version</span><span class="p">:</span> <span class="s2">&quot;0.1&quot;</span>
+<span class="n">docker</span><span class="p">:</span>
+  <span class="n">image</span><span class="p">:</span> <span class="n">cogcmd</span><span class="o">/</span><span class="n">github</span><span class="o">-</span><span class="n">trigger</span>
+  <span class="n">tag</span><span class="p">:</span> <span class="n">dev</span>
+<span class="n">commands</span><span class="p">:</span>
+  <span class="n">verify</span><span class="p">:</span>
+    <span class="n">description</span><span class="p">:</span> <span class="n">Verify</span> <span class="n">a</span> <span class="n">GitHub</span> <span class="n">webhook</span> <span class="n">body</span>
+    <span class="n">executable</span><span class="p">:</span> <span class="s2">&quot;/usr/local/bin/github_verify.rb&quot;</span>
+</pre></div>
+</div>
+<p>Assuming you have already set up a Relay instance and added it to a
+Relay group named <code class="docutils literal"><span class="pre">trigger-tutorial</span></code>, you can install this command
+bundle in your own Cog instance:</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">cog</span><span class="o">-</span><span class="n">bundles</span><span class="o">/</span><span class="n">github</span><span class="o">-</span><span class="n">trigger</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cogctl</span> <span class="n">bundle</span> <span class="n">create</span> <span class="o">./</span><span class="n">github</span><span class="o">-</span><span class="n">trigger</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">yaml</span>
+<span class="n">cogctl</span> <span class="n">bundle</span> <span class="n">enable</span> <span class="n">github</span><span class="o">-</span><span class="n">trigger</span>
+<span class="n">cogctl</span> <span class="n">relay</span><span class="o">-</span><span class="n">group</span> <span class="n">assign</span> <span class="n">trigger</span><span class="o">-</span><span class="n">tutorial</span> <span class="n">github</span><span class="o">-</span><span class="n">trigger</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li><a class="reference internal" href="managing_bundles.html"><span class="doc">Managing Bundles</span></a></li>
+<li><a class="reference internal" href="installation_guide.html#installation-guide-bundle"><span class="std std-ref">Installing and Configuring a Bundle</span></a></li>
+<li><a class="reference internal" href="installing_and_managing_relays.html#relays-and-relay-groups"><span class="std std-ref">Relays &amp; Relay Groups</span></a></li>
+</ul>
+</div>
+<p>With this command in place, we can add verification to our existing
+pipeline by simply placing <code class="docutils literal"><span class="pre">github-trigger:verify</span></code> as the first
+command (I’ve broken up the individual invocations on separate lines for
+readability):</p>
+<div class="code text highlight-default"><div class="highlight"><pre><span></span>github-trigger:verify |
+filter --path=&quot;body.ref&quot; --matches=&quot;refs/heads/master&quot; |
+echo $body.pusher.name &quot; just pushed code to &quot; $body.ref &quot; in &quot; $body.repository.html_url &quot;. Changes: &quot; $body.compare &gt; chat://#engineering
+</pre></div>
+</div>
+<p>You can update the trigger using <code class="docutils literal"><span class="pre">cogctl</span> <span class="pre">trigger</span> <span class="pre">update</span></code> as described
+above. You can also construct inputs to verify this in pure chat using
+the <code class="docutils literal"><span class="pre">seed</span></code> command, but that is left (as they say) as an exercise for
+the reader.</p>
+<p>Now if you trigger a webhook delivery, it will be verified! Try
+experimenting by using the &#8220;wrong&#8221; shared secret (either on Github or in
+your Relay configuration file; changes to either take effect immediately
+and automatically) to confirm that invalid requests stop processing as
+soon as they fail validation.</p>
+</div>
+<div class="section" id="conclusion">
+<h2>17.5. Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>We’ve covered a lot of ground in this tutorial! We’ve taken an in-depth
+look at the new triggered pipeline feature of Cog and seen how we can
+use it to kick off pipelines in response to incoming HTTP requests from
+webhooks. We’ve also seen how to develop pipelines, how to extend
+pipelines, and even how to create a custom command. Finally, we even got
+a taste of the new Docker-based command bundles.</p>
+<p>If you’re curious to learn more about the details of what’s happening
+behind the scenes of this tutorial, please take a look at the various
+documentation links scattered throughout. Also feel free to stop by our
+<a class="reference external" href="https://cogbot.slack.com">public Slack channel</a> to say &#8220;Hi&#8221; and ask
+whatever’s on your mind; we’d love to hear from you.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cog_architecture.html" class="btn btn-neutral float-right" title="18. Cog Architecture" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installing_your_first_command_bundle.html" class="btn btn-neutral" title="16. Installing Your First Command Bundle" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 Operable, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61670076-4', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  
+
+
+</body>
+</html>

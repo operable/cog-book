@@ -1,0 +1,434 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>4. Commands and Bundles &mdash; Cog Book 1.0.0 documentation</title>
+  
+
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Cog Book 1.0.0 documentation" href="../index.html"/>
+        <link rel="next" title="5. Managing Bundles" href="managing_bundles.html"/>
+        <link rel="prev" title="3. Installing and Managing Relays" href="installing_and_managing_relays.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cog Book
+          
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+          </a>
+
+          
+            <img src="../_static/cog_peek.svg" class="logo" />
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bootstrapping_cog.html">2. Bootstrapping Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_and_managing_relays.html">3. Installing and Managing Relays</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Commands and Bundles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#commands">4.1. Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bundles">4.2. Bundles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bundle-permissions-and-rules">4.2.1. Bundle Permissions and Rules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-the-operable-bundle">4.2.2. Example: The <code class="docutils literal"><span class="pre">operable</span></code> Bundle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#invoking-commands">4.3. Invoking Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#shortcuts">4.3.1. Shortcuts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#implementation-details">4.4. Implementation Details</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="managing_bundles.html">5. Managing Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_a_command_bundle.html">6. Writing A Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_password_resets.html">7. Configuring password resets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions_and_rules.html">8. Permissions and Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_execution_rules.html">9. Command Execution Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundle_configs.html">10. Bundle Configs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_environment_variables.html">11. Command Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic_command_configuration.html">12. Dynamic Command Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="returning_data_from_cog.html">13. Returning data from Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services.html">14. Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">15. Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_your_first_command_bundle.html">16. Installing Your First Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing_a_trigger.html">17. Developing a Trigger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cog_architecture.html">18. Cog Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_pipelines.html">19. Command pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="redirecting_pipeline_output.html">20. Redirecting Pipeline Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">21. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_management.html">22. User management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributor_license_agreement.html">23. Contributor License Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/cog_server_configuration.html">24. Cog Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/relay_configuration.html">25. Relay Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/command_output_tags.html">26. Command Output Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/greenbar_tags.html">27. Greenbar Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/audit_log_events.html">28. Audit Log Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/glossary.html">29. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/designing_for_chatops.html">30. Designing ChatOps Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/chat_platforms.html">31. Notes on Chat Platform Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Cog Book</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>4. Commands and Bundles</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/operable/cog-book/blob/HEAD/cog-book/source/sections/commands_and_bundles.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="commands-and-bundles">
+<h1>4. Commands and Bundles<a class="headerlink" href="#commands-and-bundles" title="Permalink to this headline">¶</a></h1>
+<p>As a chatops bot, commands are central to Cog. After all, without
+commands, Cog wouldn’t actually do anything! Let’s take a look at
+exactly what commands are, how they are organized, and how they are
+managed.</p>
+<p><strong>Current list Cog Bundles:</strong> <a class="reference external" href="https://bundles.operable.io">Bundle
+Warehouse</a></p>
+<p>Let’s start with an example. If I type the following into Slack:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>!operable:help
+</pre></div>
+</div>
+<p>I should receive a response that looks something like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>I know about these commands:
+
+*  date:date
+*  github:prs
+*  github:repo
+*  operable:bundle
+*  operable:echo
+*  operable:filter
+*  operable:greet
+*  operable:group
+*  operable:help
+*  operable:max
+*  operable:min
+*  operable:permissions
+*  operable:role
+*  operable:rules
+*  operable:sort
+*  operable:sum
+*  operable:table
+*  operable:thorn
+*  operable:unique
+*  operable:wc
+
+Try calling `operable:help COMMAND` to find out more.
+</pre></div>
+</div>
+<p>I have just executed the <code class="docutils literal"><span class="pre">help</span></code> command from the <code class="docutils literal"><span class="pre">operable</span></code> command
+bundle. From the response, I can see that the system currently has three
+bundles installed (<code class="docutils literal"><span class="pre">date</span></code>, <code class="docutils literal"><span class="pre">github</span></code>, and <code class="docutils literal"><span class="pre">operable</span></code>), each of
+which contains one or more commands. The <code class="docutils literal"><span class="pre">date</span></code> bundle contains a
+single command (also named <code class="docutils literal"><span class="pre">date</span></code>), the <code class="docutils literal"><span class="pre">github</span></code> bundle contains a
+<code class="docutils literal"><span class="pre">prs</span></code> and a <code class="docutils literal"><span class="pre">repo</span></code> command, and the <code class="docutils literal"><span class="pre">operable</span></code> bundle contains a
+great deal of commands, one of which is the <code class="docutils literal"><span class="pre">help</span></code> command we just
+invoked.</p>
+<div class="section" id="commands">
+<h2>4.1. Commands<a class="headerlink" href="#commands" title="Permalink to this headline">¶</a></h2>
+<p>If you view your chatbot as a kind of &#8220;shared command line&#8221;, then
+commands are like the executables in your terminal. In fact, you might
+recognize several commands from the <code class="docutils literal"><span class="pre">operable</span></code> namespace above from
+your everyday terminal usage: <code class="docutils literal"><span class="pre">echo</span></code>, <code class="docutils literal"><span class="pre">wc</span></code>, <code class="docutils literal"><span class="pre">sort</span></code>, etc.</p>
+<p>Command may need some additional information that would not be shared on
+the &#8220;shared command line&#8221;, but will have to be setup by an
+administrator, such as an OAuth key. See the section on
+<a class="reference internal" href="dynamic_command_configuration.html"><span class="doc">Dynamic Command Configuration</span></a> for more information on how to
+get this data for command execution.</p>
+</div>
+<div class="section" id="bundles">
+<h2>4.2. Bundles<a class="headerlink" href="#bundles" title="Permalink to this headline">¶</a></h2>
+<p>Let’s say that you’ve written some new chat commands for Cog. You have
+one command that spins up new machines in AWS and another that
+terminates machines.</p>
+<p>These commands are clearly related functionally; you probably won’t use
+one without the other, after all. They also probably share a good bit of
+library and / or dependency code. It would be nice to have a way to
+package up these commands in a way that reflects this.</p>
+<p>Enter <strong>bundles</strong>, the packaging unit for commands. Bundles contain all
+the code for the commands within, including dependencies and library
+code. They also carry metadata about the commands, including
+documentation, details about the various options each command
+recognizes, configuration that affects how the commands behave in
+<a class="reference internal" href="command_pipelines.html"><span class="doc">execution pipelines</span></a>, and even formatting
+templates, which allow the results of commands to be presented in the
+best possible way for the chat system you use.</p>
+<p>This sounds interesting, right? Come see how simple it is:
+<a class="reference internal" href="writing_a_command_bundle.html"><span class="doc">Writing A Command Bundle</span></a>.</p>
+<div class="section" id="bundle-permissions-and-rules">
+<h3>4.2.1. Bundle Permissions and Rules<a class="headerlink" href="#bundle-permissions-and-rules" title="Permalink to this headline">¶</a></h3>
+<p>Bundles also contain an initial set of <a class="reference internal" href="permissions_and_rules.html"><span class="doc">permissions and authorization
+rules</span></a> for their commands. When a bundle is
+installed, these permissions and accompanying rules are automatically
+created in the Cog system. These can be used as-is, or can be modified
+by Cog operators in whatever way suits their organization best.</p>
+<p>Since <a class="reference internal" href="permissions_and_rules.html"><span class="doc">permissions</span></a> are namespaced to the
+bundle they originate from, installing a bundle’s permissions will never
+conflict with any existing authorization system configurations you may
+have made. No users are automatically assigned any of these permissions,
+either.</p>
+</div>
+<div class="section" id="example-the-operable-bundle">
+<h3>4.2.2. Example: The <code class="docutils literal"><span class="pre">operable</span></code> Bundle<a class="headerlink" href="#example-the-operable-bundle" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">operable</span></code> bundle is a unique bundle, in that it is effectively
+built into the bot (in code, you will see it referred to as the
+&#8220;embedded bundle&#8221;). All Cog instances will have this bundle installed
+automatically, and this is how the core permissions and authorization
+rules of the system come to be installed.</p>
+</div>
+</div>
+<div class="section" id="invoking-commands">
+<h2>4.3. Invoking Commands<a class="headerlink" href="#invoking-commands" title="Permalink to this headline">¶</a></h2>
+<p>To invoke a command, like <code class="docutils literal"><span class="pre">operable:help</span></code>, you have a few options.</p>
+<p>First, you can address the bot directly by name in a channel in which
+the bot is listening. Here, my bot is named
+<a class="reference external" href="https://en.wikipedia.org/wiki/Marvin_(character)">Marvin</a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nd">@marvin</span> <span class="n">operable</span><span class="p">:</span><span class="n">help</span>
+</pre></div>
+</div>
+<p>Alternatively, you can configure the bot to use a &#8220;command prefix&#8221;,
+which defaults to <code class="docutils literal"><span class="pre">!</span></code>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>!operable:help
+</pre></div>
+</div>
+<p>Finally, you can interact with the bot in 1-on-1 chat, in which case you
+may simply type commands directly; everything you type to the bot is
+considered a command.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">operable</span><span class="p">:</span><span class="n">help</span>
+</pre></div>
+</div>
+<div class="section" id="shortcuts">
+<h3>4.3.1. Shortcuts<a class="headerlink" href="#shortcuts" title="Permalink to this headline">¶</a></h3>
+<p>Fully qualifying all command names with their bundle can get tedious for
+frequently-used commands, as well as for long pipeline sequences.
+Fortunately, Cog uses a simple rule to alleviate much of this
+frustration. If a command name <em>by itself</em> happens to be unique within a
+Cog installation (that is, no other bundles have a command with the same
+name), you may type the bare command. Thus our repeated invocations of
+<code class="docutils literal"><span class="pre">operable:help</span></code> could also have been written simply as <code class="docutils literal"><span class="pre">help</span></code>, since
+the <code class="docutils literal"><span class="pre">operable</span></code> bundle is the only bundle currently installed that has
+a <code class="docutils literal"><span class="pre">help</span></code> command.</p>
+<p>If on the other hand, your installation were to have two or more bundles
+that had a <code class="docutils literal"><span class="pre">help</span></code> command, you would need to specify exactly which
+<code class="docutils literal"><span class="pre">help</span></code> command you wanted to invoke; <code class="docutils literal"><span class="pre">operable:help</span></code>, <code class="docutils literal"><span class="pre">foo:help</span></code>,
+<code class="docutils literal"><span class="pre">bar:help</span></code>, etc. If there is any ambiguity about which command you are
+trying to invoke, Cog will not execute <em>any</em> commands, and will instead
+warn you.</p>
+</div>
+</div>
+<div class="section" id="implementation-details">
+<h2>4.4. Implementation Details<a class="headerlink" href="#implementation-details" title="Permalink to this headline">¶</a></h2>
+<p>Bundles may take one of two forms. The first, which we’ll call a
+<a class="reference internal" href="bundle_configs.html#standard-bundle-target"><span class="std std-ref">standard</span></a> bundle is a docker image that contains
+all of your commands. This is the form you’ll use if you have custom
+code to implement your chat commands and wish to package that code and
+distribute it in a bundle.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Note that versions on Cog prior to version 0.4 used a different
+packaging system for standard bundles. These old bundles will not
+work for current versions of Cog.</p>
+</div>
+<p>The other form of bundle is a
+<a class="reference internal" href="bundle_configs.html#simple-bundle-target"><span class="std std-ref">simple</span></a> bundle, which is
+essentially just the <code class="docutils literal"><span class="pre">config.yaml</span></code> file from the &#8220;standard&#8221; bundle.
+This form of bundle can be used to expose executables that are already
+on the system path, which may be installed &#8220;out of band&#8221;, using OS
+packages, standard configuration management routes, etc.</p>
+<p>It should be noted that &#8220;simple&#8221; bundles can still be configured to
+accept arguments and options. The <code class="docutils literal"><span class="pre">config.yaml</span></code> file thus serves to
+describe the command to Cog, to ensure that the proper permissions and
+rules are in place for the use of the command, and to instruct Cog how
+to interpret and expose invocation options to the command.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="managing_bundles.html" class="btn btn-neutral float-right" title="5. Managing Bundles" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installing_and_managing_relays.html" class="btn btn-neutral" title="3. Installing and Managing Relays" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 Operable, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61670076-4', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  
+
+
+</body>
+</html>

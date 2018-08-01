@@ -1,0 +1,403 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>9. Command Execution Rules &mdash; Cog Book 1.0.0 documentation</title>
+  
+
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Cog Book 1.0.0 documentation" href="../index.html"/>
+        <link rel="next" title="10. Bundle Configs" href="bundle_configs.html"/>
+        <link rel="prev" title="8. Permissions and Rules" href="permissions_and_rules.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cog Book
+          
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+          </a>
+
+          
+            <img src="../_static/cog_peek.svg" class="logo" />
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bootstrapping_cog.html">2. Bootstrapping Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_and_managing_relays.html">3. Installing and Managing Relays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands_and_bundles.html">4. Commands and Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="managing_bundles.html">5. Managing Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_a_command_bundle.html">6. Writing A Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_password_resets.html">7. Configuring password resets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions_and_rules.html">8. Permissions and Rules</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">9. Command Execution Rules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#rule-structure">9.1. Rule Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#arguments-and-options-qualifiers">9.2. Arguments and Options Qualifiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#permissions">9.3. Permissions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#site-namespace">9.4. Site Namespace</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bundle_configs.html">10. Bundle Configs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_environment_variables.html">11. Command Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic_command_configuration.html">12. Dynamic Command Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="returning_data_from_cog.html">13. Returning data from Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services.html">14. Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">15. Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_your_first_command_bundle.html">16. Installing Your First Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing_a_trigger.html">17. Developing a Trigger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cog_architecture.html">18. Cog Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_pipelines.html">19. Command pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="redirecting_pipeline_output.html">20. Redirecting Pipeline Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">21. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_management.html">22. User management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributor_license_agreement.html">23. Contributor License Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/cog_server_configuration.html">24. Cog Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/relay_configuration.html">25. Relay Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/command_output_tags.html">26. Command Output Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/greenbar_tags.html">27. Greenbar Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/audit_log_events.html">28. Audit Log Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/glossary.html">29. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/designing_for_chatops.html">30. Designing ChatOps Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/chat_platforms.html">31. Notes on Chat Platform Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Cog Book</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>9. Command Execution Rules</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/operable/cog-book/blob/HEAD/cog-book/source/sections/command_execution_rules.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="command-execution-rules">
+<h1>9. Command Execution Rules<a class="headerlink" href="#command-execution-rules" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="rule-structure">
+<h2>9.1. Rule Structure<a class="headerlink" href="#rule-structure" title="Permalink to this headline">¶</a></h2>
+<p>Rules help Cog to determine who is able to perform what task. Cog rules
+follow a specific format. The rule structure describes what command is
+executed and what permission is needed in order to execute the command.
+All rules begin with the phrase <code class="docutils literal"><span class="pre">when</span> <span class="pre">command</span> <span class="pre">is</span></code>. If a user
+does not have the specified permission, the user is not able to execute
+the command.</p>
+<p>Do you have an entire group of people who should have a certain command?
+No problem, set up the group and assign the permission to that group.
+Cog will still recognize that each user has the correct permissions
+according to the group.</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">when</span> <span class="n">command</span> <span class="ow">is</span> <span class="o">&lt;</span><span class="n">bundle_name</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">command_name</span><span class="o">&gt;</span> <span class="n">must</span> <span class="n">have</span> <span class="o">&lt;</span><span class="n">bundle_name</span><span class="o">|</span><span class="n">site</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">permission_name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="arguments-and-options-qualifiers">
+<h2>9.2. Arguments and Options Qualifiers<a class="headerlink" href="#arguments-and-options-qualifiers" title="Permalink to this headline">¶</a></h2>
+<p>You may also set rules to cover very specific invocations of a certain
+command. You can set option and arg values to match for particular
+command executions.</p>
+<p>The argument and option portion of the rules begin with the word
+<code class="docutils literal"><span class="pre">`with`</span></code>. There are argument and option qualifiers used in
+this phrasing. The possible key words and phrases that Cog recognizes
+and acts upon when using the argument and option qualifier phrase are as
+follows:</p>
+<ul class="simple">
+<li>and</li>
+<li>or</li>
+<li>&lt;,&gt;, ==, !=</li>
+<li>any in</li>
+<li>all in</li>
+<li>in</li>
+</ul>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">when</span> <span class="n">command</span> <span class="ow">is</span> <span class="o">&lt;</span><span class="n">bundle_name</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">command_name</span><span class="o">&gt;</span> <span class="k">with</span> <span class="n">arg</span><span class="p">[</span><span class="o">&lt;</span><span class="n">position</span><span class="o">&gt;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&lt;some value&gt;&#39;</span> <span class="n">must</span> <span class="n">have</span> <span class="o">&lt;</span><span class="n">bundle_name</span><span class="o">|</span><span class="n">site</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">permission_name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">when</span> <span class="n">command</span> <span class="ow">is</span> <span class="o">&lt;</span><span class="n">bundle_name</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">command_name</span><span class="o">&gt;</span> <span class="k">with</span> <span class="n">option</span><span class="p">[</span><span class="o">&lt;</span><span class="n">some</span> <span class="n">option</span><span class="o">&gt;</span><span class="p">]</span> <span class="o">==</span> <span class="o">&lt;</span><span class="n">some</span> <span class="n">value</span><span class="o">&gt;</span> <span class="n">must</span> <span class="n">have</span> <span class="o">&lt;</span><span class="n">bundle_name</span><span class="o">|</span><span class="n">site</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">permission_name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">when</span> <span class="n">command</span> <span class="ow">is</span> <span class="o">&lt;</span><span class="n">bundle_name</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">command_name</span><span class="o">&gt;</span> <span class="k">with</span> <span class="o">&lt;</span><span class="nb">any</span><span class="o">|</span><span class="nb">all</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">args</span><span class="o">|</span><span class="n">options</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;list&#39;</span><span class="p">,</span> <span class="s1">&#39;of&#39;</span><span class="p">,</span> <span class="s1">&#39;values&#39;</span><span class="p">]</span> <span class="n">must</span> <span class="n">have</span> <span class="o">&lt;</span><span class="n">bundle_name</span><span class="o">|</span><span class="n">site</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">permission_name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>You may combine these qualifiers such that your rules can be as simple
+or as complicated as you need them to be.</p>
+<p>The following are rule examples with valid argument and option qualifiers:</p>
+<div class="line-block">
+<div class="line">&#8220;when command is foo:bar with option[delete] == true must have foo:destroy&#8221;</div>
+<div class="line">&#8220;when command is foo:set with option[set] == /.*/ must have foo:baz-set&#8221;</div>
+<div class="line">&#8220;when command is foo:qux with arg[0] == &#8216;status&#8217; must have foo:view&#8221;</div>
+<div class="line">&#8220;when command is foo:barqux with option[delete] == true and arg[0] &gt; 5 must have foo:destroy&#8221;</div>
+<div class="line">&#8220;when command is foo:bar with any args in [&#8216;wubba&#8217;] must have foo:read&#8221;</div>
+<div class="line">&#8220;when command is foo:bar with any args in [&#8216;wubba&#8217;, /^f.*/, 10] must have foo:read&#8221;</div>
+<div class="line">&#8220;when command is foo:bar with all arg in [10, &#8216;baz&#8217;, &#8216;wubba&#8217;] must have foo:read&#8221;</div>
+<div class="line">&#8220;when command is foo:bar with arg[0] in [&#8216;baz&#8217;, false, 100] must have foo:read&#8221;</div>
+<div class="line">&#8220;when command is foo:bar with any option == /^prod.*/ must have foo:read&#8221;</div>
+<div class="line">&#8220;when command is foo:bar with all option &lt; 10 must have foo:read&#8221;</div>
+<div class="line">&#8220;when command is foo:bar with all options in [&#8216;staging&#8217;, &#8216;list&#8217;] must have foo:read&#8221;</div>
+<div class="line">&#8220;when command is foo:bar with option[foo] in [&#8220;foo&#8221;, &#8220;bar&#8221;] allow&#8221;</div>
+</div>
+<p>You may also use the an &#8216;in&#8217; expression when referencing values in a list option.</p>
+<div class="line-block">
+<div class="line">&#8220;when command is foo:bar with option[list] in [&#8220;foo&#8221;, &#8220;bar&#8221;] allow</div>
+<div class="line">&#8220;when command is foo:bar with option[list] in [/foo/] allow</div>
+</div>
+</div>
+<div class="section" id="permissions">
+<h2>9.3. Permissions<a class="headerlink" href="#permissions" title="Permalink to this headline">¶</a></h2>
+<p>Every rule must state what permissions are necessary in order to execute
+a certain command. The beginning of the permissions portion of the rule
+is indicated by the phrase <code class="docutils literal"><span class="pre">must</span> <span class="pre">have</span></code>. This is where you
+state any and all permissions that are deemed necessary in order to
+execute a particular command. It is possible to only require a single
+permission, a certain combination, or a list of permissions. The
+following are the possible keywords used when declaring permissions:</p>
+<ul class="simple">
+<li>or</li>
+<li>and</li>
+<li>any in</li>
+<li>all in</li>
+<li>allow</li>
+</ul>
+<p>For example, the following are rule examples with valid permission settings:</p>
+<div class="line-block">
+<div class="line">&#8220;when command is foo:baz must have foo:write and site:admin&#8221;</div>
+<div class="line">&#8220;when command is foo:export must have all in [foo:write, site:ops] or any in [site:admin, site:management]&#8221;</div>
+<div class="line">&#8220;when command is foo:bar must have any in [foo:read, foo:write]&#8221;</div>
+<div class="line">&#8220;when command is foo:qux must have all in [foo:write, site:ops] and any in [site:admin, site:management]&#8221;</div>
+<div class="line">&#8220;when command is foo:biz allow&#8221;</div>
+<div class="line"><br /></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note the special <code class="docutils literal"><span class="pre">allow</span></code> keyword. <code class="docutils literal"><span class="pre">allow</span></code> may not be
+accompanied with any other keyword or phrase. Commands
+using this permission are allowed to be executed by any registered
+user in Cog.</p>
+</div>
+</div>
+<div class="section" id="site-namespace">
+<h2>9.4. Site Namespace<a class="headerlink" href="#site-namespace" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">site</span></code> namespace is used when trying to set permissions for a
+user, group, or role. This does <strong>not</strong> have to be command specific. You
+may use site permissions when deciding what group should have
+permissions to execute certain commands, in specific environments,
+within certain groups.</p>
+<p>A user can only create and delete permissions from the site namespace.
+You cannot delete the permissions that are part of a command bundle.</p>
+<p>For example, let’s say your organization has an IT group, &#8220;it&#8221;, an
+engineering group, &#8220;eng&#8221;, and a QA group, &#8220;qa&#8221;. As a result, you have 3
+different environments &#8220;prod&#8221;, &#8220;test&#8221; and &#8220;stage&#8221;. There are certain
+tasks that can be performed in each environment, but you must belong to
+the correct group and be operating in the correct environment.</p>
+<p>So we will assume that The IT group operates in &#8220;prod&#8221;, QA in &#8220;qa&#8221;, and
+Engineering in &#8220;staging&#8221;, though IT should be able to handle certain
+tasks in all environments such as patch updates and the sort.</p>
+<p>Let’s create some example commands: foo:deploy, foo:patch, foo:delete,
+foo:readlog</p>
+<p>For the examples sake, we’ll have the example permissions map to these
+commands such that they may look like: foo:p_deploy, foo:p_patch,
+foo:p_delete, foo:p_readlog</p>
+<p>We’ll set up site permissions based on each group and each environment:
+site:prod, site:test, site:stage, site:it, site:qa, site:eng</p>
+<p>Some resulting rules may look like the following:</p>
+<div class="line-block">
+<div class="line">&#8220;when command is foo:deploy when option[environment] == &#8216;prod&#8217; must
+have all in [site:it, site:prod, foo:p_deploy]&#8221;</div>
+<div class="line">&#8220;when command is foo:deploy when option[environment] == &#8216;qa&#8217; must have
+site:test and foo:p_deploy&#8221;</div>
+<div class="line">&#8220;when command is foo:deploy when option[environment] == &#8216;stage&#8217; must
+have site:stage and foo:p_deploy&#8221;</div>
+<div class="line">&#8220;when command is foo:patch must have all in [foo:p_patch, site:it] or
+all in [site:qa, site:test, foo:p_patch] or all in [site:eng,
+site:stage, foo:p_patch]&#8221;</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="bundle_configs.html" class="btn btn-neutral float-right" title="10. Bundle Configs" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="permissions_and_rules.html" class="btn btn-neutral" title="8. Permissions and Rules" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 Operable, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61670076-4', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  
+
+
+</body>
+</html>

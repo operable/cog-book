@@ -1,0 +1,452 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>22. User management &mdash; Cog Book 1.0.0 documentation</title>
+  
+
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Cog Book 1.0.0 documentation" href="../index.html"/>
+        <link rel="next" title="23. Contributor License Agreement" href="contributor_license_agreement.html"/>
+        <link rel="prev" title="21. Triggers" href="triggers.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cog Book
+          
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+          </a>
+
+          
+            <img src="../_static/cog_peek.svg" class="logo" />
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bootstrapping_cog.html">2. Bootstrapping Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_and_managing_relays.html">3. Installing and Managing Relays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands_and_bundles.html">4. Commands and Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="managing_bundles.html">5. Managing Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_a_command_bundle.html">6. Writing A Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_password_resets.html">7. Configuring password resets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions_and_rules.html">8. Permissions and Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_execution_rules.html">9. Command Execution Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundle_configs.html">10. Bundle Configs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_environment_variables.html">11. Command Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic_command_configuration.html">12. Dynamic Command Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="returning_data_from_cog.html">13. Returning data from Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services.html">14. Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">15. Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing_your_first_command_bundle.html">16. Installing Your First Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing_a_trigger.html">17. Developing a Trigger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cog_architecture.html">18. Cog Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_pipelines.html">19. Command pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="redirecting_pipeline_output.html">20. Redirecting Pipeline Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">21. Triggers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">22. User management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#self-registration">22.1. Self Registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#user-management-via-cogctl">22.2. User Management via Cogctl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#user-management-via-cogs-api">22.3. User Management via Cog’s API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributor_license_agreement.html">23. Contributor License Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/cog_server_configuration.html">24. Cog Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/relay_configuration.html">25. Relay Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/command_output_tags.html">26. Command Output Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/greenbar_tags.html">27. Greenbar Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/audit_log_events.html">28. Audit Log Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/glossary.html">29. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/designing_for_chatops.html">30. Designing ChatOps Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/chat_platforms.html">31. Notes on Chat Platform Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Cog Book</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>22. User management</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/operable/cog-book/blob/HEAD/cog-book/source/sections/user_management.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="user-management">
+<h1>22. User management<a class="headerlink" href="#user-management" title="Permalink to this headline">¶</a></h1>
+<p>If you’ve gone through the <a class="reference internal" href="installation_guide.html"><span class="doc">Installation Guide</span></a>, you might have
+noticed that we had to create a Cog user before you could run any
+commands. The reason we need a full user object and don’t just ask for a
+Slack username is central to Cog’s design; we need users so Cog can
+check permissions when running a command. And, continuing along those
+lines, we also keep users and chat handles separate so changing your
+Slack username or switching chat providers doesn’t force you to rework
+any of your assigned groups or roles.</p>
+<p>While this design allows Cog to implement permisisons and groups in a
+sane way, it might be tedious to manage by hand, especially if you’re
+trying to keep it in sync with another service that holds your
+organization’s user data. So why not automate syncing your organizations
+users with Cog users? Below I’ll walk you through three different ways
+to automate user management: enabling self registration, writing a
+script with cogctl, and using Cog’s API directly.</p>
+<div class="section" id="self-registration">
+<h2>22.1. Self Registration<a class="headerlink" href="#self-registration" title="Permalink to this headline">¶</a></h2>
+<p>The easiest way to avoid manually creating Cog users for each new member
+of your team, is to enable &#8220;Self Registration&#8221; by setting the
+environment variable <code class="docutils literal"><span class="pre">COG_ALLOW_SELF_REGISTRATION=1</span></code>. Once enabled, if
+Cog is contacted by a new user it does not know about, a user will
+automatically be created for them with information populated from their
+chat user and a randomly generated password. However, this new user will
+have no permissions as it hasn’t been added to any groups yet. An admin
+will have to manually assign them to a group to give them any
+permissions. If you need more automation around setting specific user
+details or want to also automatically assign them to specific groups,
+writing a script around cogctl commands is the next best option.</p>
+</div>
+<div class="section" id="user-management-via-cogctl">
+<h2>22.2. User Management via Cogctl<a class="headerlink" href="#user-management-via-cogctl" title="Permalink to this headline">¶</a></h2>
+<p>You’ve probably already used cogctl to bootstrap Cog, but it has also
+been designed for use in shell scripts. Let’s walk through a quick
+example of importing users from a CSV file with a simple shell script.</p>
+<p>First, let’s go over the cogctl commands we’ll be using.</p>
+<div class="line-block">
+<div class="line"><code class="docutils literal"><span class="pre">cogctl</span> <span class="pre">user</span> <span class="pre">create</span></code> - Creates a Cog user</div>
+<div class="line"><code class="docutils literal"><span class="pre">cogctl</span> <span class="pre">chat-handle</span> <span class="pre">create</span></code> - Creates a chat handle for a given
+user</div>
+<div class="line"><code class="docutils literal"><span class="pre">cogctl</span> <span class="pre">group</span> <span class="pre">add</span></code> - Adds a user to a given group</div>
+</div>
+<p>Our CSV file will look like this:</p>
+<p><strong>users.csv.</strong></p>
+<div class="code text highlight-default"><div class="highlight"><pre><span></span><span class="n">email</span><span class="p">,</span><span class="n">password</span><span class="p">,</span><span class="n">slack_username</span><span class="p">,</span><span class="n">groups</span>
+<span class="n">mark</span><span class="nd">@operable</span><span class="o">.</span><span class="n">io</span><span class="p">,</span><span class="n">secr3t</span><span class="p">,</span><span class="n">imbriaco</span><span class="p">,</span><span class="s2">&quot;admin,raleigh&quot;</span>
+<span class="n">kevin</span><span class="nd">@operable</span><span class="o">.</span><span class="n">io</span><span class="p">,</span><span class="n">passw0rd</span><span class="p">,</span><span class="n">kevsmith</span><span class="p">,</span><span class="s2">&quot;admin,raleigh&quot;</span>
+<span class="n">patrick</span><span class="nd">@operable</span><span class="o">.</span><span class="n">io</span><span class="p">,</span><span class="n">k3yphrase</span><span class="p">,</span><span class="n">vanstee</span><span class="p">,</span><span class="s2">&quot;admin,atlanta&quot;</span>
+</pre></div>
+</div>
+<p>We can pretty easily loop through each row, to create a user, add a chat
+handle and add them them to the set of groups.</p>
+<p><strong>import.sh.</strong></p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span>#!/usr/bin/env bash
+
+OLDIFS=$IFS
+IFS=,
+
+cat $1 | tail +2 | while read email password username groups; do
+  ./cogctl user create $username \
+    --email $email \
+    --password $password &lt; /dev/null
+
+  ./cogctl chat-handle create $username slack $username &lt; /dev/null
+
+  groups=$(echo &quot;$groups&quot; | sed -e &#39;s/&quot;//g&#39;)
+  read -ra groups &lt;&lt;&lt; &quot;$groups&quot;
+
+  for group in &quot;${groups[@]}&quot;; do
+    ./cogctl group add $group $username &lt; /dev/null
+  done
+done
+
+IFS=$OLDIFS
+</pre></div>
+</div>
+<p>There are a few caveat though. cogctl reads from STDIN, so you’ll
+noticed I’ve added <code class="docutils literal"><span class="pre">&lt;</span> <span class="pre">/dev/null</span></code> to the end to avoid the while loop
+from terminating after the first item. Also if you need to do any output
+parsing it can be difficult since we emit structured text rather than
+something easy to parse, like JSON. If you’re looking to do something
+fancier, like an idempotent user sync based on email address,
+interacting directly with the API is your best bet.</p>
+</div>
+<div class="section" id="user-management-via-cogs-api">
+<h2>22.3. User Management via Cog’s API<a class="headerlink" href="#user-management-via-cogs-api" title="Permalink to this headline">¶</a></h2>
+<p>While we created cogctl as an easy way to complete simple tasks, you can
+always use Cog’s HTTP API to handle more advanced work or cases where
+it’s not convenient to shell out to cogctl. In fact, it’s the same API
+used by cogctl, so the cogctl codebase can be a good place to start if
+you want to do something similar to an existing command.</p>
+<p>If you’ve dealt with a modern HTTP API you’ll find Cog’s API to be
+pretty common. It (mostly) uses Restful URIs, it accepts and responds
+with JSON, and uses an Authorization header containing a token to
+authenticate a specific user. Here’s a quick example in Ruby similar to
+the one above that will handle cases like changing your username and
+removing someone from a group as well.</p>
+<p><strong>sync.rb.</strong></p>
+<div class="code Ruby highlight-default"><div class="highlight"><pre><span></span>#!/usr/bin/env ruby
+
+require &#39;csv&#39;
+require &#39;httparty&#39;
+require &#39;json&#39;
+
+$username = ENV[&#39;COG_USERNAME&#39;]
+$password = ENV[&#39;COG_PASSWORD&#39;]
+$host     = ENV[&#39;COG_HOST&#39;]
+$port     = ENV[&#39;COG_PORT&#39;]
+$secure   = ENV[&#39;COG_HTTPS&#39;] == &#39;1&#39;
+$address = &quot;#{$secure ? &#39;https&#39; : &#39;http&#39;}://#{$host}:#{$port}&quot;
+
+def create_token
+  params = {username: $username, password: $password}
+  response = HTTParty.post(&quot;#{$address}/v1/token&quot;, body: params)
+  response.parsed_response[&quot;token&quot;][&quot;value&quot;]
+end
+
+def find_user(email)
+  headers = {&quot;Authorization&quot; =&gt; &quot;token #{create_token}&quot;}
+  response = HTTParty.get(&quot;#{$address}/v1/users&quot;, headers: headers)
+  users = response.parsed_response[&quot;users&quot;]
+  users.find { |u| u[&quot;email_address&quot;] == email }
+end
+
+def create_user(user)
+  headers = {&quot;Authorization&quot; =&gt; &quot;token #{create_token}&quot;}
+  params = {user: user}
+  response = HTTParty.post(&quot;#{$address}/v1/users&quot;, headers: headers, body: params)
+  user = response.parsed_response[&quot;user&quot;]
+  puts &quot;Created user #{user[&quot;email_address&quot;]}&quot;
+  user
+end
+
+def update_user(user_id, username, password)
+  headers = {&quot;Authorization&quot; =&gt; &quot;token #{create_token}&quot;}
+  params = {user: {user_id: user_id, username: username, password: password}}
+  response = HTTParty.patch(&quot;#{$address}/v1/users/#{user_id}&quot;, headers: headers, body: params)
+  user = response.parsed_response[&quot;user&quot;]
+  puts &quot;Updated user #{user[&quot;email_address&quot;]}&quot;
+  user
+end
+
+def find_group(name)
+  headers = {&quot;Authorization&quot; =&gt; &quot;token #{create_token}&quot;}
+  response = HTTParty.get(&quot;#{$address}/v1/groups&quot;, headers: headers)
+  groups = response.parsed_response[&quot;groups&quot;]
+  groups.find { |g| g[&quot;name&quot;] == name }
+end
+
+def update_chat_handle(user, username)
+  headers = {&quot;Authorization&quot; =&gt; &quot;token #{create_token}&quot;}
+  params = {chat_handle: username}
+  response = HTTParty.post(&quot;#{$address}/v1/users/#{user[&quot;id&quot;]}/chat_handles&quot;, headers: headers, body: params)
+  chat_handle = response.parsed_response[&quot;chat_handle&quot;]
+  puts &quot;Updated chat handle for user #{user[&quot;email_address&quot;]}&quot;
+  chat_handle
+end
+
+def manage_group(user, group_id, action)
+  headers = {&quot;Authorization&quot; =&gt; &quot;token #{create_token}&quot;}
+  params = {users: {action =&gt; [user[&quot;username&quot;]]}}
+  response = HTTParty.post(&quot;#{$address}/v1/groups/#{group_id}/users&quot;, headers: headers, body: params)
+  group = response.parsed_response[&quot;group&quot;]
+  adding = action == :add
+  puts &quot;#{adding ? &quot;Added&quot; : &quot;Removed&quot;} user #{user[&quot;email_address&quot;]} #{adding ? &quot;to&quot; : &quot;from&quot;} group #{group_id}&quot;
+  group
+end
+
+CSV.foreach(ARGV.first, headers: true) do |csv_user|
+  if cog_user = find_user(csv_user[&quot;email_address&quot;])
+    update_user(cog_user[&quot;id&quot;], csv_user[&quot;username&quot;], csv_user[&quot;password&quot;])
+  else
+    cog_user = create_user(csv_user)
+  end
+
+  update_chat_handle(cog_user, csv_user[&quot;username&quot;])
+
+  csv_groups = csv_user[&quot;groups&quot;].split(&quot;,&quot;).map { |g| find_group(g) }.map { |g| g[&quot;id&quot;] }
+  cog_groups = cog_user[&quot;groups&quot;].map { |g| g[&quot;id&quot;] }
+
+  groups_to_add    = csv_groups - cog_groups
+  groups_to_remove = cog_groups - csv_groups
+
+  groups_to_add.each { |g| manage_group(cog_user, g, :add) }
+  groups_to_remove.each { |g| manage_group(cog_user, g, :remove) }
+end
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="contributor_license_agreement.html" class="btn btn-neutral float-right" title="23. Contributor License Agreement" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="triggers.html" class="btn btn-neutral" title="21. Triggers" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 Operable, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61670076-4', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  
+
+
+</body>
+</html>

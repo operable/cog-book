@@ -1,0 +1,662 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>24. Cog Server Configuration &mdash; Cog Book 1.0.0 documentation</title>
+  
+
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Cog Book 1.0.0 documentation" href="../index.html"/>
+        <link rel="next" title="25. Relay Configuration" href="relay_configuration.html"/>
+        <link rel="prev" title="23. Contributor License Agreement" href="../sections/contributor_license_agreement.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cog Book
+          
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+          </a>
+
+          
+            <img src="../_static/cog_peek.svg" class="logo" />
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../sections/getting_started.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/bootstrapping_cog.html">2. Bootstrapping Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/installing_and_managing_relays.html">3. Installing and Managing Relays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/commands_and_bundles.html">4. Commands and Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/managing_bundles.html">5. Managing Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/writing_a_command_bundle.html">6. Writing A Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/configuring_password_resets.html">7. Configuring password resets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/permissions_and_rules.html">8. Permissions and Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/command_execution_rules.html">9. Command Execution Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/bundle_configs.html">10. Bundle Configs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/command_environment_variables.html">11. Command Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/dynamic_command_configuration.html">12. Dynamic Command Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/returning_data_from_cog.html">13. Returning data from Cog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/services.html">14. Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/templates.html">15. Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/installing_your_first_command_bundle.html">16. Installing Your First Command Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/developing_a_trigger.html">17. Developing a Trigger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/cog_architecture.html">18. Cog Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/command_pipelines.html">19. Command pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/redirecting_pipeline_output.html">20. Redirecting Pipeline Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/triggers.html">21. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/user_management.html">22. User management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sections/contributor_license_agreement.html">23. Contributor License Agreement</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">24. Cog Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="relay_configuration.html">25. Relay Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_output_tags.html">26. Command Output Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="greenbar_tags.html">27. Greenbar Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="audit_log_events.html">28. Audit Log Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/glossary.html">29. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/designing_for_chatops.html">30. Designing ChatOps Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/chat_platforms.html">31. Notes on Chat Platform Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Cog Book</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>24. Cog Server Configuration</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/operable/cog-book/blob/HEAD/cog-book/source/references/cog_server_configuration.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cog-server-configuration">
+<h1>24. Cog Server Configuration<a class="headerlink" href="#cog-server-configuration" title="Permalink to this headline">¶</a></h1>
+<p>Cog’s behavior can be modified in a number of ways, each governed by a
+separate environment variable. This section enumerates all the available
+variables and describes their usage.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">See <a class="reference external" href="http://12factor.net">The Twelve-Factor App</a> for more
+information about this style of configuration.</p>
+</div>
+<dl class="docutils" id="cog-allow-self-registration">
+<dt><code class="docutils literal"><span class="pre">COG_ALLOW_SELF_REGISTRATION</span></code></dt>
+<dd>Cog will automatically create accounts for new users when set. User
+accounts created this way will still need to be placed into groups
+by an administrator in order to be granted any permissions.</dd>
+</dl>
+<dl class="docutils" id="cog-api-port">
+<dt><code class="docutils literal"><span class="pre">COG_API_PORT</span></code></dt>
+<dd><p class="first">The IP port to listen on for Cog’s REST API. Must be distinct from
+<a class="reference internal" href="#cog-trigger-port"><span class="std std-ref">[COG_TRIGGER_PORT]</span></a>.</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">4000</span></code>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="cog-api-url-base">
+<dt><code class="docutils literal"><span class="pre">COG_API_URL_BASE</span></code></dt>
+<dd><p class="first">Controls the prefix of URLs generated for the core API. URLs may
+contain a scheme (either <code class="docutils literal"><span class="pre">http</span></code> or <code class="docutils literal"><span class="pre">https</span></code>), a host, an optional
+port (defaulting to <code class="docutils literal"><span class="pre">80</span></code> for <code class="docutils literal"><span class="pre">http</span></code> and <code class="docutils literal"><span class="pre">443</span></code> for <code class="docutils literal"><span class="pre">https</span></code>),
+and an optional path.</p>
+<p class="last">See also <a class="reference internal" href="#cog-service-url-base"><span class="std std-ref">[COG_SERVICE_URL_BASE]</span></a> and
+<a class="reference internal" href="#cog-trigger-url-base"><span class="std std-ref">[COG_TRIGGER_URL_BASE]</span></a>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="cog-api-url-host">
+<dt><code class="docutils literal"><span class="pre">COG_API_URL_HOST</span></code></dt>
+<dd><p class="first"><strong>DEPRECATED</strong> Use <a class="reference internal" href="#cog-api-url-base"><span class="std std-ref">[COG_API_URL_BASE]</span></a>
+instead!</p>
+<p>Host to be used in generated API URLs. This should be a DNS name or
+IP address at which Cog can be reached externally.</p>
+<p>Defaults to <code class="docutils literal"><span class="pre">localhost</span></code>.</p>
+<p class="last">See <a class="reference internal" href="#cog-service-url-host"><span class="std std-ref">[COG_SERVICE_URL_HOST]</span></a> and
+<a class="reference internal" href="#cog-trigger-url-host"><span class="std std-ref">[COG_TRIGGER_URL_HOST]</span></a> also; these
+are all usually set to the same value, but need not be.</p>
+</dd>
+</dl>
+<dl class="docutils" id="cog-api-url-port">
+<dt><code class="docutils literal"><span class="pre">COG_API_URL_PORT</span></code></dt>
+<dd><p class="first"><strong>DEPRECATED</strong> Use <cite>??? &lt;COG_TRIGGER_API_BASE&gt;</cite> instead!</p>
+<p>Port to be used in generated API URLs. This should be where Cog can
+be reached externally.</p>
+<p>Defaults to <code class="docutils literal"><span class="pre">4000</span></code>.</p>
+<p class="last">See also <a class="reference internal" href="#cog-api-url-host"><span class="std std-ref">[COG_API_URL_HOST]</span></a> and
+<a class="reference internal" href="#cog-api-port"><span class="std std-ref">[COG_API_PORT]</span></a>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="cog-bootstrap">
+<dt><code class="docutils literal"><span class="pre">COG_BOOTSTRAP_*</span></code> Variables</dt>
+<dd><p class="first">The following environment variables are available to automatically
+bootstrap a Cog system at startup without further intervention
+(e.g., it does not require running <code class="docutils literal"><span class="pre">cogctl</span> <span class="pre">bootstrap</span></code> afterwards).
+Values for all the <code class="docutils literal"><span class="pre">COG_BOOTSTRAP_*</span></code> variables are required
+(except <code class="docutils literal"><span class="pre">COG_BOOTSTRAP_CHAT_HANDLE</span></code>; see below) for the
+bootstrapping to occur, and bootstrapping will <em>only</em> occur if the
+system has not already been bootstrapped. Each variable describes an
+attribute of the first user created on the system, which will have
+administrator privileges over the entire system.</p>
+<p>If you wish your bootstrap user to be associated with a chat handle
+for your currently-configured chat provider (see, e.g.,
+<a class="reference internal" href="#cog-slack-enabled"><span class="std std-ref">[COG_SLACK_ENABLED]</span></a> and
+<a class="reference internal" href="#cog-hipchat-enabled"><span class="std std-ref">[COG_HIPCHAT_ENABLED]</span></a>), then set
+<code class="docutils literal"><span class="pre">COG_BOOTSTRAP_CHAT_HANDLE</span></code>. If the value is not an existing chat
+handle, an error will be logged, but startup will proceed as usual.</p>
+<p>These are intended for automated installations of Cog (e.g., using
+management software such as Chef, Puppet, and Ansible, and / or
+platforms such as AWS and Heroku). Please note that bootstrapping
+via these variables <em>will not</em> generate a <code class="docutils literal"><span class="pre">.cogctl</span></code> file for you;
+you will need to generate one for yourself with the appropriate
+values.</p>
+<ul class="last simple">
+<li><code class="docutils literal"><span class="pre">COG_BOOTSTRAP_CHAT_HANDLE</span></code></li>
+<li><code class="docutils literal"><span class="pre">COG_BOOTSTRAP_EMAIL_ADDRESS</span></code></li>
+<li><code class="docutils literal"><span class="pre">COG_BOOTSTRAP_FIRST_NAME</span></code></li>
+<li><code class="docutils literal"><span class="pre">COG_BOOTSTRAP_LAST_NAME</span></code></li>
+<li><code class="docutils literal"><span class="pre">COG_BOOTSTRAP_PASSWORD</span></code></li>
+<li><code class="docutils literal"><span class="pre">COG_BOOTSTRAP_USERNAME</span></code></li>
+</ul>
+</dd>
+</dl>
+<dl class="docutils" id="cog-custom-template-dir">
+<dt><code class="docutils literal"><span class="pre">COG_CUSTOM_TEMPLATE_DIR</span></code></dt>
+<dd><p class="first">The path to your custom template directory.</p>
+<p class="last">Cog uses a set of common templates to format responses generated
+internally. Some of these templates may be overridden by placing a
+custom version in a directory and setting this var to said
+directory’s path. See
+<a class="reference internal" href="../sections/templates.html#customizing-the-standard-error-template"><span class="std std-ref">Customizing the standard error template</span></a> for more
+information.</p>
+</dd>
+</dl>
+<dl class="docutils" id="cog-db-pool-size">
+<dt><code class="docutils literal"><span class="pre">COG_DB_POOL_SIZE</span></code></dt>
+<dd><p class="first">Database connection pool size.</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">10</span></code>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="cog-db-pool-timeout">
+<dt><code class="docutils literal"><span class="pre">COG_DB_POOL_TIMEOUT</span></code></dt>
+<dd><p class="first">Amount of time to wait to checkout a database connection from the
+pool.</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">15000</span></code> ms.</p>
+</dd>
+</dl>
+<dl class="docutils" id="cog-db-timeout">
+<dt><code class="docutils literal"><span class="pre">COG_DB_TIMEOUT</span></code></dt>
+<dd><p class="first">Amount of time to wait for execution of a database query to
+complete.</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">15000</span></code> ms.</p>
+</dd>
+</dl>
+<dl class="docutils" id="cog-db-ssl">
+<dt><code class="docutils literal"><span class="pre">COG_DB_SSL</span></code></dt>
+<dd><p class="first">Set this environment variable to have Cog connect to its database
+using SSL.</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">false</span></code>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="cog-email-from">
+<dt><code class="docutils literal"><span class="pre">COG_EMAIL_FROM</span></code></dt>
+<dd><p class="first">Email address that emails sent from Cog will be sent from. Necessary
+to enable password resets.</p>
+<p>See also:</p>
+<ul class="last simple">
+<li><a class="reference internal" href="#cog-smtp"><span class="std std-ref">[COG_SMTP_VARIABLES]</span></a></li>
+<li><a class="reference internal" href="#cog-password-reset-base-url"><span class="std std-ref">[COG_PASSWORD_RESET_BASE_URL]</span></a></li>
+</ul>
+</dd>
+</dl>
+<dl class="docutils" id="cog-hipchat-enabled">
+<dt><code class="docutils literal"><span class="pre">COG_HIPCHAT_ENABLED</span></code></dt>
+<dd><p class="first">Enables the HipChat chat adapter for integration with HipChat. You
+<strong>MUST</strong> specify <strong>ONE</strong> and only <strong>ONE</strong> chat adapter for Cog.</p>
+<p class="last">See also: <a class="reference internal" href="#cog-slack-enabled"><span class="std std-ref">[COG_SLACK_ENABLED]</span></a></p>
+</dd>
+</dl>
+<dl class="docutils" id="cog-mqtt-host">
+<dt><code class="docutils literal"><span class="pre">COG_MQTT_HOST</span></code></dt>
+<dd><p class="first">The host (DNS name or IPv4) to listen on for the
+<a class="reference external" href="https://mqtt.org">MQTT</a> message bus. MQTT is the messaging
+system underlying Cog.</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">127.0.0.1</span></code>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="cog-mqtt-port">
+<dt><code class="docutils literal"><span class="pre">COG_MQTT_PORT</span></code></dt>
+<dd><p class="first">The IP port number to listen on for the <a class="reference external" href="https://mqtt.org">MQTT</a>
+message bus.</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">1883</span></code>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="cog-password-reset-base-url">
+<dt><code class="docutils literal"><span class="pre">COG_PASSWORD_RESET_BASE_URL</span></code></dt>
+<dd><p class="first">For advanced users</p>
+<p>Optional variable set when configuring password resets. If set Cog
+will send this link with a token appended as a query string,
+<code class="docutils literal"><span class="pre">?token=token</span></code>, in the password reset email. This is useful if you
+want to provide a custom ui for resetting passwords.</p>
+<p>See also:</p>
+<ul class="last simple">
+<li><a class="reference internal" href="#cog-email-from"><span class="std std-ref">[COG_EMAIL_FROM]</span></a></li>
+<li><a class="reference internal" href="#cog-smtp"><span class="std std-ref">[COG_SMTP_VARIABLES]</span></a></li>
+</ul>
+</dd>
+</dl>
+<dl class="docutils" id="cog-pipeline-timeout">
+<dt><code class="docutils literal"><span class="pre">COG_PIPELINE_TIMEOUT</span></code></dt>
+<dd><p class="first">Amount of time (in seconds) to wait for execution of pipeline to
+complete.</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">60</span></code> seconds.</p>
+</dd>
+</dl>
+<dl class="docutils" id="cog-service-url-base">
+<dt><code class="docutils literal"><span class="pre">COG_SERVICE_URL_BASE</span></code></dt>
+<dd><p class="first">Controls the prefix of URLs generated for services. URLs may contain
+a scheme (either <code class="docutils literal"><span class="pre">http</span></code> or <code class="docutils literal"><span class="pre">https</span></code>), a host, an optional port
+(defaulting to <code class="docutils literal"><span class="pre">80</span></code> for <code class="docutils literal"><span class="pre">http</span></code> and <code class="docutils literal"><span class="pre">443</span></code> for <code class="docutils literal"><span class="pre">https</span></code>), and
+an optional path.</p>
+<p class="last">See also <a class="reference internal" href="#cog-api-url-base"><span class="std std-ref">[COG_API_URL_BASE]</span></a> and
+<a class="reference internal" href="#cog-trigger-url-base"><span class="std std-ref">[COG_TRIGGER_URL_BASE]</span></a>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="cog-service-url-host">
+<dt><code class="docutils literal"><span class="pre">COG_SERVICE_URL_HOST</span></code></dt>
+<dd><p class="first"><strong>DEPRECATED</strong> Use
+<a class="reference internal" href="#cog-service-url-base"><span class="std std-ref">[COG_SERVICE_URL_BASE]</span></a> instead!</p>
+<p>Host to be used in generated service URLs. This should be a DNS name
+or IP address at which Cog can be reached externally.</p>
+<p>Defaults to <code class="docutils literal"><span class="pre">localhost</span></code>.</p>
+<p class="last">See <a class="reference internal" href="#cog-api-url-host"><span class="std std-ref">[COG_API_URL_HOST]</span></a> and
+<a class="reference internal" href="#cog-trigger-url-host"><span class="std std-ref">[COG_TRIGGER_URL_HOST]</span></a> also; these
+are all usually set to the same value, but need not be.</p>
+</dd>
+</dl>
+<dl class="docutils" id="cog-service-url-port">
+<dt><code class="docutils literal"><span class="pre">COG_SERVICE_URL_PORT</span></code></dt>
+<dd><p class="first"><strong>DEPRECATED</strong> Use
+<a class="reference internal" href="#cog-service-url-base"><span class="std std-ref">[COG_SERVICE_URL_BASE]</span></a> instead!</p>
+<p>Port to be used in generated service URLs. This should be where Cog
+can be reached externally.</p>
+<p>Defaults to <code class="docutils literal"><span class="pre">4002</span></code>.</p>
+<p class="last">See also <a class="reference internal" href="#cog-service-url-host"><span class="std std-ref">[COG_SERVICE_URL_HOST]</span></a> and
+<cite>??? &lt;COG_SERVICE_PORT&gt;</cite>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="cog-slack-enabled">
+<dt><code class="docutils literal"><span class="pre">COG_SLACK_ENABLED</span></code></dt>
+<dd><p class="first">Enabled the Slack chat adapter for integration with Slack. You
+<strong>MUST</strong> specify <strong>ONE</strong> and only <strong>ONE</strong> chat adapter for Cog.</p>
+<p class="last">See also: <a class="reference internal" href="#cog-hipchat-enabled"><span class="std std-ref">[COG_HIPCHAT_ENABLED]</span></a></p>
+</dd>
+</dl>
+<dl class="docutils" id="cog-smtp">
+<dt><code class="docutils literal"><span class="pre">COG_SMTP_*</span></code> Variables</dt>
+<dd><p class="first">You may optionally configure email support via SMTP for Cog.
+Currently Cog only sends emails for password resets], but there may
+be additional features that require email in the future.</p>
+<ul class="last">
+<li><p class="first"><code class="docutils literal"><span class="pre">COG_SMTP_SERVER</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">COG_SMTP_PORT</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">COG_SMTP_USERNAME</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">COG_SMTP_PASSWORD</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">COG_SMTP_SSL</span></code> (Defaults to <code class="docutils literal"><span class="pre">false</span></code>)</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">COG_SMTP_RETRIES</span></code> (Defaults to 1)</p>
+<p>See also:</p>
+</li>
+<li><p class="first"><a class="reference internal" href="#cog-email-from"><span class="std std-ref">[COG_EMAIL_FROM]</span></a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="#cog-password-reset-base-url"><span class="std std-ref">[COG_PASSWORD_RESET_BASE_URL]</span></a></p>
+</li>
+</ul>
+</dd>
+</dl>
+<dl class="docutils" id="cog-telemetry">
+<dt><code class="docutils literal"><span class="pre">COG_TELEMETRY</span></code></dt>
+<dd><p class="first">Whether or not Cog should send an event to the Operable telemetry
+service when it starts. This event contains a unique identifier
+(based on the SHA256 of the UUID for your operable bundle), the Cog
+version number, and the Elixir mix environment (:prod, :dev, etc)
+that Cog is running under. Set this value to <code class="docutils literal"><span class="pre">false</span></code> to disable
+this event from being sent.</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">true</span></code>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="cog-trigger-port">
+<dt><code class="docutils literal"><span class="pre">COG_TRIGGER_PORT</span></code></dt>
+<dd><p class="first">The IP port to listen on for invocation of triggers. Must be
+distinct from <a class="reference internal" href="#cog-api-port"><span class="std std-ref">[COG_API_PORT]</span></a>.</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">4001</span></code>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="cog-trigger-timeout-buffer">
+<dt><code class="docutils literal"><span class="pre">COG_TRIGGER_TIMEOUT_BUFFER</span></code></dt>
+<dd><p class="first">Triggers have a configurable timeout, but it is defined from the
+HTTP requestor’s perspective. In order to satisfy this, we build in
+a buffer to account for network round tripping, Cog processing, etc.</p>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">2</span></code> seconds.</p>
+</dd>
+</dl>
+<dl class="docutils" id="cog-trigger-url-base">
+<dt><code class="docutils literal"><span class="pre">COG_TRIGGER_URL_BASE</span></code></dt>
+<dd><p class="first">Controls the prefix of URLs generated for triggers. URLs may contain
+a scheme (either <code class="docutils literal"><span class="pre">http</span></code> or <code class="docutils literal"><span class="pre">https</span></code>), a host, an optional port
+(defaulting to <code class="docutils literal"><span class="pre">80</span></code> for <code class="docutils literal"><span class="pre">http</span></code> and <code class="docutils literal"><span class="pre">443</span></code> for <code class="docutils literal"><span class="pre">https</span></code>), and
+an optional path.</p>
+<p class="last">See also <a class="reference internal" href="#cog-api-url-base"><span class="std std-ref">[COG_API_URL_BASE]</span></a> and
+<a class="reference internal" href="#cog-service-url-base"><span class="std std-ref">[COG_SERVICE_URL_BASE]</span></a>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="cog-trigger-url-host">
+<dt><code class="docutils literal"><span class="pre">COG_TRIGGER_URL_HOST</span></code></dt>
+<dd><p class="first"><strong>DEPRECATED</strong> Use
+<a class="reference internal" href="#cog-trigger-url-base"><span class="std std-ref">[COG_TRIGGER_URL_BASE]</span></a> instead!</p>
+<p>Host to be used in generated trigger invocation URLs. This should be
+a DNS name or IP address at which Cog can be reached externally.</p>
+<p>Defaults to <code class="docutils literal"><span class="pre">localhost</span></code>.</p>
+<p class="last">See <a class="reference internal" href="#cog-api-url-host"><span class="std std-ref">[COG_API_URL_HOST]</span></a> and
+<a class="reference internal" href="#cog-service-url-host"><span class="std std-ref">[COG_SERVICE_URL_HOST]</span></a> also; these
+are all usually set to the same value, but need not be.</p>
+</dd>
+</dl>
+<dl class="docutils" id="cog-trigger-url-port">
+<dt><code class="docutils literal"><span class="pre">COG_TRIGGER_URL_PORT</span></code></dt>
+<dd><p class="first"><strong>DEPRECATED</strong> Use
+<a class="reference internal" href="#cog-trigger-url-base"><span class="std std-ref">[COG_TRIGGER_URL_BASE]</span></a> instead!</p>
+<p>Port to be used in generated trigger invocation URLs. This should be
+where Cog can be reached externally.</p>
+<p>Defaults to <code class="docutils literal"><span class="pre">4001</span></code>.</p>
+<p class="last">See also <a class="reference internal" href="#cog-trigger-url-host"><span class="std std-ref">[COG_TRIGGER_URL_HOST]</span></a> and
+<a class="reference internal" href="#cog-trigger-port"><span class="std std-ref">[COG_TRIGGER_PORT]</span></a>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="database-url">
+<dt><code class="docutils literal"><span class="pre">DATABASE_URL</span></code></dt>
+<dd><p class="first">The URL at which Cog may access its PostgreSQL database. Cog uses
+the <a class="reference external" href="https://hexdocs.pm/ecto/Ecto.Repo.html">Ecto</a> library, and
+the URL takes the form of:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>ecto://$POSTGRES\_USER:$POSTGRES\_PASSWORD@$DB\_HOST:$DB\_PORT/$DB\_NAME
+</pre></div>
+</div>
+<p>See also:</p>
+<ul class="last simple">
+<li><a class="reference internal" href="#postgres-user"><span class="std std-ref">[POSTGRES_USER]</span></a></li>
+<li><a class="reference internal" href="#postgres-password"><span class="std std-ref">[POSTGRES_PASSWORD]</span></a></li>
+</ul>
+</dd>
+</dl>
+<dl class="docutils" id="enable-spoken-commands">
+<dt><code class="docutils literal"><span class="pre">ENABLE_SPOKEN_COMMANDS</span></code></dt>
+<dd><p class="first">If <code class="docutils literal"><span class="pre">true</span></code>, allows Cog to respond to commands prefixed with <code class="docutils literal"><span class="pre">!</span></code>
+instead of only via direct mentions.</p>
+<p>Compare</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>!help
+</pre></div>
+</div>
+<p>with</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nd">@clever_bot_name</span> <span class="n">help</span>
+</pre></div>
+</div>
+<p class="last">Defaults to <code class="docutils literal"><span class="pre">true</span></code>.</p>
+</dd>
+</dl>
+<dl class="docutils" id="hipchat-api-token">
+<dt><code class="docutils literal"><span class="pre">HIPCHAT_API_TOKEN</span></code></dt>
+<dd>Token for HipChat’s V2 REST API. The token must have the following
+scopes: Send Message, Send Notification, View Group, View Messages,
+View Room.</dd>
+</dl>
+<dl class="docutils" id="hipchat-jabber-id">
+<dt><code class="docutils literal"><span class="pre">HIPCHAT_JABBER_ID</span></code></dt>
+<dd>The Jabber ID, also called a <code class="docutils literal"><span class="pre">jid</span></code>, assigned to the bot’s HipChat
+account.</dd>
+</dl>
+<dl class="docutils" id="hipchat-jabber-password">
+<dt><code class="docutils literal"><span class="pre">HIPCHAT_JABBER_PASSWORD</span></code></dt>
+<dd>The password assigned to the bot’s HipChat account.</dd>
+</dl>
+<dl class="docutils" id="hipchat-nickname">
+<dt><code class="docutils literal"><span class="pre">HIPCHAT_NICKNAME</span></code></dt>
+<dd>The mention name assigned to the bot’s HipChat account. The name can
+be found on the bot account’s profile page.</dd>
+</dl>
+<p>All of the above settings can be found on the HipChat account details
+page. To view this page for your bot’s account simply log in to
+HipChat’s site using your bot credentials and then open
+<code class="docutils literal"><span class="pre">https://&lt;organization</span> <span class="pre">name&gt;.hipchat.com/account</span></code> where
+<code class="docutils literal"><span class="pre">&lt;organization</span> <span class="pre">name&gt;</span></code> is the name of your HipChat organization.</p>
+<dl class="docutils" id="hipchat-api-root">
+<dt><code class="docutils literal"><span class="pre">HIPCHAT_API_ROOT</span></code></dt>
+<dd>The root URL of HipChat’s V2 REST API. Defaults to
+<a class="reference external" href="https://api.hipchat.com/v2">https://api.hipchat.com/v2</a>.</dd>
+</dl>
+<dl class="docutils" id="hipchat-chat-host">
+<dt><code class="docutils literal"><span class="pre">HIPCHAT_CHAT_HOST</span></code></dt>
+<dd>The host name of HipChat’s XMPP API. Defaults to
+<code class="docutils literal"><span class="pre">chat.hipchat.com</span></code>.</dd>
+</dl>
+<dl class="docutils" id="hipchat-conf-host">
+<dt><code class="docutils literal"><span class="pre">HIPCHAT_CONF_HOST</span></code></dt>
+<dd>The host name of HipChat’s XMPP multi-user room service. Defaults to
+<code class="docutils literal"><span class="pre">conf.hipchat.com</span></code>.</dd>
+</dl>
+<dl class="docutils" id="postgres-password">
+<dt><code class="docutils literal"><span class="pre">POSTGRES_PASSWORD</span></code></dt>
+<dd><p class="first">The password for connecting to Cog’s PostgreSQL database.</p>
+<p>See also:</p>
+<ul class="last simple">
+<li><a class="reference internal" href="#database-url"><span class="std std-ref">[DATABASE_URL]</span></a></li>
+<li><a class="reference internal" href="#postgres-user"><span class="std std-ref">[POSTGRES_USER]</span></a></li>
+</ul>
+</dd>
+</dl>
+<dl class="docutils" id="postgres-user">
+<dt><code class="docutils literal"><span class="pre">POSTGRES_USER</span></code></dt>
+<dd><p class="first">The user to connect to Cog’s PostgreSQL database.</p>
+<p>See also:</p>
+<ul class="last simple">
+<li><a class="reference internal" href="#database-url"><span class="std std-ref">[DATABASE_URL]</span></a></li>
+<li><a class="reference internal" href="#postgres-password"><span class="std std-ref">[POSTGRES_PASSWORD]</span></a></li>
+</ul>
+</dd>
+</dl>
+<dl class="docutils" id="slack-api-token">
+<dt><code class="docutils literal"><span class="pre">SLACK_API_TOKEN</span></code></dt>
+<dd><p class="first">Real-Time Messaging (RTM) API token used to connect to Slack. To
+obtain one, go to
+<code class="docutils literal"><span class="pre">https://&lt;your_slack-team&gt;.slack.com/apps/manage/custom-integrations</span></code>
+and click on <code class="docutils literal"><span class="pre">Bots</span></code>.</p>
+<p class="last">It <em>must</em> be an RTM API token; a token for the REST API will <em>not</em>
+work.</p>
+</dd>
+</dl>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="relay_configuration.html" class="btn btn-neutral float-right" title="25. Relay Configuration" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../sections/contributor_license_agreement.html" class="btn btn-neutral" title="23. Contributor License Agreement" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 Operable, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61670076-4', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  
+
+
+</body>
+</html>
