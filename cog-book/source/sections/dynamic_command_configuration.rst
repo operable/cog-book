@@ -238,15 +238,16 @@ configuration layer.
 
 ::
 
-  |relay-config
+  relay-config
   ├── heroku
   │   └── config.yaml
   ├── pingdom
-  │   ├──config.yaml
+  │   ├── config.yaml
   │   ├── room_ops.yaml
-  │   ├── room\_direct.yaml
-  │   └──user\_chris.yaml
-  └── twitter └── config.yaml
+  │   ├── room_direct.yaml
+  │   └── user_chris.yaml
+  └── twitter
+      └── config.yaml
 
 .. note::
     *About Relays*
@@ -265,7 +266,7 @@ dynamic configuration layer files to Cog and it will distribute the
 values to your Relays as appropriate.
 
 By default your Relay(s) already supports managed dynamic config, but
-you can always disable it by setting <RELAY\_MANAGED\_DYNAMIC\_CONFIG>>
+you can always disable it by setting :ref:`RELAY_MANAGED_DYNAMIC_CONFIG<relay_managed_dynamic_config>`
 to ``false``. Managed Relays check in with their Cog server periodically
 (every 5 seconds by default; see
 :ref:`RELAY_MANAGED_DYNAMIC_CONFIG_INTERVAL<relay_managed_dynamic_config_interval>` ) to refresh their
@@ -314,6 +315,7 @@ You can list all layers that are currently in place for a given bundle.
 
     $ cogctl bundle config layers pingdom
     base
+    room/direct
     room/ops
     user/chris
 
