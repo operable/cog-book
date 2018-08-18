@@ -464,3 +464,18 @@ HipChat’s site using your bot credentials and then open
 
     It *must* be an RTM API token; a token for the REST API will *not*
     work.
+
+.. _SLACK_ENABLE_THREADED_RESPONSES:
+
+``SLACK_ENABLE_THREADED_RESPONSES``
+  Whether or not Cog should respond within a slack thread.
+
+  Defaults to ``false``.
+
+.. _SLACK_ENABLE_THREAD_BROADCAST:
+
+``SLACK_ENABLE_THREAD_BROADCAST``
+  Whether or not Cog thread responses should also be broadcast to the
+  originating room.
+
+  Defaults to ``true``.
