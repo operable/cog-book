@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/operable/cog-book.svg?branch=master)](https://travis-ci.org/operable/cog-book)
 
-The Cog Book
+[The Cog Book](https://operable.github.io/cog-book/)
 ============
 
 This is the home of The Cog Book, the definitive reference for the [Cog](https://github.com/operable/cog) chat platform, by [Operable](https://operable.io).
